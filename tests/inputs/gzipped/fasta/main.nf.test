@@ -1,15 +1,14 @@
 nextflow_pipeline {
 
-    name "gzipped inputs"
-    script "../../../main.nf"
+    name "gzipped fasta"
+    script "../../../../main.nf"
     tag "input"
+    tag "fasta"
 
-    test("Should run with a gzipped gtf") {
-        tag "gtf"
-
+    test("Should run with a gzipped fasta") {
         when {
             params {
-                input = "${projectDir}/tests/inputs/gzipped/gzip_gtf.yml"
+                input = "${projectDir}/tests/inputs/gzipped/fasta/input.yml"
                 outdir = "$outputDir"
             }
         }

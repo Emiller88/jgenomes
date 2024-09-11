@@ -1,0 +1,12 @@
+{
+    "software_versions": {
+        "content": [
+            "{Workflow={nf-core/references=v1.0dev}}"
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-09-11T14:13:23.171953655"
+    }
+}
