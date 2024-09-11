@@ -1,0 +1,6 @@
+- genome: "CHM13"
+  species: homo_sapiens
+  source: ucsc
+  fasta: "${params.human_pangenomics_base}/T2T/CHM13/assemblies/analysis_set/chm13v2.0.fa.gz"
+  gff: "${params.human_pangenomics_base}/T2T/CHM13/assemblies/annotation/chm13v2.0_RefSeq_Liftoff_v5.1.gff3.gz"
+  mito_name: chrM
