@@ -50,8 +50,7 @@ workflow NFCORE_REFERENCES {
     // WORKFLOW: Run pipeline
     //
     INDEX ( ch_input )
-    // FIXME
-    // RNASEQ ( ch_input )
+    RNASEQ ( ch_input )
     SAREK ( ch_input )
 
     versions = versions.mix(INDEX.out.versions, SAREK.out.versions)
