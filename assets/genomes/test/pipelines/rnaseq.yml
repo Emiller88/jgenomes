@@ -1,0 +1,7 @@
+- genome: "R64-1-1_chrI"
+  species: "R64-1-1"
+  fasta: "https://raw.githubusercontent.com/nf-core/test-datasets/rnaseq/reference/genome.fasta"
+  gff: "https://raw.githubusercontent.com/nf-core/test-datasets/rnaseq/reference/genes.gff.gz"
+  mito_name: "MT"
+  # macs_gsize: 1.2e7
+  readme: "https://raw.githubusercontent.com/nf-core/test-datasets/rnaseq/README.md"
