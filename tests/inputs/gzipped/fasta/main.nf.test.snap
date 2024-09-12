@@ -1,12 +1,31 @@
 {
     "software_versions": {
         "content": [
-            "{BOWTIE2_BUILD={bowtie2=2.5.2}, BWAMEM1_INDEX={bwa=0.7.17-r1188}, BWAMEM2_INDEX={bwamem2=2.2.1}, GATK4_CREATESEQUENCEDICTIONARY={gatk4=4.5.0.0}, MSISENSORPRO_SCAN={msisensor-pro=1.2.0}, Workflow={nf-core/references=v1.0dev}}"
+            {
+                "BOWTIE2_BUILD": {
+                    "bowtie2": "2.5.2"
+                },
+                "BWAMEM1_INDEX": {
+                    "bwa": "0.7.17-r1188"
+                },
+                "BWAMEM2_INDEX": {
+                    "bwamem2": "2.2.1"
+                },
+                "GATK4_CREATESEQUENCEDICTIONARY": {
+                    "gatk4": "4.5.0.0"
+                },
+                "MSISENSORPRO_SCAN": {
+                    "msisensor-pro": "1.2.0"
+                },
+                "Workflow": {
+                    "nf-core/references": "v1.0dev"
+                }
+            }
         ],
         "meta": {
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-09-12T11:37:20.671184532"
+        "timestamp": "2024-09-12T12:37:18.440985067"
     }
 }
