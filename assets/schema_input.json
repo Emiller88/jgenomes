@@ -33,6 +33,11 @@
                 "pattern": "^\\S+\\.gtf(\\.gz)?$",
                 "errorMessage": "TODO"
             },
+            "gff": {
+                "type": "string",
+                "pattern": "^\\S+\\.gff(3)?(\\.gz)?$",
+                "errorMessage": "TODO"
+            },
             "bed12": {
                 "type": "string",
                 "errorMessage": "TODO"
@@ -50,6 +55,6 @@
                 "errorMessage": "TODO"
             }
         },
-        "required": ["genome", "fasta", "gtf"]
+        "required": ["genome", "fasta"]
     }
 }

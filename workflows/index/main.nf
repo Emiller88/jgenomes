@@ -9,7 +9,7 @@ workflow INDEX {
     main:
     versions = Channel.empty()
     reference
-        .multiMap { meta, fasta, gtf, bed, readme, mito, size ->
+        .multiMap { meta, fasta, gtf, gff, bed, readme, mito, size ->
             fasta: tuple(meta, fasta)
             gtf:   tuple(meta, gtf)
             bed:   tuple(meta, bed)

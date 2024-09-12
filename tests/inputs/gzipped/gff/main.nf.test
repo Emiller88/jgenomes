@@ -1,0 +1,27 @@
+nextflow_pipeline {
+
+    name "gzipped gff"
+    script "../../../../main.nf"
+    tag "input"
+    tag "gff"
+
+    test("Should run with a gzipped gff") {
+        when {
+            params {
+                input = "${projectDir}/tests/inputs/gzipped/gff/input.yml"
+                outdir = "$outputDir"
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(UTILS.removeNextflowVersion("$outputDir/pipeline_info/nf_core_references_software_mqc_versions.yml")).match("software_versions") },
+                // { assert snapshot(
+                //     // FIXME workflow.trace.tasks().size(),
+                // ).match("output_files")
+                // }
+            )
+        }
+    }
+}

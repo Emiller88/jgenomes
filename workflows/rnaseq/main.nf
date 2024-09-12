@@ -1,3 +1,8 @@
+include { GUNZIP as GUNZIP_GTF } from '../../modules/nf-core/gunzip'
+include { GUNZIP as GUNZIP_GFF } from '../../modules/nf-core/gunzip'
+
+include { GFFREAD } from '../../modules/nf-core/gffread'
+
 include { STAR_GENOMEGENERATE } from "../../modules/nf-core/star/genomegenerate/main"
 include { HISAT2_EXTRACTSPLICESITES } from "../../modules/nf-core/hisat2/extractsplicesites"
 include { HISAT2_BUILD } from "../../modules/nf-core/hisat2/build"
@@ -12,26 +17,39 @@ workflow RNASEQ {
 
     main:
     reference
-        .multiMap { meta, fasta, gtf, bed, readme, mito, size ->
+        .multiMap { meta, fasta, gtf, gff, bed, readme, mito, size ->
             fasta: tuple(meta, fasta)
             gtf:   tuple(meta, gtf)
+            gff:   tuple(meta, gff)
             bed:   tuple(meta, bed)
         }
         .set { input }
 
-    STAR_GENOMEGENERATE ( input.fasta, input.gtf )
+    //
+    // Uncompress GTF annotation file or create from GFF3 if required
+    //
+    if (input.gtf || input.gff) {
+        if (input.gtf) {
+            // TODO Maybe gunzip? Might not need to since there's no downstream analysis
+            ch_gtf = input.gtf
+        } else if (input.gff) {
+            // TODO Add fasta cause why not
+            ch_gtf = GFFREAD ( input.gff, [] ).input.gtf.map { it[1] }
+        }
+    }
 
-    // FIXME Need to unzip gtf
-    ch_splicesites = HISAT2_EXTRACTSPLICESITES ( input.gtf ).txt.map { it[1] }
-    HISAT2_BUILD ( input.fasta, input.gtf, ch_splicesites.map { [ [:], it ] } )
+    STAR_GENOMEGENERATE ( input.fasta, ch_gtf )
 
-    ch_transcript_fasta = MAKE_TRANSCRIPTS_FASTA ( input.fasta, input.gtf ).transcript_fasta
+    ch_splicesites = HISAT2_EXTRACTSPLICESITES ( ch_gtf ).txt.map { it[1] }
+    HISAT2_BUILD ( input.fasta, ch_gtf, ch_splicesites.map { [ [:], it ] } )
+
+    ch_transcript_fasta = MAKE_TRANSCRIPTS_FASTA ( input.fasta, ch_gtf ).transcript_fasta
 
     SALMON_INDEX ( input.fasta, ch_transcript_fasta )
 
     KALLISTO_INDEX ( ch_transcript_fasta.map{[ [:], it]} )
 
-    RSEM_PREPAREREFERENCE_GENOME ( input.fasta, input.gtf )
+    RSEM_PREPAREREFERENCE_GENOME ( input.fasta, ch_gtf )
 
     emit:
     star_index = STAR_GENOMEGENERATE.out.index
