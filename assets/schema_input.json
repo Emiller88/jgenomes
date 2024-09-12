@@ -38,9 +38,9 @@
                 "pattern": "^\\S+\\.gff(3)?(\\.gz)?$",
                 "errorMessage": "TODO"
             },
-            "bed12": {
+            "bed": {
                 "type": "string",
-                "errorMessage": "TODO"
+                "errorMessage": "BED12"
             },
             "readme": {
                 "type": "string",

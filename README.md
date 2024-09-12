@@ -42,7 +42,7 @@ PoC:
 
 - Replace aws-igenomes
   - bwa, bowtie2, star, bismark need to be built
-  - fasta, gtf, bed12, mito_name, macs_gsize blacklist, copied over
+  - fasta, gtf, bed, mito_name, macs_gsize blacklist, copied over
 
 Other nice things to have:
 
