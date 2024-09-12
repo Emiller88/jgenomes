@@ -16,7 +16,7 @@ nextflow_pipeline {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(path("$outputDir/pipeline_info/nf_core_references_software_mqc_versions.yml").yaml).match("software_versions") },
+                { assert snapshot(UTILS.removeNextflowVersion("$outputDir/pipeline_info/nf_core_references_software_mqc_versions.yml")).match("software_versions") },
                 // { assert snapshot(
                 //     // FIXME workflow.trace.tasks().size(),
                 // ).match("output_files")

@@ -21,8 +21,7 @@
                     "msisensor-pro": "1.2.0"
                 },
                 "Workflow": {
-                    "nf-core/references": "v1.0dev",
-                    "Nextflow": "24.04.4"
+                    "nf-core/references": "v1.0dev"
                 }
             }
         ],
@@ -30,6 +29,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-09-12T11:53:26.907185887"
+        "timestamp": "2024-09-12T12:30:29.677421655"
     }
 }
