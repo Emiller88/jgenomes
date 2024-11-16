@@ -1,6 +1,6 @@
 include { BOWTIE_BUILD            } from "./../../modules/nf-core/bowtie/build/main"
 include { BOWTIE2_BUILD           } from "./../../modules/nf-core/bowtie2/build/main"
-
+include { HOMER_UNIQMAP } from '../../subworkflows/local/homer_uniqmap/main.nf'
 
 workflow INDEX {
     take:
@@ -21,6 +21,8 @@ workflow INDEX {
     // version = versions.mix(BOWTIE_BUILD.out.versions)
     BOWTIE2_BUILD ( input.fasta )
     versions = versions.mix(BOWTIE2_BUILD.out.versions)
+
+    HOMER_UNIQMAP(input.fasta)
 
     emit:
     // bowtie_index = BOWTIE_BUILD.out.index
