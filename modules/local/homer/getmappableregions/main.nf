@@ -1,8 +1,10 @@
+// http://homer.ucsd.edu/homer/ngs/groseq/groseq.html
+// The program takes a while on mammalian genomes (~day)
 process HOMER_GETMAPPABLEREGIONS {
     tag "${fasta_files[0].baseName}"
     label 'process_high_memory'
     label 'process_long'
-
+    time '2d'
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
