@@ -1,19 +1,18 @@
 process HOMER_CREATEUNIQMAP {
-    tag "$meta.id"
+    tag "${meta.id}"
     label 'process_medium'
     label 'process_long'
-
     conda "${moduleDir}/environment.yml"
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/homer:4.11--pl526hc9558a2_3' :
-        'biocontainers/homer:4.11--pl526hc9558a2_3' }"
+    container "${workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container
+        ? 'https://depot.galaxyproject.org/singularity/homer:4.11--pl526hc9558a2_3'
+        : 'biocontainers/homer:4.11--pl526hc9558a2_3'}"
 
     input:
-    path(mappable_regions)
+    path mappable_regions
 
     output:
-    path("uniqmap/"), emit: uniqmap_dir
-    path "versions.yml"              , emit: versions
+    path ("uniqmap/"), emit: uniqmap_dir
+    path "versions.yml", emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -24,11 +23,11 @@ process HOMER_CREATEUNIQMAP {
     def VERSION = '4.11'
     """
     mkdir -p uniqmap
-    homerTools special uniqmap uniqmap/ $mappable_regions
+    homerTools special uniqmap uniqmap/ ${mappable_regions}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        homer: $VERSION
+        homer: ${VERSION}
     END_VERSIONS
     """
 
@@ -39,7 +38,7 @@ process HOMER_CREATEUNIQMAP {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        homer: $VERSION
+        homer: ${VERSION}
     END_VERSIONS
     """
 }
