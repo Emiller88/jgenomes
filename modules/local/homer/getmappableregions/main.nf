@@ -2,6 +2,7 @@
 // The program takes a while on mammalian genomes (~day)
 process HOMER_GETMAPPABLEREGIONS {
     tag "${fasta_files[0].baseName}"
+    label 'process_medium'
     label 'process_high_memory'
     label 'process_long'
     time '2d'
