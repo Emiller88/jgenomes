@@ -1,3 +1,7 @@
+.DS_Store
+dragmap/dragmap/hash_table.cfg
+dragmap/dragmap/hash_table.cfg.bin
+dragmap/dragmap/hash_table_stats.txt
 multiqc/multiqc_data/multiqc.log
 multiqc/multiqc_data/multiqc_data.json
 multiqc/multiqc_data/multiqc_general_stats.txt
@@ -6,4 +10,3 @@ multiqc/multiqc_data/multiqc_sources.txt
 multiqc/multiqc_plots/{svg,pdf,png}/*.{svg,pdf,png}
 multiqc/multiqc_report.html
 pipeline_info/*.{html,json,txt,yml}
-.DS_Store
