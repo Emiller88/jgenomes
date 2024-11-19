@@ -1,7 +1,9 @@
+<<<<<<< HEAD:modules/nf-core/bwa/index/environment.yml
 name: bwa_index
+=======
+>>>>>>> TEMPLATE:modules/nf-core/fastqc/environment.yml
 channels:
   - conda-forge
   - bioconda
-  - defaults
 dependencies:
   - bioconda::bwa=0.7.17
