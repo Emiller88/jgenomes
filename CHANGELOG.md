@@ -9,6 +9,10 @@ Initial release of nf-core/references, created with the [nf-core](https://nf-co.
 
 ### `Added`
 
+### Changed
+
+- [21](https://github.com/nf-core/references/pull/21) - Template update for nf-core/tools v3.0.2
+
 ### `Fixed`
 
 ### `Dependencies`
