@@ -10,3 +10,4 @@ null/
 .idea
 *.log
 tmp/
+.nf-test

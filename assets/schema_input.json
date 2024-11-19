@@ -50,6 +50,6 @@
                 "errorMessage": "TODO"
             }
         },
-        "required": ["genome", "fasta", "gtf"]
+        "required": ["genome", "fasta"]
     }
 }
