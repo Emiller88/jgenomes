@@ -1,0 +1,109 @@
+{
+    "Run with profile test | --input assets/genomes/test/pipelines/sarek.yml": {
+        "content": [
+            7,
+            {
+                "BOWTIE2_BUILD": {
+                    "bowtie2": "2.5.2"
+                },
+                "BWAMEM1_INDEX": {
+                    "bwa": "0.7.18-r1243-dirty"
+                },
+                "BWAMEM2_INDEX": {
+                    "bwamem2": "2.2.1"
+                },
+                "DRAGMAP_HASHTABLE": {
+                    "dragmap": "1.2.1"
+                },
+                "GATK4_CREATESEQUENCEDICTIONARY": {
+                    "gatk4": "4.6.1.0"
+                },
+                "MSISENSORPRO_SCAN": {
+                    "msisensor-pro": "1.2.0"
+                },
+                "Workflow": {
+                    "nf-core/references": "v1.0dev"
+                }
+            },
+            [
+                "bowtie2",
+                "bowtie2/bowtie2",
+                "bowtie2/bowtie2/GRCh38_chr21.1.bt2",
+                "bowtie2/bowtie2/GRCh38_chr21.2.bt2",
+                "bowtie2/bowtie2/GRCh38_chr21.3.bt2",
+                "bowtie2/bowtie2/GRCh38_chr21.4.bt2",
+                "bowtie2/bowtie2/GRCh38_chr21.rev.1.bt2",
+                "bowtie2/bowtie2/GRCh38_chr21.rev.2.bt2",
+                "bwamem1",
+                "bwamem1/bwa",
+                "bwamem1/bwa/GRCh38_chr21.amb",
+                "bwamem1/bwa/GRCh38_chr21.ann",
+                "bwamem1/bwa/GRCh38_chr21.bwt",
+                "bwamem1/bwa/GRCh38_chr21.pac",
+                "bwamem1/bwa/GRCh38_chr21.sa",
+                "bwamem2",
+                "bwamem2/bwamem2",
+                "bwamem2/bwamem2/GRCh38_chr21.fa.0123",
+                "bwamem2/bwamem2/GRCh38_chr21.fa.amb",
+                "bwamem2/bwamem2/GRCh38_chr21.fa.ann",
+                "bwamem2/bwamem2/GRCh38_chr21.fa.bwt.2bit.64",
+                "bwamem2/bwamem2/GRCh38_chr21.fa.pac",
+                "dragmap",
+                "dragmap/dragmap",
+                "dragmap/dragmap/hash_table.cfg",
+                "dragmap/dragmap/hash_table.cfg.bin",
+                "dragmap/dragmap/hash_table.cmp",
+                "dragmap/dragmap/hash_table_stats.txt",
+                "dragmap/dragmap/ref_index.bin",
+                "dragmap/dragmap/reference.bin",
+                "dragmap/dragmap/repeat_mask.bin",
+                "dragmap/dragmap/str_table.bin",
+                "gatk4",
+                "gatk4/GRCh38_chr21.dict",
+                "msisensorpro",
+                "msisensorpro/GRCh38_chr21.msisensor_scan.list",
+                "multiqc",
+                "multiqc/multiqc_data",
+                "multiqc/multiqc_data/multiqc.log",
+                "multiqc/multiqc_data/multiqc_citations.txt",
+                "multiqc/multiqc_data/multiqc_data.json",
+                "multiqc/multiqc_data/multiqc_software_versions.txt",
+                "multiqc/multiqc_data/multiqc_sources.txt",
+                "multiqc/multiqc_report.html",
+                "pipeline_info",
+                "pipeline_info/nf_core_references_software_mqc_versions.yml"
+            ],
+            [
+                "GRCh38_chr21.1.bt2:md5,3de5dca5da6810e9addac0df4c682d05",
+                "GRCh38_chr21.2.bt2:md5,c61d725cb17a44cf928f89806fe37997",
+                "GRCh38_chr21.3.bt2:md5,dbf5af96efd98d6b03f1e5d2baed848a",
+                "GRCh38_chr21.4.bt2:md5,bd952f748321c4c230671e8fce7b1650",
+                "GRCh38_chr21.rev.1.bt2:md5,652b3b94689d5ca59b02a7f89e799958",
+                "GRCh38_chr21.rev.2.bt2:md5,33a970574d59232fdfab1bf2cb26d7ae",
+                "GRCh38_chr21.amb:md5,e59d7ca1d4e9593989a13925bfc15c07",
+                "GRCh38_chr21.ann:md5,4d42ab1762829012e9139cacbeea7615",
+                "GRCh38_chr21.bwt:md5,a5015025a0ae077c011833bd73651794",
+                "GRCh38_chr21.pac:md5,8c08bed90eb472d0d35451e378e399f3",
+                "GRCh38_chr21.sa:md5,9abb4ddd6fb4eab96b79f48540882329",
+                "GRCh38_chr21.fa.0123:md5,f94ffcb0dc6a24f09699f28d700ac4fe",
+                "GRCh38_chr21.fa.amb:md5,e59d7ca1d4e9593989a13925bfc15c07",
+                "GRCh38_chr21.fa.ann:md5,4d42ab1762829012e9139cacbeea7615",
+                "GRCh38_chr21.fa.bwt.2bit.64:md5,9e25b4dcedf86f0452b3f64806da84bb",
+                "GRCh38_chr21.fa.pac:md5,8c08bed90eb472d0d35451e378e399f3",
+                "hash_table.cmp:md5,a27cf225800eada26769ad895e5f3b86",
+                "ref_index.bin:md5,9953bae4b3998c858c59a7e3a07f46b0",
+                "reference.bin:md5,3f9513f68306d60dab411c26f90a4633",
+                "repeat_mask.bin:md5,a5bf171397984ad6bc7ff398c46dd0ab",
+                "str_table.bin:md5,ae0be026310e8197d3d2c14f91d5dfd9",
+                "GRCh38_chr21.dict:md5,40482944b1a51af140a397e2544b6ed4",
+                "GRCh38_chr21.msisensor_scan.list:md5,51b72d56b479de553281745ac8e75745",
+                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.1",
+            "nextflow": "24.10.1"
+        },
+        "timestamp": "2024-11-19T18:35:07.424868215"
+    }
+}
