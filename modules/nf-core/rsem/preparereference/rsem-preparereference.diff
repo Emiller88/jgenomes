@@ -1,4 +1,5 @@
 Changes in module 'nf-core/rsem/preparereference'
+Changes in 'rsem/preparereference/main.nf':
 --- modules/nf-core/rsem/preparereference/main.nf
 +++ modules/nf-core/rsem/preparereference/main.nf
 @@ -8,8 +8,8 @@
@@ -13,4 +14,9 @@ Changes in module 'nf-core/rsem/preparereference'
      output:
      path "rsem"           , emit: index
 
+'modules/nf-core/rsem/preparereference/meta.yml' is unchanged
+'modules/nf-core/rsem/preparereference/environment.yml' is unchanged
+'modules/nf-core/rsem/preparereference/tests/main.nf.test.snap' is unchanged
+'modules/nf-core/rsem/preparereference/tests/main.nf.test' is unchanged
+'modules/nf-core/rsem/preparereference/tests/tags.yml' is unchanged
 ************************************************************

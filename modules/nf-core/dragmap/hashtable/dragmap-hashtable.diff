@@ -1,4 +1,5 @@
 Changes in module 'nf-core/dragmap/hashtable'
+Changes in 'dragmap/hashtable/main.nf':
 --- modules/nf-core/dragmap/hashtable/main.nf
 +++ modules/nf-core/dragmap/hashtable/main.nf
 @@ -4,8 +4,8 @@
@@ -27,6 +28,11 @@ Changes in module 'nf-core/dragmap/hashtable'
 -    END_VERSIONS
 -    """
 -
--}
-+}
+ }
+
+'modules/nf-core/dragmap/hashtable/meta.yml' is unchanged
+'modules/nf-core/dragmap/hashtable/environment.yml' is unchanged
+'modules/nf-core/dragmap/hashtable/tests/main.nf.test.snap' is unchanged
+'modules/nf-core/dragmap/hashtable/tests/main.nf.test' is unchanged
+'modules/nf-core/dragmap/hashtable/tests/tags.yml' is unchanged
 ************************************************************
