@@ -25,6 +25,7 @@ workflow REFERENCES {
     bwamem1      = Channel.empty()
     bwamem2      = Channel.empty()
     dict         = Channel.empty()
+    faidx        = Channel.empty()
     dragmap      = Channel.empty()
     msisensorpro = Channel.empty()
     star         = Channel.empty()
@@ -93,11 +94,17 @@ workflow REFERENCES {
         versions = versions.mix(STAR_GENOMEGENERATE.out.versions.first())
     }
 
+    if (tools && tools.split(',').contains('faidx')) {
+        SAMTOOLS_FAIDX(input.fasta, [ [ id:'no_fai' ], [] ] )
+
+        faidx = SAMTOOLS_FAIDX.out.fai.first()
+        versions = versions.mix(SAMTOOLS_FAIDX.out.versions.first())
+    }
+
     // FIXME
     // HISAT2_EXTRACTSPLICESITES(input.gtf)
     // ch_splicesites = HISAT2_EXTRACTSPLICESITES.out.txt.map{ it[1] }
     // HISAT2_BUILD(input.fasta, input.gtf, ch_splicesites.map{ [ [:], it ] })
-    // SAMTOOLS_FAIDX(input.fasta, [ [ id: input.meta.id ], [] ] )
     // MAKE_TRANSCRIPTS_FASTA(input.fasta, input.gtf)
     // ch_transcript_fasta = MAKE_TRANSCRIPTS_FASTA.out.transcript_fasta
     // SALMON_INDEX(input.fasta, ch_transcript_fasta)
@@ -111,6 +118,7 @@ workflow REFERENCES {
     bwamem2
     dict
     dragmap
+    faidx
     msisensorpro
     star
     versions
