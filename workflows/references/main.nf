@@ -22,7 +22,7 @@ include { STAR_GENOMEGENERATE                                   } from '../../mo
 workflow REFERENCES {
     take:
     reference // fasta, gtf
-    tools     // bowtie|bowtie2|bwamem1|bwamem2|createsequencedictionary|dragmap|faidx|hisat2|hisat2_extractsplicesites|kallisto|make_transcripts_fasta|msisensorpro|rsem_preparereference_genome|salmon|star
+    tools     // bowtie|bowtie2|bwamem1|bwamem2|createsequencedictionary|dragmap|faidx|gffread|hisat2|hisat2_extractsplicesites|kallisto|make_transcripts_fasta|msisensorpro|rsem_preparereference_genome|salmon|star
 
     main:
     bowtie1      = Channel.empty()
@@ -30,17 +30,17 @@ workflow REFERENCES {
     bwamem1      = Channel.empty()
     bwamem2      = Channel.empty()
     dict         = Channel.empty()
-    faidx        = Channel.empty()
     dragmap      = Channel.empty()
+    faidx        = Channel.empty()
+    gffread      = Channel.empty()
     msisensorpro = Channel.empty()
     star         = Channel.empty()
     versions     = Channel.empty()
 
-    input = reference.multiMap { meta, fasta, gtf, bed, readme, mito, size ->
+    input = reference.multiMap { meta, fasta, gtf, gff, bed, readme, mito, size ->
         fasta: tuple(meta, fasta)
         gtf:   tuple(meta, gtf)
-        // FIXME
-        // bed:   tuple(meta, bed)
+        gff:   tuple(meta, gff)
     }
 
     if (tools && tools.split(',').contains('bowtie1')) {
@@ -85,6 +85,13 @@ workflow REFERENCES {
         versions = versions.mix(GATK4_CREATESEQUENCEDICTIONARY.out.versions.first())
     }
 
+    if (tools && tools.split(',').contains('gffread')) {
+        GFFREAD(input.gff, [])
+
+        gtf      = GFFREAD.out.gtf.map{ it[1] }
+        versions = versions.mix(GFFREAD.out.versions)
+    }
+
     if (tools && tools.split(',').contains('msisensorpro')) {
         MSISENSORPRO_SCAN(input.fasta)
 
@@ -124,6 +131,7 @@ workflow REFERENCES {
     dict
     dragmap
     faidx
+    gffread
     msisensorpro
     star
     versions

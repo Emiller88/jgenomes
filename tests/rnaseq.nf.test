@@ -10,7 +10,7 @@ nextflow_pipeline {
             params {
                 input  = "${projectDir}/assets/genomes/test/pipelines/default.yml"
                 outdir = "$outputDir"
-                tools  = 'bowtie,bowtie2,hisat2,hisat2_extractsplicesites,kallisto,make_transcripts_fasta,rsem_preparereference_genome,salmon,star'
+                tools  = 'bowtie,bowtie2,gffread,hisat2,hisat2_extractsplicesites,kallisto,make_transcripts_fasta,rsem_preparereference_genome,salmon,star'
             }
         }
 
