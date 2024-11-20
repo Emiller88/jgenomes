@@ -32,10 +32,10 @@ jobs:
         NXF_VER:
           - "24.04.2"
           - "latest-everything"
-        filter: ["workflow", "function", "pipeline"]
+        filter: ["pipeline"]
         # filter: ["process", "workflow", "function", "pipeline"]
         profile: ["conda", "docker", "singularity"]
-        shard: [1]
+        shard: [1, 2]
         # shard: [1, 2, 3, 4, 5]
         isMaster:
           - ${{ github.base_ref == 'master' }}

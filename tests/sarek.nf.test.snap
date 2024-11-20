@@ -1,5 +1,5 @@
 {
-    "Run with profile test | --input assets/genomes/test/pipelines/sarek.yml": {
+    "Run with profile test for sarek | --input assets/genomes/test/pipelines/default.yml": {
         "content": [
             6,
             {

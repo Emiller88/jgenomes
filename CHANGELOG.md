@@ -12,8 +12,9 @@ Initial release of nf-core/references, created with the [nf-core](https://nf-co.
 - [5](https://github.com/nf-core/references/pull/5) - Brainstorm about input
 - [14](https://github.com/nf-core/references/pull/14) - nf-core/rnaseq references
 - [17](https://github.com/nf-core/references/pull/17) - nf-core/sarek references
-- [22](https://github.com/nf-core/references/pull/22) - Test pipeline output with nf-test
+- [22](https://github.com/nf-core/references/pull/22) - Test pipeline output with nf-test for sarek
 - [23](https://github.com/nf-core/references/pull/23) - Tools selection
+- [24](https://github.com/nf-core/references/pull/24) - Test pipeline output with nf-test for rnaseq
 
 ### Changed
 
