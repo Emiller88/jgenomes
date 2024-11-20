@@ -1,0 +1,119 @@
+Changes in module 'nf-core/samtools/faidx'
+Changes in 'samtools/faidx/main.nf':
+--- modules/nf-core/samtools/faidx/main.nf
++++ modules/nf-core/samtools/faidx/main.nf
+@@ -10,9 +10,11 @@
+     input:
+     tuple val(meta), path(fasta)
+     tuple val(meta2), path(fai)
++    val get_sizes
+ 
+     output:
+-    tuple val(meta), path ("*.{fa,fasta}") , emit: fa , optional: true
++    tuple val(meta), path ("*.{fa,fasta}") , emit: fa, optional: true
++    tuple val(meta), path ("*.sizes")      , emit: sizes, optional: true
+     tuple val(meta), path ("*.fai")        , emit: fai, optional: true
+     tuple val(meta), path ("*.gzi")        , emit: gzi, optional: true
+     path "versions.yml"                    , emit: versions
+@@ -22,11 +24,14 @@
+ 
+     script:
+     def args = task.ext.args ?: ''
++    def get_sizes_command = get_sizes ? "cut -f 1,2 ${fasta}.fai > ${fasta}.sizes" : ''
+     """
+     samtools \\
+         faidx \\
+         $fasta \\
+         $args
++
++    ${get_sizes_command}
+ 
+     cat <<-END_VERSIONS > versions.yml
+     "${task.process}":
+@@ -37,9 +42,15 @@
+     stub:
+     def match = (task.ext.args =~ /-o(?:utput)?\s(.*)\s?/).findAll()
+     def fastacmd = match[0] ? "touch ${match[0][1]}" : ''
++    def get_sizes_command = get_sizes ? "touch ${fasta}.sizes" : ''
+     """
+     ${fastacmd}
+     touch ${fasta}.fai
++    if [[ "${fasta.extension}" == "gz" ]]; then
++        touch ${fasta}.gzi
++    fi
++
++    ${get_sizes_command}
+ 
+     cat <<-END_VERSIONS > versions.yml
+ 
+
+Changes in 'samtools/faidx/meta.yml':
+--- modules/nf-core/samtools/faidx/meta.yml
++++ modules/nf-core/samtools/faidx/meta.yml
+@@ -1,9 +1,10 @@
+ name: samtools_faidx
+-description: Index FASTA file
++description: Index FASTA file, and optionally generate a file of chromosome sizes
+ keywords:
+   - index
+   - fasta
+   - faidx
++  - chromosome
+ tools:
+   - samtools:
+       description: |
+@@ -34,6 +35,11 @@
+         type: file
+         description: FASTA index file
+         pattern: "*.{fai}"
++  - - get_sizes:
++        type: boolean
++        description: use cut to get the sizes of the index (true) or not (false)
++        pattern: "true or false"
++
+ output:
+   - fa:
+       - meta:
+@@ -55,6 +61,16 @@
+           type: file
+           description: FASTA index file
+           pattern: "*.{fai}"
++  - sizes:
++      - meta:
++          type: map
++          description: |
++            Groovy Map containing sample information
++            e.g. [ id:'test', single_end:false ]
++      - "*.sizes":
++          type: file
++          description: File containing chromosome lengths
++          pattern: "*.{sizes}"
+   - gzi:
+       - meta:
+           type: map
+@@ -71,10 +87,17 @@
+           description: File containing software versions
+           pattern: "versions.yml"
+ authors:
++  - "@chris-cheshire"
+   - "@drpatelh"
+   - "@ewels"
++  - "@muffato"
+   - "@phue"
++  - "@tamara-hodgetts"
+ maintainers:
++  - "@chris-cheshire"
+   - "@drpatelh"
+   - "@ewels"
++  - "@maxulysse"
++  - "@muffato"
+   - "@phue"
++  - "@tamara-hodgetts"
+
+'modules/nf-core/samtools/faidx/environment.yml' is unchanged
+'modules/nf-core/samtools/faidx/tests/main.nf.test.snap' is unchanged
+'modules/nf-core/samtools/faidx/tests/nextflow.config' is unchanged
+'modules/nf-core/samtools/faidx/tests/nextflow2.config' is unchanged
+'modules/nf-core/samtools/faidx/tests/main.nf.test' is unchanged
+'modules/nf-core/samtools/faidx/tests/tags.yml' is unchanged
+************************************************************

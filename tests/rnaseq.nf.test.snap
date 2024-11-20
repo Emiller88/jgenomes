@@ -1,10 +1,19 @@
 {
     "Run with profile test for rnaseq | --input assets/genomes/test/pipelines/default.yml": {
         "content": [
-            3,
+            6,
             {
+                "BOWTIE1_BUILD": {
+                    "bowtie": "1.3.1"
+                },
                 "BOWTIE2_BUILD": {
                     "bowtie2": "2.5.2"
+                },
+                "GFFREAD": {
+                    "gffread": "0.12.7"
+                },
+                "SAMTOOLS_FAIDX": {
+                    "samtools": 1.21
                 },
                 "STAR_GENOMEGENERATE": {
                     "star": "2.7.11b",
@@ -16,6 +25,14 @@
                 }
             },
             [
+                "bowtie1",
+                "bowtie1/bowtie",
+                "bowtie1/bowtie/GRCh38_chr21.1.ebwt",
+                "bowtie1/bowtie/GRCh38_chr21.2.ebwt",
+                "bowtie1/bowtie/GRCh38_chr21.3.ebwt",
+                "bowtie1/bowtie/GRCh38_chr21.4.ebwt",
+                "bowtie1/bowtie/GRCh38_chr21.rev.1.ebwt",
+                "bowtie1/bowtie/GRCh38_chr21.rev.2.ebwt",
                 "bowtie2",
                 "bowtie2/bowtie2",
                 "bowtie2/bowtie2/GRCh38_chr21.1.bt2",
@@ -24,6 +41,8 @@
                 "bowtie2/bowtie2/GRCh38_chr21.4.bt2",
                 "bowtie2/bowtie2/GRCh38_chr21.rev.1.bt2",
                 "bowtie2/bowtie2/GRCh38_chr21.rev.2.bt2",
+                "gffread",
+                "gffread/GRCh38_chr21.gff3",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/multiqc.log",
@@ -34,6 +53,9 @@
                 "multiqc/multiqc_report.html",
                 "pipeline_info",
                 "pipeline_info/nf_core_references_software_mqc_versions.yml",
+                "samtools",
+                "samtools/GRCh38_chr21.fa.fai",
+                "samtools/GRCh38_chr21.fa.sizes",
                 "star",
                 "star/star",
                 "star/star/Genome",
@@ -54,13 +76,22 @@
                 "star/star/transcriptInfo.tab"
             ],
             [
+                "GRCh38_chr21.1.ebwt:md5,32b67a141c03f8f97d6f3fc4c9b90796",
+                "GRCh38_chr21.2.ebwt:md5,d811357a63a9429006f2f7a84255ef91",
+                "GRCh38_chr21.3.ebwt:md5,dbf5af96efd98d6b03f1e5d2baed848a",
+                "GRCh38_chr21.4.ebwt:md5,bd952f748321c4c230671e8fce7b1650",
+                "GRCh38_chr21.rev.1.ebwt:md5,5e5a45602d63d358e3edca7cdb683a1b",
+                "GRCh38_chr21.rev.2.ebwt:md5,1e5088944137b3277e65306ea1a347a5",
                 "GRCh38_chr21.1.bt2:md5,3de5dca5da6810e9addac0df4c682d05",
                 "GRCh38_chr21.2.bt2:md5,c61d725cb17a44cf928f89806fe37997",
                 "GRCh38_chr21.3.bt2:md5,dbf5af96efd98d6b03f1e5d2baed848a",
                 "GRCh38_chr21.4.bt2:md5,bd952f748321c4c230671e8fce7b1650",
                 "GRCh38_chr21.rev.1.bt2:md5,652b3b94689d5ca59b02a7f89e799958",
                 "GRCh38_chr21.rev.2.bt2:md5,33a970574d59232fdfab1bf2cb26d7ae",
+                "GRCh38_chr21.gff3:md5,1cd0ed9c485058e36963468893e387a6",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
+                "GRCh38_chr21.fa.fai:md5,6ea51e1c1231da5e49212ea9f493d703",
+                "GRCh38_chr21.fa.sizes:md5,c985a141685e8431ec27c782816cb744",
                 "Genome:md5,612664e3cfde5e1b73ad541d93752b31",
                 "SA:md5,074ae54177bb7b9cb981382f043f36e5",
                 "SAindex:md5,1c9cd646313f1abb1cfc205ccab73464",
@@ -82,6 +113,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.1"
         },
-        "timestamp": "2024-11-20T13:27:09.236041909"
+        "timestamp": "2024-11-20T18:08:53.580328014"
     }
 }

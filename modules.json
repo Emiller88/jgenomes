@@ -5,6 +5,11 @@
         "https://github.com/nf-core/modules.git": {
             "modules": {
                 "nf-core": {
+                    "bbmap/bbsplit": {
+                        "branch": "master",
+                        "git_sha": "a1abf90966a2a4016d3c3e41e228bfcbd4811ccc",
+                        "installed_by": ["modules"]
+                    },
                     "bowtie/build": {
                         "branch": "master",
                         "git_sha": "3a897454edabb27d21debfec644e40f7bcfa4c43",
@@ -25,6 +30,11 @@
                         "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
                         "installed_by": ["modules"]
                     },
+                    "custom/catadditionalfasta": {
+                        "branch": "master",
+                        "git_sha": "a1abf90966a2a4016d3c3e41e228bfcbd4811ccc",
+                        "installed_by": ["modules"]
+                    },
                     "dragmap/hashtable": {
                         "branch": "master",
                         "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
@@ -34,6 +44,11 @@
                     "gatk4/createsequencedictionary": {
                         "branch": "master",
                         "git_sha": "1999eff2c530b2b185a25cc42117a1686f09b685",
+                        "installed_by": ["modules"]
+                    },
+                    "gffread": {
+                        "branch": "master",
+                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
                         "installed_by": ["modules"]
                     },
                     "hisat2/build": {
@@ -76,6 +91,12 @@
                     "samtools/faidx": {
                         "branch": "master",
                         "git_sha": "b13f07be4c508d6ff6312d354d09f2493243e208",
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/samtools/faidx/samtools-faidx.diff"
+                    },
+                    "sortmerna": {
+                        "branch": "master",
+                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
                         "installed_by": ["modules"]
                     },
                     "star/genomegenerate": {

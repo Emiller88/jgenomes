@@ -10,7 +10,7 @@ nextflow_pipeline {
             params {
                 input  = "${projectDir}/assets/genomes/test/pipelines/default.yml"
                 outdir = "$outputDir"
-                tools  = 'bwamem1,bwamem2,createsequencedictionary,dragmap,msisensorpro'
+                tools  = 'bwamem1,bwamem2,createsequencedictionary,dragmap,faidx,msisensorpro'
             }
         }
 

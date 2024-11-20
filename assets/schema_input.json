@@ -33,6 +33,11 @@
                 "pattern": "^\\S+\\.gtf(\\.gz)?$",
                 "errorMessage": "TODO"
             },
+            "gff": {
+                "type": "string",
+                "pattern": "^\\S+\\.gff(\\.gz)?$",
+                "errorMessage": "TODO"
+            },
             "bed12": {
                 "type": "string",
                 "errorMessage": "TODO"

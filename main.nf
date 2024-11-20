@@ -15,13 +15,16 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { MULTIQC                 } from './modules/nf-core/multiqc/main'
-include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_references_pipeline'
-include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_references_pipeline'
-include { methodsDescriptionText  } from './subworkflows/local/utils_nfcore_references_pipeline'
 include { paramsSummaryMap        } from 'plugin/nf-schema'
+include { methodsDescriptionText  } from './subworkflows/local/utils_nfcore_references_pipeline'
 include { paramsSummaryMultiqc    } from './subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML  } from './subworkflows/nf-core/utils_nfcore_pipeline'
+
+include { MULTIQC                 } from './modules/nf-core/multiqc/main'
+
+include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_references_pipeline'
+include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_references_pipeline'
+
 include { REFERENCES              } from "./workflows/references/main"
 
 /*
