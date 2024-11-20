@@ -87,17 +87,19 @@ workflow REFERENCES {
     }
 
     if (tools && tools.split(',').contains('star')) {
-        STAR_GENOMEGENERATE(input.fasta)
+        STAR_GENOMEGENERATE(input.fasta, input.gtf)
 
-        star = STAR_GENOMEGENERATE.out.list
+        star = STAR_GENOMEGENERATE.out.index
         versions = versions.mix(STAR_GENOMEGENERATE.out.versions.first())
     }
 
     // FIXME
-    // ch_splicesites = HISAT2_EXTRACTSPLICESITES(input.gtf).txt.map{ it[1] }
+    // HISAT2_EXTRACTSPLICESITES(input.gtf)
+    // ch_splicesites = HISAT2_EXTRACTSPLICESITES.out.txt.map{ it[1] }
     // HISAT2_BUILD(input.fasta, input.gtf, ch_splicesites.map{ [ [:], it ] })
     // SAMTOOLS_FAIDX(input.fasta, [ [ id: input.meta.id ], [] ] )
-    // ch_transcript_fasta = MAKE_TRANSCRIPTS_FASTA(input.fasta, input.gtf).transcript_fasta
+    // MAKE_TRANSCRIPTS_FASTA(input.fasta, input.gtf)
+    // ch_transcript_fasta = MAKE_TRANSCRIPTS_FASTA.out.transcript_fasta
     // SALMON_INDEX(input.fasta, ch_transcript_fasta)
     // KALLISTO_INDEX(ch_transcript_fasta.map{[ [:], it]})
     // RSEM_PREPAREREFERENCE_GENOME(input.fasta, input.gtf)
