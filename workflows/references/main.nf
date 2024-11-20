@@ -1,9 +1,13 @@
-include { BOWTIE_BUILD as BOWTIE1_BUILD                         } from '../../modules/nf-core/bowtie/build'
+include { BBMAP_BBSPLIT                                         } from '../../modules/nf-core/bbmap/bbsplit'
 include { BOWTIE2_BUILD                                         } from '../../modules/nf-core/bowtie2/build'
+include { BOWTIE_BUILD as BOWTIE1_BUILD                         } from '../../modules/nf-core/bowtie/build'
 include { BWAMEM2_INDEX                                         } from '../../modules/nf-core/bwamem2/index'
 include { BWA_INDEX as BWAMEM1_INDEX                            } from '../../modules/nf-core/bwa/index'
+include { CUSTOM_CATADDITIONALFASTA                             } from '../../modules/nf-core/custom/catadditionalfasta'
+include { CUSTOM_GETCHROMSIZES                                  } from '../../modules/nf-core/custom/getchromsizes'
 include { DRAGMAP_HASHTABLE                                     } from '../../modules/nf-core/dragmap/hashtable'
 include { GATK4_CREATESEQUENCEDICTIONARY                        } from '../../modules/nf-core/gatk4/createsequencedictionary'
+include { GFFREAD                                               } from '../../modules/nf-core/gffread'
 include { HISAT2_BUILD                                          } from '../../modules/nf-core/hisat2/build'
 include { HISAT2_EXTRACTSPLICESITES                             } from '../../modules/nf-core/hisat2/extractsplicesites'
 include { KALLISTO_INDEX                                        } from '../../modules/nf-core/kallisto/index'
@@ -12,6 +16,7 @@ include { RSEM_PREPAREREFERENCE as MAKE_TRANSCRIPTS_FASTA       } from '../../mo
 include { RSEM_PREPAREREFERENCE as RSEM_PREPAREREFERENCE_GENOME } from '../../modules/nf-core/rsem/preparereference'
 include { SALMON_INDEX                                          } from '../../modules/nf-core/salmon/index'
 include { SAMTOOLS_FAIDX                                        } from '../../modules/nf-core/samtools/faidx'
+include { SORTMERNA as SORTMERNA_INDEX                          } from '../../modules/nf-core/sortmerna'
 include { STAR_GENOMEGENERATE                                   } from '../../modules/nf-core/star/genomegenerate'
 
 workflow REFERENCES {

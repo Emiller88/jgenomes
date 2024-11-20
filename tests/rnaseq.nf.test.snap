@@ -1,13 +1,10 @@
 {
     "Run with profile test for rnaseq | --input assets/genomes/test/pipelines/default.yml": {
         "content": [
-            4,
+            3,
             {
                 "BOWTIE2_BUILD": {
                     "bowtie2": "2.5.2"
-                },
-                "SAMTOOLS_FAIDX": {
-                    "samtools": 1.21
                 },
                 "STAR_GENOMEGENERATE": {
                     "star": "2.7.11b",
@@ -37,8 +34,6 @@
                 "multiqc/multiqc_report.html",
                 "pipeline_info",
                 "pipeline_info/nf_core_references_software_mqc_versions.yml",
-                "samtools",
-                "samtools/GRCh38_chr21.fa.fai",
                 "star",
                 "star/star",
                 "star/star/Genome",
@@ -66,7 +61,6 @@
                 "GRCh38_chr21.rev.1.bt2:md5,652b3b94689d5ca59b02a7f89e799958",
                 "GRCh38_chr21.rev.2.bt2:md5,33a970574d59232fdfab1bf2cb26d7ae",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
-                "GRCh38_chr21.fa.fai:md5,6ea51e1c1231da5e49212ea9f493d703",
                 "Genome:md5,612664e3cfde5e1b73ad541d93752b31",
                 "SA:md5,074ae54177bb7b9cb981382f043f36e5",
                 "SAindex:md5,1c9cd646313f1abb1cfc205ccab73464",
