@@ -62,7 +62,6 @@
                 "GRCh38_chr21.rev.2.bt2:md5,33a970574d59232fdfab1bf2cb26d7ae",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
                 "Genome:md5,612664e3cfde5e1b73ad541d93752b31",
-                "Log.out:md5,147b34bb20b9681ca36edd4dab6fceef",
                 "SA:md5,074ae54177bb7b9cb981382f043f36e5",
                 "SAindex:md5,1c9cd646313f1abb1cfc205ccab73464",
                 "chrLength.txt:md5,b0be0a56ddefa84552742c72d4859eac",
