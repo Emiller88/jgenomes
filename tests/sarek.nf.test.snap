@@ -1,11 +1,8 @@
 {
     "Run with profile test | --input assets/genomes/test/pipelines/sarek.yml": {
         "content": [
-            7,
+            6,
             {
-                "BOWTIE2_BUILD": {
-                    "bowtie2": "2.5.2"
-                },
                 "BWAMEM1_INDEX": {
                     "bwa": "0.7.18-r1243-dirty"
                 },
@@ -26,14 +23,6 @@
                 }
             },
             [
-                "bowtie2",
-                "bowtie2/bowtie2",
-                "bowtie2/bowtie2/GRCh38_chr21.1.bt2",
-                "bowtie2/bowtie2/GRCh38_chr21.2.bt2",
-                "bowtie2/bowtie2/GRCh38_chr21.3.bt2",
-                "bowtie2/bowtie2/GRCh38_chr21.4.bt2",
-                "bowtie2/bowtie2/GRCh38_chr21.rev.1.bt2",
-                "bowtie2/bowtie2/GRCh38_chr21.rev.2.bt2",
                 "bwamem1",
                 "bwamem1/bwa",
                 "bwamem1/bwa/GRCh38_chr21.amb",
@@ -74,12 +63,6 @@
                 "pipeline_info/nf_core_references_software_mqc_versions.yml"
             ],
             [
-                "GRCh38_chr21.1.bt2:md5,3de5dca5da6810e9addac0df4c682d05",
-                "GRCh38_chr21.2.bt2:md5,c61d725cb17a44cf928f89806fe37997",
-                "GRCh38_chr21.3.bt2:md5,dbf5af96efd98d6b03f1e5d2baed848a",
-                "GRCh38_chr21.4.bt2:md5,bd952f748321c4c230671e8fce7b1650",
-                "GRCh38_chr21.rev.1.bt2:md5,652b3b94689d5ca59b02a7f89e799958",
-                "GRCh38_chr21.rev.2.bt2:md5,33a970574d59232fdfab1bf2cb26d7ae",
                 "GRCh38_chr21.amb:md5,e59d7ca1d4e9593989a13925bfc15c07",
                 "GRCh38_chr21.ann:md5,4d42ab1762829012e9139cacbeea7615",
                 "GRCh38_chr21.bwt:md5,a5015025a0ae077c011833bd73651794",
@@ -101,9 +84,9 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.1",
+            "nf-test": "0.9.2",
             "nextflow": "24.10.1"
         },
-        "timestamp": "2024-11-19T18:35:07.424868215"
+        "timestamp": "2024-11-20T13:03:23.360607413"
     }
 }

@@ -8,8 +8,9 @@ nextflow_pipeline {
 
         when {
             params {
+                input  = "${projectDir}/assets/genomes/test/pipelines/sarek.yml"
                 outdir = "$outputDir"
-                input = "${projectDir}/assets/genomes/test/pipelines/sarek.yml"
+                tools  = 'bwamem1,bwamem2,createsequencedictionary,dragmap,msisensorpro'
             }
         }
 

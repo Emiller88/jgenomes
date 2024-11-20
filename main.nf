@@ -22,9 +22,7 @@ include { methodsDescriptionText  } from './subworkflows/local/utils_nfcore_refe
 include { paramsSummaryMap        } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc    } from './subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML  } from './subworkflows/nf-core/utils_nfcore_pipeline'
-include { INDEX                   } from "./workflows/index/main"
-include { RNASEQ                  } from "./workflows/rnaseq/main"
-include { SAREK                   } from "./workflows/sarek/main"
+include { REFERENCES              } from "./workflows/references/main"
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -35,24 +33,20 @@ include { SAREK                   } from "./workflows/sarek/main"
 //
 // WORKFLOW: Run main analysis pipeline depending on type of input
 //
-workflow NFCORE_REFERENCES {
+workflow NFCORE_REFERENCES{
 
     take:
-    ch_input // channel: samplesheet read in from --input
+    input // channel: samplesheet read in from --input
 
     main:
 
     reports = Channel.empty()
     versions = Channel.empty()
-    //
-    // WORKFLOW: Run pipeline
-    //
-    INDEX ( ch_input )
-    // FIXME
-    // RNASEQ ( ch_input )
-    SAREK ( ch_input )
 
-    versions = versions.mix(INDEX.out.versions, SAREK.out.versions)
+    // WORKFLOW: Run pipeline
+    REFERENCES(input, params.tools)
+
+    versions = versions.mix(REFERENCES.out.versions)
 
     emit:
     versions
