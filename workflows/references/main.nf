@@ -4,7 +4,6 @@ include { BOWTIE_BUILD as BOWTIE1_BUILD                         } from '../../mo
 include { BWAMEM2_INDEX                                         } from '../../modules/nf-core/bwamem2/index'
 include { BWA_INDEX as BWAMEM1_INDEX                            } from '../../modules/nf-core/bwa/index'
 include { CUSTOM_CATADDITIONALFASTA                             } from '../../modules/nf-core/custom/catadditionalfasta'
-include { CUSTOM_GETCHROMSIZES                                  } from '../../modules/nf-core/custom/getchromsizes'
 include { DRAGMAP_HASHTABLE                                     } from '../../modules/nf-core/dragmap/hashtable'
 include { GATK4_CREATESEQUENCEDICTIONARY                        } from '../../modules/nf-core/gatk4/createsequencedictionary'
 include { GFFREAD                                               } from '../../modules/nf-core/gffread'
@@ -34,6 +33,7 @@ workflow REFERENCES {
     faidx        = Channel.empty()
     gffread      = Channel.empty()
     msisensorpro = Channel.empty()
+    sizes        = Channel.empty()
     star         = Channel.empty()
     versions     = Channel.empty()
 
@@ -107,9 +107,11 @@ workflow REFERENCES {
     }
 
     if (tools && tools.split(',').contains('faidx')) {
-        SAMTOOLS_FAIDX(input.fasta, [ [ id:'no_fai' ], [] ] )
+        generate_sizes = tools.split(',').contains('sizes')
+        SAMTOOLS_FAIDX(input.fasta, [ [ id:'no_fai' ], [] ], generate_sizes)
 
         faidx = SAMTOOLS_FAIDX.out.fai.first()
+        sizes = SAMTOOLS_FAIDX.out.sizes.first()
         versions = versions.mix(SAMTOOLS_FAIDX.out.versions.first())
     }
 
@@ -133,6 +135,7 @@ workflow REFERENCES {
     faidx
     gffread
     msisensorpro
+    sizes
     star
     versions
 }

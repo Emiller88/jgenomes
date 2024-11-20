@@ -35,11 +35,6 @@
                         "git_sha": "a1abf90966a2a4016d3c3e41e228bfcbd4811ccc",
                         "installed_by": ["modules"]
                     },
-                    "custom/getchromsizes": {
-                        "branch": "master",
-                        "git_sha": "49f4e50534fe4b64101e62ea41d5dc43b1324358",
-                        "installed_by": ["modules"]
-                    },
                     "dragmap/hashtable": {
                         "branch": "master",
                         "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
@@ -96,7 +91,8 @@
                     "samtools/faidx": {
                         "branch": "master",
                         "git_sha": "b13f07be4c508d6ff6312d354d09f2493243e208",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/samtools/faidx/samtools-faidx.diff"
                     },
                     "sortmerna": {
                         "branch": "master",
