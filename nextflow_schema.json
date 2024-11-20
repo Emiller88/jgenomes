@@ -29,6 +29,13 @@
                     "description": "The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.",
                     "fa_icon": "fas fa-folder-open"
                 },
+                "tools": {
+                    "type": "string",
+                    "fa_icon": "fas fa-toolbox",
+                    "description": "Tools to use for building references.",
+                    "help_text": "Multiple tools separated with commas.",
+                    "pattern": "^((bowtie|bowtie2|bwamem1|bwamem2|createsequencedictionary|dragmap|faidx|hisat2|hisat2_extractsplicesites|kallisto|make_transcripts_fasta|msisensorpro|rsem_preparereference_genome|salmon|star)?,?)*(?<!,)$"
+                },
                 "email": {
                     "type": "string",
                     "description": "Email address for completion summary.",
