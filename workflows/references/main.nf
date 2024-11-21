@@ -103,6 +103,7 @@ workflow REFERENCES {
     }
 
     if (tools && (tools.split(',').contains('hisat2') || tools.split(',').contains('hisat2_extractsplicesites')) ) {
+        // TODO: Deal with no input.splice_sites
         if (tools.split(',').contains('hisat2_extractsplicesites')) {
             HISAT2_EXTRACTSPLICESITES(input.gtf)
             versions = versions.mix(HISAT2_EXTRACTSPLICESITES.out.versions.first())
@@ -138,7 +139,6 @@ workflow REFERENCES {
     }
 
     // FIXME
-    // ch_splicesites = HISAT2_EXTRACTSPLICESITES.out.txt.map{ it[1] }
     // MAKE_TRANSCRIPTS_FASTA(input.fasta, input.gtf)
     // ch_transcript_fasta = MAKE_TRANSCRIPTS_FASTA.out.transcript_fasta
     // SALMON_INDEX(input.fasta, ch_transcript_fasta)
