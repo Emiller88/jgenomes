@@ -28,21 +28,26 @@
                 "pattern": "^\\S+\\.f(ast|n)?a(\\.gz)?$",
                 "errorMessage": "TODO"
             },
-            "gtf": {
-                "type": "string",
-                "pattern": "^\\S+\\.gtf(\\.gz)?$",
-                "errorMessage": "TODO"
-            },
             "gff": {
                 "type": "string",
                 "pattern": "^\\S+\\.gff(\\.gz)?$",
                 "errorMessage": "TODO"
             },
-            "bed12": {
+            "gtf": {
                 "type": "string",
+                "pattern": "^\\S+\\.gtf(\\.gz)?$",
+                "errorMessage": "TODO"
+            },
+            "splice_sites": {
+                "type": "string",
+                "pattern": "^\\S+(\\.splice_sites)(\\.txt)?$",
                 "errorMessage": "TODO"
             },
             "readme": {
+                "type": "string",
+                "errorMessage": "TODO"
+            },
+            "bed12": {
                 "type": "string",
                 "errorMessage": "TODO"
             },
