@@ -24,21 +24,20 @@ workflow REFERENCES {
     tools     // bowtie|bowtie2|bwamem1|bwamem2|createsequencedictionary|dragmap|faidx|gffread|hisat2|hisat2_extractsplicesites|kallisto|make_transcripts_fasta|msisensorpro|rsem_preparereference_genome|salmon|star
 
     main:
-    bowtie1      = Channel.empty()
-    bowtie2      = Channel.empty()
-    bwamem1      = Channel.empty()
-    bwamem2      = Channel.empty()
-    dict         = Channel.empty()
-    dragmap      = Channel.empty()
-    faidx        = Channel.empty()
-    gffread      = Channel.empty()
-    hisat2       = Channel.empty()
-    msisensorpro = Channel.empty()
-    sizes        = Channel.empty()
-    star         = Channel.empty()
-    versions     = Channel.empty()
-
-    reference.view()
+    bowtie1             = Channel.empty()
+    bowtie2             = Channel.empty()
+    bwamem1             = Channel.empty()
+    bwamem2             = Channel.empty()
+    dict                = Channel.empty()
+    dragmap             = Channel.empty()
+    faidx               = Channel.empty()
+    gffread             = Channel.empty()
+    hisat2              = Channel.empty()
+    hisat2_splice_sites = Channel.empty()
+    msisensorpro        = Channel.empty()
+    sizes               = Channel.empty()
+    star                = Channel.empty()
+    versions            = Channel.empty()
 
     input = reference.multiMap { meta, fasta, gff, gtf, splice_sites, readme, bed, mito, size ->
         fasta:        tuple(meta, fasta)
@@ -103,15 +102,24 @@ workflow REFERENCES {
         versions = versions.mix(MSISENSORPRO_SCAN.out.versions.first())
     }
 
-    if (tools && tools.split(',').contains('hisat2')) {
-        HISAT2_EXTRACTSPLICESITES(input.gtf)
-        splicesites = input.splice_sites ?: HISAT2_EXTRACTSPLICESITES.out.txt
+    if (tools && (tools.split(',').contains('hisat2') || tools.split(',').contains('hisat2_extractsplicesites')) ) {
+        // TODO: Deal with no input.splice_sites
+        if (tools.split(',').contains('hisat2_extractsplicesites')) {
+            HISAT2_EXTRACTSPLICESITES(input.gtf)
+            versions = versions.mix(HISAT2_EXTRACTSPLICESITES.out.versions.first())
 
-        HISAT2_BUILD(input.fasta, input.gtf, splicesites)
+            hisat2_splice_sites = HISAT2_EXTRACTSPLICESITES.out.txt
+        } else {
+            hisat2_splice_sites = input.splice_sites
+        }
 
-        hisat2 = HISAT2_BUILD.out.index
-        versions = versions.mix(HISAT2_EXTRACTSPLICESITES.out.versions.first())
-        versions = versions.mix(HISAT2_BUILD.out.versions.first())
+        if (tools.split(',').contains('hisat2')) {
+
+            HISAT2_BUILD(input.fasta, input.gtf, hisat2_splice_sites)
+
+            hisat2 = HISAT2_BUILD.out.index
+            versions = versions.mix(HISAT2_BUILD.out.versions.first())
+        }
     }
 
     if (tools && tools.split(',').contains('star')) {
@@ -131,7 +139,6 @@ workflow REFERENCES {
     }
 
     // FIXME
-    // ch_splicesites = HISAT2_EXTRACTSPLICESITES.out.txt.map{ it[1] }
     // MAKE_TRANSCRIPTS_FASTA(input.fasta, input.gtf)
     // ch_transcript_fasta = MAKE_TRANSCRIPTS_FASTA.out.transcript_fasta
     // SALMON_INDEX(input.fasta, ch_transcript_fasta)
@@ -150,6 +157,7 @@ workflow REFERENCES {
     hisat2
     msisensorpro
     sizes
+    hisat2_splice_sites
     star
     versions
 }
