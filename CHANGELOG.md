@@ -17,6 +17,7 @@ Initial release of nf-core/references, created with the [nf-core](https://nf-co.
 - [24](https://github.com/nf-core/references/pull/24) - Test pipeline output with nf-test for rnaseq
 - [27](https://github.com/nf-core/references/pull/27) - Add faidx, gffread, sizes generation
 - [28](https://github.com/nf-core/references/pull/28) - Add hisat2 generation
+- [29](https://github.com/nf-core/references/pull/29) - Add hisat2_extract_sites generation
 
 ### Changed
 
