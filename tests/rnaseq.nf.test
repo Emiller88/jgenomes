@@ -10,7 +10,7 @@ nextflow_pipeline {
             params {
                 input  = "${projectDir}/assets/genomes/test/pipelines/default.yml"
                 outdir = "$outputDir"
-                tools  = 'bbmap,bowtie1,bowtie2,faidx,gffread,hisat2,kallisto,make_transcripts_fasta,rsem_preparereference_genome,salmon,sizes,star'
+                tools  = 'bbmap,bowtie1,bowtie2,faidx,gffread,hisat2,hisat2_extractsplicesites,kallisto,make_transcripts_fasta,rsem_preparereference_genome,salmon,sizes,star'
                 // TODO REMOVE ME when the module is fixed
                 // cf https://github.com/nf-core/modules/issues/7045
                 hisat2_build_memory = "3.GB"
