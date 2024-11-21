@@ -32,15 +32,19 @@ workflow REFERENCES {
     dragmap      = Channel.empty()
     faidx        = Channel.empty()
     gffread      = Channel.empty()
+    hisat2       = Channel.empty()
     msisensorpro = Channel.empty()
     sizes        = Channel.empty()
     star         = Channel.empty()
     versions     = Channel.empty()
 
-    input = reference.multiMap { meta, fasta, gtf, gff, bed, readme, mito, size ->
-        fasta: tuple(meta, fasta)
-        gtf:   tuple(meta, gtf)
-        gff:   tuple(meta, gff)
+    reference.view()
+
+    input = reference.multiMap { meta, fasta, gff, gtf, splice_sites, readme, bed, mito, size ->
+        fasta:        tuple(meta, fasta)
+        gff:          tuple(meta, gff)
+        gtf:          tuple(meta, gtf)
+        splice_sites: tuple(meta, splice_sites)
     }
 
     if (tools && tools.split(',').contains('bowtie1')) {
@@ -99,6 +103,17 @@ workflow REFERENCES {
         versions = versions.mix(MSISENSORPRO_SCAN.out.versions.first())
     }
 
+    if (tools && tools.split(',').contains('hisat2')) {
+        HISAT2_EXTRACTSPLICESITES(input.gtf)
+        splicesites = input.splice_sites ?: HISAT2_EXTRACTSPLICESITES.out.txt
+
+        HISAT2_BUILD(input.fasta, input.gtf, splicesites)
+
+        hisat2 = HISAT2_BUILD.out.index
+        versions = versions.mix(HISAT2_EXTRACTSPLICESITES.out.versions.first())
+        versions = versions.mix(HISAT2_BUILD.out.versions.first())
+    }
+
     if (tools && tools.split(',').contains('star')) {
         STAR_GENOMEGENERATE(input.fasta, input.gtf)
 
@@ -116,9 +131,7 @@ workflow REFERENCES {
     }
 
     // FIXME
-    // HISAT2_EXTRACTSPLICESITES(input.gtf)
     // ch_splicesites = HISAT2_EXTRACTSPLICESITES.out.txt.map{ it[1] }
-    // HISAT2_BUILD(input.fasta, input.gtf, ch_splicesites.map{ [ [:], it ] })
     // MAKE_TRANSCRIPTS_FASTA(input.fasta, input.gtf)
     // ch_transcript_fasta = MAKE_TRANSCRIPTS_FASTA.out.transcript_fasta
     // SALMON_INDEX(input.fasta, ch_transcript_fasta)
@@ -134,6 +147,7 @@ workflow REFERENCES {
     dragmap
     faidx
     gffread
+    hisat2
     msisensorpro
     sizes
     star
