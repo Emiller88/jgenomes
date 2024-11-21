@@ -39,11 +39,11 @@ workflow REFERENCES {
     star                = Channel.empty()
     versions            = Channel.empty()
 
-    input = reference.multiMap { meta, fasta, gff, gtf, splice_sites, readme, bed, mito, size ->
-        fasta:        tuple(meta, fasta)
-        gff:          tuple(meta, gff)
-        gtf:          tuple(meta, gtf)
-        splice_sites: tuple(meta, splice_sites)
+    input = reference.multiMap{ meta, fasta, gff, gtf, splice_sites, readme, bed, mito, size ->
+        fasta:        fasta        ? [meta, fasta]        : Channel.empty()
+        gff:          gff          ? [meta, gff]          : Channel.empty()
+        gtf:          gtf          ? [meta, gtf]          : Channel.empty()
+        splice_sites: splice_sites ? [meta, splice_sites] : Channel.empty()
     }
 
     if (tools && tools.split(',').contains('bowtie1')) {
@@ -103,15 +103,10 @@ workflow REFERENCES {
     }
 
     if (tools && (tools.split(',').contains('hisat2') || tools.split(',').contains('hisat2_extractsplicesites')) ) {
-        // TODO: Deal with no input.splice_sites
-        if (tools.split(',').contains('hisat2_extractsplicesites')) {
-            HISAT2_EXTRACTSPLICESITES(input.gtf)
-            versions = versions.mix(HISAT2_EXTRACTSPLICESITES.out.versions.first())
+        HISAT2_EXTRACTSPLICESITES(input.splice_sites ? Channel.empty() : input.gtf)
+        versions = versions.mix(HISAT2_EXTRACTSPLICESITES.out.versions.first())
 
-            hisat2_splice_sites = HISAT2_EXTRACTSPLICESITES.out.txt
-        } else {
-            hisat2_splice_sites = input.splice_sites
-        }
+        hisat2_splice_sites = input.splice_sites ?: HISAT2_EXTRACTSPLICESITES.out.txt
 
         if (tools.split(',').contains('hisat2')) {
 
