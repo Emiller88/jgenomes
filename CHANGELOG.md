@@ -15,7 +15,8 @@ Initial release of nf-core/references, created with the [nf-core](https://nf-co.
 - [22](https://github.com/nf-core/references/pull/22) - Test pipeline output with nf-test for sarek
 - [23](https://github.com/nf-core/references/pull/23) - Tools selection
 - [24](https://github.com/nf-core/references/pull/24) - Test pipeline output with nf-test for rnaseq
-- [26](https://github.com/nf-core/references/pull/26) - Add faidx, gffread, sizes generation
+- [27](https://github.com/nf-core/references/pull/27) - Add faidx, gffread, sizes generation
+- [28](https://github.com/nf-core/references/pull/28) - Add hisat2 generation
 
 ### Changed
 
