@@ -21,7 +21,7 @@ include { STAR_GENOMEGENERATE                                   } from '../../mo
 workflow REFERENCES {
     take:
     reference // fasta, gtf
-    tools     // bowtie|bowtie2|bwamem1|bwamem2|createsequencedictionary|dragmap|faidx|gffread|hisat2|hisat2_extractsplicesites|kallisto|make_transcripts_fasta|msisensorpro|rsem|salmon|star
+    tools     // bowtie|bowtie2|bwamem1|bwamem2|createsequencedictionary|dragmap|faidx|gffread|hisat2|hisat2_extractsplicesites|kallisto|msisensorpro|rsem|rsem_make_transcripts_fasta|salmon|star
 
     main:
     bowtie1             = Channel.empty()
@@ -38,9 +38,10 @@ workflow REFERENCES {
     rsem                = Channel.empty()
     sizes               = Channel.empty()
     star                = Channel.empty()
+    transcript_fasta    = Channel.empty()
     versions            = Channel.empty()
 
-    input = reference.multiMap{ meta, fasta, gff, gtf, splice_sites, readme, bed, mito, size ->
+    input = reference.multiMap{ meta, fasta, gff, gtf, splice_sites, transcript_fasta, readme, bed, mito, size ->
         fasta:        [meta, fasta]
         gff:          [meta, gff]
         gtf:          [meta, gtf]
@@ -144,6 +145,13 @@ workflow REFERENCES {
         versions = versions.mix(RSEM_PREPAREREFERENCE_GENOME.out.versions.first())
     }
 
+    if (tools && tools.split(',').contains('rsem_make_transcript_fasta')) {
+        MAKE_TRANSCRIPTS_FASTA(input.fasta, input.gtf)
+
+        transcript_fasta = MAKE_TRANSCRIPTS_FASTA.out.transcript_fasta
+        versions = versions.mix(MAKE_TRANSCRIPTS_FASTA.out.versions.first())
+    }
+
     if (tools && tools.split(',').contains('star')) {
         STAR_GENOMEGENERATE(input.fasta, input.gtf)
 
@@ -172,5 +180,6 @@ workflow REFERENCES {
     rsem
     sizes
     star
+    transcript_fasta
     versions
 }

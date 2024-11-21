@@ -6,4 +6,6 @@
   readme: "https://raw.githubusercontent.com/nf-core/test-datasets/references/references/GRCh38_chr21/README.md"
   source: "nf-core/references"
   species: "Homo_sapiens"
+  splice_sites: "https://raw.githubusercontent.com/nf-core/test-datasets/references/references/GRCh38_chr21/genes_chr21.splice_sites.txt"
+  transcript_fasta: "https://raw.githubusercontent.com/nf-core/test-datasets/references/references/GRCh38_chr21/genome.transcripts.fa"
   # macs_gsize:   "1.2e7"
