@@ -21,7 +21,7 @@ include { STAR_GENOMEGENERATE                                   } from '../../mo
 workflow REFERENCES {
     take:
     reference // fasta, gtf
-    tools     // bowtie|bowtie2|bwamem1|bwamem2|createsequencedictionary|dragmap|faidx|gffread|hisat2|hisat2_extractsplicesites|kallisto|make_transcripts_fasta|msisensorpro|rsem_preparereference_genome|salmon|star
+    tools     // bowtie|bowtie2|bwamem1|bwamem2|createsequencedictionary|dragmap|faidx|gffread|hisat2|hisat2_extractsplicesites|kallisto|msisensorpro|rsem|rsem_make_transcripts_fasta|salmon|star
 
     main:
     bowtie1             = Channel.empty()
@@ -35,11 +35,13 @@ workflow REFERENCES {
     hisat2              = Channel.empty()
     hisat2_splice_sites = Channel.empty()
     msisensorpro        = Channel.empty()
+    rsem                = Channel.empty()
     sizes               = Channel.empty()
     star                = Channel.empty()
+    transcript_fasta    = Channel.empty()
     versions            = Channel.empty()
 
-    input = reference.multiMap{ meta, fasta, gff, gtf, splice_sites, readme, bed, mito, size ->
+    input = reference.multiMap{ meta, fasta, gff, gtf, splice_sites, transcript_fasta, readme, bed, mito, size ->
         fasta:        [meta, fasta]
         gff:          [meta, gff]
         gtf:          [meta, gtf]
@@ -88,52 +90,6 @@ workflow REFERENCES {
         versions = versions.mix(GATK4_CREATESEQUENCEDICTIONARY.out.versions.first())
     }
 
-    if (tools && tools.split(',').contains('gffread')) {
-        GFFREAD(input.gff, [])
-
-        gtf      = GFFREAD.out.gtf.map{ it[1] }
-        versions = versions.mix(GFFREAD.out.versions)
-    }
-
-    if (tools && tools.split(',').contains('msisensorpro')) {
-        MSISENSORPRO_SCAN(input.fasta)
-
-        msisensorpro = MSISENSORPRO_SCAN.out.list
-        versions = versions.mix(MSISENSORPRO_SCAN.out.versions.first())
-    }
-
-    if (tools && (tools.split(',').contains('hisat2') || tools.split(',').contains('hisat2_extractsplicesites')) ) {
-
-        // TODO: be smarter about input assets
-        gtf = input.gtf.join(input.splice_sites).groupTuple().map{ meta, gtf, splice_sites ->
-            if (splice_sites[0][0]) return null
-            else return [meta, gtf]
-        }
-
-        HISAT2_EXTRACTSPLICESITES(gtf)
-        versions = versions.mix(HISAT2_EXTRACTSPLICESITES.out.versions.first())
-
-        // TODO: be smarter about input assets
-        hisat2_extractsplicesites = input.splice_sites.mix(HISAT2_EXTRACTSPLICESITES.out.txt).groupTuple().map{ meta, txt ->
-            if (txt[1]) return [meta, txt[1]]
-            else return [meta, txt]
-        }
-
-        if (tools.split(',').contains('hisat2')) {
-            HISAT2_BUILD(input.fasta, input.gtf, hisat2_extractsplicesites)
-
-            hisat2 = HISAT2_BUILD.out.index
-            versions = versions.mix(HISAT2_BUILD.out.versions.first())
-        }
-    }
-
-    if (tools && tools.split(',').contains('star')) {
-        STAR_GENOMEGENERATE(input.fasta, input.gtf)
-
-        star = STAR_GENOMEGENERATE.out.index
-        versions = versions.mix(STAR_GENOMEGENERATE.out.versions.first())
-    }
-
     if (tools && tools.split(',').contains('faidx')) {
         generate_sizes = tools.split(',').contains('sizes')
         SAMTOOLS_FAIDX(input.fasta, [ [ id:'no_fai' ], [] ], generate_sizes)
@@ -143,12 +99,71 @@ workflow REFERENCES {
         versions = versions.mix(SAMTOOLS_FAIDX.out.versions.first())
     }
 
+    if (tools && tools.split(',').contains('gffread')) {
+        GFFREAD(input.gff, [])
+
+        gtf      = GFFREAD.out.gtf.map{ it[1] }
+        versions = versions.mix(GFFREAD.out.versions)
+    }
+
+    if (tools && (tools.split(',').contains('hisat2') || tools.split(',').contains('hisat2_extractsplicesites')) ) {
+
+        // TODO: be smarter about input assets
+        //   Here we either return an empty channel if we have a splice_sites so that HISAT2_EXTRACTSPLICESITES is not triggered
+        //   Or we return the provided gtf so that HISAT2_EXTRACTSPLICESITES is run
+        gtf = input.gtf.join(input.splice_sites).groupTuple()
+            .map{ meta, gtf, splice_sites -> return splice_sites[0][0] ? null : [meta, gtf] }
+
+        HISAT2_EXTRACTSPLICESITES(gtf)
+        versions = versions.mix(HISAT2_EXTRACTSPLICESITES.out.versions.first())
+
+        // TODO: be smarter about input assets
+        //   Here we either mix+GT an empty channel (either no output or no input splice_sites) with the splice_sites return splice_sites
+        //   And we filter out the empty value
+        hisat2_extractsplicesites = input.splice_sites.mix(HISAT2_EXTRACTSPLICESITES.out.txt).groupTuple()
+            .map{ meta, txt -> return txt[1] ? [meta, txt[1]] : [meta, txt] }
+
+        if (tools.split(',').contains('hisat2')) {
+            HISAT2_BUILD(input.fasta, input.gtf, hisat2_extractsplicesites)
+
+            hisat2 = HISAT2_BUILD.out.index
+            versions = versions.mix(HISAT2_BUILD.out.versions.first())
+        }
+    }
+
+    if (tools && tools.split(',').contains('msisensorpro')) {
+        MSISENSORPRO_SCAN(input.fasta)
+
+        msisensorpro = MSISENSORPRO_SCAN.out.list
+        versions = versions.mix(MSISENSORPRO_SCAN.out.versions.first())
+    }
+
+    if (tools && tools.split(',').contains('rsem')) {
+        RSEM_PREPAREREFERENCE_GENOME(input.fasta, input.gtf)
+
+        rsem = RSEM_PREPAREREFERENCE_GENOME.out.index
+        versions = versions.mix(RSEM_PREPAREREFERENCE_GENOME.out.versions.first())
+    }
+
+    if (tools && tools.split(',').contains('rsem_make_transcript_fasta')) {
+        MAKE_TRANSCRIPTS_FASTA(input.fasta, input.gtf)
+
+        transcript_fasta = MAKE_TRANSCRIPTS_FASTA.out.transcript_fasta
+        versions = versions.mix(MAKE_TRANSCRIPTS_FASTA.out.versions.first())
+    }
+
+    if (tools && tools.split(',').contains('star')) {
+        STAR_GENOMEGENERATE(input.fasta, input.gtf)
+
+        star = STAR_GENOMEGENERATE.out.index
+        versions = versions.mix(STAR_GENOMEGENERATE.out.versions.first())
+    }
+
     // FIXME
     // MAKE_TRANSCRIPTS_FASTA(input.fasta, input.gtf)
     // ch_transcript_fasta = MAKE_TRANSCRIPTS_FASTA.out.transcript_fasta
     // SALMON_INDEX(input.fasta, ch_transcript_fasta)
     // KALLISTO_INDEX(ch_transcript_fasta.map{[ [:], it]})
-    // RSEM_PREPAREREFERENCE_GENOME(input.fasta, input.gtf)
 
     emit:
     bowtie1
@@ -160,9 +175,11 @@ workflow REFERENCES {
     faidx
     gffread
     hisat2
-    msisensorpro
-    sizes
     hisat2_splice_sites
+    msisensorpro
+    rsem
+    sizes
     star
+    transcript_fasta
     versions
 }

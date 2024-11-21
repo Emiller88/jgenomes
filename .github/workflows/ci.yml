@@ -35,7 +35,7 @@ jobs:
         filter: ["pipeline"]
         # filter: ["process", "workflow", "function", "pipeline"]
         profile: ["conda", "docker", "singularity"]
-        shard: [1, 2]
+        shard: [1, 2, 3, 4]
         # shard: [1, 2, 3, 4, 5]
         isMaster:
           - ${{ github.base_ref == 'master' }}

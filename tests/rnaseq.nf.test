@@ -4,49 +4,13 @@ nextflow_pipeline {
     script "../main.nf"
     tag "pipeline"
 
-    test("Run with profile test for rnaseq | --input assets/genomes/test/pipelines/default.yml") {
+    test("Run with profile test for rnaseq | --input assets/genomes/test/pipelines/default_extended.yml") {
 
         when {
             params {
-                input  = "${projectDir}/assets/genomes/test/pipelines/default.yml"
+                input  = "${projectDir}/assets/genomes/test/pipelines/default_extended.yml"
                 outdir = "$outputDir"
-                tools  = 'bbmap,bowtie1,bowtie2,faidx,gffread,hisat2,hisat2_extractsplicesites,kallisto,make_transcripts_fasta,rsem_preparereference_genome,salmon,sizes,star'
-                // TODO REMOVE ME when the module is fixed
-                // cf https://github.com/nf-core/modules/issues/7045
-                hisat2_build_memory = "3.GB"
-            }
-        }
-
-        then {
-            // stable_name: All files + folders in ${params.outdir}/ with a stable name
-            def stable_name = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
-            // stable_path: All files in ${params.outdir}/ with stable content
-            def stable_path = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore')
-            assertAll(
-                { assert workflow.success},
-                { assert snapshot(
-                    // Number of successful tasks
-                    workflow.trace.succeeded().size(),
-                    // pipeline versions.yml file for multiqc from which Nextflow version is removed because we tests pipelines on multiple Nextflow versions
-                    removeNextflowVersion("$outputDir/pipeline_info/nf_core_references_software_mqc_versions.yml"),
-                    // All stable path name, with a relative path
-                    stable_name,
-                    // All files with stable contents
-                    stable_path
-                ).match() }
-            )
-        }
-    }
-    test("Run with profile test for rnaseq | --input assets/genomes/test/pipelines/default_no_splice_sites.yml") {
-
-        when {
-            params {
-                input  = "${projectDir}/assets/genomes/test/pipelines/default_no_splice_sites.yml"
-                outdir = "$outputDir"
-                tools  = 'hisat2,hisat2_extractsplicesites'
-                // TODO REMOVE ME when the module is fixed
-                // cf https://github.com/nf-core/modules/issues/7045
-                hisat2_build_memory = "3.GB"
+                tools  = 'bbmap,bowtie1,bowtie2,faidx,gffread,kallisto,salmon,sizes,star'
             }
         }
 

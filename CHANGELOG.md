@@ -18,11 +18,13 @@ Initial release of nf-core/references, created with the [nf-core](https://nf-co.
 - [27](https://github.com/nf-core/references/pull/27) - Add faidx, gffread, sizes generation
 - [28](https://github.com/nf-core/references/pull/28) - Add hisat2 generation
 - [29](https://github.com/nf-core/references/pull/29) - Add hisat2_extract_sites generation
+- [31](https://github.com/nf-core/references/pull/31) - Add rsem, rsem_make_transcript_fasta generation
 
 ### Changed
 
 - [21](https://github.com/nf-core/references/pull/21) - Template update for nf-core/tools v3.0.2
 - [23](https://github.com/nf-core/references/pull/23) - Merge all scripts into one
+- [31](https://github.com/nf-core/references/pull/31) - Test refactor: hisat2 and rsem have their own tests
 
 ### `Fixed`
 

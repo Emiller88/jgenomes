@@ -43,6 +43,11 @@
                 "pattern": "^\\S+(\\.splice_sites)(\\.txt)?$",
                 "errorMessage": "TODO"
             },
+            "transcript_fasta": {
+                "type": "string",
+                "pattern": "^\\S+\\.f(ast|n)?a(\\.gz)?$",
+                "errorMessage": "TODO"
+            },
             "readme": {
                 "type": "string",
                 "errorMessage": "TODO"
