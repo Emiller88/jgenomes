@@ -24,6 +24,7 @@ Initial release of nf-core/references, created with the [nf-core](https://nf-co.
 
 - [21](https://github.com/nf-core/references/pull/21) - Template update for nf-core/tools v3.0.2
 - [23](https://github.com/nf-core/references/pull/23) - Merge all scripts into one
+- [31](https://github.com/nf-core/references/pull/31) - Test refactor: hisat2 and rsem have their own tests
 
 ### `Fixed`
 
