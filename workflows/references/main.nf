@@ -21,7 +21,7 @@ include { STAR_GENOMEGENERATE                                   } from '../../mo
 workflow REFERENCES {
     take:
     reference // fasta, gtf
-    tools     // bowtie|bowtie2|bwamem1|bwamem2|createsequencedictionary|dragmap|faidx|gffread|hisat2|hisat2_extractsplicesites|kallisto|make_transcripts_fasta|msisensorpro|rsem_preparereference_genome|salmon|star
+    tools     // bowtie|bowtie2|bwamem1|bwamem2|createsequencedictionary|dragmap|faidx|gffread|hisat2|hisat2_extractsplicesites|kallisto|make_transcripts_fasta|msisensorpro|rsem|salmon|star
 
     main:
     bowtie1             = Channel.empty()
@@ -35,6 +35,7 @@ workflow REFERENCES {
     hisat2              = Channel.empty()
     hisat2_splice_sites = Channel.empty()
     msisensorpro        = Channel.empty()
+    rsem                = Channel.empty()
     sizes               = Channel.empty()
     star                = Channel.empty()
     versions            = Channel.empty()
@@ -88,6 +89,15 @@ workflow REFERENCES {
         versions = versions.mix(GATK4_CREATESEQUENCEDICTIONARY.out.versions.first())
     }
 
+    if (tools && tools.split(',').contains('faidx')) {
+        generate_sizes = tools.split(',').contains('sizes')
+        SAMTOOLS_FAIDX(input.fasta, [ [ id:'no_fai' ], [] ], generate_sizes)
+
+        faidx = SAMTOOLS_FAIDX.out.fai.first()
+        sizes = SAMTOOLS_FAIDX.out.sizes.first()
+        versions = versions.mix(SAMTOOLS_FAIDX.out.versions.first())
+    }
+
     if (tools && tools.split(',').contains('gffread')) {
         GFFREAD(input.gff, [])
 
@@ -105,19 +115,19 @@ workflow REFERENCES {
     if (tools && (tools.split(',').contains('hisat2') || tools.split(',').contains('hisat2_extractsplicesites')) ) {
 
         // TODO: be smarter about input assets
-        gtf = input.gtf.join(input.splice_sites).groupTuple().map{ meta, gtf, splice_sites ->
-            if (splice_sites[0][0]) return null
-            else return [meta, gtf]
-        }
+        //   Here we either return an empty channel if we have a splice_sites so that HISAT2_EXTRACTSPLICESITES is not triggered
+        //   Or we return the provided gtf so that HISAT2_EXTRACTSPLICESITES is run
+        gtf = input.gtf.join(input.splice_sites).groupTuple()
+            .map{ meta, gtf, splice_sites -> return splice_sites[0][0] ? null : [meta, gtf] }
 
         HISAT2_EXTRACTSPLICESITES(gtf)
         versions = versions.mix(HISAT2_EXTRACTSPLICESITES.out.versions.first())
 
         // TODO: be smarter about input assets
-        hisat2_extractsplicesites = input.splice_sites.mix(HISAT2_EXTRACTSPLICESITES.out.txt).groupTuple().map{ meta, txt ->
-            if (txt[1]) return [meta, txt[1]]
-            else return [meta, txt]
-        }
+        //   Here we either mix+GT an empty channel (either no output or no input splice_sites) with the splice_sites return splice_sites
+        //   And we filter out the empty value
+        hisat2_extractsplicesites = input.splice_sites.mix(HISAT2_EXTRACTSPLICESITES.out.txt).groupTuple()
+            .map{ meta, txt -> return txt[1] ? [meta, txt[1]] : [meta, txt] }
 
         if (tools.split(',').contains('hisat2')) {
             HISAT2_BUILD(input.fasta, input.gtf, hisat2_extractsplicesites)
@@ -132,15 +142,6 @@ workflow REFERENCES {
 
         star = STAR_GENOMEGENERATE.out.index
         versions = versions.mix(STAR_GENOMEGENERATE.out.versions.first())
-    }
-
-    if (tools && tools.split(',').contains('faidx')) {
-        generate_sizes = tools.split(',').contains('sizes')
-        SAMTOOLS_FAIDX(input.fasta, [ [ id:'no_fai' ], [] ], generate_sizes)
-
-        faidx = SAMTOOLS_FAIDX.out.fai.first()
-        sizes = SAMTOOLS_FAIDX.out.sizes.first()
-        versions = versions.mix(SAMTOOLS_FAIDX.out.versions.first())
     }
 
     // FIXME
