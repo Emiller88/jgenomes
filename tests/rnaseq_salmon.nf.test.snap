@@ -66,19 +66,14 @@
                 "genome.transcripts.fa:md5,fd4e06fc250a19351a611a44861b9aea",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
                 "complete_ref_lens.bin:md5,ec4126a76984f26dc11baa2aaec7c325",
-                "ctable.bin:md5,2976c1405642b6f12c0845b31959d682",
                 "ctg_offsets.bin:md5,6f41c3fe64790ba0399be18d30436bb6",
                 "duplicate_clusters.tsv:md5,b65592e6f604234ac3cf45f8cafd8d27",
                 "info.json:md5,e13f6500d048a7f72bcc385ce54bd50a",
                 "mphf.bin:md5,9651ab954dccca304b6dcddf50fbae61",
-                "pos.bin:md5,29aecd1dc0f356c50ead73ff41e27945",
-                "pre_indexing.log:md5,5cad93238ba6825a691f7096f1bc9585",
                 "rank.bin:md5,e2ee4a817caa0614c7cfa732358aa829",
                 "refAccumLengths.bin:md5,f79c13f67c09f87982ff1503826d6350",
-                "ref_indexing.log:md5,82bd643818a8891493362e6ca478198c",
                 "reflengths.bin:md5,ec4126a76984f26dc11baa2aaec7c325",
                 "refseq.bin:md5,dbe45319a08f3ea4b9eed98787b683ba",
-                "seq.bin:md5,dfd36f1f251010a8a525478ede69661d",
                 "versionInfo.json:md5,d2c799050e81aa6e282ac8a73e773941"
             ]
         ],
@@ -86,7 +81,7 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.1"
         },
-        "timestamp": "2024-11-21T21:32:01.480007626"
+        "timestamp": "2024-11-21T21:44:36.180276389"
     },
     "Run with profile test for rnaseq [salmon] | --input assets/genomes/test/pipelines/default_extended.yml": {
         "content": [
@@ -131,19 +126,14 @@
             [
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
                 "complete_ref_lens.bin:md5,ec4126a76984f26dc11baa2aaec7c325",
-                "ctable.bin:md5,9474cbc6517e17d48acf85fe1ae9c33a",
                 "ctg_offsets.bin:md5,6f41c3fe64790ba0399be18d30436bb6",
                 "duplicate_clusters.tsv:md5,b65592e6f604234ac3cf45f8cafd8d27",
                 "info.json:md5,e13f6500d048a7f72bcc385ce54bd50a",
                 "mphf.bin:md5,9651ab954dccca304b6dcddf50fbae61",
-                "pos.bin:md5,e4be24ffaff041e3b03f8d402b3809e5",
-                "pre_indexing.log:md5,2314505e6e001506c241b296cc8a54ad",
                 "rank.bin:md5,e2ee4a817caa0614c7cfa732358aa829",
                 "refAccumLengths.bin:md5,f79c13f67c09f87982ff1503826d6350",
-                "ref_indexing.log:md5,90cbed6547292c3560a57a3989d3daeb",
                 "reflengths.bin:md5,ec4126a76984f26dc11baa2aaec7c325",
                 "refseq.bin:md5,dbe45319a08f3ea4b9eed98787b683ba",
-                "seq.bin:md5,8bb708c29d5531dac322ce53b1e395b6",
                 "versionInfo.json:md5,d2c799050e81aa6e282ac8a73e773941"
             ]
         ],
@@ -151,6 +141,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.1"
         },
-        "timestamp": "2024-11-21T21:31:15.147930838"
+        "timestamp": "2024-11-21T21:43:43.210418612"
     }
 }
