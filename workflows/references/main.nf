@@ -105,13 +105,6 @@ workflow REFERENCES {
         versions = versions.mix(GFFREAD.out.versions)
     }
 
-    if (tools && tools.split(',').contains('msisensorpro')) {
-        MSISENSORPRO_SCAN(input.fasta)
-
-        msisensorpro = MSISENSORPRO_SCAN.out.list
-        versions = versions.mix(MSISENSORPRO_SCAN.out.versions.first())
-    }
-
     if (tools && (tools.split(',').contains('hisat2') || tools.split(',').contains('hisat2_extractsplicesites')) ) {
 
         // TODO: be smarter about input assets
@@ -137,6 +130,20 @@ workflow REFERENCES {
         }
     }
 
+    if (tools && tools.split(',').contains('msisensorpro')) {
+        MSISENSORPRO_SCAN(input.fasta)
+
+        msisensorpro = MSISENSORPRO_SCAN.out.list
+        versions = versions.mix(MSISENSORPRO_SCAN.out.versions.first())
+    }
+
+    if (tools && tools.split(',').contains('rsem')) {
+        RSEM_PREPAREREFERENCE_GENOME(input.fasta, input.gtf)
+
+        rsem = RSEM_PREPAREREFERENCE_GENOME.out.index
+        versions = versions.mix(RSEM_PREPAREREFERENCE_GENOME.out.versions.first())
+    }
+
     if (tools && tools.split(',').contains('star')) {
         STAR_GENOMEGENERATE(input.fasta, input.gtf)
 
@@ -149,7 +156,6 @@ workflow REFERENCES {
     // ch_transcript_fasta = MAKE_TRANSCRIPTS_FASTA.out.transcript_fasta
     // SALMON_INDEX(input.fasta, ch_transcript_fasta)
     // KALLISTO_INDEX(ch_transcript_fasta.map{[ [:], it]})
-    // RSEM_PREPAREREFERENCE_GENOME(input.fasta, input.gtf)
 
     emit:
     bowtie1
@@ -161,9 +167,10 @@ workflow REFERENCES {
     faidx
     gffread
     hisat2
-    msisensorpro
-    sizes
     hisat2_splice_sites
+    msisensorpro
+    rsem
+    sizes
     star
     versions
 }

@@ -18,6 +18,7 @@ Initial release of nf-core/references, created with the [nf-core](https://nf-co.
 - [27](https://github.com/nf-core/references/pull/27) - Add faidx, gffread, sizes generation
 - [28](https://github.com/nf-core/references/pull/28) - Add hisat2 generation
 - [29](https://github.com/nf-core/references/pull/29) - Add hisat2_extract_sites generation
+- [31](https://github.com/nf-core/references/pull/31) - Add kallisto generation
 
 ### Changed
 
