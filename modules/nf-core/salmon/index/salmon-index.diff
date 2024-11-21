@@ -1,14 +1,28 @@
 Changes in module 'nf-core/salmon/index'
+Changes in 'salmon/index/main.nf':
 --- modules/nf-core/salmon/index/main.nf
 +++ modules/nf-core/salmon/index/main.nf
-@@ -8,7 +8,7 @@
-         'biocontainers/salmon:1.10.1--h7e5ed60_0' }"
+@@ -8,12 +8,12 @@
+         'biocontainers/salmon:1.10.3--h6dccd9a_2' }"
  
      input:
 -    path genome_fasta
+-    path transcript_fasta
 +    tuple val(meta), path(genome_fasta)
-
++    tuple val(meta2), path(transcript_fasta)
+ 
      output:
-     path "salmon"      , emit: index
+-    path "salmon"      , emit: index
+-    path "versions.yml", emit: versions
++    tuple val(meta), path("salmon"), emit: index
++    path "versions.yml",             emit: versions
+ 
+     when:
+     task.ext.when == null || task.ext.when
 
+'modules/nf-core/salmon/index/meta.yml' is unchanged
+'modules/nf-core/salmon/index/environment.yml' is unchanged
+'modules/nf-core/salmon/index/tests/main.nf.test.snap' is unchanged
+'modules/nf-core/salmon/index/tests/main.nf.test' is unchanged
+'modules/nf-core/salmon/index/tests/tags.yml' is unchanged
 ************************************************************

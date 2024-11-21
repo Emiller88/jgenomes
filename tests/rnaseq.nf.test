@@ -10,7 +10,7 @@ nextflow_pipeline {
             params {
                 input  = "${projectDir}/assets/genomes/test/pipelines/default_extended.yml"
                 outdir = "$outputDir"
-                tools  = 'bbmap,bowtie1,bowtie2,faidx,gffread,kallisto,salmon,sizes,star'
+                tools  = 'bbmap,bowtie1,bowtie2,faidx,gffread,sizes,star'
             }
         }
 
