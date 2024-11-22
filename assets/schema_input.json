@@ -28,6 +28,21 @@
                 "pattern": "^\\S+\\.f(ast|n)?a(\\.gz)?$",
                 "errorMessage": "TODO"
             },
+            "fasta_dict": {
+                "type": "string",
+                "pattern": "^\\S+\\.dict(\\.gz)?$",
+                "errorMessage": "TODO"
+            },
+            "fasta_fai": {
+                "type": "string",
+                "pattern": "^\\S+\\.f(ast|n)?a\\.fai(\\.gz)?$",
+                "errorMessage": "TODO"
+            },
+            "fasta_sizes": {
+                "type": "string",
+                "pattern": "^\\S+\\.f(ast|n)?a\\.sizes(\\.gz)?$",
+                "errorMessage": "TODO"
+            },
             "gff": {
                 "type": "string",
                 "pattern": "^\\S+\\.gff(\\.gz)?$",
