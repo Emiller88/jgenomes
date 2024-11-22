@@ -107,7 +107,7 @@
         },
         "timestamp": "2024-11-22T14:27:29.083199939"
     },
-    "Run with profile test for rnaseq | --input assets/genomes/test/pipelines/default.yml": {
+    "Run with profile test for rnaseq | --input GRCh38_chr21.yml": {
         "content": [
             2,
             {
