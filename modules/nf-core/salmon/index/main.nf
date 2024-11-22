@@ -8,12 +8,12 @@ process SALMON_INDEX {
         'biocontainers/salmon:1.10.3--h6dccd9a_2' }"
 
     input:
-    path genome_fasta
-    path transcript_fasta
+    tuple val(meta), path(genome_fasta)
+    tuple val(meta2), path(transcript_fasta)
 
     output:
-    path "salmon"      , emit: index
-    path "versions.yml", emit: versions
+    tuple val(meta), path("salmon"), emit: index
+    path "versions.yml",             emit: versions
 
     when:
     task.ext.when == null || task.ext.when

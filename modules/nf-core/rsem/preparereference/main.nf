@@ -12,8 +12,8 @@ process RSEM_PREPAREREFERENCE {
     tuple val(meta2), path(gtf)
 
     output:
-    path "rsem"           , emit: index
-    path "*transcripts.fa", emit: transcript_fasta
+    tuple val(meta), path("rsem")           , emit: index
+    tuple val(meta), path("*transcripts.fa"), emit: transcript_fasta
     path "versions.yml"   , emit: versions
 
     when:

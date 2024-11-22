@@ -20,7 +20,7 @@ include { STAR_GENOMEGENERATE                                   } from '../../mo
 
 workflow REFERENCES {
     take:
-    reference // fasta, gtf
+    reference // fasta, gff, gtf, splice_sites, transcript_fasta
     tools     // bowtie|bowtie2|bwamem1|bwamem2|createsequencedictionary|dragmap|faidx|gffread|hisat2|hisat2_extractsplicesites|kallisto|msisensorpro|rsem|rsem_make_transcripts_fasta|salmon|star
 
     main:
@@ -34,18 +34,22 @@ workflow REFERENCES {
     gffread             = Channel.empty()
     hisat2              = Channel.empty()
     hisat2_splice_sites = Channel.empty()
+    kallisto            = Channel.empty()
     msisensorpro        = Channel.empty()
     rsem                = Channel.empty()
+    salmon              = Channel.empty()
     sizes               = Channel.empty()
     star                = Channel.empty()
     transcript_fasta    = Channel.empty()
     versions            = Channel.empty()
 
-    input = reference.multiMap{ meta, fasta, gff, gtf, splice_sites, transcript_fasta, readme, bed, mito, size ->
-        fasta:        [meta, fasta]
-        gff:          [meta, gff]
-        gtf:          [meta, gtf]
-        splice_sites: [meta, splice_sites]
+    input = reference.multiMap{ meta, fasta, gff, gtf, splice_sites, transcript_fasta, readme, bed, mito, sizes ->
+        fasta:            [meta, fasta]
+        gff:              [meta, gff]
+        gtf:              [meta, gtf]
+        splice_sites:     [meta, splice_sites]
+        transcript_fasta: [meta, transcript_fasta]
+        readme:           [meta, readme]
     }
 
     if (tools && tools.split(',').contains('bowtie1')) {
@@ -107,7 +111,6 @@ workflow REFERENCES {
     }
 
     if (tools && (tools.split(',').contains('hisat2') || tools.split(',').contains('hisat2_extractsplicesites')) ) {
-
         // TODO: be smarter about input assets
         //   Here we either return an empty channel if we have a splice_sites so that HISAT2_EXTRACTSPLICESITES is not triggered
         //   Or we return the provided gtf so that HISAT2_EXTRACTSPLICESITES is run
@@ -131,6 +134,38 @@ workflow REFERENCES {
         }
     }
 
+    if (tools && (tools.split(',').contains('kallisto')) || tools.split(',').contains('rsem_make_transcript_fasta') || tools.split(',').contains('salmon')) {
+        // TODO: be smarter about input assets
+        //   Here we either return an empty channel if we have a splice_sites so that MAKE_TRANSCRIPTS_FASTA is not triggered
+        //   Or we return the provided gtf so that MAKE_TRANSCRIPTS_FASTA is run
+        gtf = input.gtf.join(input.transcript_fasta).groupTuple()
+            .map{ meta, gtf, transcript_fasta -> return transcript_fasta[0][0] ? null : [meta, gtf] }
+
+        MAKE_TRANSCRIPTS_FASTA(input.fasta, gtf)
+        versions = versions.mix(MAKE_TRANSCRIPTS_FASTA.out.versions.first())
+
+        // TODO: be smarter about input assets
+        //   Here we either mix+GT an empty channel (either no output or no input splice_sites) with the splice_sites return splice_sites
+        //   And we filter out the empty value
+        transcript_fasta = input.transcript_fasta.mix(MAKE_TRANSCRIPTS_FASTA.out.transcript_fasta).groupTuple()
+            .map{ meta, txt -> return txt[1] ? [meta, txt[1]] : [meta, txt] }
+
+        if (tools.split(',').contains('kallisto')) {
+            KALLISTO_INDEX(transcript_fasta)
+
+            kallisto = KALLISTO_INDEX.out.index
+            versions = versions.mix(KALLISTO_INDEX.out.versions.first())
+        }
+
+        if (tools.split(',').contains('salmon')) {
+            SALMON_INDEX(input.fasta, transcript_fasta)
+
+            salmon = SALMON_INDEX.out.index
+            versions = versions.mix(SALMON_INDEX.out.versions.first())
+        }
+
+    }
+
     if (tools && tools.split(',').contains('msisensorpro')) {
         MSISENSORPRO_SCAN(input.fasta)
 
@@ -145,25 +180,12 @@ workflow REFERENCES {
         versions = versions.mix(RSEM_PREPAREREFERENCE_GENOME.out.versions.first())
     }
 
-    if (tools && tools.split(',').contains('rsem_make_transcript_fasta')) {
-        MAKE_TRANSCRIPTS_FASTA(input.fasta, input.gtf)
-
-        transcript_fasta = MAKE_TRANSCRIPTS_FASTA.out.transcript_fasta
-        versions = versions.mix(MAKE_TRANSCRIPTS_FASTA.out.versions.first())
-    }
-
     if (tools && tools.split(',').contains('star')) {
         STAR_GENOMEGENERATE(input.fasta, input.gtf)
 
         star = STAR_GENOMEGENERATE.out.index
         versions = versions.mix(STAR_GENOMEGENERATE.out.versions.first())
     }
-
-    // FIXME
-    // MAKE_TRANSCRIPTS_FASTA(input.fasta, input.gtf)
-    // ch_transcript_fasta = MAKE_TRANSCRIPTS_FASTA.out.transcript_fasta
-    // SALMON_INDEX(input.fasta, ch_transcript_fasta)
-    // KALLISTO_INDEX(ch_transcript_fasta.map{[ [:], it]})
 
     emit:
     bowtie1
@@ -176,8 +198,10 @@ workflow REFERENCES {
     gffread
     hisat2
     hisat2_splice_sites
+    kallisto
     msisensorpro
     rsem
+    salmon
     sizes
     star
     transcript_fasta

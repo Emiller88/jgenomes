@@ -19,6 +19,7 @@ Initial release of nf-core/references, created with the [nf-core](https://nf-co.
 - [28](https://github.com/nf-core/references/pull/28) - Add hisat2 generation
 - [29](https://github.com/nf-core/references/pull/29) - Add hisat2_extract_sites generation
 - [31](https://github.com/nf-core/references/pull/31) - Add rsem, rsem_make_transcript_fasta generation
+- [32](https://github.com/nf-core/references/pull/32) - Add kallisto, salmon generation
 
 ### Changed
 
