@@ -34,7 +34,7 @@
         },
         "timestamp": "2024-11-21T21:42:27.712506257"
     },
-    "Run with profile test for rnaseq [kallisto] | --input assets/genomes/test/pipelines/default.yml": {
+    "Run with profile test for rnaseq [kallisto] | --input GRCh38_chr21.yml": {
         "content": [
             3,
             {

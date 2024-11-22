@@ -1,5 +1,5 @@
 {
-    "Run with profile test for rnaseq [rsem] | --input assets/genomes/test/pipelines/default.yml": {
+    "Run with profile test for rnaseq [rsem] | --input GRCh38_chr21.yml": {
         "content": [
             3,
             {

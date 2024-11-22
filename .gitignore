@@ -11,3 +11,4 @@ null/
 *.log
 tmp/
 .nf-test
+.vscode

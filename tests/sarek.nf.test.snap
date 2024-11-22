@@ -1,5 +1,5 @@
 {
-    "Run with profile test for sarek | --input assets/genomes/test/pipelines/default.yml": {
+    "Run with profile test for sarek | --input GRCh38_chr21.yml": {
         "content": [
             7,
             {
