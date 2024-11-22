@@ -1,9 +1,8 @@
-include { BBMAP_BBSPLIT                                         } from '../../modules/nf-core/bbmap/bbsplit'
 include { BOWTIE2_BUILD                                         } from '../../modules/nf-core/bowtie2/build'
 include { BOWTIE_BUILD as BOWTIE1_BUILD                         } from '../../modules/nf-core/bowtie/build'
 include { BWAMEM2_INDEX                                         } from '../../modules/nf-core/bwamem2/index'
+include { GAWK as BUILD_INTERVALS                               } from '../../modules/nf-core/gawk'
 include { BWA_INDEX as BWAMEM1_INDEX                            } from '../../modules/nf-core/bwa/index'
-include { CUSTOM_CATADDITIONALFASTA                             } from '../../modules/nf-core/custom/catadditionalfasta'
 include { DRAGMAP_HASHTABLE                                     } from '../../modules/nf-core/dragmap/hashtable'
 include { GATK4_CREATESEQUENCEDICTIONARY                        } from '../../modules/nf-core/gatk4/createsequencedictionary'
 include { GFFREAD                                               } from '../../modules/nf-core/gffread'
@@ -15,21 +14,19 @@ include { RSEM_PREPAREREFERENCE as MAKE_TRANSCRIPTS_FASTA       } from '../../mo
 include { RSEM_PREPAREREFERENCE as RSEM_PREPAREREFERENCE_GENOME } from '../../modules/nf-core/rsem/preparereference'
 include { SALMON_INDEX                                          } from '../../modules/nf-core/salmon/index'
 include { SAMTOOLS_FAIDX                                        } from '../../modules/nf-core/samtools/faidx'
-include { SORTMERNA as SORTMERNA_INDEX                          } from '../../modules/nf-core/sortmerna'
 include { STAR_GENOMEGENERATE                                   } from '../../modules/nf-core/star/genomegenerate'
+// include { BBMAP_BBSPLIT                                         } from '../../modules/nf-core/bbmap/bbsplit'
+// include { CUSTOM_CATADDITIONALFASTA                             } from '../../modules/nf-core/custom/catadditionalfasta'
+// include { SORTMERNA as SORTMERNA_INDEX                          } from '../../modules/nf-core/sortmerna'
 
 workflow REFERENCES {
     take:
     reference // fasta, gff, gtf, splice_sites, transcript_fasta
-    tools     // bowtie|bowtie2|bwamem1|bwamem2|createsequencedictionary|dragmap|faidx|gffread|hisat2|hisat2_extractsplicesites|kallisto|msisensorpro|rsem|rsem_make_transcripts_fasta|salmon|star
+    tools     // bowtie|bowtie2|bwamem1|bwamem2|createsequencedictionary|dragmap|faidx|gffread|intervals|hisat2|hisat2_extractsplicesites|kallisto|msisensorpro|rsem|rsem_make_transcripts_fasta|salmon|star
 
     main:
     bowtie1 = Channel.empty()
     bowtie2 = Channel.empty()
-    bwamem1 = Channel.empty()
-    bwamem2 = Channel.empty()
-    dict = Channel.empty()
-    dragmap = Channel.empty()
     faidx = Channel.empty()
     gffread = Channel.empty()
     hisat2 = Channel.empty()
@@ -43,6 +40,8 @@ workflow REFERENCES {
     star = Channel.empty()
     versions = Channel.empty()
 
+    // input = reference.multiMap { meta, fasta, fasta_dict, fasta_fai, fasta_sizes, gff, gtf, fai_intervals, splice_sites, transcript_fasta, readme, bed12, mito_name, macs_gsize ->
+    // fai_intervals: [meta, fai_intervals]
     input = reference.multiMap { meta, fasta, fasta_dict, fasta_fai, fasta_sizes, gff, gtf, splice_sites, transcript_fasta, readme, bed12, mito_name, macs_gsize ->
         fasta: [meta, fasta]
         fasta_dict: [meta, fasta_dict]
@@ -56,7 +55,14 @@ workflow REFERENCES {
         bed12: [meta, bed12]
         mito_name: [meta, mito_name]
         macs_gsize: [meta, macs_gsize]
+        bwamem1_fasta: tools.contains('bwamem1') ? [meta, fasta] : [[:], []]
+        bwamem2_fasta: tools.contains('bwamem2') ? [meta, fasta] : [[:], []]
+        dragmap_fasta: tools.contains('dragmap') ? [meta, fasta] : [[:], []]
+        createsequencedictionary_fasta: tools.contains('createsequencedictionary') ? [meta, fasta] : [[:], []]
+        fasta_samtools: (tools.contains('faidx') || tools.contains('sizes')) && !(fasta_fai || fasta_sizes) ? [meta, fasta] : [[:], []]
     }
+    // I should be able to output null instead of `[[:], []] and have that registered as an empty channel and not trigger downstream processes
+    // but not working currently
 
     if (tools && tools.split(',').contains('bowtie1')) {
         BOWTIE1_BUILD(input.fasta)
@@ -72,81 +78,67 @@ workflow REFERENCES {
         versions = versions.mix(BOWTIE2_BUILD.out.versions)
     }
 
-    if (tools && tools.split(',').contains('bwamem1')) {
-        BWAMEM1_INDEX(input.fasta)
+    // the whole map -> null should be removed once I managed to make it work properly
+    BWAMEM1_INDEX(
+        input.bwamem1_fasta.map { meta, file ->
+            return file ? [meta, file] : null
+        }
+    )
 
-        bwamem1 = BWAMEM1_INDEX.out.index
-        versions = versions.mix(BWAMEM1_INDEX.out.versions)
-    }
+    BWAMEM2_INDEX(
+        input.bwamem2_fasta.map { meta, file ->
+            return file ? [meta, file] : null
+        }
+    )
 
-    if (tools && tools.split(',').contains('bwamem2')) {
-        BWAMEM2_INDEX(input.fasta)
+    DRAGMAP_HASHTABLE(
+        input.dragmap_fasta.map { meta, file ->
+            return file ? [meta, file] : null
+        }
+    )
 
-        bwamem2 = BWAMEM2_INDEX.out.index
-        versions = versions.mix(BWAMEM2_INDEX.out.versions)
-    }
+    GATK4_CREATESEQUENCEDICTIONARY(
+        input.createsequencedictionary_fasta.map { meta, file ->
+            return file ? [meta, file] : null
+        }
+    )
 
-    if (tools && tools.split(',').contains('dragmap')) {
-        DRAGMAP_HASHTABLE(input.fasta)
+    SAMTOOLS_FAIDX(
+        input.fasta_samtools.map { meta, file ->
+            return file ? [meta, file] : null
+        },
+        [[id: 'no_fai'], []],
+        tools.contains('sizes')
+    )
 
-        dragmap = DRAGMAP_HASHTABLE.out.hashmap
-        versions = versions.mix(DRAGMAP_HASHTABLE.out.versions)
-    }
+    // TODO: be smarter about input assets
+    //   Here we either mix+GT an empty channel (either no output or no input faidx) with the faidx return faidx
+    //   And we filter out the empty value
+    faidx = input.fasta_fai
+        .mix(SAMTOOLS_FAIDX.out.fai)
+        .groupTuple()
+        .map { meta, file ->
+            return file[1] ? [meta, file[1]] : [meta, file]
+        }
 
-    if (tools && tools.split(',').contains('createsequencedictionary')) {
-        GATK4_CREATESEQUENCEDICTIONARY(input.fasta)
+    // TODO: be smarter about input assets
+    //   Here we either mix+GT an empty channel (either no output or no input sizes) with the sizes return sizes
+    //   And we filter out the empty value
+    sizes = input.fasta_sizes
+        .mix(SAMTOOLS_FAIDX.out.sizes)
+        .groupTuple()
+        .map { meta, file ->
+            return file[1] ? [meta, file[1]] : [meta, file]
+        }
 
-        dict = GATK4_CREATESEQUENCEDICTIONARY.out.dict
-        versions = versions.mix(GATK4_CREATESEQUENCEDICTIONARY.out.versions)
-    }
-
-    if (tools && (tools.split(',').contains('faidx') || tools.split(',').contains('sizes'))) {
-        // TODO: be smarter about input assets
-        //   Here we either return an empty channel if we have a fai and sizes so that SAMTOOLS_FAIDX is not triggered
-        //   Or we return the provided fasta so that SAMTOOLS_FAIDX is run
-        fasta_samtools = input.fasta
-            .join(input.fasta_fai)
-            .join(input.fasta_sizes)
-            .groupTuple()
-            .map { meta, fasta, fai, fa_sizes ->
-                return fai[0][0] && fa_sizes[0][0] ? null : [meta, fasta]
-            }
-
-        generate_sizes = tools.split(',').contains('sizes')
-        SAMTOOLS_FAIDX(fasta_samtools, [[id: 'no_fai'], []], generate_sizes)
-
-
-        // TODO: be smarter about input assets
-        //   Here we either mix+GT an empty channel (either no output or no input faidx) with the faidx return faidx
-        //   And we filter out the empty value
-        faidx = input.fasta_fai
-            .mix(SAMTOOLS_FAIDX.out.fai)
-            .groupTuple()
-            .map { meta, fai ->
-                return fai[1] ? [meta, fai[1]] : [meta, fai]
-            }
-
-        // TODO: be smarter about input assets
-        //   Here we either mix+GT an empty channel (either no output or no input sizes) with the sizes return sizes
-        //   And we filter out the empty value
-        sizes = input.fasta_sizes
-            .mix(SAMTOOLS_FAIDX.out.sizes)
-            .groupTuple()
-            .map { meta, file ->
-                return file[1] ? [meta, file[1]] : [meta, file]
-            }
-
-        versions = versions.mix(SAMTOOLS_FAIDX.out.versions)
-    }
-
-    if (tools && tools.split(',').contains('gffread')) {
+    if (tools.contains('gffread')) {
         GFFREAD(input.gff, [])
 
         gffread = GFFREAD.out.gtf.map { it[1] }
         versions = versions.mix(GFFREAD.out.versions)
     }
 
-    if (tools && (tools.split(',').contains('hisat2') || tools.split(',').contains('hisat2_extractsplicesites'))) {
+    if (tools.contains('hisat2') || tools.contains('hisat2_extractsplicesites')) {
         // TODO: be smarter about input assets
         //   Here we either return an empty channel if we have a splice_sites so that HISAT2_EXTRACTSPLICESITES is not triggered
         //   Or we return the provided gtf so that HISAT2_EXTRACTSPLICESITES is run
@@ -170,7 +162,7 @@ workflow REFERENCES {
                 return txt[1] ? [meta, txt[1]] : [meta, txt]
             }
 
-        if (tools.split(',').contains('hisat2')) {
+        if (tools.contains('hisat2')) {
             HISAT2_BUILD(input.fasta, input.gtf, hisat2_extractsplicesites)
 
             hisat2 = HISAT2_BUILD.out.index
@@ -178,7 +170,7 @@ workflow REFERENCES {
         }
     }
 
-    if (tools && tools.split(',').contains('kallisto') || tools.split(',').contains('rsem_make_transcript_fasta') || tools.split(',').contains('salmon')) {
+    if (tools.contains('kallisto') || tools.contains('rsem_make_transcript_fasta') || tools.contains('salmon')) {
         // TODO: be smarter about input assets
         //   Here we either return an empty channel if we have a transcript_fasta so that MAKE_TRANSCRIPTS_FASTA is not triggered
         //   Or we return the provided gtf so that MAKE_TRANSCRIPTS_FASTA is run
@@ -202,14 +194,14 @@ workflow REFERENCES {
                 return txt[1] ? [meta, txt[1]] : [meta, txt]
             }
 
-        if (tools.split(',').contains('kallisto')) {
+        if (tools.contains('kallisto')) {
             KALLISTO_INDEX(rsem_transcript_fasta)
 
             kallisto = KALLISTO_INDEX.out.index
             versions = versions.mix(KALLISTO_INDEX.out.versions)
         }
 
-        if (tools.split(',').contains('salmon')) {
+        if (tools.contains('salmon')) {
             SALMON_INDEX(input.fasta, rsem_transcript_fasta)
 
             salmon = SALMON_INDEX.out.index
@@ -217,34 +209,41 @@ workflow REFERENCES {
         }
     }
 
-    if (tools && tools.split(',').contains('msisensorpro')) {
+    if (tools.contains('msisensorpro')) {
         MSISENSORPRO_SCAN(input.fasta)
 
         msisensorpro = MSISENSORPRO_SCAN.out.list
         versions = versions.mix(MSISENSORPRO_SCAN.out.versions)
     }
 
-    if (tools && tools.split(',').contains('rsem')) {
+    if (tools.contains('rsem')) {
         RSEM_PREPAREREFERENCE_GENOME(input.fasta, input.gtf)
 
         rsem = RSEM_PREPAREREFERENCE_GENOME.out.index
         versions = versions.mix(RSEM_PREPAREREFERENCE_GENOME.out.versions)
     }
 
-    if (tools && tools.split(',').contains('star')) {
+    if (tools.contains('star')) {
         STAR_GENOMEGENERATE(input.fasta, input.gtf)
 
         star = STAR_GENOMEGENERATE.out.index
         versions = versions.mix(STAR_GENOMEGENERATE.out.versions)
     }
 
+    versions = versions.mix(BWAMEM1_INDEX.out.versions)
+    versions = versions.mix(BWAMEM2_INDEX.out.versions)
+    versions = versions.mix(DRAGMAP_HASHTABLE.out.versions)
+    versions = versions.mix(GATK4_CREATESEQUENCEDICTIONARY.out.versions)
+    versions = versions.mix(SAMTOOLS_FAIDX.out.versions)
+
     emit:
     bowtie1
     bowtie2
-    bwamem1
-    bwamem2
-    dict
-    dragmap
+    bwamem1               = BWAMEM1_INDEX.out.index
+    bwamem2               = BWAMEM2_INDEX.out.index
+    dict                  = GATK4_CREATESEQUENCEDICTIONARY.out.dict
+    dragmap               = DRAGMAP_HASHTABLE.out.hashmap
+    fasta                 = input.fasta
     faidx
     gffread
     hisat2

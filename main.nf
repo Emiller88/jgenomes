@@ -44,6 +44,11 @@ workflow {
     )
 
     // WORKFLOW: Run main workflow
+    if (!params.tools) {
+        log.error("No tools specified")
+        error("EXIT: No tools specified")
+    }
+
     NFCORE_REFERENCES(PIPELINE_INITIALISATION.out.samplesheet, params.tools)
 
     ch_multiqc_files = Channel.empty()
