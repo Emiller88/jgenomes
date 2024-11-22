@@ -108,8 +108,8 @@ workflow REFERENCES {
             .join(input.fasta_fai)
             .join(input.fasta_sizes)
             .groupTuple()
-            .map { meta, fasta, fai, sizes ->
-                return fai[0][0] && sizes[0][0] ? null : [meta, fasta]
+            .map { meta, fasta, fai, fa_sizes ->
+                return fai[0][0] && fa_sizes[0][0] ? null : [meta, fasta]
             }
 
         generate_sizes = tools.split(',').contains('sizes')
