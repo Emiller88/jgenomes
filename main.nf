@@ -109,5 +109,23 @@ workflow NFCORE_REFERENCES {
     REFERENCES(input, tools)
 
     emit:
-    versions = REFERENCES.out.versions
+    bowtie1               = REFERENCES.out.bowtie1
+    bowtie2               = REFERENCES.out.bowtie2
+    bwamem1               = REFERENCES.out.bwamem1
+    bwamem2               = REFERENCES.out.bwamem2
+    dict                  = REFERENCES.out.dict
+    dragmap               = REFERENCES.out.dragmap
+    fasta                 = REFERENCES.out.fasta
+    faidx                 = REFERENCES.out.faidx
+    gffread               = REFERENCES.out.gffread
+    hisat2                = REFERENCES.out.hisat2
+    hisat2_splice_sites   = REFERENCES.out.hisat2_splice_sites
+    kallisto              = REFERENCES.out.kallisto
+    msisensorpro          = REFERENCES.out.msisensorpro
+    rsem                  = REFERENCES.out.rsem
+    rsem_transcript_fasta = REFERENCES.out.rsem_transcript_fasta
+    salmon                = REFERENCES.out.salmon
+    sizes                 = REFERENCES.out.sizes
+    star                  = REFERENCES.out.star
+    versions              = REFERENCES.out.versions
 }
