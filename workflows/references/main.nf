@@ -138,7 +138,7 @@ workflow REFERENCES {
         versions = versions.mix(GFFREAD.out.versions)
     }
 
-    if (tools.contains('hisat2') || tools.contains('hisat2_extractsplicesites')) {
+    if (tools.contains('hisat2')) {
         // TODO: be smarter about input assets
         //   Here we either return an empty channel if we have a splice_sites so that HISAT2_EXTRACTSPLICESITES is not triggered
         //   Or we return the provided gtf so that HISAT2_EXTRACTSPLICESITES is run
@@ -162,7 +162,7 @@ workflow REFERENCES {
                 return txt[1] ? [meta, txt[1]] : [meta, txt]
             }
 
-        if (tools.contains('hisat2')) {
+        if (tools && tools.split(',').contains('hisat2')) {
             HISAT2_BUILD(input.fasta, input.gtf, hisat2_extractsplicesites)
 
             hisat2 = HISAT2_BUILD.out.index
@@ -216,7 +216,7 @@ workflow REFERENCES {
         versions = versions.mix(MSISENSORPRO_SCAN.out.versions)
     }
 
-    if (tools.contains('rsem')) {
+    if (tools && tools.split(',').contains('rsem')) {
         RSEM_PREPAREREFERENCE_GENOME(input.fasta, input.gtf)
 
         rsem = RSEM_PREPAREREFERENCE_GENOME.out.index
@@ -237,23 +237,23 @@ workflow REFERENCES {
     versions = versions.mix(SAMTOOLS_FAIDX.out.versions)
 
     emit:
-    bowtie1
-    bowtie2
+    bowtie1               = bowtie1
+    bowtie2               = bowtie2
     bwamem1               = BWAMEM1_INDEX.out.index
     bwamem2               = BWAMEM2_INDEX.out.index
     dict                  = GATK4_CREATESEQUENCEDICTIONARY.out.dict
     dragmap               = DRAGMAP_HASHTABLE.out.hashmap
     fasta                 = input.fasta
-    faidx
-    gffread
-    hisat2
-    hisat2_splice_sites
-    kallisto
-    msisensorpro
-    rsem
-    rsem_transcript_fasta
-    salmon
-    sizes
-    star
-    versions
+    faidx                 = faidx
+    gffread               = gffread
+    hisat2                = hisat2
+    hisat2_splice_sites   = hisat2_splice_sites
+    kallisto              = kallisto
+    msisensorpro          = msisensorpro
+    rsem                  = rsem
+    rsem_transcript_fasta = rsem_transcript_fasta
+    salmon                = salmon
+    sizes                 = sizes
+    star                  = star
+    versions              = versions
 }
