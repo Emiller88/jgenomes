@@ -3,6 +3,7 @@ dragmap/dragmap/hash_table.cfg
 dragmap/dragmap/hash_table.cfg.bin
 dragmap/dragmap/hash_table_stats.txt
 kallisto/kallisto
+multiqc/multiqc_data
 multiqc/multiqc_data/multiqc.log
 multiqc/multiqc_data/multiqc_data.json
 multiqc/multiqc_data/multiqc_general_stats.txt

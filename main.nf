@@ -122,18 +122,13 @@ output {
         mode 'copy'
     }
 
-    'dict' {
-        path 'dict'
+    'gatk4' {
+        path 'gatk4'
         mode 'copy'
     }
 
     'dragmap' {
         path 'dragmap'
-        mode 'copy'
-    }
-
-    'faidx' {
-        path 'faidx'
         mode 'copy'
     }
 
@@ -152,8 +147,8 @@ output {
         mode 'copy'
     }
 
-    'hisat2_splice_sites' {
-        path 'splice_sites'
+    'hisat2/splice_sites' {
+        path 'hisat2/splice_sites'
         mode 'copy'
     }
 
@@ -177,8 +172,8 @@ output {
         mode 'copy'
     }
 
-    'rsem_transcript_fasta' {
-        path 'transcript_fasta'
+    'make' {
+        path 'make'
         mode 'copy'
     }
 
@@ -187,8 +182,8 @@ output {
         mode 'copy'
     }
 
-    'sizes' {
-        path 'sizes'
+    'samtools' {
+        path 'samtools'
         mode 'copy'
     }
 

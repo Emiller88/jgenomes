@@ -10,24 +10,19 @@
             [
                 "multiqc",
                 "multiqc/multiqc_data",
-                "multiqc/multiqc_data/multiqc.log",
-                "multiqc/multiqc_data/multiqc_citations.txt",
-                "multiqc/multiqc_data/multiqc_data.json",
-                "multiqc/multiqc_data/multiqc_software_versions.txt",
-                "multiqc/multiqc_data/multiqc_sources.txt",
                 "multiqc/multiqc_report.html",
                 "pipeline_info",
                 "pipeline_info/nf_core_references_software_mqc_versions.yml"
             ],
             [
-                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
+                
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "24.10.1"
         },
-        "timestamp": "2024-11-26T13:49:24.26665886"
+        "timestamp": "2024-11-26T18:53:42.908195688"
     },
     "Run with profile test for sarek | --input GRCh38_chr21.yml": {
         "content": [
@@ -86,11 +81,6 @@
                 "msisensorpro/GRCh38_chr21.msisensor_scan.list",
                 "multiqc",
                 "multiqc/multiqc_data",
-                "multiqc/multiqc_data/multiqc.log",
-                "multiqc/multiqc_data/multiqc_citations.txt",
-                "multiqc/multiqc_data/multiqc_data.json",
-                "multiqc/multiqc_data/multiqc_software_versions.txt",
-                "multiqc/multiqc_data/multiqc_sources.txt",
                 "multiqc/multiqc_report.html",
                 "pipeline_info",
                 "pipeline_info/nf_core_references_software_mqc_versions.yml",
@@ -115,7 +105,6 @@
                 "str_table.bin:md5,ae0be026310e8197d3d2c14f91d5dfd9",
                 "GRCh38_chr21.dict:md5,40482944b1a51af140a397e2544b6ed4",
                 "GRCh38_chr21.msisensor_scan.list:md5,51b72d56b479de553281745ac8e75745",
-                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
                 "GRCh38_chr21.fa.fai:md5,6ea51e1c1231da5e49212ea9f493d703"
             ]
         ],
@@ -123,7 +112,7 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.1"
         },
-        "timestamp": "2024-11-26T13:49:05.779990531"
+        "timestamp": "2024-11-26T19:56:11.073843899"
     },
     "Run with profile test for sarek [intervals] | --input assets/genomes/test/pipelines/default_full.yml": {
         "content": [
@@ -134,25 +123,17 @@
                 }
             },
             [
-                "multiqc",
-                "multiqc/multiqc_data",
-                "multiqc/multiqc_data/multiqc.log",
-                "multiqc/multiqc_data/multiqc_citations.txt",
-                "multiqc/multiqc_data/multiqc_data.json",
-                "multiqc/multiqc_data/multiqc_software_versions.txt",
-                "multiqc/multiqc_data/multiqc_sources.txt",
-                "multiqc/multiqc_report.html",
                 "pipeline_info",
                 "pipeline_info/nf_core_references_software_mqc_versions.yml"
             ],
             [
-                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
+                
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "24.10.1"
         },
-        "timestamp": "2024-11-26T13:49:41.415917881"
+        "timestamp": "2024-11-26T18:54:07.913822075"
     }
 }
