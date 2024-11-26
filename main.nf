@@ -115,11 +115,12 @@ workflow NFCORE_REFERENCES {
     bwamem2               = REFERENCES.out.bwamem2
     dict                  = REFERENCES.out.dict
     dragmap               = REFERENCES.out.dragmap
-    fasta                 = REFERENCES.out.fasta
     faidx                 = REFERENCES.out.faidx
+    fasta                 = REFERENCES.out.fasta
     gffread               = REFERENCES.out.gffread
     hisat2                = REFERENCES.out.hisat2
     hisat2_splice_sites   = REFERENCES.out.hisat2_splice_sites
+    intervals             = REFERENCES.out.intervals
     kallisto              = REFERENCES.out.kallisto
     msisensorpro          = REFERENCES.out.msisensorpro
     rsem                  = REFERENCES.out.rsem

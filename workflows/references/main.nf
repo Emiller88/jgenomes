@@ -252,7 +252,6 @@ workflow REFERENCES {
     bowtie2               = bowtie2
     bwamem1               = BWAMEM1_INDEX.out.index
     bwamem2               = BWAMEM2_INDEX.out.index
-    bed_intervals         = bed_intervals
     dict                  = GATK4_CREATESEQUENCEDICTIONARY.out.dict
     dragmap               = DRAGMAP_HASHTABLE.out.hashmap
     faidx                 = faidx
@@ -260,6 +259,7 @@ workflow REFERENCES {
     gffread               = gffread
     hisat2                = hisat2
     hisat2_splice_sites   = hisat2_splice_sites
+    intervals             = bed_intervals
     kallisto              = kallisto
     msisensorpro          = msisensorpro
     rsem                  = rsem
