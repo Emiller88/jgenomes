@@ -247,15 +247,22 @@ workflow REFERENCES {
     versions = versions.mix(GATK4_CREATESEQUENCEDICTIONARY.out.versions)
     versions = versions.mix(SAMTOOLS_FAIDX.out.versions)
 
+    bwamem1 = BWAMEM1_INDEX.out.index
+    bwamem2 = BWAMEM2_INDEX.out.index
+    dict = GATK4_CREATESEQUENCEDICTIONARY.out.dict
+    dragmap = DRAGMAP_HASHTABLE.out.hashmap
+    fasta = input.fasta
+    intervals = bed_intervals
+
     emit:
     bowtie1               = bowtie1
     bowtie2               = bowtie2
-    bwamem1               = BWAMEM1_INDEX.out.index
-    bwamem2               = BWAMEM2_INDEX.out.index
-    dict                  = GATK4_CREATESEQUENCEDICTIONARY.out.dict
-    dragmap               = DRAGMAP_HASHTABLE.out.hashmap
+    bwamem1               = bwamem1
+    bwamem2               = bwamem2
+    dict                  = dict
+    dragmap               = dragmap
     faidx                 = faidx
-    fasta                 = input.fasta
+    fasta                 = fasta
     gffread               = gffread
     hisat2                = hisat2
     hisat2_splice_sites   = hisat2_splice_sites
@@ -268,4 +275,25 @@ workflow REFERENCES {
     sizes                 = sizes
     star                  = star
     versions              = versions
+
+    publish:
+    bowtie1 >> 'bowtie1'
+    bowtie2 >> 'bowtie2'
+    bwamem1 >> 'bwamem1'
+    bwamem2 >> 'bwamem2'
+    dict >> 'dict'
+    dragmap >> 'dragmap'
+    faidx >> 'faidx'
+    fasta >> 'fasta'
+    gffread >> 'gffread'
+    hisat2 >> 'hisat2'
+    hisat2_splice_sites >> 'splice_sites'
+    intervals >> 'intervals'
+    kallisto >> 'kallisto'
+    msisensorpro >> 'msisensorpro'
+    rsem >> 'rsem'
+    rsem_transcript_fasta >> 'transcript_fasta'
+    salmon >> 'salmon'
+    sizes >> 'sizes'
+    star >> 'star'
 }

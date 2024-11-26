@@ -35,6 +35,7 @@ include { REFERENCES              } from "./workflows/references/main"
 */
 
 workflow {
+    main:
     // SUBWORKFLOW: Run initialisation tasks
     PIPELINE_INITIALISATION(
         params.version,
@@ -76,7 +77,10 @@ workflow {
         [],
         []
     )
-    multiqc_report = MULTIQC.out.report.toList()
+
+    multiqc_data = MULTIQC.out.data
+    multiqc_plots = MULTIQC.out.plots
+    multiqc_report = MULTIQC.out.report
 
     //
     // SUBWORKFLOW: Run completion tasks
@@ -88,8 +92,103 @@ workflow {
         params.outdir,
         params.monochrome_logs,
         params.hook_url,
-        multiqc_report
+        MULTIQC.out.report.toList()
     )
+
+    publish:
+    multiqc_data >> 'multiqc'
+    multiqc_plots >> 'multiqc'
+    multiqc_report >> 'multiqc'
+}
+
+output {
+    'bowtie1' {
+        path 'bowtie1'
+    }
+
+    'bowtie2' {
+        path 'bowtie2'
+    }
+
+    'bwamem1' {
+        path 'bwamem1'
+    }
+
+    'bwamem2' {
+        path 'bwamem2'
+    }
+
+    'dict' {
+        path 'dict'
+    }
+
+    'dragmap' {
+        path 'dragmap'
+    }
+
+    'faidx' {
+        path 'faidx'
+    }
+
+    'fasta' {
+        path 'fasta'
+    }
+
+    'gffread' {
+        path 'gffread'
+    }
+
+    'hisat2' {
+        path 'hisat2'
+    }
+
+    'hisat2_splice_sites' {
+        path 'splice_sites'
+    }
+
+    'intervals' {
+        path 'intervals'
+    }
+
+    'kallisto' {
+        path 'kallisto'
+    }
+
+    'msisensorpro' {
+        path 'msisensorpro'
+    }
+
+    'rsem' {
+        path 'rsem'
+    }
+
+    'rsem_transcript_fasta' {
+        path 'transcript_fasta'
+    }
+
+    'salmon' {
+        path 'salmon'
+    }
+
+    'sizes' {
+        path 'sizes'
+    }
+
+    'star' {
+        path 'star'
+    }
+
+    'multiqc_data' {
+        path 'multiqc'
+    }
+
+    'multiqc_plots' {
+        path 'multiqc'
+    }
+
+    'multiqc_report' {
+        path 'multiqc'
+    }
 }
 
 /*
