@@ -1,10 +1,10 @@
 include { BOWTIE2_BUILD                                         } from '../../modules/nf-core/bowtie2/build'
 include { BOWTIE_BUILD as BOWTIE1_BUILD                         } from '../../modules/nf-core/bowtie/build'
 include { BWAMEM2_INDEX                                         } from '../../modules/nf-core/bwamem2/index'
-include { GAWK as BUILD_INTERVALS                               } from '../../modules/nf-core/gawk'
 include { BWA_INDEX as BWAMEM1_INDEX                            } from '../../modules/nf-core/bwa/index'
 include { DRAGMAP_HASHTABLE                                     } from '../../modules/nf-core/dragmap/hashtable'
 include { GATK4_CREATESEQUENCEDICTIONARY                        } from '../../modules/nf-core/gatk4/createsequencedictionary'
+include { GAWK as BUILD_INTERVALS                               } from '../../modules/nf-core/gawk'
 include { GFFREAD                                               } from '../../modules/nf-core/gffread'
 include { HISAT2_BUILD                                          } from '../../modules/nf-core/hisat2/build'
 include { HISAT2_EXTRACTSPLICESITES                             } from '../../modules/nf-core/hisat2/extractsplicesites'
@@ -15,6 +15,7 @@ include { RSEM_PREPAREREFERENCE as RSEM_PREPAREREFERENCE_GENOME } from '../../mo
 include { SALMON_INDEX                                          } from '../../modules/nf-core/salmon/index'
 include { SAMTOOLS_FAIDX                                        } from '../../modules/nf-core/samtools/faidx'
 include { STAR_GENOMEGENERATE                                   } from '../../modules/nf-core/star/genomegenerate'
+
 // include { BBMAP_BBSPLIT                                         } from '../../modules/nf-core/bbmap/bbsplit'
 // include { CUSTOM_CATADDITIONALFASTA                             } from '../../modules/nf-core/custom/catadditionalfasta'
 // include { SORTMERNA as SORTMERNA_INDEX                          } from '../../modules/nf-core/sortmerna'
@@ -25,6 +26,7 @@ workflow REFERENCES {
     tools     // bowtie|bowtie2|bwamem1|bwamem2|createsequencedictionary|dragmap|faidx|gffread|intervals|hisat2|hisat2_extractsplicesites|kallisto|msisensorpro|rsem|rsem_make_transcripts_fasta|salmon|star
 
     main:
+    bed_intervals = Channel.empty()
     bowtie1 = Channel.empty()
     bowtie2 = Channel.empty()
     faidx = Channel.empty()
@@ -40,9 +42,7 @@ workflow REFERENCES {
     star = Channel.empty()
     versions = Channel.empty()
 
-    // input = reference.multiMap { meta, fasta, fasta_dict, fasta_fai, fasta_sizes, gff, gtf, fai_intervals, splice_sites, transcript_fasta, readme, bed12, mito_name, macs_gsize ->
-    // fai_intervals: [meta, fai_intervals]
-    input = reference.multiMap { meta, fasta, fasta_dict, fasta_fai, fasta_sizes, gff, gtf, splice_sites, transcript_fasta, readme, bed12, mito_name, macs_gsize ->
+    input = reference.multiMap { meta, intervals, fasta, fasta_dict, fasta_fai, fasta_sizes, gff, gtf, splice_sites, transcript_fasta, readme, bed12, mito_name, macs_gsize ->
         fasta: [meta, fasta]
         fasta_dict: [meta, fasta_dict]
         fasta_fai: [meta, fasta_fai]
@@ -55,11 +55,12 @@ workflow REFERENCES {
         bed12: [meta, bed12]
         mito_name: [meta, mito_name]
         macs_gsize: [meta, macs_gsize]
+        intervals: [meta, intervals]
         bwamem1_fasta: tools.contains('bwamem1') ? [meta, fasta] : [[:], []]
         bwamem2_fasta: tools.contains('bwamem2') ? [meta, fasta] : [[:], []]
-        dragmap_fasta: tools.contains('dragmap') ? [meta, fasta] : [[:], []]
         createsequencedictionary_fasta: tools.contains('createsequencedictionary') ? [meta, fasta] : [[:], []]
-        fasta_samtools: (tools.contains('faidx') || tools.contains('sizes')) && !(fasta_fai || fasta_sizes) ? [meta, fasta] : [[:], []]
+        dragmap_fasta: tools.contains('dragmap') ? [meta, fasta] : [[:], []]
+        fasta_samtools: ((tools.contains('faidx') || tools.contains('sizes')) && !(fasta_fai || fasta_sizes)) || (tools.contains('intervals') && !(fasta_fai || intervals)) ? [meta, fasta] : [[:], []]
     }
     // I should be able to output null instead of `[[:], []] and have that registered as an empty channel and not trigger downstream processes
     // but not working currently
@@ -130,6 +131,15 @@ workflow REFERENCES {
         .map { meta, file ->
             return file[1] ? [meta, file[1]] : [meta, file]
         }
+
+    faidx_intervals = faidx
+        .mix(input.intervals)
+        .groupTuple()
+        .map { meta, file ->
+            return file[1] ? null : [meta, file]
+        }
+
+    BUILD_INTERVALS(faidx_intervals, [])
 
     if (tools.contains('gffread')) {
         GFFREAD(input.gff, [])
@@ -230,6 +240,7 @@ workflow REFERENCES {
         versions = versions.mix(STAR_GENOMEGENERATE.out.versions)
     }
 
+    versions = versions.mix(BUILD_INTERVALS.out.versions)
     versions = versions.mix(BWAMEM1_INDEX.out.versions)
     versions = versions.mix(BWAMEM2_INDEX.out.versions)
     versions = versions.mix(DRAGMAP_HASHTABLE.out.versions)
@@ -241,10 +252,11 @@ workflow REFERENCES {
     bowtie2               = bowtie2
     bwamem1               = BWAMEM1_INDEX.out.index
     bwamem2               = BWAMEM2_INDEX.out.index
+    bed_intervals         = bed_intervals
     dict                  = GATK4_CREATESEQUENCEDICTIONARY.out.dict
     dragmap               = DRAGMAP_HASHTABLE.out.hashmap
-    fasta                 = input.fasta
     faidx                 = faidx
+    fasta                 = input.fasta
     gffread               = gffread
     hisat2                = hisat2
     hisat2_splice_sites   = hisat2_splice_sites

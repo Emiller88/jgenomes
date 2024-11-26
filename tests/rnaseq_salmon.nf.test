@@ -34,6 +34,7 @@ nextflow_pipeline {
             )
         }
     }
+
     test("Run with profile test for rnaseq [salmon] | --input GRCh38_chr21.yml") {
 
         when {

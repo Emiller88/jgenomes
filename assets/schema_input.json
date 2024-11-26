@@ -23,6 +23,11 @@
                 "errorMessage": "Species of the reference",
                 "meta": ["species"]
             },
+            "bed_intervals": {
+                "type": "string",
+                "pattern": "^\\S+\\.bed?$",
+                "errorMessage": "TODO"
+            },
             "fasta": {
                 "type": "string",
                 "pattern": "^\\S+\\.f(ast|n)?a(\\.gz)?$",
