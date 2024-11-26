@@ -25,7 +25,7 @@
             },
             "bed_intervals": {
                 "type": "string",
-                "pattern": "^\\S+\\.bed?$",
+                "pattern": "^\\S+\\.bed$",
                 "errorMessage": "TODO"
             },
             "fasta": {
