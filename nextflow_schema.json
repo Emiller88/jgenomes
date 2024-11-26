@@ -34,7 +34,7 @@
                     "fa_icon": "fas fa-toolbox",
                     "description": "Tools to use for building references.",
                     "help_text": "Multiple tools separated with commas.",
-                    "pattern": "^((bbmap|bowtie1|bowtie2|bwamem1|bwamem2|createsequencedictionary|dragmap|faidx|gffread|hisat2|hisat2_extractsplicesites|kallisto|msisensorpro|rsem|rsem_make_transcript_fasta|salmon|sizes|star)?,?)*(?<!,)$"
+                    "pattern": "^((bbmap|bowtie1|bowtie2|bwamem1|bwamem2|createsequencedictionary|dragmap|faidx|gffread|hisat2|hisat2_extractsplicesites|intervals|kallisto|msisensorpro|rsem|rsem_make_transcript_fasta|salmon|sizes|star)?,?)*(?<!,)$"
                 },
                 "email": {
                     "type": "string",
