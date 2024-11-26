@@ -104,90 +104,112 @@ workflow {
 output {
     'bowtie1' {
         path 'bowtie1'
+        mode 'copy'
     }
 
     'bowtie2' {
         path 'bowtie2'
+        mode 'copy'
     }
 
     'bwamem1' {
         path 'bwamem1'
+        mode 'copy'
     }
 
     'bwamem2' {
         path 'bwamem2'
+        mode 'copy'
     }
 
     'dict' {
         path 'dict'
+        mode 'copy'
     }
 
     'dragmap' {
         path 'dragmap'
+        mode 'copy'
     }
 
     'faidx' {
         path 'faidx'
+        mode 'copy'
     }
 
     'fasta' {
         path 'fasta'
+        mode 'copy'
     }
 
     'gffread' {
         path 'gffread'
+        mode 'copy'
     }
 
     'hisat2' {
         path 'hisat2'
+        mode 'copy'
     }
 
     'hisat2_splice_sites' {
         path 'splice_sites'
+        mode 'copy'
     }
 
     'intervals' {
         path 'intervals'
+        mode 'copy'
     }
 
     'kallisto' {
         path 'kallisto'
+        mode 'copy'
     }
 
     'msisensorpro' {
         path 'msisensorpro'
+        mode 'copy'
     }
 
     'rsem' {
         path 'rsem'
+        mode 'copy'
     }
 
     'rsem_transcript_fasta' {
         path 'transcript_fasta'
+        mode 'copy'
     }
 
     'salmon' {
         path 'salmon'
+        mode 'copy'
     }
 
     'sizes' {
         path 'sizes'
+        mode 'copy'
     }
 
     'star' {
         path 'star'
+        mode 'copy'
     }
 
     'multiqc_data' {
         path 'multiqc'
+        mode 'copy'
     }
 
     'multiqc_plots' {
         path 'multiqc'
+        mode 'copy'
     }
 
     'multiqc_report' {
         path 'multiqc'
+        mode 'copy'
     }
 }
 
