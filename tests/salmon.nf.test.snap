@@ -1,5 +1,5 @@
 {
-    "Run with profile test for rnaseq [salmon] | --input GRCh38_chr21.yml": {
+    "Run with profile test for salmon | --input GRCh38_chr21.yml": {
         "content": [
             3,
             {
@@ -66,7 +66,7 @@
         },
         "timestamp": "2024-11-27T10:47:56.770600657"
     },
-    "Run with profile test for rnaseq [salmon] | --input assets/genomes/test/pipelines/default_extended.yml": {
+    "Run with profile test for salmon | --input assets/genomes/test/pipelines/default_extended.yml": {
         "content": [
             2,
             {

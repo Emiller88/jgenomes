@@ -1,43 +1,10 @@
 nextflow_pipeline {
 
-    name "Build samtools references"
+    name "Build rsem references"
     script "../main.nf"
     tag "pipeline"
 
-    test("Run with profile test for samtools | --input GRCh38_chr21.yml") {
-
-        options "-output-dir $outputDir"
-
-        when {
-            params {
-                input  = 'https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/references/references/GRCh38_chr21/GRCh38_chr21.yml'
-                outdir = "$outputDir"
-                tools  = 'faidx,intervals,sizes'
-            }
-        }
-
-        then {
-            // stable_name: All files + folders in ${params.outdir}/ with a stable name
-            def stable_name = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
-            // stable_path: All files in ${params.outdir}/ with stable content
-            def stable_path = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore')
-            assertAll(
-                { assert workflow.success},
-                { assert snapshot(
-                    // Number of successful tasks
-                    workflow.trace.succeeded().size(),
-                    // pipeline versions.yml file for multiqc from which Nextflow version is removed because we tests pipelines on multiple Nextflow versions
-                    removeNextflowVersion("$outputDir/pipeline_info/nf_core_references_software_mqc_versions.yml"),
-                    // All stable path name, with a relative path
-                    stable_name,
-                    // All files with stable contents
-                    stable_path
-                ).match() }
-            )
-        }
-    }
-
-    test("Run with profile test for samtools | --input assets/genomes/test/pipelines/default_extended.yml") {
+    test("Run with profile test for rsem | --input assets/genomes/test/pipelines/default_extended.yml") {
 
         options "-output-dir $outputDir"
 
@@ -45,7 +12,7 @@ nextflow_pipeline {
             params {
                 input  = "${projectDir}/assets/genomes/test/pipelines/default_extended.yml"
                 outdir = "$outputDir"
-                tools  = 'faidx,intervals,sizes'
+                tools  = 'rsem,rsem_make_transcript_fasta'
             }
         }
 
@@ -70,15 +37,15 @@ nextflow_pipeline {
         }
     }
 
-    test("Run with profile test for samtools | --input assets/genomes/test/pipelines/default_full.yml") {
+    test("Run with profile test for rsem | --input GRCh38_chr21.yml") {
 
         options "-output-dir $outputDir"
 
         when {
             params {
-                input  = "${projectDir}/assets/genomes/test/pipelines/default_full.yml"
+                input  = 'https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/references/references/GRCh38_chr21/GRCh38_chr21.yml'
                 outdir = "$outputDir"
-                tools  = 'faidx,intervals,sizes'
+                tools  = 'rsem,rsem_make_transcript_fasta'
             }
         }
 
@@ -102,5 +69,4 @@ nextflow_pipeline {
             )
         }
     }
-
 }

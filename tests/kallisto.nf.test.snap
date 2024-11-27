@@ -1,5 +1,5 @@
 {
-    "Run with profile test for rnaseq [kallisto] | --input assets/genomes/test/pipelines/default_extended.yml": {
+    "Run with profile test for kallisto | --input assets/genomes/test/pipelines/default_extended.yml": {
         "content": [
             2,
             {
@@ -34,7 +34,7 @@
         },
         "timestamp": "2024-11-27T10:41:51.31627571"
     },
-    "Run with profile test for rnaseq [kallisto] | --input GRCh38_chr21.yml": {
+    "Run with profile test for kallisto | --input GRCh38_chr21.yml": {
         "content": [
             3,
             {

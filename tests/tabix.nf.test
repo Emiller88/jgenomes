@@ -1,10 +1,10 @@
 nextflow_pipeline {
 
-    name "Build rnaseq references"
+    name "Build tabix references"
     script "../main.nf"
     tag "pipeline"
 
-    test("Run with profile test for rnaseq [salmon] | --input assets/genomes/test/pipelines/default_extended.yml") {
+    test("Run with profile test with tabix | --input assets/genomes/test/pipelines/default_extended.yml") {
 
         options "-output-dir $outputDir"
 
@@ -12,7 +12,7 @@ nextflow_pipeline {
             params {
                 input  = "${projectDir}/assets/genomes/test/pipelines/default_extended.yml"
                 outdir = "$outputDir"
-                tools  = 'salmon,rsem_make_transcript_fasta'
+                tools  = 'tabix'
             }
         }
 
@@ -37,15 +37,15 @@ nextflow_pipeline {
         }
     }
 
-    test("Run with profile test for rnaseq [salmon] | --input GRCh38_chr21.yml") {
+    test("Run with profile test with tabix | --input assets/genomes/test/pipelines/default_full.yml") {
 
         options "-output-dir $outputDir"
 
         when {
             params {
-                input  = 'https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/references/references/GRCh38_chr21/GRCh38_chr21.yml'
+                input  = "${projectDir}/assets/genomes/test/pipelines/default_full.yml"
                 outdir = "$outputDir"
-                tools  = 'salmon,rsem_make_transcript_fasta'
+                tools  = 'tabix'
             }
         }
 
@@ -69,4 +69,5 @@ nextflow_pipeline {
             )
         }
     }
+
 }
