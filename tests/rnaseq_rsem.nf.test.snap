@@ -18,15 +18,6 @@
             [
                 "make",
                 "make/genome.transcripts.fa",
-                "make/rsem",
-                "make/rsem/GRCh38_chr21.fa",
-                "make/rsem/genome.chrlist",
-                "make/rsem/genome.grp",
-                "make/rsem/genome.idx.fa",
-                "make/rsem/genome.n2g.idx.fa",
-                "make/rsem/genome.seq",
-                "make/rsem/genome.ti",
-                "make/rsem/genome.transcripts.fa",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/multiqc.log",
@@ -38,7 +29,6 @@
                 "pipeline_info",
                 "pipeline_info/nf_core_references_software_mqc_versions.yml",
                 "rsem",
-                "rsem/genome.transcripts.fa",
                 "rsem/rsem",
                 "rsem/rsem/GRCh38_chr21.fa",
                 "rsem/rsem/Genome",
@@ -67,16 +57,7 @@
             ],
             [
                 "genome.transcripts.fa:md5,fd4e06fc250a19351a611a44861b9aea",
-                "GRCh38_chr21.fa:md5,c675070fcf168d7b64cfadc30b5d7b4d",
-                "genome.chrlist:md5,c985a141685e8431ec27c782816cb744",
-                "genome.grp:md5,f75057a7bf6943f88c04f164cd641105",
-                "genome.idx.fa:md5,fd4e06fc250a19351a611a44861b9aea",
-                "genome.n2g.idx.fa:md5,fd4e06fc250a19351a611a44861b9aea",
-                "genome.seq:md5,03f87c5a63ec7cb6e681e8e4e042153e",
-                "genome.ti:md5,38ba06dd31c6feaa10c8d9b42662358c",
-                "genome.transcripts.fa:md5,fd4e06fc250a19351a611a44861b9aea",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
-                "genome.transcripts.fa:md5,fd4e06fc250a19351a611a44861b9aea",
                 "GRCh38_chr21.fa:md5,c675070fcf168d7b64cfadc30b5d7b4d",
                 "Genome:md5,612664e3cfde5e1b73ad541d93752b31",
                 "SA:md5,074ae54177bb7b9cb981382f043f36e5",
@@ -106,7 +87,7 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.1"
         },
-        "timestamp": "2024-11-21T20:34:05.29795087"
+        "timestamp": "2024-11-27T11:06:55.293456882"
     },
     "Run with profile test for rnaseq [rsem] | --input assets/genomes/test/pipelines/default_extended.yml": {
         "content": [
@@ -132,7 +113,6 @@
                 "pipeline_info",
                 "pipeline_info/nf_core_references_software_mqc_versions.yml",
                 "rsem",
-                "rsem/genome.transcripts.fa",
                 "rsem/rsem",
                 "rsem/rsem/GRCh38_chr21.fa",
                 "rsem/rsem/Genome",
@@ -161,7 +141,6 @@
             ],
             [
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
-                "genome.transcripts.fa:md5,fd4e06fc250a19351a611a44861b9aea",
                 "GRCh38_chr21.fa:md5,c675070fcf168d7b64cfadc30b5d7b4d",
                 "Genome:md5,612664e3cfde5e1b73ad541d93752b31",
                 "SA:md5,074ae54177bb7b9cb981382f043f36e5",
@@ -191,6 +170,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.1"
         },
-        "timestamp": "2024-11-21T21:47:29.005036503"
+        "timestamp": "2024-11-27T11:05:05.450221738"
     }
 }

@@ -9,6 +9,8 @@
 ----------------------------------------------------------------------------------------
 */
 
+nextflow.preview.output = true
+
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT FUNCTIONS / MODULES / SUBWORKFLOWS / WORKFLOWS
@@ -33,6 +35,7 @@ include { REFERENCES              } from "./workflows/references/main"
 */
 
 workflow {
+    main:
     // SUBWORKFLOW: Run initialisation tasks
     PIPELINE_INITIALISATION(
         params.version,
@@ -74,7 +77,10 @@ workflow {
         [],
         []
     )
-    multiqc_report = MULTIQC.out.report.toList()
+
+    multiqc_data = MULTIQC.out.data
+    multiqc_plots = MULTIQC.out.plots
+    multiqc_report = MULTIQC.out.report
 
     //
     // SUBWORKFLOW: Run completion tasks
@@ -86,8 +92,95 @@ workflow {
         params.outdir,
         params.monochrome_logs,
         params.hook_url,
-        multiqc_report
+        MULTIQC.out.report.toList()
     )
+
+    publish:
+    multiqc_data >> 'multiqc'
+    multiqc_plots >> 'multiqc'
+    multiqc_report >> 'multiqc'
+}
+
+output {
+    'bowtie1' {
+        path 'bowtie1'
+    }
+
+    'bowtie2' {
+        path 'bowtie2'
+    }
+
+    'bwamem1' {
+        path 'bwamem1'
+    }
+
+    'bwamem2' {
+        path 'bwamem2'
+    }
+
+    'gatk4' {
+        path 'gatk4'
+    }
+
+    'dragmap' {
+        path 'dragmap'
+    }
+
+    'fasta' {
+        path 'fasta'
+    }
+
+    'gffread' {
+        path 'gffread'
+    }
+
+    'hisat2' {
+        path 'hisat2'
+    }
+
+    'intervals' {
+        path 'intervals'
+    }
+
+    'kallisto' {
+        path 'kallisto'
+    }
+
+    'msisensorpro' {
+        path 'msisensorpro'
+    }
+
+    'rsem' {
+        path 'rsem'
+    }
+
+    'make' {
+        path 'make'
+    }
+
+    'salmon' {
+        path 'salmon'
+    }
+
+    'samtools' {
+        path 'samtools'
+    }
+
+    'star' {
+        path 'star'
+    }
+
+    'multiqc_data' {
+        path 'multiqc'
+    }
+
+    'multiqc_plots' {
+        path 'multiqc'
+    }
+
+    'multiqc_report' {
+        path 'multiqc'
+    }
 }
 
 /*
@@ -120,7 +213,7 @@ workflow NFCORE_REFERENCES {
     gffread               = REFERENCES.out.gffread
     hisat2                = REFERENCES.out.hisat2
     hisat2_splice_sites   = REFERENCES.out.hisat2_splice_sites
-    intervals             = REFERENCES.out.intervals
+    intervals             = REFERENCES.out.bed_intervals
     kallisto              = REFERENCES.out.kallisto
     msisensorpro          = REFERENCES.out.msisensorpro
     rsem                  = REFERENCES.out.rsem

@@ -85,24 +85,28 @@ workflow REFERENCES {
             return file ? [meta, file] : null
         }
     )
+    bwamem1 = BWAMEM1_INDEX.out.index
 
     BWAMEM2_INDEX(
         input.bwamem2_fasta.map { meta, file ->
             return file ? [meta, file] : null
         }
     )
+    bwamem2 = BWAMEM2_INDEX.out.index
 
     DRAGMAP_HASHTABLE(
         input.dragmap_fasta.map { meta, file ->
             return file ? [meta, file] : null
         }
     )
+    dragmap = DRAGMAP_HASHTABLE.out.hashmap
 
     GATK4_CREATESEQUENCEDICTIONARY(
         input.createsequencedictionary_fasta.map { meta, file ->
             return file ? [meta, file] : null
         }
     )
+    dict = GATK4_CREATESEQUENCEDICTIONARY.out.dict
 
     SAMTOOLS_FAIDX(
         input.fasta_samtools.map { meta, file ->
@@ -140,6 +144,7 @@ workflow REFERENCES {
         }
 
     BUILD_INTERVALS(faidx_intervals, [])
+    bed_intervals = BUILD_INTERVALS.out.output
 
     if (tools.contains('gffread')) {
         GFFREAD(input.gff, [])
@@ -165,7 +170,7 @@ workflow REFERENCES {
         // TODO: be smarter about input assets
         //   Here we either mix+GT an empty channel (either no output or no input splice_sites) with the splice_sites return splice_sites
         //   And we filter out the empty value
-        hisat2_extractsplicesites = input.splice_sites
+        hisat2_splice_sites = input.splice_sites
             .mix(HISAT2_EXTRACTSPLICESITES.out.txt)
             .groupTuple()
             .map { meta, txt ->
@@ -173,7 +178,7 @@ workflow REFERENCES {
             }
 
         if (tools && tools.split(',').contains('hisat2')) {
-            HISAT2_BUILD(input.fasta, input.gtf, hisat2_extractsplicesites)
+            HISAT2_BUILD(input.fasta, input.gtf, hisat2_splice_sites)
 
             hisat2 = HISAT2_BUILD.out.index
             versions = versions.mix(HISAT2_BUILD.out.versions)
@@ -240,12 +245,16 @@ workflow REFERENCES {
         versions = versions.mix(STAR_GENOMEGENERATE.out.versions)
     }
 
+    // versions
     versions = versions.mix(BUILD_INTERVALS.out.versions)
     versions = versions.mix(BWAMEM1_INDEX.out.versions)
     versions = versions.mix(BWAMEM2_INDEX.out.versions)
     versions = versions.mix(DRAGMAP_HASHTABLE.out.versions)
     versions = versions.mix(GATK4_CREATESEQUENCEDICTIONARY.out.versions)
     versions = versions.mix(SAMTOOLS_FAIDX.out.versions)
+
+    // input fasta
+    fasta = input.fasta
 
     emit:
     bowtie1               = bowtie1
@@ -259,7 +268,7 @@ workflow REFERENCES {
     gffread               = gffread
     hisat2                = hisat2
     hisat2_splice_sites   = hisat2_splice_sites
-    intervals             = bed_intervals
+    bed_intervals         = bed_intervals
     kallisto              = kallisto
     msisensorpro          = msisensorpro
     rsem                  = rsem
@@ -268,4 +277,25 @@ workflow REFERENCES {
     sizes                 = sizes
     star                  = star
     versions              = versions
+
+    publish:
+    bowtie1 >> 'bowtie1'
+    bowtie2 >> 'bowtie2'
+    bwamem1 >> 'bwamem1'
+    bwamem2 >> 'bwamem2'
+    dict >> 'gatk4'
+    dragmap >> 'dragmap'
+    faidx >> 'samtools'
+    fasta >> 'fasta'
+    gffread >> 'gffread'
+    hisat2 >> 'hisat2'
+    hisat2_splice_sites >> 'hisat2'
+    bed_intervals >> 'intervals'
+    kallisto >> 'kallisto'
+    msisensorpro >> 'msisensorpro'
+    rsem >> 'rsem'
+    rsem_transcript_fasta >> 'make'
+    salmon >> 'salmon'
+    sizes >> 'samtools'
+    star >> 'star'
 }
