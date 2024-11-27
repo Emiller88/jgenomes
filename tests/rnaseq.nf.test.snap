@@ -16,7 +16,7 @@
                     "samtools": 1.21
                 },
                 "STAR_GENOMEGENERATE": {
-                    "star": null,
+                    "star": "2.7.11b",
                     "samtools": 1.2,
                     "gawk": "5.1.0"
                 },
@@ -25,63 +25,17 @@
                 }
             },
             [
-                "bowtie1",
-                "bowtie1/bowtie",
-                "bowtie1/bowtie/GRCh38_chr21.1.ebwt",
-                "bowtie1/bowtie/GRCh38_chr21.2.ebwt",
-                "bowtie1/bowtie/GRCh38_chr21.3.ebwt",
-                "bowtie1/bowtie/GRCh38_chr21.4.ebwt",
-                "bowtie1/bowtie/GRCh38_chr21.rev.1.ebwt",
-                "bowtie1/bowtie/GRCh38_chr21.rev.2.ebwt",
-                "bowtie2",
-                "bowtie2/bowtie2",
-                "bowtie2/bowtie2/GRCh38_chr21.1.bt2",
-                "bowtie2/bowtie2/GRCh38_chr21.2.bt2",
-                "bowtie2/bowtie2/GRCh38_chr21.3.bt2",
-                "bowtie2/bowtie2/GRCh38_chr21.4.bt2",
-                "bowtie2/bowtie2/GRCh38_chr21.rev.1.bt2",
-                "bowtie2/bowtie2/GRCh38_chr21.rev.2.bt2",
-                "gffread",
-                "gffread/GRCh38_chr21.gtf",
-                "multiqc",
-                "multiqc/multiqc_data",
-                "multiqc/multiqc_data/multiqc.log",
-                "multiqc/multiqc_data/multiqc_citations.txt",
-                "multiqc/multiqc_data/multiqc_data.json",
-                "multiqc/multiqc_data/multiqc_software_versions.txt",
-                "multiqc/multiqc_data/multiqc_sources.txt",
-                "multiqc/multiqc_report.html",
                 "pipeline_info",
-                "pipeline_info/nf_core_references_software_mqc_versions.yml",
-                "samtools",
-                "samtools/GRCh38_chr21.fa.fai",
-                "samtools/GRCh38_chr21.fa.sizes",
-                "star",
-                "star/star"
+                "pipeline_info/nf_core_references_software_mqc_versions.yml"
             ],
             [
-                "GRCh38_chr21.1.ebwt:md5,32b67a141c03f8f97d6f3fc4c9b90796",
-                "GRCh38_chr21.2.ebwt:md5,d811357a63a9429006f2f7a84255ef91",
-                "GRCh38_chr21.3.ebwt:md5,dbf5af96efd98d6b03f1e5d2baed848a",
-                "GRCh38_chr21.4.ebwt:md5,bd952f748321c4c230671e8fce7b1650",
-                "GRCh38_chr21.rev.1.ebwt:md5,5e5a45602d63d358e3edca7cdb683a1b",
-                "GRCh38_chr21.rev.2.ebwt:md5,1e5088944137b3277e65306ea1a347a5",
-                "GRCh38_chr21.1.bt2:md5,3de5dca5da6810e9addac0df4c682d05",
-                "GRCh38_chr21.2.bt2:md5,c61d725cb17a44cf928f89806fe37997",
-                "GRCh38_chr21.3.bt2:md5,dbf5af96efd98d6b03f1e5d2baed848a",
-                "GRCh38_chr21.4.bt2:md5,bd952f748321c4c230671e8fce7b1650",
-                "GRCh38_chr21.rev.1.bt2:md5,652b3b94689d5ca59b02a7f89e799958",
-                "GRCh38_chr21.rev.2.bt2:md5,33a970574d59232fdfab1bf2cb26d7ae",
-                "GRCh38_chr21.gtf:md5,c552c0aee5f1becb1d3991d21e63a5c1",
-                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
-                "GRCh38_chr21.fa.fai:md5,6ea51e1c1231da5e49212ea9f493d703",
-                "GRCh38_chr21.fa.sizes:md5,c985a141685e8431ec27c782816cb744"
+                
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "24.10.1"
         },
-        "timestamp": "2024-11-26T18:32:28.01844"
+        "timestamp": "2024-11-27T10:38:33.991666827"
     }
 }

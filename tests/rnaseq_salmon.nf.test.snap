@@ -64,7 +64,7 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.1"
         },
-        "timestamp": "2024-11-26T18:38:59.82582"
+        "timestamp": "2024-11-27T10:47:56.770600657"
     },
     "Run with profile test for rnaseq [salmon] | --input assets/genomes/test/pipelines/default_extended.yml": {
         "content": [
@@ -124,6 +124,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.1"
         },
-        "timestamp": "2024-11-26T18:38:20.330712"
+        "timestamp": "2024-11-27T10:47:00.694933333"
     }
 }
