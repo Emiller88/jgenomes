@@ -36,6 +36,7 @@ Initial release of nf-core/references, created with the [nf-core](https://nf-co.
 - [23](https://github.com/nf-core/references/pull/23) - No generation of bowtie2 index for sarek
 - [30](https://github.com/nf-core/references/pull/30) - Deal with existing splice_sites
 - [33](https://github.com/nf-core/references/pull/33) - Deal with existing faidx, sizes
+- [36](https://github.com/nf-core/references/pull/36) - Deal intervals generation
 
 ### Dependencies
 
