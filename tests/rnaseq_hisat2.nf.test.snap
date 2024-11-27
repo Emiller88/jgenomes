@@ -75,6 +75,8 @@
                 "hisat2/hisat2/GRCh38_chr21.6.ht2",
                 "hisat2/hisat2/GRCh38_chr21.7.ht2",
                 "hisat2/hisat2/GRCh38_chr21.8.ht2",
+                "hisat2/splice_sites",
+                "hisat2/splice_sites/genes_chr21.splice_sites.txt",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/multiqc.log",
@@ -95,6 +97,7 @@
                 "GRCh38_chr21.6.ht2:md5,242e36d01cd1719b6bd05f157c644eed",
                 "GRCh38_chr21.7.ht2:md5,24e7d0673a77e07fbe40400f9a6b3db6",
                 "GRCh38_chr21.8.ht2:md5,5e0626bdb7f7a267990f72ae45c3e44a",
+                "genes_chr21.splice_sites.txt:md5,291af43cd5b00eeb15277f90a76e77f8",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
             ]
         ],
@@ -102,6 +105,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.1"
         },
-        "timestamp": "2024-11-27T10:41:30.269020481"
+        "timestamp": "2024-11-27T11:28:56.222488969"
     }
 }

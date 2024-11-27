@@ -165,7 +165,7 @@ workflow REFERENCES {
         // TODO: be smarter about input assets
         //   Here we either mix+GT an empty channel (either no output or no input splice_sites) with the splice_sites return splice_sites
         //   And we filter out the empty value
-        hisat2_extractsplicesites = input.splice_sites
+        hisat2_splice_sites = input.splice_sites
             .mix(HISAT2_EXTRACTSPLICESITES.out.txt)
             .groupTuple()
             .map { meta, txt ->
@@ -173,7 +173,7 @@ workflow REFERENCES {
             }
 
         if (tools && tools.split(',').contains('hisat2')) {
-            HISAT2_BUILD(input.fasta, input.gtf, hisat2_extractsplicesites)
+            HISAT2_BUILD(input.fasta, input.gtf, hisat2_splice_sites)
 
             hisat2 = HISAT2_BUILD.out.index
             versions = versions.mix(HISAT2_BUILD.out.versions)
