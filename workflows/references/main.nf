@@ -287,7 +287,7 @@ workflow REFERENCES {
     fasta >> 'fasta'
     gffread >> 'gffread'
     hisat2 >> 'hisat2'
-    hisat2_splice_sites >> 'hisat2/splice_sites'
+    hisat2_splice_sites >> 'hisat2'
     intervals >> 'intervals'
     kallisto >> 'kallisto'
     msisensorpro >> 'msisensorpro'
