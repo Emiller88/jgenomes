@@ -138,10 +138,6 @@ output {
         path 'hisat2'
     }
 
-    'hisat2/splice_sites' {
-        path 'hisat2/splice_sites'
-    }
-
     'intervals' {
         path 'intervals'
     }
@@ -217,7 +213,7 @@ workflow NFCORE_REFERENCES {
     gffread               = REFERENCES.out.gffread
     hisat2                = REFERENCES.out.hisat2
     hisat2_splice_sites   = REFERENCES.out.hisat2_splice_sites
-    intervals             = REFERENCES.out.intervals
+    intervals             = REFERENCES.out.bed_intervals
     kallisto              = REFERENCES.out.kallisto
     msisensorpro          = REFERENCES.out.msisensorpro
     rsem                  = REFERENCES.out.rsem
