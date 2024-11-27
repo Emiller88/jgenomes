@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial release of nf-core/references, created with the [nf-core](https://nf-co.re/) template.
 
-### `Added`
+### Added
 
 - [5](https://github.com/nf-core/references/pull/5) - Brainstorm about input
 - [14](https://github.com/nf-core/references/pull/14) - nf-core/rnaseq references
@@ -27,14 +27,16 @@ Initial release of nf-core/references, created with the [nf-core](https://nf-co.
 - [23](https://github.com/nf-core/references/pull/23) - Merge all scripts into one
 - [31](https://github.com/nf-core/references/pull/31) - Test refactor: hisat2 and rsem have their own tests
 - [33](https://github.com/nf-core/references/pull/33) - default.yml asset file is now in the test-dataset repo
+- [35](https://github.com/nf-core/references/pull/35) - Use new output system
+- [35](https://github.com/nf-core/references/pull/35) - Samtools + intervals are separate from Sarek tests now
 
-### `Fixed`
+### Fixed
 
 - [19](https://github.com/nf-core/references/pull/19) - Use nf-core TEMPLATE
 - [23](https://github.com/nf-core/references/pull/23) - No generation of bowtie2 index for sarek
 - [30](https://github.com/nf-core/references/pull/30) - Deal with existing splice_sites
 - [33](https://github.com/nf-core/references/pull/33) - Deal with existing faidx, sizes
 
-### `Dependencies`
+### Dependencies
 
-### `Deprecated`
+### Deprecated
