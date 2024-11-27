@@ -140,7 +140,7 @@ workflow REFERENCES {
         .mix(faidx)
         .groupTuple()
         .map { meta, file ->
-            return file[0] ? null : file[1] ? [meta, file[1]] : [meta, file]
+            return file[0] || !tools.contains('intervals') ? null : file[1] ? [meta, file[1]] : [meta, file]
         }
 
     BUILD_INTERVALS(faidx_intervals, [])
