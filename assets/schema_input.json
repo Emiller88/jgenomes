@@ -18,6 +18,26 @@
                 "errorMessage": "Where the references came from",
                 "meta": ["source"]
             },
+            "source_dbsnp": {
+                "type": "string",
+                "errorMessage": "Where the references came from",
+                "meta": ["source_dbsnp"]
+            },
+            "source_germline_resource": {
+                "type": "string",
+                "errorMessage": "Where the references came from",
+                "meta": ["source_germline_resource"]
+            },
+            "source_known_indels": {
+                "type": "string",
+                "errorMessage": "Where the references came from",
+                "meta": ["source_known_indels"]
+            },
+            "source_known_snps": {
+                "type": "string",
+                "errorMessage": "Where the references came from",
+                "meta": ["source_known_snps"]
+            },
             "species": {
                 "type": "string",
                 "errorMessage": "Species of the reference",
@@ -105,6 +125,6 @@
                 "errorMessage": "TODO"
             }
         },
-        "required": ["genome", "fasta"]
+        "required": ["genome", "fasta", "source", "species"]
     }
 }

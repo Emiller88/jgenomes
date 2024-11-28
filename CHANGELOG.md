@@ -32,6 +32,8 @@ Initial release of nf-core/references, created with the [nf-core](https://nf-co.
 - [35](https://github.com/nf-core/references/pull/35) - Samtools + intervals are separate from Sarek tests now
 - [35](https://github.com/nf-core/references/pull/35) - Rename bed_intervals to intervals_bed
 - [35](https://github.com/nf-core/references/pull/35) - Rename rnaseq tests to tools tests
+- [41](https://github.com/nf-core/references/pull/41) - Better sarek tests
+- [41](https://github.com/nf-core/references/pull/41) - Better publishing for sarek related files
 
 ### Fixed
 
@@ -40,6 +42,7 @@ Initial release of nf-core/references, created with the [nf-core](https://nf-co.
 - [30](https://github.com/nf-core/references/pull/30) - Deal with existing splice_sites
 - [33](https://github.com/nf-core/references/pull/33) - Deal with existing faidx, sizes
 - [36](https://github.com/nf-core/references/pull/36) - Deal intervals generation
+- [39](https://github.com/nf-core/references/pull/39) - Fix gtf generation and dependencies
 
 ### Dependencies
 

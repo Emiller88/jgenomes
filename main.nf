@@ -109,19 +109,25 @@ output {
         path 'bowtie2'
     }
     'bwamem1' {
-        path 'bwamem1'
+        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/BWAIndex/" } }
     }
     'bwamem2' {
-        path 'bwamem2'
+        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/BWAmem2Index/" } }
     }
     'dragmap' {
-        path 'dragmap'
+        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/dragmap/" } }
     }
     'fasta' {
-        path 'fasta'
+        path { meta, fasta -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/WholeGenomeFasta/${file}" } }
     }
-    'gatk4' {
-        path 'gatk4'
+    'fasta_dict' {
+        path { meta, dict -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/WholeGenomeFasta/${file}" } }
+    }
+    'fasta_fai' {
+        path { meta, fai -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/WholeGenomeFasta/${file}" } }
+    }
+    'fasta_sizes' {
+        path 'fasta_sizes'
     }
     'gffread' {
         path 'gffread'
@@ -130,7 +136,7 @@ output {
         path 'hisat2'
     }
     'intervals' {
-        path 'intervals'
+        path { meta, intervals -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/intervals/${file}" } }
     }
     'kallisto' {
         path 'kallisto'
@@ -139,7 +145,7 @@ output {
         path 'make'
     }
     'msisensorpro' {
-        path 'msisensorpro'
+        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/msisensorpro/${file}" } }
     }
     'multiqc_data' {
         path 'multiqc'
@@ -156,14 +162,20 @@ output {
     'salmon' {
         path 'salmon'
     }
-    'samtools' {
-        path 'samtools'
-    }
     'star' {
         path 'star'
     }
-    'tabix' {
-        path 'tabix'
+    'tabix_dbsnp' {
+        path { meta, vcf -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/${meta.source_dbsnp}/${file}" } }
+    }
+    'tabix_germline_resource' {
+        path { meta, vcf -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/${meta.source_germline_resource}/${file}" } }
+    }
+    'tabix_known_indels' {
+        path { meta, vcf -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/${meta.source_known_indels}/${file}" } }
+    }
+    'tabix_known_snps' {
+        path { meta, vcf -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/${meta.source_known_snps}/${file}" } }
     }
 }
 /*
@@ -190,10 +202,10 @@ workflow NFCORE_REFERENCES {
     bwamem1                   = REFERENCES.out.bwamem1
     bwamem2                   = REFERENCES.out.bwamem2
     dbsnp_vcf_tbi             = REFERENCES.out.dbsnp_vcf_tbi
-    dict                      = REFERENCES.out.dict
     dragmap                   = REFERENCES.out.dragmap
-    faidx                     = REFERENCES.out.faidx
     fasta                     = REFERENCES.out.fasta
+    fasta_dict                = REFERENCES.out.fasta_dict
+    fasta_fai                 = REFERENCES.out.fasta_fai
     germline_resource_vcf_tbi = REFERENCES.out.germline_resource_vcf_tbi
     gffread                   = REFERENCES.out.gff_gtf
     hisat2                    = REFERENCES.out.hisat2
