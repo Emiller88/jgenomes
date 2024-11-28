@@ -109,22 +109,22 @@ output {
         path 'bowtie2'
     }
     'bwamem1' {
-        path { meta, dir -> { "${workflow.outputDir}/${meta.species}/${meta.source}/${meta.id}/Sequence/BWAIndex/" } }
+        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/BWAIndex/" } }
     }
     'bwamem2' {
-        path { meta, dir -> { "${workflow.outputDir}/${meta.species}/${meta.source}/${meta.id}/Sequence/BWAmem2Index/" } }
+        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/BWAmem2Index/" } }
     }
     'dragmap' {
-        path { meta, dir -> { "${workflow.outputDir}/${meta.species}/${meta.source}/${meta.id}/Sequence/dragmap/" } }
+        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/dragmap/" } }
     }
     'fasta' {
-        path { meta, file -> { "${workflow.outputDir}/${meta.species}/${meta.source}/${meta.id}/Sequence/WholeGenomeFasta/" } }
+        path { meta, fasta -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/WholeGenomeFasta/${file}" } }
     }
     'fasta_dict' {
-        path { meta, file -> { "${workflow.outputDir}/${meta.species}/${meta.source}/${meta.id}/Sequence/WholeGenomeFasta/" } }
+        path { meta, dict -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/WholeGenomeFasta/${file}" } }
     }
     'fasta_fai' {
-        path { meta, file -> { "${workflow.outputDir}/${meta.species}/${meta.source}/${meta.id}/Sequence/WholeGenomeFasta/" } }
+        path { meta, fai -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/WholeGenomeFasta/${file}" } }
     }
     'fasta_sizes' {
         path 'fasta_sizes'
@@ -136,7 +136,7 @@ output {
         path 'hisat2'
     }
     'intervals' {
-        path { meta, file -> { "${workflow.outputDir}/${meta.species}/${meta.source}/${meta.id}/Annotation/intervals/" } }
+        path { meta, intervals -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/intervals/${file}" } }
     }
     'kallisto' {
         path 'kallisto'
@@ -145,7 +145,7 @@ output {
         path 'make'
     }
     'msisensorpro' {
-        path { meta, file -> { "${workflow.outputDir}/${meta.species}/${meta.source}/${meta.id}/Annotation/msisensorpro/" } }
+        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/msisensorpro/${file}" } }
     }
     'multiqc_data' {
         path 'multiqc'
@@ -166,16 +166,16 @@ output {
         path 'star'
     }
     'tabix_dbsnp' {
-        path { meta, file -> { "${workflow.outputDir}/${meta.species}/${meta.source}/${meta.id}/Annotation/${meta.source_dbsnp}/" } }
+        path { meta, vcf -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/${meta.source_dbsnp}/${file}" } }
     }
     'tabix_germline_resource' {
-        path { meta, file -> { "${workflow.outputDir}/${meta.species}/${meta.source}/${meta.id}/Annotation/${meta.source_germline_resource}/" } }
+        path { meta, vcf -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/${meta.source_germline_resource}/${file}" } }
     }
     'tabix_known_indels' {
-        path { meta, file -> { "${workflow.outputDir}/${meta.species}/${meta.source}/${meta.id}/Annotation/${meta.source_known_indels}/" } }
+        path { meta, vcf -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/${meta.source_known_indels}/${file}" } }
     }
     'tabix_known_snps' {
-        path { meta, file -> { "${workflow.outputDir}/${meta.species}/${meta.source}/${meta.id}/Annotation/${meta.source_known_snps}/" } }
+        path { meta, vcf -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/${meta.source_known_snps}/${file}" } }
     }
 }
 /*
