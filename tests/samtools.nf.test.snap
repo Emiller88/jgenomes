@@ -25,53 +25,9 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.1"
+            "nextflow": "24.10.2"
         },
-        "timestamp": "2024-11-27T16:44:02.665944913"
-    },
-    "Run with profile test for samtools | --input GRCh38_chr21.yml": {
-        "content": [
-            3,
-            {
-                "BUILD_INTERVALS": {
-                    "gawk": "5.3.0"
-                },
-                "SAMTOOLS_FAIDX": {
-                    "samtools": 1.21
-                },
-                "Workflow": {
-                    "nf-core/references": "v1.0dev"
-                }
-            },
-            [
-                "intervals",
-                "intervals/GRCh38_chr21.bed",
-                "multiqc",
-                "multiqc/multiqc_data",
-                "multiqc/multiqc_data/multiqc.log",
-                "multiqc/multiqc_data/multiqc_citations.txt",
-                "multiqc/multiqc_data/multiqc_data.json",
-                "multiqc/multiqc_data/multiqc_software_versions.txt",
-                "multiqc/multiqc_data/multiqc_sources.txt",
-                "multiqc/multiqc_report.html",
-                "pipeline_info",
-                "pipeline_info/nf_core_references_software_mqc_versions.yml",
-                "samtools",
-                "samtools/GRCh38_chr21.fa.fai",
-                "samtools/GRCh38_chr21.fa.sizes"
-            ],
-            [
-                "GRCh38_chr21.bed:md5,472d213cfcde96565699779d5bfc0e32",
-                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
-                "GRCh38_chr21.fa.fai:md5,6ea51e1c1231da5e49212ea9f493d703",
-                "GRCh38_chr21.fa.sizes:md5,c985a141685e8431ec27c782816cb744"
-            ]
-        ],
-        "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.1"
-        },
-        "timestamp": "2024-11-27T16:21:13.948757673"
+        "timestamp": "2024-11-28T13:03:25.374670864"
     },
     "Run with profile test for samtools | --input assets/genomes/test/pipelines/default_extended.yml": {
         "content": [
@@ -105,8 +61,53 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.1"
+            "nextflow": "24.10.2"
         },
-        "timestamp": "2024-11-27T16:21:30.037987596"
+        "timestamp": "2024-11-28T13:03:10.610939902"
+    },
+    "Run with profile test for samtools | --input GRCh38_chr21.yml": {
+        "content": [
+            3,
+            {
+                "BUILD_INTERVALS": {
+                    "gawk": "5.3.0"
+                },
+                "SAMTOOLS_FAIDX": {
+                    "samtools": 1.21
+                },
+                "Workflow": {
+                    "nf-core/references": "v1.0dev"
+                }
+            },
+            [
+                "fasta_fai",
+                "fasta_fai/GRCh38_chr21.fa.fai",
+                "fasta_sizes",
+                "fasta_sizes/GRCh38_chr21.fa.sizes",
+                "intervals",
+                "intervals/GRCh38_chr21.bed",
+                "multiqc",
+                "multiqc/multiqc_data",
+                "multiqc/multiqc_data/multiqc.log",
+                "multiqc/multiqc_data/multiqc_citations.txt",
+                "multiqc/multiqc_data/multiqc_data.json",
+                "multiqc/multiqc_data/multiqc_software_versions.txt",
+                "multiqc/multiqc_data/multiqc_sources.txt",
+                "multiqc/multiqc_report.html",
+                "pipeline_info",
+                "pipeline_info/nf_core_references_software_mqc_versions.yml"
+            ],
+            [
+                "GRCh38_chr21.fa.fai:md5,6ea51e1c1231da5e49212ea9f493d703",
+                "GRCh38_chr21.fa.sizes:md5,c985a141685e8431ec27c782816cb744",
+                "GRCh38_chr21.bed:md5,472d213cfcde96565699779d5bfc0e32",
+                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.2"
+        },
+        "timestamp": "2024-11-28T13:02:55.459754611"
     }
 }

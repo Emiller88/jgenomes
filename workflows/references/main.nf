@@ -50,7 +50,7 @@ workflow REFERENCES {
     ch_star = Channel.empty()
     versions = Channel.empty()
 
-    input = reference.multiMap { meta, intervals, fasta, fasta_dict, fasta_fai, fasta_sizes, gff, gtf, splice_sites, transcript_fasta, dbsnp_vcf, known_snps_vcf, known_indels_vcf, germline_resource_vcf, readme, bed12, mito_name, macs_gsize ->
+    input = reference.multiMap { meta, intervals_bed, fasta, fasta_dict, fasta_fai, fasta_sizes, gff, gtf, splice_sites, transcript_fasta, dbsnp_vcf, known_snps_vcf, known_indels_vcf, germline_resource_vcf, readme, bed12, mito_name, macs_gsize ->
         fasta: [meta, fasta]
         fasta_dict: [meta, fasta_dict]
         fasta_fai: [meta, fasta_fai]
@@ -63,7 +63,7 @@ workflow REFERENCES {
         bed12: [meta, bed12]
         mito_name: [meta, mito_name]
         macs_gsize: [meta, macs_gsize]
-        intervals: [meta, intervals]
+        intervals_bed: [meta, intervals_bed]
         bwamem1_fasta: tools.contains('bwamem1') ? [meta, fasta] : [[:], []]
         bwamem2_fasta: tools.contains('bwamem2') ? [meta, fasta] : [[:], []]
         createsequencedictionary_fasta: tools.contains('createsequencedictionary') ? [meta, fasta] : [[:], []]
@@ -149,14 +149,14 @@ workflow REFERENCES {
             return file[1] ? [meta, file[1]] : [meta, file]
         }
 
-    ch_fasta_fai_intervals = input.intervals
+    ch_fasta_fai_intervals_bed = input.intervals_bed
         .mix(ch_fasta_fai)
         .groupTuple()
         .map { meta, file ->
             return file[0] || !tools.contains('intervals') ? null : file[1] ? [meta, file[1]] : [meta, file]
         }
 
-    BUILD_INTERVALS(ch_fasta_fai_intervals, [])
+    BUILD_INTERVALS(ch_fasta_fai_intervals_bed, [])
     ch_intervals_bed = BUILD_INTERVALS.out.output
 
     TABIX_DBSNP(
@@ -336,7 +336,7 @@ workflow REFERENCES {
     gff_gtf                   = ch_gff_gtf
     hisat2                    = ch_hisat2
     hisat2_splice_sites       = ch_hisat2_splice_sites
-    ch_intervals_bed          = ch_intervals_bed
+    intervals_bed             = ch_intervals_bed
     kallisto                  = ch_kallisto
     known_indels_vcf_tbi      = ch_known_indels_vcf_tbi
     known_snps_vcf_tbi        = ch_known_snps_vcf_tbi
@@ -353,23 +353,23 @@ workflow REFERENCES {
     ch_bowtie2 >> 'bowtie2'
     ch_bwamem1 >> 'bwamem1'
     ch_bwamem2 >> 'bwamem2'
-    ch_dbsnp_vcf_tbi >> 'tabix'
+    ch_dbsnp_vcf_tbi >> 'tabix_dbsnp'
     ch_dragmap >> 'dragmap'
     ch_fasta >> 'fasta'
-    ch_fasta_dict >> 'gatk4'
-    ch_fasta_fai >> 'samtools'
-    ch_germline_resource_vcf_tbi >> 'tabix'
+    ch_fasta_dict >> 'fasta_dict'
+    ch_fasta_fai >> 'fasta_fai'
+    ch_germline_resource_vcf_tbi >> 'tabix_germline_resource'
     ch_gff_gtf >> 'gffread'
     ch_hisat2 >> 'hisat2'
     ch_hisat2_splice_sites >> 'hisat2'
     ch_intervals_bed >> 'intervals'
     ch_kallisto >> 'kallisto'
-    ch_known_indels_vcf_tbi >> 'tabix'
-    ch_known_snps_vcf_tbi >> 'tabix'
+    ch_known_indels_vcf_tbi >> 'tabix_known_indels'
+    ch_known_snps_vcf_tbi >> 'tabix_known_snps'
     ch_msisensorpro >> 'msisensorpro'
     ch_rsem >> 'rsem'
     ch_rsem_transcript_fasta >> 'make'
     ch_salmon >> 'salmon'
-    ch_sizes >> 'samtools'
+    ch_sizes >> 'fasta_sizes'
     ch_star >> 'star'
 }

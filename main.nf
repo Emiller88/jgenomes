@@ -120,8 +120,14 @@ output {
     'fasta' {
         path 'fasta'
     }
-    'gatk4' {
-        path 'gatk4'
+    'fasta_dict' {
+        path 'fasta_dict'
+    }
+    'fasta_fai' {
+        path 'fasta_fai'
+    }
+    'fasta_sizes' {
+        path 'fasta_sizes'
     }
     'gffread' {
         path 'gffread'
@@ -156,14 +162,20 @@ output {
     'salmon' {
         path 'salmon'
     }
-    'samtools' {
-        path 'samtools'
-    }
     'star' {
         path 'star'
     }
-    'tabix' {
-        path 'tabix'
+    'tabix_dbsnp' {
+        path 'tabix_dbsnp'
+    }
+    'tabix_germline_resource' {
+        path 'tabix_germline_resource'
+    }
+    'tabix_known_indels' {
+        path 'tabix_known_indels'
+    }
+    'tabix_known_snps' {
+        path 'tabix_known_snps'
     }
 }
 /*
