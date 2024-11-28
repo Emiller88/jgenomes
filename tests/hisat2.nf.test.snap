@@ -46,14 +46,17 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.1"
+            "nextflow": "24.10.2"
         },
-        "timestamp": "2024-11-27T10:40:01.494387729"
+        "timestamp": "2024-11-28T09:47:04.908315963"
     },
     "Run with profile test for hisat2 | --input GRCh38_chr21.yml": {
         "content": [
-            3,
+            4,
             {
+                "GFFREAD": {
+                    "gffread": "0.12.7"
+                },
                 "HISAT2_BUILD": {
                     "hisat2": "2.2.1"
                 },
@@ -65,8 +68,10 @@
                 }
             },
             [
+                "gffread",
+                "gffread/GRCh38_chr21.gtf",
                 "hisat2",
-                "hisat2/genes_chr21.splice_sites.txt",
+                "hisat2/GRCh38_chr21.splice_sites.txt",
                 "hisat2/hisat2",
                 "hisat2/hisat2/GRCh38_chr21.1.ht2",
                 "hisat2/hisat2/GRCh38_chr21.2.ht2",
@@ -88,7 +93,8 @@
                 "pipeline_info/nf_core_references_software_mqc_versions.yml"
             ],
             [
-                "genes_chr21.splice_sites.txt:md5,291af43cd5b00eeb15277f90a76e77f8",
+                "GRCh38_chr21.gtf:md5,c552c0aee5f1becb1d3991d21e63a5c1",
+                "GRCh38_chr21.splice_sites.txt:md5,291af43cd5b00eeb15277f90a76e77f8",
                 "GRCh38_chr21.1.ht2:md5,eb322cf410ecc616d7fe63cc1be2785b",
                 "GRCh38_chr21.2.ht2:md5,46be3356d4c236ebd5d1e52e9eaf4e12",
                 "GRCh38_chr21.3.ht2:md5,dbf5af96efd98d6b03f1e5d2baed848a",
@@ -102,8 +108,8 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.1"
+            "nextflow": "24.10.2"
         },
-        "timestamp": "2024-11-27T11:34:29.562342157"
+        "timestamp": "2024-11-28T09:41:32.891380441"
     }
 }

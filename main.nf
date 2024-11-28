@@ -195,7 +195,7 @@ workflow NFCORE_REFERENCES {
     faidx                     = REFERENCES.out.faidx
     fasta                     = REFERENCES.out.fasta
     germline_resource_vcf_tbi = REFERENCES.out.germline_resource_vcf_tbi
-    gffread                   = REFERENCES.out.gffread
+    gffread                   = REFERENCES.out.gff_gtf
     hisat2                    = REFERENCES.out.hisat2
     hisat2_splice_sites       = REFERENCES.out.hisat2_splice_sites
     intervals                 = REFERENCES.out.intervals_bed
