@@ -34,7 +34,7 @@ workflow REFERENCES {
     bowtie1 = Channel.empty()
     bowtie2 = Channel.empty()
     faidx = Channel.empty()
-    gffread = Channel.empty()
+    gff_gtf = Channel.empty()
     hisat2 = Channel.empty()
     hisat2_splice_sites = Channel.empty()
     kallisto = Channel.empty()
@@ -73,6 +73,7 @@ workflow REFERENCES {
         known_snps_vcf: tools.contains('tabix') && known_snps_vcf ? [meta, known_snps_vcf] : [[:], []]
         known_indels_vcf: tools.contains('tabix') && known_indels_vcf ? [meta, known_indels_vcf] : [[:], []]
         germline_resource_vcf: tools.contains('tabix') && germline_resource_vcf ? [meta, germline_resource_vcf] : [[:], []]
+        gff_gffread: !gtf && (tools.contains('gffread') || tools.contains('hisat2') || tools.contains('kallisto') || tools.contains('rsem') || tools.contains('salmon') || tools.contains('star')) ? [meta, gff] : [[:], []]
     }
     // I should be able to output null instead of `[[:], []] and have that registered as an empty channel and not trigger downstream processes
     // but not working currently
@@ -186,19 +187,25 @@ workflow REFERENCES {
     )
     germline_resource_vcf_tbi = TABIX_GERMLINE_RESOURCE.out.tbi
 
+    GFFREAD(
+        input.gff_gffread.map { meta, file ->
+            return file ? [meta, file] : null
+        },
+        []
+    )
 
-    if (tools.contains('gffread')) {
-        GFFREAD(input.gff, [])
-
-        gffread = GFFREAD.out.gtf.map { it[1] }
-        versions = versions.mix(GFFREAD.out.versions)
-    }
+    gff_gtf = input.gtf
+        .mix(GFFREAD.out.gtf)
+        .groupTuple()
+        .map { meta, file ->
+            return file[1] ? [meta, file[1]] : [meta, file]
+        }
 
     if (tools.contains('hisat2')) {
         // TODO: be smarter about input assets
         //   Here we either return an empty channel if we have a splice_sites so that HISAT2_EXTRACTSPLICESITES is not triggered
         //   Or we return the provided gtf so that HISAT2_EXTRACTSPLICESITES is run
-        gtf_hisat2 = input.gtf
+        gtf_hisat2 = gff_gtf
             .join(input.splice_sites)
             .groupTuple()
             .map { meta, gtf, splice_sites ->
@@ -219,7 +226,7 @@ workflow REFERENCES {
             }
 
         if (tools && tools.split(',').contains('hisat2')) {
-            HISAT2_BUILD(input.fasta, input.gtf, hisat2_splice_sites)
+            HISAT2_BUILD(input.fasta, gff_gtf, hisat2_splice_sites)
 
             hisat2 = HISAT2_BUILD.out.index
             versions = versions.mix(HISAT2_BUILD.out.versions)
@@ -230,7 +237,7 @@ workflow REFERENCES {
         // TODO: be smarter about input assets
         //   Here we either return an empty channel if we have a transcript_fasta so that MAKE_TRANSCRIPTS_FASTA is not triggered
         //   Or we return the provided gtf so that MAKE_TRANSCRIPTS_FASTA is run
-        gtf_rsem = input.gtf
+        gtf_rsem = gff_gtf
             .join(input.transcript_fasta)
             .groupTuple()
             .map { meta, gtf, transcript_fasta ->
@@ -273,14 +280,14 @@ workflow REFERENCES {
     }
 
     if (tools && tools.split(',').contains('rsem')) {
-        RSEM_PREPAREREFERENCE_GENOME(input.fasta, input.gtf)
+        RSEM_PREPAREREFERENCE_GENOME(input.fasta, gff_gtf)
 
         rsem = RSEM_PREPAREREFERENCE_GENOME.out.index
         versions = versions.mix(RSEM_PREPAREREFERENCE_GENOME.out.versions)
     }
 
     if (tools.contains('star')) {
-        STAR_GENOMEGENERATE(input.fasta, input.gtf)
+        STAR_GENOMEGENERATE(input.fasta, gff_gtf)
 
         star = STAR_GENOMEGENERATE.out.index
         versions = versions.mix(STAR_GENOMEGENERATE.out.versions)
@@ -292,11 +299,12 @@ workflow REFERENCES {
     versions = versions.mix(BWAMEM2_INDEX.out.versions)
     versions = versions.mix(DRAGMAP_HASHTABLE.out.versions)
     versions = versions.mix(GATK4_CREATESEQUENCEDICTIONARY.out.versions)
+    versions = versions.mix(GFFREAD.out.versions)
     versions = versions.mix(SAMTOOLS_FAIDX.out.versions)
     versions = versions.mix(TABIX_DBSNP.out.versions)
-    versions = versions.mix(TABIX_KNOWN_SNPS.out.versions)
-    versions = versions.mix(TABIX_KNOWN_INDELS.out.versions)
     versions = versions.mix(TABIX_GERMLINE_RESOURCE.out.versions)
+    versions = versions.mix(TABIX_KNOWN_INDELS.out.versions)
+    versions = versions.mix(TABIX_KNOWN_SNPS.out.versions)
 
     // input fasta
     fasta = input.fasta
@@ -313,7 +321,7 @@ workflow REFERENCES {
     faidx                     = faidx
     fasta                     = input.fasta
     germline_resource_vcf_tbi = germline_resource_vcf_tbi
-    gffread                   = gffread
+    gff_gtf                   = gff_gtf
     hisat2                    = hisat2
     hisat2_splice_sites       = hisat2_splice_sites
     kallisto                  = kallisto
@@ -339,7 +347,7 @@ workflow REFERENCES {
     faidx >> 'samtools'
     fasta >> 'fasta'
     germline_resource_vcf_tbi >> 'tabix'
-    gffread >> 'gffread'
+    gff_gtf >> 'gffread'
     hisat2 >> 'hisat2'
     hisat2_splice_sites >> 'hisat2'
     kallisto >> 'kallisto'
