@@ -1,5 +1,5 @@
 {
-    "Run with profile test for rnaseq [rsem] | --input GRCh38_chr21.yml": {
+    "Run with profile test for rsem | --input GRCh38_chr21.yml": {
         "content": [
             3,
             {
@@ -89,7 +89,7 @@
         },
         "timestamp": "2024-11-27T11:06:55.293456882"
     },
-    "Run with profile test for rnaseq [rsem] | --input assets/genomes/test/pipelines/default_extended.yml": {
+    "Run with profile test for rsem | --input assets/genomes/test/pipelines/default_extended.yml": {
         "content": [
             2,
             {

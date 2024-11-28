@@ -1,5 +1,5 @@
 {
-    "Run with profile test with samtools | --input assets/genomes/test/pipelines/default_full.yml": {
+    "Run with profile test for samtools | --input assets/genomes/test/pipelines/default_full.yml": {
         "content": [
             1,
             {
@@ -29,7 +29,7 @@
         },
         "timestamp": "2024-11-27T16:44:02.665944913"
     },
-    "Run with profile test with samtools | --input GRCh38_chr21.yml": {
+    "Run with profile test for samtools | --input GRCh38_chr21.yml": {
         "content": [
             3,
             {
@@ -73,7 +73,7 @@
         },
         "timestamp": "2024-11-27T16:21:13.948757673"
     },
-    "Run with profile test with samtools | --input assets/genomes/test/pipelines/default_extended.yml": {
+    "Run with profile test for samtools | --input assets/genomes/test/pipelines/default_extended.yml": {
         "content": [
             2,
             {

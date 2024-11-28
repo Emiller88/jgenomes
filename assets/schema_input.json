@@ -23,7 +23,7 @@
                 "errorMessage": "Species of the reference",
                 "meta": ["species"]
             },
-            "bed_intervals": {
+            "intervals_bed": {
                 "type": "string",
                 "pattern": "^\\S+\\.bed$",
                 "errorMessage": "TODO"
@@ -66,6 +66,26 @@
             "transcript_fasta": {
                 "type": "string",
                 "pattern": "^\\S+\\.f(ast|n)?a(\\.gz)?$",
+                "errorMessage": "TODO"
+            },
+            "dbsnp_vcf": {
+                "type": "string",
+                "pattern": "^\\S+\\.vcf\\.gz$",
+                "errorMessage": "TODO"
+            },
+            "known_snps_vcf": {
+                "type": "string",
+                "pattern": "^\\S+\\.vcf\\.gz$",
+                "errorMessage": "TODO"
+            },
+            "known_indels_vcf": {
+                "type": "string",
+                "pattern": "^\\S+\\.vcf\\.gz$",
+                "errorMessage": "TODO"
+            },
+            "germline_resource_vcf": {
+                "type": "string",
+                "pattern": "^\\S+\\.vcf\\.gz$",
                 "errorMessage": "TODO"
             },
             "readme": {

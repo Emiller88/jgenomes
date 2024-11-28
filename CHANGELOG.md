@@ -20,6 +20,7 @@ Initial release of nf-core/references, created with the [nf-core](https://nf-co.
 - [29](https://github.com/nf-core/references/pull/29) - Add hisat2_extract_sites generation
 - [31](https://github.com/nf-core/references/pull/31) - Add rsem, rsem_make_transcript_fasta generation
 - [32](https://github.com/nf-core/references/pull/32) - Add kallisto, salmon generation
+- [37](https://github.com/nf-core/references/pull/37) - Add tabix tbi generation
 
 ### Changed
 
@@ -29,6 +30,8 @@ Initial release of nf-core/references, created with the [nf-core](https://nf-co.
 - [33](https://github.com/nf-core/references/pull/33) - default.yml asset file is now in the test-dataset repo
 - [35](https://github.com/nf-core/references/pull/35) - Use new output system
 - [35](https://github.com/nf-core/references/pull/35) - Samtools + intervals are separate from Sarek tests now
+- [35](https://github.com/nf-core/references/pull/35) - Rename bed_intervals to intervals_bed
+- [35](https://github.com/nf-core/references/pull/35) - Rename rnaseq tests to tools tests
 
 ### Fixed
 

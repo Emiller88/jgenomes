@@ -1,5 +1,5 @@
 {
-    "Run with profile test for rnaseq [hisat2] | --input assets/genomes/test/pipelines/default_extended.yml": {
+    "Run with profile test for hisat2 | --input assets/genomes/test/pipelines/default_extended.yml": {
         "content": [
             2,
             {
@@ -50,7 +50,7 @@
         },
         "timestamp": "2024-11-27T10:40:01.494387729"
     },
-    "Run with profile test for rnaseq [hisat2] | --input GRCh38_chr21.yml": {
+    "Run with profile test for hisat2 | --input GRCh38_chr21.yml": {
         "content": [
             3,
             {

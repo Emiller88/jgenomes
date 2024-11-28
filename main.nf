@@ -105,84 +105,67 @@ output {
     'bowtie1' {
         path 'bowtie1'
     }
-
     'bowtie2' {
         path 'bowtie2'
     }
-
     'bwamem1' {
         path 'bwamem1'
     }
-
     'bwamem2' {
         path 'bwamem2'
     }
-
-    'gatk4' {
-        path 'gatk4'
-    }
-
     'dragmap' {
         path 'dragmap'
     }
-
     'fasta' {
         path 'fasta'
     }
-
+    'gatk4' {
+        path 'gatk4'
+    }
     'gffread' {
         path 'gffread'
     }
-
     'hisat2' {
         path 'hisat2'
     }
-
     'intervals' {
         path 'intervals'
     }
-
     'kallisto' {
         path 'kallisto'
     }
-
-    'msisensorpro' {
-        path 'msisensorpro'
-    }
-
-    'rsem' {
-        path 'rsem'
-    }
-
     'make' {
         path 'make'
     }
-
-    'salmon' {
-        path 'salmon'
+    'msisensorpro' {
+        path 'msisensorpro'
     }
-
-    'samtools' {
-        path 'samtools'
-    }
-
-    'star' {
-        path 'star'
-    }
-
     'multiqc_data' {
         path 'multiqc'
     }
-
     'multiqc_plots' {
         path 'multiqc'
     }
-
     'multiqc_report' {
         path 'multiqc'
     }
+    'rsem' {
+        path 'rsem'
+    }
+    'salmon' {
+        path 'salmon'
+    }
+    'samtools' {
+        path 'samtools'
+    }
+    'star' {
+        path 'star'
+    }
+    'tabix' {
+        path 'tabix'
+    }
 }
-
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     NAMED WORKFLOWS FOR PIPELINE
@@ -202,24 +185,28 @@ workflow NFCORE_REFERENCES {
     REFERENCES(input, tools)
 
     emit:
-    bowtie1               = REFERENCES.out.bowtie1
-    bowtie2               = REFERENCES.out.bowtie2
-    bwamem1               = REFERENCES.out.bwamem1
-    bwamem2               = REFERENCES.out.bwamem2
-    dict                  = REFERENCES.out.dict
-    dragmap               = REFERENCES.out.dragmap
-    faidx                 = REFERENCES.out.faidx
-    fasta                 = REFERENCES.out.fasta
-    gffread               = REFERENCES.out.gffread
-    hisat2                = REFERENCES.out.hisat2
-    hisat2_splice_sites   = REFERENCES.out.hisat2_splice_sites
-    intervals             = REFERENCES.out.bed_intervals
-    kallisto              = REFERENCES.out.kallisto
-    msisensorpro          = REFERENCES.out.msisensorpro
-    rsem                  = REFERENCES.out.rsem
-    rsem_transcript_fasta = REFERENCES.out.rsem_transcript_fasta
-    salmon                = REFERENCES.out.salmon
-    sizes                 = REFERENCES.out.sizes
-    star                  = REFERENCES.out.star
-    versions              = REFERENCES.out.versions
+    bowtie1                   = REFERENCES.out.bowtie1
+    bowtie2                   = REFERENCES.out.bowtie2
+    bwamem1                   = REFERENCES.out.bwamem1
+    bwamem2                   = REFERENCES.out.bwamem2
+    dbsnp_vcf_tbi             = REFERENCES.out.dbsnp_vcf_tbi
+    dict                      = REFERENCES.out.dict
+    dragmap                   = REFERENCES.out.dragmap
+    faidx                     = REFERENCES.out.faidx
+    fasta                     = REFERENCES.out.fasta
+    germline_resource_vcf_tbi = REFERENCES.out.germline_resource_vcf_tbi
+    gffread                   = REFERENCES.out.gffread
+    hisat2                    = REFERENCES.out.hisat2
+    hisat2_splice_sites       = REFERENCES.out.hisat2_splice_sites
+    intervals                 = REFERENCES.out.intervals_bed
+    kallisto                  = REFERENCES.out.kallisto
+    known_indels_vcf_tbi      = REFERENCES.out.known_indels_vcf_tbi
+    known_snps_vcf_tbi        = REFERENCES.out.known_snps_vcf_tbi
+    msisensorpro              = REFERENCES.out.msisensorpro
+    rsem                      = REFERENCES.out.rsem
+    rsem_transcript_fasta     = REFERENCES.out.rsem_transcript_fasta
+    salmon                    = REFERENCES.out.salmon
+    sizes                     = REFERENCES.out.sizes
+    star                      = REFERENCES.out.star
+    versions                  = REFERENCES.out.versions
 }
