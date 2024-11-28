@@ -1,8 +1,11 @@
 {
-    "Run with profile test for sarek | --input GRCh38_chr21.yml": {
+    "Run with profile test for sarek | --input assets/genomes/test/pipelines/sarek.yml": {
         "content": [
-            6,
+            11,
             {
+                "BUILD_INTERVALS": {
+                    "gawk": "5.3.0"
+                },
                 "BWAMEM1_INDEX": {
                     "bwa": "0.7.18-r1243-dirty"
                 },
@@ -18,6 +21,18 @@
                 "MSISENSORPRO_SCAN": {
                     "msisensor-pro": "1.2.0"
                 },
+                "SAMTOOLS_FAIDX": {
+                    "samtools": 1.21
+                },
+                "TABIX_DBSNP": {
+                    "tabix": 1.2
+                },
+                "TABIX_KNOWN_INDELS": {
+                    "tabix": 1.2
+                },
+                "TABIX_KNOWN_SNPS": {
+                    "tabix": 1.2
+                },
                 "Workflow": {
                     "nf-core/references": "v1.0dev"
                 }
@@ -25,18 +40,18 @@
             [
                 "bwamem1",
                 "bwamem1/bwa",
-                "bwamem1/bwa/GRCh38_chr21.amb",
-                "bwamem1/bwa/GRCh38_chr21.ann",
-                "bwamem1/bwa/GRCh38_chr21.bwt",
-                "bwamem1/bwa/GRCh38_chr21.pac",
-                "bwamem1/bwa/GRCh38_chr21.sa",
+                "bwamem1/bwa/genome.amb",
+                "bwamem1/bwa/genome.ann",
+                "bwamem1/bwa/genome.bwt",
+                "bwamem1/bwa/genome.pac",
+                "bwamem1/bwa/genome.sa",
                 "bwamem2",
                 "bwamem2/bwamem2",
-                "bwamem2/bwamem2/GRCh38_chr21.fa.0123",
-                "bwamem2/bwamem2/GRCh38_chr21.fa.amb",
-                "bwamem2/bwamem2/GRCh38_chr21.fa.ann",
-                "bwamem2/bwamem2/GRCh38_chr21.fa.bwt.2bit.64",
-                "bwamem2/bwamem2/GRCh38_chr21.fa.pac",
+                "bwamem2/bwamem2/genome.fasta.0123",
+                "bwamem2/bwamem2/genome.fasta.amb",
+                "bwamem2/bwamem2/genome.fasta.ann",
+                "bwamem2/bwamem2/genome.fasta.bwt.2bit.64",
+                "bwamem2/bwamem2/genome.fasta.pac",
                 "dragmap",
                 "dragmap/dragmap",
                 "dragmap/dragmap/hash_table.cfg",
@@ -48,9 +63,13 @@
                 "dragmap/dragmap/repeat_mask.bin",
                 "dragmap/dragmap/str_table.bin",
                 "fasta_dict",
-                "fasta_dict/GRCh38_chr21.dict",
+                "fasta_dict/genome.dict",
+                "fasta_fai",
+                "fasta_fai/genome.fasta.fai",
+                "intervals",
+                "intervals/testdata.GRCh38_chr22.bed",
                 "msisensorpro",
-                "msisensorpro/GRCh38_chr21.msisensor_scan.list",
+                "msisensorpro/testdata.GRCh38_chr22.msisensor_scan.list",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/multiqc.log",
@@ -60,33 +79,44 @@
                 "multiqc/multiqc_data/multiqc_sources.txt",
                 "multiqc/multiqc_report.html",
                 "pipeline_info",
-                "pipeline_info/nf_core_references_software_mqc_versions.yml"
+                "pipeline_info/nf_core_references_software_mqc_versions.yml",
+                "tabix_dbsnp",
+                "tabix_dbsnp/dbsnp_146.hg38.vcf.gz.tbi",
+                "tabix_known_indels",
+                "tabix_known_indels/mills_and_1000G.indels.vcf.gz.tbi",
+                "tabix_known_snps",
+                "tabix_known_snps/dbsnp_146.hg38.vcf.gz.tbi"
             ],
             [
-                "GRCh38_chr21.amb:md5,e59d7ca1d4e9593989a13925bfc15c07",
-                "GRCh38_chr21.ann:md5,4d42ab1762829012e9139cacbeea7615",
-                "GRCh38_chr21.bwt:md5,a5015025a0ae077c011833bd73651794",
-                "GRCh38_chr21.pac:md5,8c08bed90eb472d0d35451e378e399f3",
-                "GRCh38_chr21.sa:md5,9abb4ddd6fb4eab96b79f48540882329",
-                "GRCh38_chr21.fa.0123:md5,f94ffcb0dc6a24f09699f28d700ac4fe",
-                "GRCh38_chr21.fa.amb:md5,e59d7ca1d4e9593989a13925bfc15c07",
-                "GRCh38_chr21.fa.ann:md5,4d42ab1762829012e9139cacbeea7615",
-                "GRCh38_chr21.fa.bwt.2bit.64:md5,9e25b4dcedf86f0452b3f64806da84bb",
-                "GRCh38_chr21.fa.pac:md5,8c08bed90eb472d0d35451e378e399f3",
-                "hash_table.cmp:md5,a27cf225800eada26769ad895e5f3b86",
-                "ref_index.bin:md5,9953bae4b3998c858c59a7e3a07f46b0",
-                "reference.bin:md5,3f9513f68306d60dab411c26f90a4633",
-                "repeat_mask.bin:md5,a5bf171397984ad6bc7ff398c46dd0ab",
-                "str_table.bin:md5,ae0be026310e8197d3d2c14f91d5dfd9",
-                "GRCh38_chr21.dict:md5,40482944b1a51af140a397e2544b6ed4",
-                "GRCh38_chr21.msisensor_scan.list:md5,51b72d56b479de553281745ac8e75745",
-                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
+                "genome.amb:md5,1891c1de381b3a96d4e72f590fde20c1",
+                "genome.ann:md5,2df4aa2d7580639fa0fcdbcad5e2e969",
+                "genome.bwt:md5,815eded87e4cb6b0f1daab5c4d6e30af",
+                "genome.pac:md5,8569fbdb2c98c6fb16dfa73d8eacb070",
+                "genome.sa:md5,e7cff62b919448a3a3d0fe4aaf427594",
+                "genome.fasta.0123:md5,d73300d44f733bcdb7c988fc3ff3e3e9",
+                "genome.fasta.amb:md5,1891c1de381b3a96d4e72f590fde20c1",
+                "genome.fasta.ann:md5,2df4aa2d7580639fa0fcdbcad5e2e969",
+                "genome.fasta.bwt.2bit.64:md5,cd4bdf496eab05228a50c45ee43c1ed0",
+                "genome.fasta.pac:md5,8569fbdb2c98c6fb16dfa73d8eacb070",
+                "hash_table.cmp:md5,1caab4ffc89f81ace615a2e813295cf4",
+                "ref_index.bin:md5,dbb5c7d26b974e0ac338024fe4535044",
+                "reference.bin:md5,be67b80ee48aa96b383fd72f1ccfefea",
+                "repeat_mask.bin:md5,294939f1f80aa7f4a70b9b537e4c0f21",
+                "str_table.bin:md5,45f7818c4a10fdeed04db7a34b5f9ff1",
+                "genome.dict:md5,2433fe2ba31257337bf4c4bd4cb8da15",
+                "genome.fasta.fai:md5,3520cd30e1b100e55f578db9c855f685",
+                "testdata.GRCh38_chr22.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7",
+                "testdata.GRCh38_chr22.msisensor_scan.list:md5,a7886e7a56a1d7e3be6b4496753fd743",
+                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
+                "dbsnp_146.hg38.vcf.gz.tbi:md5,628232d0c870f2dbf73c3e81aff7b4b4",
+                "mills_and_1000G.indels.vcf.gz.tbi:md5,1bb7ab8f22eb798efd796439d3b29b7a",
+                "dbsnp_146.hg38.vcf.gz.tbi:md5,628232d0c870f2dbf73c3e81aff7b4b4"
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-11-28T13:04:34.983880661"
+        "timestamp": "2024-11-28T13:22:08.507639734"
     }
 }
