@@ -103,7 +103,7 @@
                 "pattern": "^\\S+\\.vcf\\.gz$",
                 "errorMessage": "TODO"
             },
-            "germline_resource": {
+            "germline_resource_vcf": {
                 "type": "string",
                 "pattern": "^\\S+\\.vcf\\.gz$",
                 "errorMessage": "TODO"

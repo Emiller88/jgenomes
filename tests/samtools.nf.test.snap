@@ -63,7 +63,7 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-11-28T13:03:10.610939902"
+        "timestamp": "2024-11-28T13:35:43.408985344"
     },
     "Run with profile test for samtools | --input GRCh38_chr21.yml": {
         "content": [
