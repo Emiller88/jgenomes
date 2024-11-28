@@ -306,19 +306,6 @@ workflow REFERENCES {
     versions = versions.mix(TABIX_KNOWN_INDELS.out.versions)
     versions = versions.mix(TABIX_KNOWN_SNPS.out.versions)
 
-    // ch_bwamem1 >> '<SPECIES>/<SOURCE>/<GENOME>/Sequence/BWAIndex'
-    // ch_bwamem2 >> '<SPECIES>/<SOURCE>/<GENOME>/Sequence/BWAmem2Index'
-    // ch_dbsnp_vcf_tbi >> '<SPECIES>/<SOURCE>/<GENOME>/Annotation/<SOURCE_DBSNP>/FILE.vcf.gz.tbi'
-    // ch_fasta_dict >> '<SPECIES>/<SOURCE>/<GENOME>/Sequence/WholeGenomeFasta/FILE.dict'
-    // ch_dragmap >> '<SPECIES>/<SOURCE>/<GENOME>/Sequence/dragmap'
-    // ch_fasta_fai >> '<SPECIES>/<SOURCE>/<GENOME>/Sequence/WholeGenomeFasta/FILE.fasta.fai'
-    // ch_fasta >> '<SPECIES>/<SOURCE>/<GENOME>/Sequence/WholeGenomeFasta/FILE.fasta'
-    // ch_germline_resource_vcf_tbi >> '<SPECIES>/<SOURCE>/<GENOME>/Annotation/<SOURCE_GERMLINE_RESOURCE>/FILE.vcf.gz.tbi'
-    // ch_intervals_bed >> '<SPECIES>/<SOURCE>/<GENOME>/Annotation/intervals/FILE.bed'
-    // ch_known_indels_vcf_tbi >> '<SPECIES>/<SOURCE>/<GENOME>/Annotation/<SOURCE_KNOWN_INDELS>/{FILE1,FILE2}.vcf.gz.tbi'
-    // ch_known_snps_vcf_tbi >> '<SPECIES>/<SOURCE>/<GENOME>/Annotation/<SOURCE_KNOWN_SNPS>/FILE.vcf.gz'
-    // ch_msisensorpro >> '<SPECIES>/<SOURCE>/<GENOME>/Annotation/msisensorpro/FILE.msisensor_scan.list'
-
     // input fasta
     ch_fasta = input.fasta
 
