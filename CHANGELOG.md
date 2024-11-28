@@ -21,6 +21,7 @@ Initial release of nf-core/references, created with the [nf-core](https://nf-co.
 - [31](https://github.com/nf-core/references/pull/31) - Add rsem, rsem_make_transcript_fasta generation
 - [32](https://github.com/nf-core/references/pull/32) - Add kallisto, salmon generation
 - [37](https://github.com/nf-core/references/pull/37) - Add tabix tbi generation
+- [42](https://github.com/nf-core/references/pull/42) - Add multiple references build tests
 
 ### Changed
 
