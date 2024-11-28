@@ -22,6 +22,7 @@ Initial release of nf-core/references, created with the [nf-core](https://nf-co.
 - [32](https://github.com/nf-core/references/pull/32) - Add kallisto, salmon generation
 - [37](https://github.com/nf-core/references/pull/37) - Add tabix tbi generation
 - [42](https://github.com/nf-core/references/pull/42) - Add multiple references build tests
+- [43](https://github.com/nf-core/references/pull/43) - Add support for multiple known_indels_vcf via s3 globs
 
 ### Changed
 
@@ -35,6 +36,7 @@ Initial release of nf-core/references, created with the [nf-core](https://nf-co.
 - [35](https://github.com/nf-core/references/pull/35) - Rename rnaseq tests to tools tests
 - [41](https://github.com/nf-core/references/pull/41) - Better sarek tests
 - [41](https://github.com/nf-core/references/pull/41) - Better publishing for sarek related files
+- [43](https://github.com/nf-core/references/pull/43) - Fasta is no longer a required asset
 
 ### Fixed
 
