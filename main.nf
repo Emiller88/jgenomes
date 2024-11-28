@@ -190,10 +190,10 @@ workflow NFCORE_REFERENCES {
     bwamem1                   = REFERENCES.out.bwamem1
     bwamem2                   = REFERENCES.out.bwamem2
     dbsnp_vcf_tbi             = REFERENCES.out.dbsnp_vcf_tbi
-    dict                      = REFERENCES.out.dict
     dragmap                   = REFERENCES.out.dragmap
-    faidx                     = REFERENCES.out.faidx
     fasta                     = REFERENCES.out.fasta
+    fasta_dict                = REFERENCES.out.fasta_dict
+    fasta_fai                 = REFERENCES.out.fasta_fai
     germline_resource_vcf_tbi = REFERENCES.out.germline_resource_vcf_tbi
     gffread                   = REFERENCES.out.gff_gtf
     hisat2                    = REFERENCES.out.hisat2
