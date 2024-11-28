@@ -125,6 +125,6 @@
                 "errorMessage": "TODO"
             }
         },
-        "required": ["genome", "fasta", "source", "species"]
+        "required": ["genome", "source", "species"]
     }
 }
