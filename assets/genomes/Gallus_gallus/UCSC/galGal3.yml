@@ -1,0 +1,4 @@
+- genome: "galGal3"
+  fasta: "s3://ngi-igenomes/igenomes/Gallus_gallus/UCSC/galGal3/Sequence/WholeGenomeFasta/genome.fa"
+  source: "UCSC"
+  species: "Gallus_gallus"

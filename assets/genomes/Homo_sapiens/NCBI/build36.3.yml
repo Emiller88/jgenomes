@@ -1,0 +1,4 @@
+- genome: "build36.3"
+  fasta: "s3://ngi-igenomes/igenomes/Homo_sapiens/NCBI/build36.3/Sequence/WholeGenomeFasta/genome.fa"
+  source: "NCBI"
+  species: "Homo_sapiens"

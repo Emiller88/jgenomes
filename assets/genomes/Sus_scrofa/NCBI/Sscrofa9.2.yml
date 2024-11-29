@@ -1,0 +1,4 @@
+- genome: "Sscrofa9.2"
+  fasta: "s3://ngi-igenomes/igenomes/Sus_scrofa/NCBI/Sscrofa9.2/Sequence/WholeGenomeFasta/genome.fa"
+  source: "NCBI"
+  species: "Sus_scrofa"

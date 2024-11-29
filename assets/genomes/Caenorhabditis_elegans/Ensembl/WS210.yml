@@ -1,0 +1,4 @@
+- genome: "WS210"
+  fasta: "s3://ngi-igenomes/igenomes/Caenorhabditis_elegans/Ensembl/WS210/Sequence/WholeGenomeFasta/genome.fa"
+  source: "Ensembl"
+  species: "Caenorhabditis_elegans"

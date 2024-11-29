@@ -1,0 +1,4 @@
+- genome: "Btau_4.2"
+  fasta: "s3://ngi-igenomes/igenomes/Bos_taurus/NCBI/Btau_4.2/Sequence/WholeGenomeFasta/genome.fa"
+  source: "NCBI"
+  species: "Bos_taurus"

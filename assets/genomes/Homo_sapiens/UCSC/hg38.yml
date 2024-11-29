@@ -1,0 +1,4 @@
+- genome: "hg38"
+  fasta: "s3://ngi-igenomes/igenomes/Homo_sapiens/UCSC/hg38/Sequence/WholeGenomeFasta/genome.fa"
+  source: "UCSC"
+  species: "Homo_sapiens"
