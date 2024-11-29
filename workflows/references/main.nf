@@ -64,16 +64,16 @@ workflow REFERENCES {
         mito_name: [meta, mito_name]
         macs_gsize: [meta, macs_gsize]
         intervals_bed: [meta, intervals_bed]
-        bwamem1_fasta: tools.contains('bwamem1') ? [meta, fasta] : [[:], []]
-        bwamem2_fasta: tools.contains('bwamem2') ? [meta, fasta] : [[:], []]
-        createsequencedictionary_fasta: tools.contains('createsequencedictionary') ? [meta, fasta] : [[:], []]
-        dragmap_fasta: tools.contains('dragmap') ? [meta, fasta] : [[:], []]
-        fasta_samtools: ((tools.contains('faidx') || tools.contains('sizes')) && !(fasta_fai || fasta_sizes)) || (tools.contains('intervals') && !(fasta_fai || intervals)) ? [meta, fasta] : [[:], []]
-        dbsnp_vcf: tools.contains('tabix') && dbsnp_vcf ? [meta, dbsnp_vcf] : [[:], []]
-        known_snps_vcf: tools.contains('tabix') && known_snps_vcf ? [meta, known_snps_vcf] : [[:], []]
-        known_indels_vcf: tools.contains('tabix') && known_indels_vcf ? [meta, known_indels_vcf] : [[:], []]
-        germline_resource_vcf: tools.contains('tabix') && germline_resource_vcf ? [meta, germline_resource_vcf] : [[:], []]
-        gff_gffread: !gtf && (tools.contains('gffread') || tools.contains('hisat2') || tools.contains('kallisto') || tools.contains('rsem') || tools.contains('salmon') || tools.contains('star')) ? [meta, gff] : [[:], []]
+        bwamem1_fasta: tools.contains('bwamem1') && fasta ? [meta, file(fasta)] : [[:], []]
+        bwamem2_fasta: tools.contains('bwamem2') && fasta ? [meta, file(fasta)] : [[:], []]
+        createsequencedictionary_fasta: tools.contains('createsequencedictionary') && fasta ? [meta, file(fasta)] : [[:], []]
+        dragmap_fasta: tools.contains('dragmap') && fasta ? [meta, file(fasta)] : [[:], []]
+        fasta_samtools: ((tools.contains('faidx') || tools.contains('sizes')) && !(fasta_fai || fasta_sizes) && fasta) || (tools.contains('intervals') && !(fasta_fai || intervals_bed)) ? [meta, file(fasta)] : [[:], []]
+        dbsnp_vcf: tools.contains('tabix') && dbsnp_vcf ? [meta, file(dbsnp_vcf)] : [[:], []]
+        known_snps_vcf: tools.contains('tabix') && known_snps_vcf ? [meta, file(known_snps_vcf)] : [[:], []]
+        known_indels_vcf: tools.contains('tabix') && known_indels_vcf ? [meta, file(known_indels_vcf)] : [[:], []]
+        germline_resource_vcf: tools.contains('tabix') && germline_resource_vcf ? [meta, file(germline_resource_vcf)] : [[:], []]
+        gff_gffread: !gtf && gff && (tools.contains('gffread') || tools.contains('hisat2') || tools.contains('kallisto') || tools.contains('rsem') || tools.contains('salmon') || tools.contains('star')) ? [meta, file(gff)] : [[:], []]
     }
     // I should be able to output null instead of `[[:], []] and have that registered as an empty channel and not trigger downstream processes
     // but not working currently
@@ -176,7 +176,7 @@ workflow REFERENCES {
     TABIX_KNOWN_INDELS(
         input.known_indels_vcf.map { meta, file ->
             return file ? [meta, file] : null
-        }
+        }.transpose()
     )
     ch_known_indels_vcf_tbi = TABIX_KNOWN_INDELS.out.tbi
 
