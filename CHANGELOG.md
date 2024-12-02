@@ -23,6 +23,7 @@ Initial release of nf-core/references, created with the [nf-core](https://nf-co.
 - [37](https://github.com/nf-core/references/pull/37) - Add tabix tbi generation
 - [42](https://github.com/nf-core/references/pull/42) - Add multiple references build tests
 - [43](https://github.com/nf-core/references/pull/43) - Add support for multiple known_indels_vcf via s3 globs
+- [47](https://github.com/nf-core/references/pull/47) - Add fasta assets for files in igenomes
 
 ### Changed
 
