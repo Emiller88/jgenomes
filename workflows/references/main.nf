@@ -71,14 +71,20 @@ workflow REFERENCES {
     // but not working currently
 
     if (tools && tools.split(',').contains('bowtie1')) {
-        BOWTIE1_BUILD(input.fasta)
+        BOWTIE1_BUILD(input.fasta.map { meta, file ->
+            return file ? [meta, file] : null
+        }
+    ))
 
         ch_bowtie1 = BOWTIE1_BUILD.out.index
         versions = versions.mix(BOWTIE1_BUILD.out.versions)
     }
 
     if (tools && tools.split(',').contains('bowtie2')) {
-        BOWTIE2_BUILD(input.fasta)
+        BOWTIE2_BUILD(input.fasta.map { meta, file ->
+            return file ? [meta, file] : null
+        }
+    ))
 
         ch_bowtie2 = BOWTIE2_BUILD.out.index
         versions = versions.mix(BOWTIE2_BUILD.out.versions)
