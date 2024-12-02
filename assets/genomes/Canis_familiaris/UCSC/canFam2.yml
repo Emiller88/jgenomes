@@ -1,0 +1,4 @@
+- genome: "canFam2"
+  fasta: "s3://ngi-igenomes/igenomes/Canis_familiaris/UCSC/canFam2/Sequence/WholeGenomeFasta/genome.fa"
+  source: "UCSC"
+  species: "Canis_familiaris"

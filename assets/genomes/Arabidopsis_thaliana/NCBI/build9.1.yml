@@ -1,0 +1,4 @@
+- genome: "build9.1"
+  fasta: "s3://ngi-igenomes/igenomes/Arabidopsis_thaliana/NCBI/build9.1/Sequence/WholeGenomeFasta/genome.fa"
+  source: "NCBI"
+  species: "Arabidopsis_thaliana"

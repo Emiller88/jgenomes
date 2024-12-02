@@ -1,0 +1,4 @@
+- genome: "Zv9"
+  fasta: "s3://ngi-igenomes/igenomes/Danio_rerio/NCBI/Zv9/Sequence/WholeGenomeFasta/genome.fa"
+  source: "NCBI"
+  species: "Danio_rerio"

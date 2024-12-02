@@ -1,0 +1,4 @@
+- genome: "ce10"
+  fasta: "s3://ngi-igenomes/igenomes/Caenorhabditis_elegans/UCSC/ce10/Sequence/WholeGenomeFasta/genome.fa"
+  source: "UCSC"
+  species: "Caenorhabditis_elegans"

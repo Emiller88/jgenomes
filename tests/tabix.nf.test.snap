@@ -1,5 +1,5 @@
 {
-    "Run with profile test with tabix | --input assets/genomes/test/pipelines/default_extended.yml": {
+    "Run with profile test with tabix | --input assets/genomes/test/default_extended.yml": {
         "content": [
             5,
             {
@@ -53,7 +53,7 @@
         },
         "timestamp": "2024-11-28T14:57:48.388939938"
     },
-    "Run with profile test with tabix | --input assets/genomes/test/pipelines/default_full.yml": {
+    "Run with profile test with tabix | --input assets/genomes/test/default_full.yml": {
         "content": [
             5,
             {
