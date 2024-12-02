@@ -165,7 +165,7 @@ workflow REFERENCES {
     TABIX_TABIX(
         input.vcf.map { meta, file ->
             return file ? [meta, file] : null
-        }
+        }.transpose()
     )
     ch_vcf_tbi = TABIX_TABIX.out.tbi
 
