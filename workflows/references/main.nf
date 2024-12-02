@@ -208,7 +208,13 @@ workflow REFERENCES {
             }
 
         if (tools && tools.split(',').contains('hisat2')) {
-            HISAT2_BUILD(input.fasta, ch_gff_gtf, ch_hisat2_splice_sites)
+            HISAT2_BUILD(
+                input.fasta.map { meta, file ->
+                    return file ? [meta, file] : null
+                },
+                ch_gff_gtf,
+                ch_hisat2_splice_sites
+            )
 
             ch_hisat2 = HISAT2_BUILD.out.index
             versions = versions.mix(HISAT2_BUILD.out.versions)
@@ -226,7 +232,12 @@ workflow REFERENCES {
                 return transcript_fasta[0][0] ? null : [meta, gtf]
             }
 
-        MAKE_TRANSCRIPTS_FASTA(input.fasta, ch_gtf_rsem)
+        MAKE_TRANSCRIPTS_FASTA(
+            input.fasta.map { meta, file ->
+                return file ? [meta, file] : null
+            },
+            ch_gtf_rsem
+        )
         versions = versions.mix(MAKE_TRANSCRIPTS_FASTA.out.versions)
 
         // TODO: be smarter about input assets
@@ -247,7 +258,12 @@ workflow REFERENCES {
         }
 
         if (tools.contains('salmon')) {
-            SALMON_INDEX(input.fasta, ch_rsem_transcript_fasta)
+            SALMON_INDEX(
+                input.fasta.map { meta, file ->
+                    return file ? [meta, file] : null
+                },
+                ch_rsem_transcript_fasta
+            )
 
             ch_salmon = SALMON_INDEX.out.index
             versions = versions.mix(SALMON_INDEX.out.versions)
@@ -266,14 +282,24 @@ workflow REFERENCES {
     }
 
     if (tools && tools.split(',').contains('rsem')) {
-        RSEM_PREPAREREFERENCE_GENOME(input.fasta, ch_gff_gtf)
+        RSEM_PREPAREREFERENCE_GENOME(
+            input.fasta.map { meta, file ->
+                return file ? [meta, file] : null
+            },
+            ch_gff_gtf
+        )
 
         ch_rsem = RSEM_PREPAREREFERENCE_GENOME.out.index
         versions = versions.mix(RSEM_PREPAREREFERENCE_GENOME.out.versions)
     }
 
     if (tools.contains('star')) {
-        STAR_GENOMEGENERATE(input.fasta, ch_gff_gtf)
+        STAR_GENOMEGENERATE(
+            input.fasta.map { meta, file ->
+                return file ? [meta, file] : null
+            },
+            ch_gff_gtf
+        )
 
         ch_star = STAR_GENOMEGENERATE.out.index
         versions = versions.mix(STAR_GENOMEGENERATE.out.versions)
