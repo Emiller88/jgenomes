@@ -150,9 +150,6 @@ workflow REFERENCES {
         }
 
     ch_fasta_fai_intervals_bed = input.intervals_bed
-        .map { meta, file ->
-            return file ? [meta, file] : null
-        }
         .mix(ch_fasta_fai)
         .groupTuple()
         .map { meta, file ->
