@@ -4,13 +4,13 @@ nextflow_pipeline {
     script "../main.nf"
     tag "pipeline"
 
-    test("Run with profile test for multiple | --input assets/genomes/test/pipelines/default_multiple.yml") {
+    test("Run with profile test for multiple | --input assets/genomes/test/default_multiple.yml") {
 
         options "-output-dir $outputDir"
 
         when {
             params {
-                input  = "${projectDir}/assets/genomes/test/pipelines/default_multiple.yml"
+                input  = "${projectDir}/assets/genomes/test/default_multiple.yml"
                 outdir = "$outputDir"
                 tools  = 'bwamem1,createsequencedictionary,faidx,intervals'
             }

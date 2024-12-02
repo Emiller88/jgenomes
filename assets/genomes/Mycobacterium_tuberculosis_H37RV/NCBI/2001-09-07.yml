@@ -1,0 +1,4 @@
+- genome: "2001-09-07"
+  fasta: "s3://ngi-igenomes/igenomes/Mycobacterium_tuberculosis_H37RV/NCBI/2001-09-07/Sequence/WholeGenomeFasta/genome.fa"
+  source: "NCBI"
+  species: "Mycobacterium_tuberculosis_H37RV"

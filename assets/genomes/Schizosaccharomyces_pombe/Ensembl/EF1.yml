@@ -1,0 +1,4 @@
+- genome: "EF1"
+  fasta: "s3://ngi-igenomes/igenomes/Schizosaccharomyces_pombe/Ensembl/EF1/Sequence/WholeGenomeFasta/genome.fa"
+  source: "Ensembl"
+  species: "Schizosaccharomyces_pombe"

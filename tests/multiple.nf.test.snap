@@ -48,7 +48,7 @@
         },
         "timestamp": "2024-11-28T18:25:56.49079277"
     },
-    "Run with profile test for multiple | --input assets/genomes/test/pipelines/default_multiple.yml": {
+    "Run with profile test for multiple | --input assets/genomes/test/default_multiple.yml": {
         "content": [
             9,
             {

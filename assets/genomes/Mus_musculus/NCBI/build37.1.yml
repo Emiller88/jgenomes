@@ -1,0 +1,4 @@
+- genome: "build37.1"
+  fasta: "s3://ngi-igenomes/igenomes/Mus_musculus/NCBI/build37.1/Sequence/WholeGenomeFasta/genome.fa"
+  source: "NCBI"
+  species: "Mus_musculus"

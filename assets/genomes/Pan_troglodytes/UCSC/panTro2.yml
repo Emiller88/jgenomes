@@ -1,0 +1,4 @@
+- genome: "panTro2"
+  fasta: "s3://ngi-igenomes/igenomes/Pan_troglodytes/UCSC/panTro2/Sequence/WholeGenomeFasta/genome.fa"
+  source: "UCSC"
+  species: "Pan_troglodytes"
