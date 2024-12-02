@@ -2,6 +2,8 @@
 
 # Download or regenerate manifest file
 
+# cf https://github.com/ewels/AWS-iGenomes/pull/22
+
 # wget https://raw.githubusercontent.com/ewels/AWS-iGenomes/refs/heads/master/ngi-igenomes_file_manifest.txt
 
 # aws s3 --no-sign-request ls --recursive s3://ngi-igenomes/igenomes/ | cut -d "/" -f 2- > tmp
