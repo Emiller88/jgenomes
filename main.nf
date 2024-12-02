@@ -165,17 +165,8 @@ output {
     'star' {
         path 'star'
     }
-    'tabix_dbsnp' {
-        path { meta, vcf -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/${meta.source_dbsnp}/${file}" } }
-    }
-    'tabix_germline_resource' {
-        path { meta, vcf -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/${meta.source_germline_resource}/${file}" } }
-    }
-    'tabix_known_indels' {
-        path { meta, vcf -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/${meta.source_known_indels}/${file}" } }
-    }
-    'tabix_known_snps' {
-        path { meta, vcf -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/${meta.source_known_snps}/${file}" } }
+    'tabix_vcf_tbi' {
+        path { meta, tbi -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/${meta.source_vcf}/${file}" } }
     }
 }
 /*
@@ -197,28 +188,25 @@ workflow NFCORE_REFERENCES {
     REFERENCES(input, tools)
 
     emit:
-    bowtie1                   = REFERENCES.out.bowtie1
-    bowtie2                   = REFERENCES.out.bowtie2
-    bwamem1                   = REFERENCES.out.bwamem1
-    bwamem2                   = REFERENCES.out.bwamem2
-    dbsnp_vcf_tbi             = REFERENCES.out.dbsnp_vcf_tbi
-    dragmap                   = REFERENCES.out.dragmap
-    fasta                     = REFERENCES.out.fasta
-    fasta_dict                = REFERENCES.out.fasta_dict
-    fasta_fai                 = REFERENCES.out.fasta_fai
-    germline_resource_vcf_tbi = REFERENCES.out.germline_resource_vcf_tbi
-    gffread                   = REFERENCES.out.gff_gtf
-    hisat2                    = REFERENCES.out.hisat2
-    hisat2_splice_sites       = REFERENCES.out.hisat2_splice_sites
-    intervals                 = REFERENCES.out.intervals_bed
-    kallisto                  = REFERENCES.out.kallisto
-    known_indels_vcf_tbi      = REFERENCES.out.known_indels_vcf_tbi
-    known_snps_vcf_tbi        = REFERENCES.out.known_snps_vcf_tbi
-    msisensorpro              = REFERENCES.out.msisensorpro
-    rsem                      = REFERENCES.out.rsem
-    rsem_transcript_fasta     = REFERENCES.out.rsem_transcript_fasta
-    salmon                    = REFERENCES.out.salmon
-    sizes                     = REFERENCES.out.sizes
-    star                      = REFERENCES.out.star
-    versions                  = REFERENCES.out.versions
+    bowtie1               = REFERENCES.out.bowtie1
+    bowtie2               = REFERENCES.out.bowtie2
+    bwamem1               = REFERENCES.out.bwamem1
+    bwamem2               = REFERENCES.out.bwamem2
+    dragmap               = REFERENCES.out.dragmap
+    fasta                 = REFERENCES.out.fasta
+    fasta_dict            = REFERENCES.out.fasta_dict
+    fasta_fai             = REFERENCES.out.fasta_fai
+    gffread               = REFERENCES.out.gff_gtf
+    hisat2                = REFERENCES.out.hisat2
+    hisat2_splice_sites   = REFERENCES.out.hisat2_splice_sites
+    intervals             = REFERENCES.out.intervals_bed
+    kallisto              = REFERENCES.out.kallisto
+    msisensorpro          = REFERENCES.out.msisensorpro
+    rsem                  = REFERENCES.out.rsem
+    rsem_transcript_fasta = REFERENCES.out.rsem_transcript_fasta
+    salmon                = REFERENCES.out.salmon
+    sizes                 = REFERENCES.out.sizes
+    star                  = REFERENCES.out.star
+    vcf_tbi               = REFERENCES.out.vcf_tbi
+    versions              = REFERENCES.out.versions
 }

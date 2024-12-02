@@ -1,7 +1,7 @@
 {
     "Run with profile test for sarek | --input assets/genomes/test/pipelines/sarek.yml": {
         "content": [
-            12,
+            11,
             {
                 "BUILD_INTERVALS": {
                     "gawk": "5.3.0"
@@ -24,16 +24,7 @@
                 "SAMTOOLS_FAIDX": {
                     "samtools": 1.21
                 },
-                "TABIX_DBSNP": {
-                    "tabix": 1.2
-                },
-                "TABIX_GERMLINE_RESOURCE": {
-                    "tabix": 1.2
-                },
-                "TABIX_KNOWN_INDELS": {
-                    "tabix": 1.2
-                },
-                "TABIX_KNOWN_SNPS": {
+                "TABIX_TABIX": {
                     "tabix": 1.2
                 },
                 "Workflow": {
@@ -120,6 +111,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-11-28T15:48:25.039272086"
+        "timestamp": "2024-12-02T11:01:41.706614228"
     }
 }

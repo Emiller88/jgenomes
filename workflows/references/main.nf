@@ -15,10 +15,7 @@ include { RSEM_PREPAREREFERENCE as RSEM_PREPAREREFERENCE_GENOME } from '../../mo
 include { SALMON_INDEX                                          } from '../../modules/nf-core/salmon/index'
 include { SAMTOOLS_FAIDX                                        } from '../../modules/nf-core/samtools/faidx'
 include { STAR_GENOMEGENERATE                                   } from '../../modules/nf-core/star/genomegenerate'
-include { TABIX_TABIX as TABIX_DBSNP                            } from '../../modules/nf-core/tabix/tabix'
-include { TABIX_TABIX as TABIX_GERMLINE_RESOURCE                } from '../../modules/nf-core/tabix/tabix'
-include { TABIX_TABIX as TABIX_KNOWN_INDELS                     } from '../../modules/nf-core/tabix/tabix'
-include { TABIX_TABIX as TABIX_KNOWN_SNPS                       } from '../../modules/nf-core/tabix/tabix'
+include { TABIX_TABIX                                           } from '../../modules/nf-core/tabix/tabix'
 
 // include { BBMAP_BBSPLIT                                         } from '../../modules/nf-core/bbmap/bbsplit'
 // include { CUSTOM_CATADDITIONALFASTA                             } from '../../modules/nf-core/custom/catadditionalfasta'
@@ -32,25 +29,22 @@ workflow REFERENCES {
     main:
     ch_bowtie1 = Channel.empty()
     ch_bowtie2 = Channel.empty()
-    ch_dbsnp_vcf_tbi = Channel.empty()
     ch_fasta_fai = Channel.empty()
-    ch_germline_resource_vcf_tbi = Channel.empty()
     ch_gff_gtf = Channel.empty()
     ch_hisat2 = Channel.empty()
     ch_hisat2_splice_sites = Channel.empty()
     ch_intervals_bed = Channel.empty()
     ch_kallisto = Channel.empty()
-    ch_known_indels_vcf_tbi = Channel.empty()
-    ch_known_snps_vcf_tbi = Channel.empty()
     ch_msisensorpro = Channel.empty()
     ch_rsem = Channel.empty()
     ch_rsem_transcript_fasta = Channel.empty()
     ch_salmon = Channel.empty()
     ch_sizes = Channel.empty()
     ch_star = Channel.empty()
+    ch_vcf_tbi = Channel.empty()
     versions = Channel.empty()
 
-    input = reference.multiMap { meta, intervals_bed, fasta, fasta_dict, fasta_fai, fasta_sizes, gff, gtf, splice_sites, transcript_fasta, dbsnp_vcf, known_snps_vcf, known_indels_vcf, germline_resource_vcf, readme, bed12, mito_name, macs_gsize ->
+    input = reference.multiMap { meta, intervals_bed, fasta, fasta_dict, fasta_fai, fasta_sizes, gff, gtf, splice_sites, transcript_fasta, vcf, readme, bed12, mito_name, macs_gsize ->
         fasta: [meta, fasta]
         fasta_dict: [meta, fasta_dict]
         fasta_fai: [meta, fasta_fai]
@@ -66,14 +60,12 @@ workflow REFERENCES {
         intervals_bed: [meta, intervals_bed]
         bwamem1_fasta: tools.contains('bwamem1') && fasta ? [meta, file(fasta)] : [[:], []]
         bwamem2_fasta: tools.contains('bwamem2') && fasta ? [meta, file(fasta)] : [[:], []]
+        fasta_msisensorpro: tools.contains('msisensorpro') && fasta ? [meta, file(fasta)] : [[:], []]
         createsequencedictionary_fasta: tools.contains('createsequencedictionary') && fasta ? [meta, file(fasta)] : [[:], []]
         dragmap_fasta: tools.contains('dragmap') && fasta ? [meta, file(fasta)] : [[:], []]
-        fasta_samtools: ((tools.contains('faidx') || tools.contains('sizes')) && !(fasta_fai || fasta_sizes) && fasta) || (tools.contains('intervals') && !(fasta_fai || intervals_bed)) ? [meta, file(fasta)] : [[:], []]
-        dbsnp_vcf: tools.contains('tabix') && dbsnp_vcf ? [meta, file(dbsnp_vcf)] : [[:], []]
-        known_snps_vcf: tools.contains('tabix') && known_snps_vcf ? [meta, file(known_snps_vcf)] : [[:], []]
-        known_indels_vcf: tools.contains('tabix') && known_indels_vcf ? [meta, file(known_indels_vcf)] : [[:], []]
-        germline_resource_vcf: tools.contains('tabix') && germline_resource_vcf ? [meta, file(germline_resource_vcf)] : [[:], []]
+        fasta_samtools: ((tools.contains('faidx') || tools.contains('sizes')) && !(fasta_fai || fasta_sizes) && fasta) || (tools.contains('intervals') && !(fasta_fai || intervals_bed) && fasta) ? [meta, file(fasta)] : [[:], []]
         gff_gffread: !gtf && gff && (tools.contains('gffread') || tools.contains('hisat2') || tools.contains('kallisto') || tools.contains('rsem') || tools.contains('salmon') || tools.contains('star')) ? [meta, file(gff)] : [[:], []]
+        vcf: tools.contains('tabix') && vcf ? [meta, file(vcf)] : [[:], []]
     }
     // I should be able to output null instead of `[[:], []] and have that registered as an empty channel and not trigger downstream processes
     // but not working currently
@@ -150,42 +142,24 @@ workflow REFERENCES {
         }
 
     ch_fasta_fai_intervals_bed = input.intervals_bed
+        .map { meta, file ->
+            return file ? [meta, file] : null
+        }
         .mix(ch_fasta_fai)
         .groupTuple()
         .map { meta, file ->
-            return file[0] || !tools.contains('intervals') ? null : file[1] ? [meta, file[1]] : [meta, file]
+            return !tools.contains('intervals') ? null : file[0][0] ? null : file.flatten() ? [meta, file.flatten()] : [meta, file]
         }
 
     BUILD_INTERVALS(ch_fasta_fai_intervals_bed, [])
     ch_intervals_bed = BUILD_INTERVALS.out.output
 
-    TABIX_DBSNP(
-        input.dbsnp_vcf.map { meta, file ->
+    TABIX_TABIX(
+        input.vcf.map { meta, file ->
             return file ? [meta, file] : null
         }
     )
-    ch_dbsnp_vcf_tbi = TABIX_DBSNP.out.tbi
-
-    TABIX_KNOWN_SNPS(
-        input.known_snps_vcf.map { meta, file ->
-            return file ? [meta, file] : null
-        }
-    )
-    ch_known_snps_vcf_tbi = TABIX_KNOWN_SNPS.out.tbi
-
-    TABIX_KNOWN_INDELS(
-        input.known_indels_vcf.map { meta, file ->
-            return file ? [meta, file] : null
-        }.transpose()
-    )
-    ch_known_indels_vcf_tbi = TABIX_KNOWN_INDELS.out.tbi
-
-    TABIX_GERMLINE_RESOURCE(
-        input.germline_resource_vcf.map { meta, file ->
-            return file ? [meta, file] : null
-        }
-    )
-    ch_germline_resource_vcf_tbi = TABIX_GERMLINE_RESOURCE.out.tbi
+    ch_vcf_tbi = TABIX_TABIX.out.tbi
 
     GFFREAD(
         input.gff_gffread.map { meta, file ->
@@ -273,7 +247,11 @@ workflow REFERENCES {
     }
 
     if (tools.contains('msisensorpro')) {
-        MSISENSORPRO_SCAN(input.fasta)
+        MSISENSORPRO_SCAN(
+            input.fasta_msisensorpro.map { meta, file ->
+                return file ? [meta, file] : null
+            }
+        )
 
         ch_msisensorpro = MSISENSORPRO_SCAN.out.list
         versions = versions.mix(MSISENSORPRO_SCAN.out.versions)
@@ -301,62 +279,53 @@ workflow REFERENCES {
     versions = versions.mix(GATK4_CREATESEQUENCEDICTIONARY.out.versions)
     versions = versions.mix(GFFREAD.out.versions)
     versions = versions.mix(SAMTOOLS_FAIDX.out.versions)
-    versions = versions.mix(TABIX_DBSNP.out.versions)
-    versions = versions.mix(TABIX_GERMLINE_RESOURCE.out.versions)
-    versions = versions.mix(TABIX_KNOWN_INDELS.out.versions)
-    versions = versions.mix(TABIX_KNOWN_SNPS.out.versions)
+    versions = versions.mix(TABIX_TABIX.out.versions)
 
     // input fasta
     ch_fasta = input.fasta
 
     emit:
-    bowtie1                   = ch_bowtie1
-    bowtie2                   = ch_bowtie2
-    bwamem1                   = ch_bwamem1
-    bwamem2                   = ch_bwamem2
-    dbsnp_vcf_tbi             = ch_dbsnp_vcf_tbi
-    dragmap                   = ch_dragmap
-    fasta                     = ch_fasta
-    fasta_dict                = ch_fasta_dict
-    fasta_fai                 = ch_fasta_fai
-    germline_resource_vcf_tbi = ch_germline_resource_vcf_tbi
-    gff_gtf                   = ch_gff_gtf
-    hisat2                    = ch_hisat2
-    hisat2_splice_sites       = ch_hisat2_splice_sites
-    intervals_bed             = ch_intervals_bed
-    kallisto                  = ch_kallisto
-    known_indels_vcf_tbi      = ch_known_indels_vcf_tbi
-    known_snps_vcf_tbi        = ch_known_snps_vcf_tbi
-    msisensorpro              = ch_msisensorpro
-    rsem                      = ch_rsem
-    rsem_transcript_fasta     = ch_rsem_transcript_fasta
-    salmon                    = ch_salmon
-    sizes                     = ch_sizes
-    star                      = ch_star
-    versions                  = versions
+    bowtie1               = ch_bowtie1
+    bowtie2               = ch_bowtie2
+    bwamem1               = ch_bwamem1
+    bwamem2               = ch_bwamem2
+    dragmap               = ch_dragmap
+    fasta                 = ch_fasta
+    fasta_dict            = ch_fasta_dict
+    fasta_fai             = ch_fasta_fai
+    gff_gtf               = ch_gff_gtf
+    hisat2                = ch_hisat2
+    hisat2_splice_sites   = ch_hisat2_splice_sites
+    intervals_bed         = ch_intervals_bed
+    kallisto              = ch_kallisto
+    msisensorpro          = ch_msisensorpro
+    rsem                  = ch_rsem
+    rsem_transcript_fasta = ch_rsem_transcript_fasta
+    salmon                = ch_salmon
+    sizes                 = ch_sizes
+    star                  = ch_star
+    vcf_tbi               = ch_vcf_tbi
+    versions              = versions
 
     publish:
     ch_bowtie1 >> 'bowtie1'
     ch_bowtie2 >> 'bowtie2'
     ch_bwamem1 >> 'bwamem1'
     ch_bwamem2 >> 'bwamem2'
-    ch_dbsnp_vcf_tbi >> 'tabix_dbsnp'
     ch_dragmap >> 'dragmap'
     ch_fasta >> 'fasta'
     ch_fasta_dict >> 'fasta_dict'
     ch_fasta_fai >> 'fasta_fai'
-    ch_germline_resource_vcf_tbi >> 'tabix_germline_resource'
     ch_gff_gtf >> 'gffread'
     ch_hisat2 >> 'hisat2'
     ch_hisat2_splice_sites >> 'hisat2'
     ch_intervals_bed >> 'intervals'
     ch_kallisto >> 'kallisto'
-    ch_known_indels_vcf_tbi >> 'tabix_known_indels'
-    ch_known_snps_vcf_tbi >> 'tabix_known_snps'
     ch_msisensorpro >> 'msisensorpro'
     ch_rsem >> 'rsem'
     ch_rsem_transcript_fasta >> 'make'
     ch_salmon >> 'salmon'
     ch_sizes >> 'fasta_sizes'
     ch_star >> 'star'
+    ch_vcf_tbi >> 'tabix_vcf_tbi'
 }
