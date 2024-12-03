@@ -102,7 +102,7 @@ workflow REFERENCES {
     fasta_dict        // channel: [meta, *.fa(sta).dict]
     fasta_fai         // channel: [meta, *.fa(sta).fai]
     fasta_sizes       // channel: [meta, *.fa(sta).sizes]
-    gff               // channel: [meta, gtf]
+    gtf               // channel: [meta, gtf]
     hisat2_index      // channel: [meta, Hisat2Index/]
     intervals_bed     // channel: [meta, *.bed]
     kallisto_index    // channel: [meta, KallistoIndex]
@@ -125,7 +125,7 @@ workflow REFERENCES {
     fasta_dict >> 'fasta_dict'
     fasta_fai >> 'fasta_fai'
     fasta_sizes >> 'fasta_sizes'
-    gff >> 'gff'
+    gtf >> 'gtf'
     hisat2_index >> 'hisat2_index'
     intervals_bed >> 'intervals_bed'
     kallisto_index >> 'kallisto_index'

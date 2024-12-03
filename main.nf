@@ -129,7 +129,7 @@ output {
     'fasta_sizes' {
         path { meta, sizes -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/WholeGenomeFasta/${file}" } }
     }
-    'gff' {
+    'gtf' {
         path { meta, intervals -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/Genes/${file}" } }
     }
     'hisat2_index' {
@@ -200,7 +200,7 @@ workflow NFCORE_REFERENCES {
     fasta_dict        = REFERENCES.out.fasta_dict
     fasta_fai         = REFERENCES.out.fasta_fai
     fasta_sizes       = REFERENCES.out.fasta_sizes
-    gff               = REFERENCES.out.gff
+    gtf               = REFERENCES.out.gtf
     hisat2_index      = REFERENCES.out.hisat2_index
     splice_sites      = REFERENCES.out.splice_sites
     intervals_bed     = REFERENCES.out.intervals_bed
