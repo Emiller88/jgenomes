@@ -14,7 +14,7 @@
 # rm tmp
 
 # All source fasta
-cat ngi-igenomes_file_manifest.txt | grep "\.fa" | grep -v "\.fa." | grep WholeGenomeFasta | grep -v CT_conversion | grep -v GA_conversion > all_fastas.txt
+cat ngi-igenomes_file_manifest.txt | grep "\.fa." | grep -v "\.fa\." | grep -v "\.fasta\." |grep WholeGenomeFasta | grep -v CT_conversion | grep -v GA_conversion > all_fastas.txt
 
 # Generate base info in species/genome/build.yml
 
