@@ -26,7 +26,7 @@ workflow SAMPLESHEET_TO_CHANNEL {
     }
 
     gff = reference.map { meta, input_intervals_bed, input_fasta, input_fasta_dict, input_fasta_fai, input_fasta_sizes, input_gff, input_gtf, input_splice_sites, input_transcript_fasta, input_vcf, input_readme, input_bed12, input_mito_name, input_macs_gsize ->
-        return input_gff ? [meta, input_gff] : null
+        return input_gff && !input_gtf ? [meta, input_gff] : null
     }
 
     gtf = reference.map { meta, input_intervals_bed, input_fasta, input_fasta_dict, input_fasta_fai, input_fasta_sizes, input_gff, input_gtf, input_splice_sites, input_transcript_fasta, input_vcf, input_readme, input_bed12, input_mito_name, input_macs_gsize ->
