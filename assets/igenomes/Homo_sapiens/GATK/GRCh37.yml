@@ -1,4 +1,0 @@
-- genome: "GRCh37"
-  fasta: "s3://ngi-igenomes/igenomes/Homo_sapiens/GATK/GRCh37/Sequence/WholeGenomeFasta/human_g1k_v37_decoy.fasta"
-  source: "GATK"
-  species: "Homo_sapiens"
