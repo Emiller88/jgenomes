@@ -10,10 +10,10 @@ include { STAR_GENOMEGENERATE                                   } from '../../..
 workflow CREATE_ALIGN_INDEX_WITH_GFF {
     take:
     fasta
-    gff
-    gtf
-    splice_sites
-    transcript_fasta
+    input_gff
+    input_gtf
+    input_splice_sites
+    input_transcript_fasta
     run_hisat2
     run_kallisto
     run_rsem
@@ -36,11 +36,11 @@ workflow CREATE_ALIGN_INDEX_WITH_GFF {
     if (run_hisat2 || run_kallisto || run_rsem || run_rsem_make_transcript_fasta || run_salmon || run_star) {
 
         GFFREAD(
-            gff,
+            input_gff,
             []
         )
 
-        gff_gtf = gtf
+        gff_gtf = input_gtf
             .mix(GFFREAD.out.gtf)
             .groupTuple()
             .map { meta, file ->
@@ -52,10 +52,10 @@ workflow CREATE_ALIGN_INDEX_WITH_GFF {
             //   Here we either return an empty channel if we have a splice_sites so that HISAT2_EXTRACTSPLICESITES is not triggered
             //   Or we return the provided gtf so that HISAT2_EXTRACTSPLICESITES is run
             ch_gtf_hisat2 = gff_gtf
-                .join(splice_sites)
+                .join(input_splice_sites)
                 .groupTuple()
-                .map { meta, input_gtf, input_splice_sites ->
-                    return input_splice_sites[0][0] ? null : [meta, input_gtf]
+                .map { meta, map_gtf, map_splice_sites ->
+                    return map_splice_sites[0][0] ? null : [meta, map_gtf]
                 }
 
             HISAT2_EXTRACTSPLICESITES(ch_gtf_hisat2)
@@ -64,7 +64,7 @@ workflow CREATE_ALIGN_INDEX_WITH_GFF {
             // TODO: be smarter about input assets
             //   Here we either mix+GT an empty channel (either no output or no input splice_sites) with the splice_sites return splice_sites
             //   And we filter out the empty value
-            hisat2_splice_sites = splice_sites
+            hisat2_splice_sites = input_splice_sites
                 .mix(HISAT2_EXTRACTSPLICESITES.out.txt)
                 .groupTuple()
                 .map { meta, txt ->
@@ -84,31 +84,17 @@ workflow CREATE_ALIGN_INDEX_WITH_GFF {
         }
 
         if (run_kallisto || run_rsem_make_transcript_fasta || run_salmon) {
-            // TODO: be smarter about input assets
-            //   Here we either return an empty channel if we have a transcript_fasta so that MAKE_TRANSCRIPTS_FASTA is not triggered
-            //   Or we return the provided gtf so that MAKE_TRANSCRIPTS_FASTA is run
-            gtf_rsem = gff_gtf
-                .join(transcript_fasta)
-                .groupTuple()
-                .map { meta, input_gtf, input_transcript_fasta ->
-                    return input_transcript_fasta[0][0] ? null : [meta, input_gtf]
-                }
+            fasta_make_transcripts_fasta = fasta.map { meta, map_fasta ->
+                return meta.run_rsem_make_transcript_fasta ? [meta, map_fasta] : null
+            }
 
             MAKE_TRANSCRIPTS_FASTA(
-                fasta,
-                gtf_rsem
+                fasta_make_transcripts_fasta,
+                gff_gtf
             )
             versions = versions.mix(MAKE_TRANSCRIPTS_FASTA.out.versions)
 
-            // TODO: be smarter about input assets
-            //   Here we either mix+GT an empty channel (either no output or no input transcript_fasta) with the transcript_fasta return transcript_fasta
-            //   And we filter out the empty value
-            rsem_transcript_fasta = transcript_fasta
-                .mix(MAKE_TRANSCRIPTS_FASTA.out.transcript_fasta)
-                .groupTuple()
-                .map { meta, txt ->
-                    return txt[1] ? [meta, txt[1]] : [meta, txt]
-                }
+            rsem_transcript_fasta = input_transcript_fasta.mix(MAKE_TRANSCRIPTS_FASTA.out.transcript_fasta)
 
             if (run_kallisto) {
                 KALLISTO_INDEX(rsem_transcript_fasta)

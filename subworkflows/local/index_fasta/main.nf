@@ -24,10 +24,8 @@ workflow INDEX_FASTA {
     versions = Channel.empty()
 
     if (run_createsequencedictionary) {
+        GATK4_CREATESEQUENCEDICTIONARY(fasta)
 
-        GATK4_CREATESEQUENCEDICTIONARY(
-            fasta
-        )
         fasta_dict = GATK4_CREATESEQUENCEDICTIONARY.out.dict
         versions - versions.mix(GATK4_CREATESEQUENCEDICTIONARY.out.versions)
     }
@@ -54,10 +52,10 @@ workflow INDEX_FASTA {
 
     if (run_intervals) {
         fasta_fai_intervals_bed = input_intervals_bed
-            .mix(fasta_fai)
+            .join(fasta_fai)
             .groupTuple()
-            .map { meta, file ->
-                return file[0][0] ? null : file.flatten() ? [meta, file.flatten()] : [meta, file]
+            .map { meta, bed, fai ->
+                return bed ? null : [meta, fai]
             }
 
         BUILD_INTERVALS(fasta_fai_intervals_bed, [])
@@ -66,9 +64,7 @@ workflow INDEX_FASTA {
     }
 
     if (run_msisensorpro) {
-        MSISENSORPRO_SCAN(
-            fasta
-        )
+        MSISENSORPRO_SCAN(fasta)
 
         msisensorpro_list = MSISENSORPRO_SCAN.out.list
         versions = versions.mix(MSISENSORPRO_SCAN.out.versions)

@@ -10,7 +10,7 @@ workflow SAMPLESHEET_TO_CHANNEL {
     }
 
     fasta = reference.map { meta, input_intervals_bed, input_fasta, input_fasta_dict, input_fasta_fai, input_fasta_sizes, input_gff, input_gtf, input_splice_sites, input_transcript_fasta, input_vcf, input_readme, input_bed12, input_mito_name, input_macs_gsize ->
-        return input_fasta ? [meta, input_fasta] : null
+        return input_fasta ? [meta + [run_rsem_make_transcript_fasta: input_transcript_fasta ? false : true], input_fasta] : null
     }
 
     fasta_dict = reference.map { meta, input_intervals_bed, input_fasta, input_fasta_dict, input_fasta_fai, input_fasta_sizes, input_gff, input_gtf, input_splice_sites, input_transcript_fasta, input_vcf, input_readme, input_bed12, input_mito_name, input_macs_gsize ->
