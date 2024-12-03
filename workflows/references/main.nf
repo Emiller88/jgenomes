@@ -14,19 +14,19 @@ workflow REFERENCES {
 
     SAMPLESHEET_TO_CHANNEL(reference)
 
-    ch_intervals_bed = SAMPLESHEET_TO_CHANNEL.out.intervals_bed
-    ch_fasta = SAMPLESHEET_TO_CHANNEL.out.fasta
-    ch_fasta_dict = SAMPLESHEET_TO_CHANNEL.out.fasta_dict
-    ch_fasta_fai = SAMPLESHEET_TO_CHANNEL.out.fasta_fai
-    ch_fasta_sizes = SAMPLESHEET_TO_CHANNEL.out.fasta_sizes
-    ch_gff = SAMPLESHEET_TO_CHANNEL.out.gff
-    ch_gtf = SAMPLESHEET_TO_CHANNEL.out.gtf
-    ch_splice_sites = SAMPLESHEET_TO_CHANNEL.out.splice_sites
-    ch_transcript_fasta = SAMPLESHEET_TO_CHANNEL.out.transcript_fasta
-    ch_vcf = SAMPLESHEET_TO_CHANNEL.out.vcf
+    intervals_bed = SAMPLESHEET_TO_CHANNEL.out.intervals_bed
+    fasta = SAMPLESHEET_TO_CHANNEL.out.fasta
+    fasta_dict = SAMPLESHEET_TO_CHANNEL.out.fasta_dict
+    fasta_fai = SAMPLESHEET_TO_CHANNEL.out.fasta_fai
+    fasta_sizes = SAMPLESHEET_TO_CHANNEL.out.fasta_sizes
+    gff = SAMPLESHEET_TO_CHANNEL.out.gff
+    gtf = SAMPLESHEET_TO_CHANNEL.out.gtf
+    splice_sites = SAMPLESHEET_TO_CHANNEL.out.splice_sites
+    transcript_fasta = SAMPLESHEET_TO_CHANNEL.out.transcript_fasta
+    vcf = SAMPLESHEET_TO_CHANNEL.out.vcf
 
     CREATE_ALIGN_INDEX(
-        ch_fasta,
+        fasta,
         tools.split(',').contains('bowtie1'),
         tools.split(',').contains('bowtie2'),
         tools.split(',').contains('bwamem1'),
@@ -35,11 +35,11 @@ workflow REFERENCES {
     )
 
     CREATE_ALIGN_INDEX_WITH_GFF(
-        ch_fasta,
-        ch_gff,
-        ch_gtf,
-        ch_splice_sites,
-        ch_transcript_fasta,
+        fasta,
+        gff,
+        gtf,
+        splice_sites,
+        transcript_fasta,
         tools.split(',').contains('hisat2'),
         tools.split(',').contains('hisat2_extractsplicesites'),
         tools.split(',').contains('kallisto'),
@@ -50,8 +50,8 @@ workflow REFERENCES {
     )
 
     INDEX_FASTA(
-        ch_fasta,
-        ch_fasta_fai,
+        fasta,
+        fasta_fai,
         tools.split(',').contains('createsequencedictionary'),
         tools.split(',').contains('faidx'),
         tools.split(',').contains('intervals'),
@@ -60,33 +60,32 @@ workflow REFERENCES {
     )
 
     INDEX_VCF(
-        ch_vcf,
+        vcf,
         tools.split(',').contains('tabix')
     )
 
-    ch_bowtie1 = CREATE_ALIGN_INDEX.out.bowtie1_index
-    ch_bowtie2 = CREATE_ALIGN_INDEX.out.bowtie2_index
-    ch_bwamem1 = CREATE_ALIGN_INDEX.out.bwamem1_index
-    ch_bwamem2 = CREATE_ALIGN_INDEX.out.bwamem2_index
-    ch_dragmap = CREATE_ALIGN_INDEX.out.dragmap_hashmap
+    bowtie1_index = CREATE_ALIGN_INDEX.out.bowtie1_index
+    bowtie2_index = CREATE_ALIGN_INDEX.out.bowtie2_index
+    bwamem1_index = CREATE_ALIGN_INDEX.out.bwamem1_index
+    bwamem2_index = CREATE_ALIGN_INDEX.out.bwamem2_index
+    dragmap_hashmap = CREATE_ALIGN_INDEX.out.dragmap_hashmap
 
-    ch_gff_gtf = CREATE_ALIGN_INDEX_WITH_GFF.out.gff_gtf
-    ch_hisat2 = CREATE_ALIGN_INDEX_WITH_GFF.out.hisat2_index
-    ch_splice_sites = ch_splice_sites.mix(CREATE_ALIGN_INDEX_WITH_GFF.out.hisat2_splice_sites)
-    ch_kallisto = CREATE_ALIGN_INDEX_WITH_GFF.out.kallisto_index
-    ch_rsem = CREATE_ALIGN_INDEX_WITH_GFF.out.rsem_index
-    ch_transcript_fasta = ch_transcript_fasta.mix(CREATE_ALIGN_INDEX_WITH_GFF.out.rsem_transcript_fasta)
-    ch_salmon = CREATE_ALIGN_INDEX_WITH_GFF.out.salmon_index
-    ch_star = CREATE_ALIGN_INDEX_WITH_GFF.out.star_index
-    ch_star = CREATE_ALIGN_INDEX_WITH_GFF.out.star_index
+    gtf = gtf.mix(CREATE_ALIGN_INDEX_WITH_GFF.out.gtf)
+    hisat2_index = CREATE_ALIGN_INDEX_WITH_GFF.out.hisat2_index
+    splice_sites = splice_sites.mix(CREATE_ALIGN_INDEX_WITH_GFF.out.splice_sites)
+    kallisto_index = CREATE_ALIGN_INDEX_WITH_GFF.out.kallisto_index
+    rsem_index = CREATE_ALIGN_INDEX_WITH_GFF.out.rsem_index
+    transcript_fasta = transcript_fasta.mix(CREATE_ALIGN_INDEX_WITH_GFF.out.transcript_fasta)
+    salmon_index = CREATE_ALIGN_INDEX_WITH_GFF.out.salmon_index
+    star_index = CREATE_ALIGN_INDEX_WITH_GFF.out.star_index
 
-    ch_fasta_dict = ch_fasta_dict.mix(INDEX_FASTA.out.fasta_dict)
-    ch_fasta_fai = ch_fasta_fai.mix(INDEX_FASTA.out.fasta_fai)
-    ch_intervals_bed = ch_intervals_bed.mix(INDEX_FASTA.out.intervals_bed)
-    ch_fasta_sizes = ch_fasta_sizes.mix(INDEX_FASTA.out.fasta_sizes)
-    ch_msisensorpro = INDEX_FASTA.out.msisensorpro_list
+    fasta_dict = fasta_dict.mix(INDEX_FASTA.out.fasta_dict)
+    fasta_fai = fasta_fai.mix(INDEX_FASTA.out.fasta_fai)
+    intervals_bed = intervals_bed.mix(INDEX_FASTA.out.intervals_bed)
+    fasta_sizes = fasta_sizes.mix(INDEX_FASTA.out.fasta_sizes)
+    msisensorpro_list = INDEX_FASTA.out.msisensorpro_list
 
-    ch_vcf_tbi = INDEX_VCF.out.vcf_tbi
+    vcf_tbi = INDEX_VCF.out.vcf_tbi
 
     versions = versions.mix(CREATE_ALIGN_INDEX.out.versions)
     versions = versions.mix(CREATE_ALIGN_INDEX_WITH_GFF.out.versions)
@@ -94,47 +93,47 @@ workflow REFERENCES {
     versions = versions.mix(INDEX_VCF.out.versions)
 
     emit:
-    bowtie1               = ch_bowtie1 // channel: [meta, BowtieIndex/]
-    bowtie2               = ch_bowtie2 // channel: [meta, Bowtie2Index/]
-    bwamem1               = ch_bwamem1 // channel: [meta, BWAmemIndex/]
-    bwamem2               = ch_bwamem2 // channel: [meta, BWAmem2memIndex/]
-    dragmap               = ch_dragmap // channel: [meta, DragmapHashtable/]
-    fasta                 = ch_fasta // channel: [meta, *.fa(sta)]
-    fasta_dict            = ch_fasta_dict // channel: [meta, *.fa(sta).dict]
-    fasta_fai             = ch_fasta_fai // channel: [meta, *.fa(sta).fai]
-    gff_gtf               = ch_gff_gtf // channel: [meta, gtf]
-    hisat2                = ch_hisat2 // channel: [meta, Hisat2Index/]
-    hisat2_splice_sites   = ch_splice_sites // channel: [meta, *.splice_sites.txt]
-    intervals_bed         = ch_intervals_bed // channel: [meta, *.bed]
-    kallisto              = ch_kallisto // channel: [meta, KallistoIndex]
-    msisensorpro          = ch_msisensorpro // channel: [meta, *.list]
-    rsem                  = ch_rsem // channel: [meta, RSEMIndex/]
-    rsem_transcript_fasta = ch_transcript_fasta // channel: [meta, *.transcripts.fasta]
-    salmon                = ch_salmon // channel: [meta, SalmonIndex/]
-    sizes                 = ch_fasta_sizes // channel: [meta, *.fa(sta).sizes]
-    star                  = ch_star // channel: [meta, STARIndex/]
-    vcf_tbi               = ch_vcf_tbi // channel: [meta, *.vcf.tbi]
-    versions              = versions // channel: [versions.yml]
+    bowtie1_index     // channel: [meta, BowtieIndex/]
+    bowtie2_index     // channel: [meta, Bowtie2Index/]
+    bwamem1_index     // channel: [meta, BWAmemIndex/]
+    bwamem2_index     // channel: [meta, BWAmem2memIndex/]
+    dragmap_hashmap   // channel: [meta, DragmapHashtable/]
+    fasta             // channel: [meta, *.fa(sta)]
+    fasta_dict        // channel: [meta, *.fa(sta).dict]
+    fasta_fai         // channel: [meta, *.fa(sta).fai]
+    fasta_sizes       // channel: [meta, *.fa(sta).sizes]
+    gff               // channel: [meta, gtf]
+    hisat2_index      // channel: [meta, Hisat2Index/]
+    intervals_bed     // channel: [meta, *.bed]
+    kallisto_index    // channel: [meta, KallistoIndex]
+    msisensorpro_list // channel: [meta, *.list]
+    rsem_index        // channel: [meta, RSEMIndex/]
+    salmon_index      // channel: [meta, SalmonIndex/]
+    splice_sites      // channel: [meta, *.splice_sites.txt]
+    star_index        // channel: [meta, STARIndex/]
+    transcript_fasta  // channel: [meta, *.transcripts.fasta]
+    vcf_tbi           // channel: [meta, *.vcf.tbi]
+    versions          // channel: [versions.yml]
 
     publish:
-    ch_bowtie1 >> 'bowtie1'
-    ch_bowtie2 >> 'bowtie2'
-    ch_bwamem1 >> 'bwamem1'
-    ch_bwamem2 >> 'bwamem2'
-    ch_dragmap >> 'dragmap'
-    ch_fasta >> 'fasta'
-    ch_fasta_dict >> 'fasta_dict'
-    ch_fasta_fai >> 'fasta_fai'
-    ch_gff_gtf >> 'gffread'
-    ch_hisat2 >> 'hisat2'
-    ch_splice_sites >> 'splice_sites'
-    ch_intervals_bed >> 'intervals'
-    ch_kallisto >> 'kallisto'
-    ch_msisensorpro >> 'msisensorpro'
-    ch_rsem >> 'rsem'
-    ch_transcript_fasta >> 'transcript_fasta'
-    ch_salmon >> 'salmon'
-    ch_fasta_sizes >> 'fasta_sizes'
-    ch_star >> 'star'
-    ch_vcf_tbi >> 'vcf_tbi'
+    bowtie1_index >> 'bowtie1_index'
+    bowtie2_index >> 'bowtie2_index'
+    bwamem1_index >> 'bwamem1_index'
+    bwamem2_index >> 'bwamem2_index'
+    dragmap_hashmap >> 'dragmap_hashmap'
+    fasta >> 'fasta'
+    fasta_dict >> 'fasta_dict'
+    fasta_fai >> 'fasta_fai'
+    fasta_sizes >> 'fasta_sizes'
+    gff >> 'gff'
+    hisat2_index >> 'hisat2_index'
+    intervals_bed >> 'intervals_bed'
+    kallisto_index >> 'kallisto_index'
+    msisensorpro_list >> 'msisensorpro_list'
+    rsem_index >> 'rsem_index'
+    salmon_index >> 'salmon_index'
+    splice_sites >> 'splice_sites'
+    star_index >> 'star_index'
+    transcript_fasta >> 'transcript_fasta'
+    vcf_tbi >> 'vcf_tbi'
 }

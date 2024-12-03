@@ -23,14 +23,14 @@ workflow CREATE_ALIGN_INDEX_WITH_GFF {
     run_star                       // boolean: true/false
 
     main:
-    gff_gtf = Channel.empty()
+    gtf = Channel.empty()
     hisat2_index = Channel.empty()
-    hisat2_splice_sites = Channel.empty()
     kallisto_index = Channel.empty()
     rsem_index = Channel.empty()
-    rsem_transcript_fasta = Channel.empty()
     salmon_index = Channel.empty()
+    splice_sites = Channel.empty()
     star_index = Channel.empty()
+    transcript_fasta = Channel.empty()
 
     versions = Channel.empty()
 
@@ -43,7 +43,7 @@ workflow CREATE_ALIGN_INDEX_WITH_GFF {
 
         versions = versions.mix(GFFREAD.out.versions)
 
-        gff_gtf = input_gtf
+        gtf = input_gtf
             .mix(GFFREAD.out.gtf)
             .groupTuple()
             .map { meta, file ->
@@ -51,19 +51,19 @@ workflow CREATE_ALIGN_INDEX_WITH_GFF {
             }
 
         if (run_hisat2 || run_hisat2_extractsplicesites) {
-            gtf_hisat2 = gff_gtf.map { meta, map_gtf ->
+            gtf_hisat2 = gtf.map { meta, map_gtf ->
                 return meta.run_hisat2 ? [meta, map_gtf] : null
             }
 
             HISAT2_EXTRACTSPLICESITES(gtf_hisat2)
 
-            hisat2_splice_sites = input_splice_sites.mix(HISAT2_EXTRACTSPLICESITES.out.txt)
+            splice_sites = input_splice_sites.mix(HISAT2_EXTRACTSPLICESITES.out.txt)
 
             if (run_hisat2) {
                 HISAT2_BUILD(
                     fasta,
-                    gff_gtf,
-                    hisat2_splice_sites
+                    gtf,
+                    splice_sites
                 )
 
                 hisat2_index = HISAT2_BUILD.out.index
@@ -80,14 +80,14 @@ workflow CREATE_ALIGN_INDEX_WITH_GFF {
 
             MAKE_TRANSCRIPTS_FASTA(
                 fasta_make_transcripts_fasta,
-                gff_gtf
+                gtf
             )
             versions = versions.mix(MAKE_TRANSCRIPTS_FASTA.out.versions)
 
-            rsem_transcript_fasta = input_transcript_fasta.mix(MAKE_TRANSCRIPTS_FASTA.out.transcript_fasta)
+            transcript_fasta = input_transcript_fasta.mix(MAKE_TRANSCRIPTS_FASTA.out.transcript_fasta)
 
             if (run_kallisto) {
-                KALLISTO_INDEX(rsem_transcript_fasta)
+                KALLISTO_INDEX(transcript_fasta)
 
                 kallisto_index = KALLISTO_INDEX.out.index
                 versions = versions.mix(KALLISTO_INDEX.out.versions)
@@ -96,7 +96,7 @@ workflow CREATE_ALIGN_INDEX_WITH_GFF {
             if (run_salmon) {
                 SALMON_INDEX(
                     fasta,
-                    rsem_transcript_fasta
+                    transcript_fasta
                 )
 
                 salmon_index = SALMON_INDEX.out.index
@@ -105,14 +105,14 @@ workflow CREATE_ALIGN_INDEX_WITH_GFF {
         }
 
         if (run_rsem) {
-            RSEM_PREPAREREFERENCE_GENOME(fasta, gff_gtf)
+            RSEM_PREPAREREFERENCE_GENOME(fasta, gtf)
 
             rsem_index = RSEM_PREPAREREFERENCE_GENOME.out.index
             versions = versions.mix(RSEM_PREPAREREFERENCE_GENOME.out.versions)
         }
 
         if (run_star) {
-            STAR_GENOMEGENERATE(fasta, gff_gtf)
+            STAR_GENOMEGENERATE(fasta, gtf)
 
             star_index = STAR_GENOMEGENERATE.out.index
             versions = versions.mix(STAR_GENOMEGENERATE.out.versions)
@@ -120,13 +120,13 @@ workflow CREATE_ALIGN_INDEX_WITH_GFF {
     }
 
     emit:
-    gff_gtf
-    hisat2_index
-    hisat2_splice_sites
-    kallisto_index
-    rsem_index
-    rsem_transcript_fasta
-    salmon_index
-    star_index
-    versions
+    gtf              // channel: [meta, gtf]
+    hisat2_index     // channel: [meta, Hisat2Index/]
+    kallisto_index   // channel: [meta, KallistoIndex]
+    rsem_index       // channel: [meta, RSEMIndex/]
+    salmon_index     // channel: [meta, SalmonIndex/]
+    splice_sites     // channel: [meta, *.splice_sites.txt]
+    star_index       // channel: [meta, STARIndex/]
+    transcript_fasta // channel: [meta, *.transcripts.fasta]
+    versions         // channel: [versions.yml]
 }

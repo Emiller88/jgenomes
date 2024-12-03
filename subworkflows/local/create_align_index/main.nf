@@ -58,10 +58,10 @@ workflow CREATE_ALIGN_INDEX {
     }
 
     emit:
-    bowtie1_index
-    bowtie2_index
-    bwamem1_index
-    bwamem2_index
-    dragmap_hashmap
-    versions
+    bowtie1_index   // channel: [meta, BowtieIndex/]
+    bowtie2_index   // channel: [meta, Bowtie2Index/]
+    bwamem1_index   // channel: [meta, BWAmemIndex/]
+    bwamem2_index   // channel: [meta, BWAmem2memIndex/]
+    dragmap_hashmap // channel: [meta, DragmapHashtable/]
+    versions        // channel: [versions.yml]
 }

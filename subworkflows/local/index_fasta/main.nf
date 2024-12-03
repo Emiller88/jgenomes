@@ -63,10 +63,10 @@ workflow INDEX_FASTA {
     }
 
     emit:
-    intervals_bed
-    fasta_fai
-    fasta_dict
-    fasta_sizes
-    msisensorpro_list
-    versions
+    fasta_dict        // channel: [meta, *.fa(sta).dict]
+    fasta_fai         // channel: [meta, *.fa(sta).fai]
+    fasta_sizes       // channel: [meta, *.fa(sta).sizes]
+    intervals_bed     // channel: [meta, *.bed]
+    msisensorpro_list // channel: [meta, *.list]
+    versions          // channel: [versions.yml]
 }

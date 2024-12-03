@@ -18,6 +18,6 @@ workflow INDEX_VCF {
     }
 
     emit:
-    vcf_tbi
-    versions
+    vcf_tbi  // channel: [meta, *.vcf.tbi]
+    versions // channel: [versions.yml]
 }
