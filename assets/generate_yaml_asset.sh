@@ -14,7 +14,7 @@
 # rm tmp
 
 # All source fasta
-cat ngi-igenomes_file_manifest.txt | grep "\.fa." | grep -v "\.fa\." | grep -v "\.fasta\." | grep WholeGenomeFasta | grep -v CT_conversion | grep -v GA_conversion > all_fastas.txt
+cat ngi-igenomes_file_manifest.txt | grep "\.fa" | grep -v "\.fa." | grep WholeGenomeFasta | grep -v CT_conversion | grep -v GA_conversion > all_fastas.txt
 
 # Generate base info in species/genome/build.yml
 
@@ -23,9 +23,13 @@ do
     species=$(echo $i | cut -d "/" -f 5)
     genome=$(echo $i | cut -d "/" -f 6)
     build=$(echo $i | cut -d "/" -f 7)
-    mkdir -p ${genome}/${genome}
-    echo "- genome: '${build}'" > ${species}/${genome}/${build}.yml
-    echo "  fasta: '${i}'" >> ${species}/${genome}/${build}.yml
-    echo "  source: '${genome}'" >> ${species}/${genome}/${build}.yml
-    echo "  species:  '${species}'" >> ${species}/${genome}/${build}.yml
+
+    mkdir -p igenomes/${species}/${genome}
+    if [ -f "igenomes/${species}/${genome}/${build}.yml" ]; then
+        build+="_2_"
+    fi
+    echo "- genome: '${build}'" > igenomes/${species}/${genome}/${build}.yml
+    echo "  fasta: '${i}'" >> igenomes/${species}/${genome}/${build}.yml
+    echo "  source: '${genome}'" >> igenomes/${species}/${genome}/${build}.yml
+    echo "  species:  '${species}'" >> igenomes/${species}/${genome}/${build}.yml
 done

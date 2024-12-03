@@ -1,5 +1,5 @@
 {
-    "Run with profile test for samtools | --input assets/genomes/test/default_full.yml": {
+    "Run with profile test for samtools | --input assets/test/default_full.yml": {
         "content": [
             1,
             {
@@ -29,7 +29,7 @@
         },
         "timestamp": "2024-11-28T13:03:25.374670864"
     },
-    "Run with profile test for samtools | --input assets/genomes/test/default_extended.yml": {
+    "Run with profile test for samtools | --input assets/test/default_extended.yml": {
         "content": [
             2,
             {

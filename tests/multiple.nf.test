@@ -4,13 +4,13 @@ nextflow_pipeline {
     script "../main.nf"
     tag "pipeline"
 
-    test("Run with profile test for multiple | --input assets/genomes/test/default_multiple.yml") {
+    test("Run with profile test for multiple | --input assets/test/default_multiple.yml") {
 
         options "-output-dir $outputDir"
 
         when {
             params {
-                input  = "${projectDir}/assets/genomes/test/default_multiple.yml"
+                input  = "${projectDir}/assets/test/default_multiple.yml"
                 outdir = "$outputDir"
                 tools  = 'bwamem1,createsequencedictionary,faidx,intervals'
             }
@@ -37,13 +37,13 @@ nextflow_pipeline {
         }
     }
 
-    test("Run with profile test for multiple with globs on s3 | --input assets/genomes/test/pipelines/sarek_s3_muliple_glob.yml") {
+    test("Run with profile test for multiple with globs on s3 | --input assets/test/pipelines/sarek_s3_muliple_glob.yml") {
 
         options "-output-dir $outputDir"
 
         when {
             params {
-                input  = "${projectDir}/assets/genomes/test/pipelines/sarek_s3_muliple_glob.yml"
+                input  = "${projectDir}/assets/test/pipelines/sarek_s3_muliple_glob.yml"
                 outdir = "$outputDir"
                 tools  = 'tabix'
             }
