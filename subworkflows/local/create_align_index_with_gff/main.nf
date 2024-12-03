@@ -40,6 +40,8 @@ workflow CREATE_ALIGN_INDEX_WITH_GFF {
             []
         )
 
+        versions = versions.mix(GFFREAD.out.versions)
+
         gff_gtf = input_gtf
             .mix(GFFREAD.out.gtf)
             .groupTuple()
