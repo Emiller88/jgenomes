@@ -42,7 +42,7 @@
             ],
             [
                 "GRCh38_chr21.gtf:md5,c552c0aee5f1becb1d3991d21e63a5c1",
-                "KallistoIndex:md5,faf5be4df83f9293afe7a41dc18afb8a",
+                "KallistoIndex:md5,d158e1aa66822a85c638c3a2aaa0d9c2",
                 "genome.transcripts.fa:md5,fd4e06fc250a19351a611a44861b9aea",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
             ]
@@ -51,7 +51,7 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-12-03T13:23:48.176587452"
+        "timestamp": "2024-12-03T13:58:04.103662171"
     },
     "Run with profile test for kallisto | --input assets/genomes/test/default_extended.yml": {
         "content": [
@@ -83,7 +83,7 @@
                 "pipeline_info/nf_core_references_software_mqc_versions.yml"
             ],
             [
-                "KallistoIndex:md5,3fa232eff33648f2057e83cbbd1a1753",
+                "KallistoIndex:md5,0f72ef2b99dd03ba3118b05449656da9",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
             ]
         ],
@@ -91,6 +91,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-12-03T13:22:39.94411636"
+        "timestamp": "2024-12-03T13:57:39.883841333"
     }
 }

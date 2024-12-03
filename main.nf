@@ -141,9 +141,6 @@ output {
     'kallisto' {
         path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/KallistoIndex/" } }
     }
-    'make' {
-        path { meta, sizes -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/TranscriptFasta/${file}" } }
-    }
     'msisensorpro' {
         path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/msisensorpro/${file}" } }
     }
@@ -162,8 +159,14 @@ output {
     'salmon' {
         path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/SalmonIndex/" } }
     }
+    'splice_sites' {
+        path { meta, txt -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/SpliceSites/${file}" } }
+    }
     'star' {
         path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/STARIndex/" } }
+    }
+    'transcript_fasta' {
+        path { meta, fasta -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/TranscriptFasta/${file}" } }
     }
     'tabix_dbsnp' {
         path { meta, vcf -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/${meta.source_dbsnp}/${file}" } }
