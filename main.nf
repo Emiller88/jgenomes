@@ -114,8 +114,59 @@ output {
     'bwamem2' {
         path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/BWAmem2Index/" } }
     }
+    'dragmap' {
+        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/dragmap/" } }
+    }
     'fasta' {
         path { meta, fasta -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/WholeGenomeFasta/${file}" } }
+    }
+    'fasta_dict' {
+        path { meta, dict -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/WholeGenomeFasta/${file}" } }
+    }
+    'fasta_fai' {
+        path { meta, fai -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/WholeGenomeFasta/${file}" } }
+    }
+    'fasta_sizes' {
+        path 'fasta_sizes'
+    }
+    'gffread' {
+        path 'gffread'
+    }
+    'hisat2' {
+        path 'hisat2'
+    }
+    'intervals' {
+        path { meta, intervals -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/intervals/${file}" } }
+    }
+    'kallisto' {
+        path 'kallisto'
+    }
+    'make' {
+        path 'make'
+    }
+    'msisensorpro' {
+        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/msisensorpro/${file}" } }
+    }
+    'multiqc_data' {
+        path 'multiqc'
+    }
+    'multiqc_plots' {
+        path 'multiqc'
+    }
+    'multiqc_report' {
+        path 'multiqc'
+    }
+    'rsem' {
+        path 'rsem'
+    }
+    'salmon' {
+        path 'salmon'
+    }
+    'star' {
+        path 'star'
+    }
+    'vcf_tbi' {
+        path { meta, tbi -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/${meta.source_vcf}/${file}" } }
     }
 }
 /*
@@ -137,10 +188,25 @@ workflow NFCORE_REFERENCES {
     REFERENCES(input, tools)
 
     emit:
-    bowtie1  = REFERENCES.out.bowtie1
-    bowtie2  = REFERENCES.out.bowtie2
-    bwamem1  = REFERENCES.out.bwamem1
-    bwamem2  = REFERENCES.out.bwamem2
-    fasta    = REFERENCES.out.fasta
-    versions = REFERENCES.out.versions
+    bowtie1               = REFERENCES.out.bowtie1
+    bowtie2               = REFERENCES.out.bowtie2
+    bwamem1               = REFERENCES.out.bwamem1
+    bwamem2               = REFERENCES.out.bwamem2
+    dragmap               = REFERENCES.out.dragmap
+    fasta                 = REFERENCES.out.fasta
+    fasta_dict            = REFERENCES.out.fasta_dict
+    fasta_fai             = REFERENCES.out.fasta_fai
+    gffread               = REFERENCES.out.gff_gtf
+    hisat2                = REFERENCES.out.hisat2
+    hisat2_splice_sites   = REFERENCES.out.hisat2_splice_sites
+    intervals             = REFERENCES.out.intervals_bed
+    kallisto              = REFERENCES.out.kallisto
+    msisensorpro          = REFERENCES.out.msisensorpro
+    rsem                  = REFERENCES.out.rsem
+    rsem_transcript_fasta = REFERENCES.out.rsem_transcript_fasta
+    salmon                = REFERENCES.out.salmon
+    sizes                 = REFERENCES.out.sizes
+    star                  = REFERENCES.out.star
+    vcf_tbi               = REFERENCES.out.vcf_tbi
+    versions              = REFERENCES.out.versions
 }

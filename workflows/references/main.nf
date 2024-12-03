@@ -136,5 +136,5 @@ workflow REFERENCES {
     ch_salmon >> 'salmon'
     ch_sizes >> 'fasta_sizes'
     ch_star >> 'star'
-    ch_vcf_tbi >> 'tabix_vcf_tbi'
+    ch_vcf_tbi >> 'vcf_tbi'
 }
