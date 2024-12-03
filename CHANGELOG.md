@@ -39,6 +39,7 @@ Initial release of nf-core/references, created with the [nf-core](https://nf-co.
 - [41](https://github.com/nf-core/references/pull/41) - Better publishing for sarek related files
 - [43](https://github.com/nf-core/references/pull/43) - Fasta is no longer a required asset
 - [48](https://github.com/nf-core/references/pull/48) - Simplify VCF tabix index generation and related assets
+- [48](https://github.com/nf-core/references/pull/48) - Code refactoring (new subworfklows for each type of operations)
 
 ### Fixed
 
