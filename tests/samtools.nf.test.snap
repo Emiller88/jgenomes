@@ -29,6 +29,56 @@
         },
         "timestamp": "2024-11-28T13:03:25.374670864"
     },
+    "Run with profile test for samtools | --input GRCh38_chr21.yml": {
+        "content": [
+            3,
+            {
+                "BUILD_INTERVALS": {
+                    "gawk": "5.3.0"
+                },
+                "SAMTOOLS_FAIDX": {
+                    "samtools": 1.21
+                },
+                "Workflow": {
+                    "nf-core/references": "v1.0dev"
+                }
+            },
+            [
+                "Homo_sapiens",
+                "Homo_sapiens/nf-core",
+                "Homo_sapiens/nf-core/references",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Annotation",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Annotation/intervals",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Annotation/intervals/GRCh38_chr21.bed",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/WholeGenomeFasta",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/WholeGenomeFasta/GRCh38_chr21.fa.fai",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/WholeGenomeFasta/GRCh38_chr21.fa.sizes",
+                "multiqc",
+                "multiqc/multiqc_data",
+                "multiqc/multiqc_data/multiqc.log",
+                "multiqc/multiqc_data/multiqc_citations.txt",
+                "multiqc/multiqc_data/multiqc_data.json",
+                "multiqc/multiqc_data/multiqc_software_versions.txt",
+                "multiqc/multiqc_data/multiqc_sources.txt",
+                "multiqc/multiqc_report.html",
+                "pipeline_info",
+                "pipeline_info/nf_core_references_software_mqc_versions.yml"
+            ],
+            [
+                "GRCh38_chr21.bed:md5,472d213cfcde96565699779d5bfc0e32",
+                "GRCh38_chr21.fa.fai:md5,6ea51e1c1231da5e49212ea9f493d703",
+                "GRCh38_chr21.fa.sizes:md5,c985a141685e8431ec27c782816cb744",
+                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.2"
+        },
+        "timestamp": "2024-12-03T13:07:34.895283019"
+    },
     "Run with profile test for samtools | --input assets/genomes/test/default_extended.yml": {
         "content": [
             2,
@@ -69,56 +119,5 @@
             "nextflow": "24.10.2"
         },
         "timestamp": "2024-11-28T14:47:38.70092941"
-    },
-    "Run with profile test for samtools | --input GRCh38_chr21.yml": {
-        "content": [
-            3,
-            {
-                "BUILD_INTERVALS": {
-                    "gawk": "5.3.0"
-                },
-                "SAMTOOLS_FAIDX": {
-                    "samtools": 1.21
-                },
-                "Workflow": {
-                    "nf-core/references": "v1.0dev"
-                }
-            },
-            [
-                "Homo_sapiens",
-                "Homo_sapiens/nf-core",
-                "Homo_sapiens/nf-core/references",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Annotation",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Annotation/intervals",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Annotation/intervals/GRCh38_chr21.bed",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/WholeGenomeFasta",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/WholeGenomeFasta/GRCh38_chr21.fa.fai",
-                "fasta_sizes",
-                "fasta_sizes/GRCh38_chr21.fa.sizes",
-                "multiqc",
-                "multiqc/multiqc_data",
-                "multiqc/multiqc_data/multiqc.log",
-                "multiqc/multiqc_data/multiqc_citations.txt",
-                "multiqc/multiqc_data/multiqc_data.json",
-                "multiqc/multiqc_data/multiqc_software_versions.txt",
-                "multiqc/multiqc_data/multiqc_sources.txt",
-                "multiqc/multiqc_report.html",
-                "pipeline_info",
-                "pipeline_info/nf_core_references_software_mqc_versions.yml"
-            ],
-            [
-                "GRCh38_chr21.bed:md5,472d213cfcde96565699779d5bfc0e32",
-                "GRCh38_chr21.fa.fai:md5,6ea51e1c1231da5e49212ea9f493d703",
-                "GRCh38_chr21.fa.sizes:md5,c985a141685e8431ec27c782816cb744",
-                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
-            ]
-        ],
-        "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.2"
-        },
-        "timestamp": "2024-11-28T14:47:16.499906044"
     }
 }
