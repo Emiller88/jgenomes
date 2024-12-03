@@ -52,7 +52,6 @@ workflow REFERENCES {
     INDEX_FASTA(
         ch_fasta,
         ch_fasta_fai,
-        ch_intervals_bed,
         tools.split(',').contains('createsequencedictionary'),
         tools.split(',').contains('faidx'),
         tools.split(',').contains('intervals'),

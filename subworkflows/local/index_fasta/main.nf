@@ -7,7 +7,6 @@ workflow INDEX_FASTA {
     take:
     fasta
     input_fasta_fai
-    input_intervals_bed
     run_createsequencedictionary
     run_faidx
     run_intervals
@@ -31,17 +30,26 @@ workflow INDEX_FASTA {
     }
 
     if (run_faidx || run_intervals || run_sizes) {
+        fasta_samtools = fasta.map { meta, map_fasta ->
+            return meta.run_faidx ? [meta, map_fasta] : null
+        }
+
         SAMTOOLS_FAIDX(
-            fasta,
+            fasta_samtools,
             [[id: 'no_fai'], []],
             run_sizes
         )
+
         fasta_fai = input_fasta_fai.mix(SAMTOOLS_FAIDX.out.fai)
         fasta_sizes = SAMTOOLS_FAIDX.out.sizes
         versions = versions.mix(SAMTOOLS_FAIDX.out.versions)
 
         if (run_intervals) {
-            BUILD_INTERVALS(fasta_fai, [])
+            fasta_fai_intervals = fasta_fai.map { meta, map_fasta_fai ->
+                return meta.intervals ? [meta, map_fasta_fai] : null
+            }
+
+            BUILD_INTERVALS(fasta_fai_intervals, [])
             intervals_bed = BUILD_INTERVALS.out.output
             versions = versions.mix(BUILD_INTERVALS.out.versions)
         }
