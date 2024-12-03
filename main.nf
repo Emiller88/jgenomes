@@ -103,10 +103,10 @@ workflow {
 
 output {
     'bowtie1' {
-        path 'bowtie1'
+        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/BowtieIndex/" } }
     }
     'bowtie2' {
-        path 'bowtie2'
+        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/Bowtie2Index/" } }
     }
     'bwamem1' {
         path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/BWAIndex/" } }
@@ -127,22 +127,19 @@ output {
         path { meta, fai -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/WholeGenomeFasta/${file}" } }
     }
     'fasta_sizes' {
-        path 'fasta_sizes'
+        path { meta, sizes -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/WholeGenomeFasta/${file}" } }
     }
     'gffread' {
-        path 'gffread'
+        path { meta, intervals -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/Genes/${file}" } }
     }
     'hisat2' {
-        path 'hisat2'
+        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/Hisat2Index/" } }
     }
     'intervals' {
         path { meta, intervals -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/intervals/${file}" } }
     }
     'kallisto' {
-        path 'kallisto'
-    }
-    'make' {
-        path 'make'
+        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/KallistoIndex/" } }
     }
     'msisensorpro' {
         path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/msisensorpro/${file}" } }
@@ -157,13 +154,19 @@ output {
         path 'multiqc'
     }
     'rsem' {
-        path 'rsem'
+        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/RSEMIndex/" } }
     }
     'salmon' {
-        path 'salmon'
+        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/SalmonIndex/" } }
+    }
+    'splice_sites' {
+        path { meta, txt -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/SpliceSites/${file}" } }
     }
     'star' {
-        path 'star'
+        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/STARIndex/" } }
+    }
+    'transcript_fasta' {
+        path { meta, fasta -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/TranscriptFasta/${file}" } }
     }
     'tabix_dbsnp' {
         path { meta, vcf -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/${meta.source_dbsnp}/${file}" } }

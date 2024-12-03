@@ -18,12 +18,17 @@
                 }
             },
             [
-                "gffread",
-                "gffread/GRCh38_chr21.gtf",
-                "kallisto",
-                "kallisto/kallisto",
-                "make",
-                "make/genome.transcripts.fa",
+                "Homo_sapiens",
+                "Homo_sapiens/nf-core",
+                "Homo_sapiens/nf-core/references",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Annotation",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Annotation/Genes",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Annotation/Genes/GRCh38_chr21.gtf",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/KallistoIndex",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/TranscriptFasta",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/TranscriptFasta/genome.transcripts.fa",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/multiqc.log",
@@ -45,7 +50,7 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-11-28T09:49:13.419658545"
+        "timestamp": "2024-12-03T14:31:39.422746281"
     },
     "Run with profile test for kallisto | --input assets/test/default_extended.yml": {
         "content": [
@@ -59,8 +64,12 @@
                 }
             },
             [
-                "kallisto",
-                "kallisto/kallisto",
+                "Homo_sapiens",
+                "Homo_sapiens/nf-core",
+                "Homo_sapiens/nf-core/references",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/KallistoIndex",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/multiqc.log",
@@ -80,6 +89,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-11-28T09:48:51.312930217"
+        "timestamp": "2024-12-03T14:31:07.501838885"
     }
 }
