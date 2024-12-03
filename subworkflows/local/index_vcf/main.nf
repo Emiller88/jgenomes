@@ -2,8 +2,8 @@ include { TABIX_TABIX } from '../../../modules/nf-core/tabix/tabix'
 
 workflow INDEX_VCF {
     take:
-    vcf
-    run_tabix
+    vcf       // channel: [meta, vcf]
+    run_tabix // boolean: true/false
 
     main:
     vcf_tbi = Channel.empty()

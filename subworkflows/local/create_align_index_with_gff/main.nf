@@ -9,18 +9,18 @@ include { STAR_GENOMEGENERATE                                   } from '../../..
 
 workflow CREATE_ALIGN_INDEX_WITH_GFF {
     take:
-    fasta
-    input_gff
-    input_gtf
-    input_splice_sites
-    input_transcript_fasta
-    run_hisat2
-    run_hisat2_extractsplicesites
-    run_kallisto
-    run_rsem
-    run_rsem_make_transcript_fasta
-    run_salmon
-    run_star
+    fasta                          // channel: [meta, fasta]
+    input_gff                      // channel: [meta, gff]
+    input_gtf                      // channel: [meta, gtf]
+    input_splice_sites             // channel: [meta, splice_sites]
+    input_transcript_fasta         // channel: [meta, transcript_fasta]
+    run_hisat2                     // boolean: true/false
+    run_hisat2_extractsplicesites  // boolean: true/false
+    run_kallisto                   // boolean: true/false
+    run_rsem                       // boolean: true/false
+    run_rsem_make_transcript_fasta // boolean: true/false
+    run_salmon                     // boolean: true/false
+    run_star                       // boolean: true/false
 
     main:
     gff_gtf = Channel.empty()

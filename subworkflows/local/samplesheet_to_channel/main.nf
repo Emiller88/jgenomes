@@ -1,6 +1,6 @@
 workflow SAMPLESHEET_TO_CHANNEL {
     take:
-    reference
+    reference // channel: [meta, intervals_bed, fasta, fasta_dict, fasta_fai, fasta_sizes, gff, gtf, splice_sites, transcript_fasta, vcf, readme, bed12, mito_name, macs_gsize]
 
     main:
 

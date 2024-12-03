@@ -6,12 +6,12 @@ include { DRAGMAP_HASHTABLE             } from '../../../modules/nf-core/dragmap
 
 workflow CREATE_ALIGN_INDEX {
     take:
-    fasta
-    run_bowtie1
-    run_bowtie2
-    run_bwamem1
-    run_bwamem2
-    run_dragmap
+    fasta       // channel: [meta, fasta]
+    run_bowtie1 // boolean: true/false
+    run_bowtie2 // boolean: true/false
+    run_bwamem1 // boolean: true/false
+    run_bwamem2 // boolean: true/false
+    run_dragmap // boolean: true/false
 
     main:
     bowtie1_index = Channel.empty()

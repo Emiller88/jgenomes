@@ -5,13 +5,13 @@ include { SAMTOOLS_FAIDX                 } from '../../../modules/nf-core/samtoo
 
 workflow INDEX_FASTA {
     take:
-    fasta
-    input_fasta_fai
-    run_createsequencedictionary
-    run_faidx
-    run_intervals
-    run_msisensorpro
-    run_sizes
+    fasta                        // channel: [meta, fasta]
+    input_fasta_fai              // channel: [meta, fasta_fai]
+    run_createsequencedictionary // boolean: true/false
+    run_faidx                    // boolean: true/false
+    run_intervals                // boolean: true/false
+    run_msisensorpro             // boolean: true/false
+    run_sizes                    // boolean: true/false
 
     main:
     intervals_bed = Channel.empty()
