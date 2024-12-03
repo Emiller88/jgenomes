@@ -38,6 +38,7 @@ Initial release of nf-core/references, created with the [nf-core](https://nf-co.
 - [41](https://github.com/nf-core/references/pull/41) - Better sarek tests
 - [41](https://github.com/nf-core/references/pull/41) - Better publishing for sarek related files
 - [43](https://github.com/nf-core/references/pull/43) - Fasta is no longer a required asset
+- [49](https://github.com/nf-core/references/pull/49) - Better publishing for all files
 
 ### Fixed
 
