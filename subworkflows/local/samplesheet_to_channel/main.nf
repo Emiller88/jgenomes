@@ -41,9 +41,11 @@ workflow SAMPLESHEET_TO_CHANNEL {
         return input_transcript_fasta ? [meta, input_transcript_fasta] : null
     }
 
-    vcf = reference.map { meta, input_intervals_bed, input_fasta, input_fasta_dict, input_fasta_fai, input_fasta_sizes, input_gff, input_gtf, input_splice_sites, input_transcript_fasta, input_vcf, input_readme, input_bed12, input_mito_name, input_macs_gsize ->
-        return input_vcf ? [meta, input_vcf] : null
-    }
+    vcf = reference
+        .map { meta, input_intervals_bed, input_fasta, input_fasta_dict, input_fasta_fai, input_fasta_sizes, input_gff, input_gtf, input_splice_sites, input_transcript_fasta, input_vcf, input_readme, input_bed12, input_mito_name, input_macs_gsize ->
+            return input_vcf ? [meta, file(input_vcf)] : null
+        }
+        .transpose()
 
     emit:
     intervals_bed
