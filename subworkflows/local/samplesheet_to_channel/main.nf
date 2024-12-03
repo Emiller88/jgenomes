@@ -1,7 +1,6 @@
 workflow SAMPLESHEET_TO_CHANNEL {
     take:
     reference
-    tools
 
     main:
 

@@ -12,7 +12,7 @@ workflow REFERENCES {
     main:
     versions = Channel.empty()
 
-    SAMPLESHEET_TO_CHANNEL(reference, tools)
+    SAMPLESHEET_TO_CHANNEL(reference)
 
     ch_intervals_bed = SAMPLESHEET_TO_CHANNEL.out.intervals_bed
     ch_fasta = SAMPLESHEET_TO_CHANNEL.out.fasta
@@ -73,18 +73,18 @@ workflow REFERENCES {
 
     ch_gff_gtf = CREATE_ALIGN_INDEX_WITH_GFF.out.gff_gtf
     ch_hisat2 = CREATE_ALIGN_INDEX_WITH_GFF.out.hisat2_index
-    ch_hisat2_splice_sites = CREATE_ALIGN_INDEX_WITH_GFF.out.hisat2_splice_sites
+    ch_splice_sites = ch_splice_sites.mix(CREATE_ALIGN_INDEX_WITH_GFF.out.hisat2_splice_sites)
     ch_kallisto = CREATE_ALIGN_INDEX_WITH_GFF.out.kallisto_index
     ch_rsem = CREATE_ALIGN_INDEX_WITH_GFF.out.rsem_index
-    ch_rsem_transcript_fasta = CREATE_ALIGN_INDEX_WITH_GFF.out.rsem_transcript_fasta
+    ch_transcript_fasta = ch_transcript_fasta.mix(CREATE_ALIGN_INDEX_WITH_GFF.out.rsem_transcript_fasta)
     ch_salmon = CREATE_ALIGN_INDEX_WITH_GFF.out.salmon_index
     ch_star = CREATE_ALIGN_INDEX_WITH_GFF.out.star_index
     ch_star = CREATE_ALIGN_INDEX_WITH_GFF.out.star_index
 
-    ch_fasta_dict = INDEX_FASTA.out.fasta_dict
-    ch_fasta_fai = INDEX_FASTA.out.fasta_fai
-    ch_intervals_bed = INDEX_FASTA.out.intervals_bed
-    ch_sizes = INDEX_FASTA.out.fasta_sizes
+    ch_fasta_dict = ch_fasta_dict.mix(INDEX_FASTA.out.fasta_dict)
+    ch_fasta_fai = ch_fasta_fai.mix(INDEX_FASTA.out.fasta_fai)
+    ch_intervals_bed = ch_intervals_bed.mix(INDEX_FASTA.out.intervals_bed)
+    ch_fasta_sizes = ch_fasta_sizes.mix(INDEX_FASTA.out.fasta_sizes)
     ch_msisensorpro = INDEX_FASTA.out.msisensorpro_list
 
     ch_vcf_tbi = INDEX_VCF.out.vcf_tbi
@@ -105,14 +105,14 @@ workflow REFERENCES {
     fasta_fai             = ch_fasta_fai
     gff_gtf               = ch_gff_gtf
     hisat2                = ch_hisat2
-    hisat2_splice_sites   = ch_hisat2_splice_sites
+    hisat2_splice_sites   = ch_splice_sites
     intervals_bed         = ch_intervals_bed
     kallisto              = ch_kallisto
     msisensorpro          = ch_msisensorpro
     rsem                  = ch_rsem
-    rsem_transcript_fasta = ch_rsem_transcript_fasta
+    rsem_transcript_fasta = ch_transcript_fasta
     salmon                = ch_salmon
-    sizes                 = ch_sizes
+    sizes                 = ch_fasta_sizes
     star                  = ch_star
     vcf_tbi               = ch_vcf_tbi
     versions              = versions
@@ -128,14 +128,14 @@ workflow REFERENCES {
     ch_fasta_fai >> 'fasta_fai'
     ch_gff_gtf >> 'gffread'
     ch_hisat2 >> 'hisat2'
-    ch_hisat2_splice_sites >> 'hisat2'
+    ch_splice_sites >> 'hisat2'
     ch_intervals_bed >> 'intervals'
     ch_kallisto >> 'kallisto'
     ch_msisensorpro >> 'msisensorpro'
     ch_rsem >> 'rsem'
-    ch_rsem_transcript_fasta >> 'make'
+    ch_transcript_fasta >> 'make'
     ch_salmon >> 'salmon'
-    ch_sizes >> 'fasta_sizes'
+    ch_fasta_sizes >> 'fasta_sizes'
     ch_star >> 'star'
     ch_vcf_tbi >> 'vcf_tbi'
 }
