@@ -27,7 +27,7 @@ workflow INDEX_FASTA {
         GATK4_CREATESEQUENCEDICTIONARY(fasta)
 
         fasta_dict = GATK4_CREATESEQUENCEDICTIONARY.out.dict
-        versions - versions.mix(GATK4_CREATESEQUENCEDICTIONARY.out.versions)
+        versions = versions.mix(GATK4_CREATESEQUENCEDICTIONARY.out.versions)
     }
 
     if (run_faidx || run_intervals || run_sizes) {
@@ -36,31 +36,15 @@ workflow INDEX_FASTA {
             [[id: 'no_fai'], []],
             run_sizes
         )
-
-        // TODO: be smarter about input assets
-        //   Here we either mix+GT an empty channel (either no output or no input faidx) with the faidx return faidx
-        //   And we filter out the empty value
-        fasta_fai = input_fasta_fai
-            .mix(SAMTOOLS_FAIDX.out.fai)
-            .groupTuple()
-            .map { meta, file ->
-                return file[1] ? [meta, file[1]] : [meta, file]
-            }
+        fasta_fai = input_fasta_fai.mix(SAMTOOLS_FAIDX.out.fai)
         fasta_sizes = SAMTOOLS_FAIDX.out.sizes
-        versions - versions.mix(SAMTOOLS_FAIDX.out.versions)
-    }
+        versions = versions.mix(SAMTOOLS_FAIDX.out.versions)
 
-    if (run_intervals) {
-        fasta_fai_intervals_bed = input_intervals_bed
-            .join(fasta_fai)
-            .groupTuple()
-            .map { meta, bed, fai ->
-                return bed ? null : [meta, fai]
-            }
-
-        BUILD_INTERVALS(fasta_fai_intervals_bed, [])
-        intervals_bed = BUILD_INTERVALS.out.output
-        versions - versions.mix(BUILD_INTERVALS.out.versions)
+        if (run_intervals) {
+            BUILD_INTERVALS(fasta_fai, [])
+            intervals_bed = BUILD_INTERVALS.out.output
+            versions = versions.mix(BUILD_INTERVALS.out.versions)
+        }
     }
 
     if (run_msisensorpro) {
