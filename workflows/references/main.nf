@@ -41,6 +41,7 @@ workflow REFERENCES {
         ch_splice_sites,
         ch_transcript_fasta,
         tools.split(',').contains('hisat2'),
+        tools.split(',').contains('hisat2_extractsplicesites'),
         tools.split(',').contains('kallisto'),
         tools.split(',').contains('rsem'),
         tools.split(',').contains('rsem_make_transcript_fasta'),

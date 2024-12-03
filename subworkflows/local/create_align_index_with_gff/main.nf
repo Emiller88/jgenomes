@@ -15,6 +15,7 @@ workflow CREATE_ALIGN_INDEX_WITH_GFF {
     input_splice_sites
     input_transcript_fasta
     run_hisat2
+    run_hisat2_extractsplicesites
     run_kallisto
     run_rsem
     run_rsem_make_transcript_fasta
@@ -49,29 +50,14 @@ workflow CREATE_ALIGN_INDEX_WITH_GFF {
                 return file[1] ? [meta, file[1]] : [meta, file]
             }
 
-        if (run_hisat2) {
-            // TODO: be smarter about input assets
-            //   Here we either return an empty channel if we have a splice_sites so that HISAT2_EXTRACTSPLICESITES is not triggered
-            //   Or we return the provided gtf so that HISAT2_EXTRACTSPLICESITES is run
-            ch_gtf_hisat2 = gff_gtf
-                .join(input_splice_sites)
-                .groupTuple()
-                .map { meta, map_gtf, map_splice_sites ->
-                    return map_splice_sites[0][0] ? null : [meta, map_gtf]
-                }
+        if (run_hisat2 || run_hisat2_extractsplicesites) {
+            gtf_hisat2 = gff_gtf.map { meta, map_gtf ->
+                return meta.run_hisat2 ? [meta, map_gtf] : null
+            }
 
-            HISAT2_EXTRACTSPLICESITES(ch_gtf_hisat2)
-            versions = versions.mix(HISAT2_EXTRACTSPLICESITES.out.versions)
+            HISAT2_EXTRACTSPLICESITES(gtf_hisat2)
 
-            // TODO: be smarter about input assets
-            //   Here we either mix+GT an empty channel (either no output or no input splice_sites) with the splice_sites return splice_sites
-            //   And we filter out the empty value
-            hisat2_splice_sites = input_splice_sites
-                .mix(HISAT2_EXTRACTSPLICESITES.out.txt)
-                .groupTuple()
-                .map { meta, txt ->
-                    return txt[1] ? [meta, txt[1]] : [meta, txt]
-                }
+            hisat2_splice_sites = input_splice_sites.mix(HISAT2_EXTRACTSPLICESITES.out.txt)
 
             if (run_hisat2) {
                 HISAT2_BUILD(
@@ -81,6 +67,8 @@ workflow CREATE_ALIGN_INDEX_WITH_GFF {
                 )
 
                 hisat2_index = HISAT2_BUILD.out.index
+
+                versions = versions.mix(HISAT2_EXTRACTSPLICESITES.out.versions)
                 versions = versions.mix(HISAT2_BUILD.out.versions)
             }
         }
