@@ -46,7 +46,7 @@ workflow INDEX_FASTA {
 
         if (run_intervals) {
             fasta_fai_intervals = fasta_fai.map { meta, map_fasta_fai ->
-                return meta.intervals ? [meta, map_fasta_fai] : null
+                return meta.run_intervals ? [meta, map_fasta_fai] : null
             }
 
             BUILD_INTERVALS(fasta_fai_intervals, [])
