@@ -94,27 +94,27 @@ workflow REFERENCES {
     versions = versions.mix(INDEX_VCF.out.versions)
 
     emit:
-    bowtie1               = ch_bowtie1
-    bowtie2               = ch_bowtie2
-    bwamem1               = ch_bwamem1
-    bwamem2               = ch_bwamem2
-    dragmap               = ch_dragmap
-    fasta                 = ch_fasta
-    fasta_dict            = ch_fasta_dict
-    fasta_fai             = ch_fasta_fai
-    gff_gtf               = ch_gff_gtf
-    hisat2                = ch_hisat2
-    hisat2_splice_sites   = ch_splice_sites
-    intervals_bed         = ch_intervals_bed
-    kallisto              = ch_kallisto
-    msisensorpro          = ch_msisensorpro
-    rsem                  = ch_rsem
-    rsem_transcript_fasta = ch_transcript_fasta
-    salmon                = ch_salmon
-    sizes                 = ch_fasta_sizes
-    star                  = ch_star
-    vcf_tbi               = ch_vcf_tbi
-    versions              = versions
+    bowtie1               = ch_bowtie1 // channel: [meta, BowtieIndex/]
+    bowtie2               = ch_bowtie2 // channel: [meta, Bowtie2Index/]
+    bwamem1               = ch_bwamem1 // channel: [meta, BWAmemIndex/]
+    bwamem2               = ch_bwamem2 // channel: [meta, BWAmem2memIndex/]
+    dragmap               = ch_dragmap // channel: [meta, DragmapHashtable/]
+    fasta                 = ch_fasta // channel: [meta, *.fa(sta)]
+    fasta_dict            = ch_fasta_dict // channel: [meta, *.fa(sta).dict]
+    fasta_fai             = ch_fasta_fai // channel: [meta, *.fa(sta).fai]
+    gff_gtf               = ch_gff_gtf // channel: [meta, gtf]
+    hisat2                = ch_hisat2 // channel: [meta, Hisat2Index/]
+    hisat2_splice_sites   = ch_splice_sites // channel: [meta, *.splice_sites.txt]
+    intervals_bed         = ch_intervals_bed // channel: [meta, *.bed]
+    kallisto              = ch_kallisto // channel: [meta, KallistoIndex]
+    msisensorpro          = ch_msisensorpro // channel: [meta, *.list]
+    rsem                  = ch_rsem // channel: [meta, RSEMIndex/]
+    rsem_transcript_fasta = ch_transcript_fasta // channel: [meta, *.transcripts.fasta]
+    salmon                = ch_salmon // channel: [meta, SalmonIndex/]
+    sizes                 = ch_fasta_sizes // channel: [meta, *.fa(sta).sizes]
+    star                  = ch_star // channel: [meta, STARIndex/]
+    vcf_tbi               = ch_vcf_tbi // channel: [meta, *.vcf.tbi]
+    versions              = versions // channel: [versions.yml]
 
     publish:
     ch_bowtie1 >> 'bowtie1'
