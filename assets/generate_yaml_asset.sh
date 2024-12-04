@@ -51,6 +51,18 @@ do
     echo "  readme: \"${i}\"" >> igenomes/${species}/${genome}/${build}.yml
 done
 
+# All source gtf (removing the onces coming from gencode)
+cat ngi-igenomes_file_manifest.txt | grep "\.gtf" | grep -v "gtf\." | grep -v "STARIndex" | grep -v "Genes\.gencode" > all_gtf.txt
+
+for i in `cat all_gtf.txt`;
+do
+    species=$(echo $i | cut -d "/" -f 5)
+    genome=$(echo $i | cut -d "/" -f 6)
+    build=$(echo $i | cut -d "/" -f 7)
+
+    echo "  gtf: \"${i}\"" >> igenomes/${species}/${genome}/${build}.yml
+done
+
 # All source fasta.dict
 cat ngi-igenomes_file_manifest.txt | grep "\.dict" | grep -v "dict\.gz" | grep -v "dict\.old" > all_dict.txt
 

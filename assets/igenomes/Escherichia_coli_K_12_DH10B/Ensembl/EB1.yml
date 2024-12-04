@@ -4,6 +4,7 @@
   species: "Escherichia_coli_K_12_DH10B"
   fasta_fai: "s3://ngi-igenomes/igenomes/Escherichia_coli_K_12_DH10B/Ensembl/EB1/Sequence/WholeGenomeFasta/genome.fa.fai"
   readme: "s3://ngi-igenomes/igenomes/Escherichia_coli_K_12_DH10B/Ensembl/EB1/Annotation/README.txt"
+  gtf: "s3://ngi-igenomes/igenomes/Escherichia_coli_K_12_DH10B/Ensembl/EB1/Annotation/Genes/genes.gtf"
   fasta_dict: "s3://ngi-igenomes/igenomes/Escherichia_coli_K_12_DH10B/Ensembl/EB1/Sequence/WholeGenomeFasta/genome.dict"
   bowtie1_index: "s3://ngi-igenomes/igenomes/Escherichia_coli_K_12_DH10B/Ensembl/EB1/Sequence/BowtieIndex/"
   bowtie2_index: "s3://ngi-igenomes/igenomes/Escherichia_coli_K_12_DH10B/Ensembl/EB1/Sequence/Bowtie2Index/"
