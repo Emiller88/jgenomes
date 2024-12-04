@@ -1,5 +1,6 @@
 - genome: "GRCz10"
   fasta: "s3://ngi-igenomes/igenomes/Danio_rerio/NCBI/GRCz10/Sequence/WholeGenomeFasta/genome.fa"
-  fasta_fai: "s3://ngi-igenomes/igenomes/Danio_rerio/NCBI/GRCz10/Sequence/WholeGenomeFasta/genome.fa.fai"
   source: "NCBI"
   species: "Danio_rerio"
+  fasta_fai: "s3://ngi-igenomes/igenomes/Danio_rerio/NCBI/GRCz10/Sequence/WholeGenomeFasta/genome.fa.fai"
+  fasta_dict: "s3://ngi-igenomes/igenomes/Danio_rerio/NCBI/GRCz10/Sequence/WholeGenomeFasta/genome.dict"

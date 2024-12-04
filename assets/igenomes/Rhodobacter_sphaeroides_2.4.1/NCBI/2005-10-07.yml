@@ -1,5 +1,6 @@
 - genome: "2005-10-07"
   fasta: "s3://ngi-igenomes/igenomes/Rhodobacter_sphaeroides_2.4.1/NCBI/2005-10-07/Sequence/WholeGenomeFasta/genome.fa"
-  fasta_fai: "s3://ngi-igenomes/igenomes/Rhodobacter_sphaeroides_2.4.1/NCBI/2005-10-07/Sequence/WholeGenomeFasta/genome.fa.fai"
   source: "NCBI"
   species: "Rhodobacter_sphaeroides_2.4.1"
+  fasta_fai: "s3://ngi-igenomes/igenomes/Rhodobacter_sphaeroides_2.4.1/NCBI/2005-10-07/Sequence/WholeGenomeFasta/genome.fa.fai"
+  fasta_dict: "s3://ngi-igenomes/igenomes/Rhodobacter_sphaeroides_2.4.1/NCBI/2005-10-07/Sequence/WholeGenomeFasta/genome.dict"
