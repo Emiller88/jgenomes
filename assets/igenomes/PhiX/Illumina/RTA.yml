@@ -8,4 +8,5 @@
   bowtie1_index: "s3://ngi-igenomes/igenomes/PhiX/Illumina/RTA/Sequence/BowtieIndex/"
   bowtie2_index: "s3://ngi-igenomes/igenomes/PhiX/Illumina/RTA/Sequence/Bowtie2Index/"
   bwamem1_index: "s3://ngi-igenomes/igenomes/PhiX/Illumina/RTA/Sequence/BWAIndex/version0.6.0/"
+  bismark_index: "s3://ngi-igenomes/igenomes/PhiX/Illumina/RTA/Sequence/BismarkIndex/"
   star_index: "s3://ngi-igenomes/igenomes/PhiX/Illumina/RTA/Sequence/STARIndex/"

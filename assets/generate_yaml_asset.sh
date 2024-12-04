@@ -124,6 +124,18 @@ do
     echo "  dragmap_hashtable: \"${i}/\"" >> igenomes/${species}/${genome}/${build}.yml
 done
 
+# All source BismarkIndex
+cat ngi-igenomes_file_manifest.txt | grep "BismarkIndex\/genome\.fa" | rev | cut -d "/" -f 2- | rev | sort -u > all_bismark.txt
+
+for i in `cat all_bismark.txt`;
+do
+    species=$(echo $i | cut -d "/" -f 5)
+    genome=$(echo $i | cut -d "/" -f 6)
+    build=$(echo $i | cut -d "/" -f 7)
+
+    echo "  bismark_index: \"${i}/\"" >> igenomes/${species}/${genome}/${build}.yml
+done
+
 # All source star
 cat ngi-igenomes_file_manifest.txt | grep "STARIndex" | rev | cut -d "/" -f 2- | rev | sort -u > all_star.txt
 

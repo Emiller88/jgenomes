@@ -8,4 +8,5 @@
   bowtie1_index: "s3://ngi-igenomes/igenomes/Sorghum_bicolor/Ensembl/Sbi1/Sequence/BowtieIndex/"
   bowtie2_index: "s3://ngi-igenomes/igenomes/Sorghum_bicolor/Ensembl/Sbi1/Sequence/Bowtie2Index/"
   bwamem1_index: "s3://ngi-igenomes/igenomes/Sorghum_bicolor/Ensembl/Sbi1/Sequence/BWAIndex/version0.6.0/"
+  bismark_index: "s3://ngi-igenomes/igenomes/Sorghum_bicolor/Ensembl/Sbi1/Sequence/BismarkIndex/"
   star_index: "s3://ngi-igenomes/igenomes/Sorghum_bicolor/Ensembl/Sbi1/Sequence/STARIndex/"
