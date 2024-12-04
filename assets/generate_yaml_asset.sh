@@ -39,6 +39,18 @@ do
     echo "  fasta_fai: \"${i}\"" >> igenomes/${species}/${genome}/${build}.yml
 done
 
+# All source README
+cat ngi-igenomes_file_manifest.txt | grep "README" | grep -v "Archives" | grep -v "beagle" | grep -v "plink" | grep -v "PhiX\/Illumina\/RTA\/Annotation\/README\.txt" > all_readme.txt
+
+for i in `cat all_readme.txt`;
+do
+    species=$(echo $i | cut -d "/" -f 5)
+    genome=$(echo $i | cut -d "/" -f 6)
+    build=$(echo $i | cut -d "/" -f 7)
+
+    echo "  readme: \"${i}\"" >> igenomes/${species}/${genome}/${build}.yml
+done
+
 # All source fasta.dict
 cat ngi-igenomes_file_manifest.txt | grep "\.dict" | grep -v "dict\.gz" | grep -v "dict\.old" > all_dict.txt
 

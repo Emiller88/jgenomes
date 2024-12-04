@@ -3,6 +3,7 @@
   source: "Ensembl"
   species: "Arabidopsis_thaliana"
   fasta_fai: "s3://ngi-igenomes/igenomes/Arabidopsis_thaliana/Ensembl/TAIR10/Sequence/WholeGenomeFasta/genome.fa.fai"
+  readme: "s3://ngi-igenomes/igenomes/Arabidopsis_thaliana/Ensembl/TAIR10/Annotation/README.txt"
   fasta_dict: "s3://ngi-igenomes/igenomes/Arabidopsis_thaliana/Ensembl/TAIR10/Sequence/WholeGenomeFasta/genome.dict"
   bowtie1_index: "s3://ngi-igenomes/igenomes/Arabidopsis_thaliana/Ensembl/TAIR10/Sequence/BowtieIndex/"
   bowtie2_index: "s3://ngi-igenomes/igenomes/Arabidopsis_thaliana/Ensembl/TAIR10/Sequence/Bowtie2Index/"

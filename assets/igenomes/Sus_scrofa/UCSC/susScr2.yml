@@ -3,6 +3,7 @@
   source: "UCSC"
   species: "Sus_scrofa"
   fasta_fai: "s3://ngi-igenomes/igenomes/Sus_scrofa/UCSC/susScr2/Sequence/WholeGenomeFasta/genome.fa.fai"
+  readme: "s3://ngi-igenomes/igenomes/Sus_scrofa/UCSC/susScr2/Annotation/README.txt"
   fasta_dict: "s3://ngi-igenomes/igenomes/Sus_scrofa/UCSC/susScr2/Sequence/WholeGenomeFasta/genome.dict"
   bowtie1_index: "s3://ngi-igenomes/igenomes/Sus_scrofa/UCSC/susScr2/Sequence/BowtieIndex/"
   bowtie2_index: "s3://ngi-igenomes/igenomes/Sus_scrofa/UCSC/susScr2/Sequence/Bowtie2Index/"
