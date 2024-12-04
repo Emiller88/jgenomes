@@ -25,7 +25,7 @@ Initial release of nf-core/references, created with the [nf-core](https://nf-co.
 - [43](https://github.com/nf-core/references/pull/43) - Add support for multiple known_indels_vcf via s3 globs
 - [47](https://github.com/nf-core/references/pull/47) - Add fasta assets for files in igenomes
 - [51](https://github.com/nf-core/references/pull/51) - Add fasta_fai assets for files in igenomes
-- [52](https://github.com/nf-core/references/pull/52) - Add readme, fasta_dict, bowtie1_index, bowtie2_index, bwamem1_index, bismark_index, bwamem2_index, dragmap_hashtable, star_index assets for files in igenomes
+- [52](https://github.com/nf-core/references/pull/52) - Add readme, fasta_dict, bowtie1_index, bowtie2_index, bwamem1_index, bismark_index, bwamem2_index, dragmap_hashtable, gtf, star_index assets for files in igenomes
 
 ### Changed
 
