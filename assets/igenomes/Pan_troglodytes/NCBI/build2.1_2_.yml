@@ -1,0 +1,5 @@
+- genome: "build2.1_2_"
+  fasta: "s3://ngi-igenomes/igenomes/Pan_troglodytes/NCBI/build2.1/Sequence/WholeGenomeFasta/genome.fa"
+  fasta_fai: "s3://ngi-igenomes/igenomes/Pan_troglodytes/NCBI/build2.1/Sequence/WholeGenomeFasta/genome.fa.fai"
+  source: "NCBI"
+  species: "Pan_troglodytes"

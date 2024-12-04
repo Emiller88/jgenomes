@@ -1,0 +1,5 @@
+- genome: "CHIMP2.1_2_"
+  fasta: "s3://ngi-igenomes/igenomes/Pan_troglodytes/Ensembl/CHIMP2.1/Sequence/WholeGenomeFasta/genome.fa"
+  fasta_fai: "s3://ngi-igenomes/igenomes/Pan_troglodytes/Ensembl/CHIMP2.1/Sequence/WholeGenomeFasta/genome.fa.fai"
+  source: "Ensembl"
+  species: "Pan_troglodytes"

@@ -1,0 +1,5 @@
+- genome: "Gm01_2_"
+  fasta: "s3://ngi-igenomes/igenomes/Glycine_max/Ensembl/Gm01/Sequence/WholeGenomeFasta/genome.fa"
+  fasta_fai: "s3://ngi-igenomes/igenomes/Glycine_max/Ensembl/Gm01/Sequence/WholeGenomeFasta/genome.fa.fai"
+  source: "Ensembl"
+  species: "Glycine_max"
