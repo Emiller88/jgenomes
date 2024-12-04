@@ -1,5 +1,0 @@
-- genome: "RTA_2_"
-  fasta: "s3://ngi-igenomes/igenomes/PhiX/Illumina/RTA/Sequence/WholeGenomeFasta/genome.fa"
-  fasta_fai: "s3://ngi-igenomes/igenomes/PhiX/Illumina/RTA/Sequence/WholeGenomeFasta/genome.fa.fai"
-  source: "Illumina"
-  species: "PhiX"

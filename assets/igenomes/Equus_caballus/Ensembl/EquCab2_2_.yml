@@ -1,5 +1,0 @@
-- genome: "EquCab2_2_"
-  fasta: "s3://ngi-igenomes/igenomes/Equus_caballus/Ensembl/EquCab2/Sequence/WholeGenomeFasta/genome.fa"
-  fasta_fai: "s3://ngi-igenomes/igenomes/Equus_caballus/Ensembl/EquCab2/Sequence/WholeGenomeFasta/genome.fa.fai"
-  source: "Ensembl"
-  species: "Equus_caballus"

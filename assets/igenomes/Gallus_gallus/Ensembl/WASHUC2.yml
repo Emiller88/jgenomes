@@ -1,5 +1,5 @@
 - genome: "WASHUC2"
-  fasta: "s3://ngi-igenomes/igenomes/Gallus_gallus/Ensembl/WASHUC2/Sequence/WholeGenomeFasta/genome.fa."
+  fasta: "s3://ngi-igenomes/igenomes/Gallus_gallus/Ensembl/WASHUC2/Sequence/WholeGenomeFasta/genome.fa"
   fasta_fai: "s3://ngi-igenomes/igenomes/Gallus_gallus/Ensembl/WASHUC2/Sequence/WholeGenomeFasta/genome.fa.fai"
   source: "Ensembl"
   species: "Gallus_gallus"

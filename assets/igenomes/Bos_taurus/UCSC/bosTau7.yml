@@ -1,5 +1,5 @@
 - genome: "bosTau7"
-  fasta: "s3://ngi-igenomes/igenomes/Bos_taurus/UCSC/bosTau7/Sequence/WholeGenomeFasta/genome.fa."
+  fasta: "s3://ngi-igenomes/igenomes/Bos_taurus/UCSC/bosTau7/Sequence/WholeGenomeFasta/genome.fa"
   fasta_fai: "s3://ngi-igenomes/igenomes/Bos_taurus/UCSC/bosTau7/Sequence/WholeGenomeFasta/genome.fa.fai"
   source: "UCSC"
   species: "Bos_taurus"

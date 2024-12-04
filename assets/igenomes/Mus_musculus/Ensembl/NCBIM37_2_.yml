@@ -1,5 +1,0 @@
-- genome: "NCBIM37_2_"
-  fasta: "s3://ngi-igenomes/igenomes/Mus_musculus/Ensembl/NCBIM37/Sequence/WholeGenomeFasta/genome.fa"
-  fasta_fai: "s3://ngi-igenomes/igenomes/Mus_musculus/Ensembl/NCBIM37/Sequence/WholeGenomeFasta/genome.fa.fai"
-  source: "Ensembl"
-  species: "Mus_musculus"

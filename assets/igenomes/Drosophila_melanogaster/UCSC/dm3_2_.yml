@@ -1,5 +1,0 @@
-- genome: "dm3_2_"
-  fasta: "s3://ngi-igenomes/igenomes/Drosophila_melanogaster/UCSC/dm3/Sequence/WholeGenomeFasta/genome.fa"
-  fasta_fai: "s3://ngi-igenomes/igenomes/Drosophila_melanogaster/UCSC/dm3/Sequence/WholeGenomeFasta/genome.fa.fai"
-  source: "UCSC"
-  species: "Drosophila_melanogaster"

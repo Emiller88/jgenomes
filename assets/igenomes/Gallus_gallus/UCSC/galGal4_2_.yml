@@ -1,5 +1,0 @@
-- genome: "galGal4_2_"
-  fasta: "s3://ngi-igenomes/igenomes/Gallus_gallus/UCSC/galGal4/Sequence/WholeGenomeFasta/genome.fa"
-  fasta_fai: "s3://ngi-igenomes/igenomes/Gallus_gallus/UCSC/galGal4/Sequence/WholeGenomeFasta/genome.fa.fai"
-  source: "UCSC"
-  species: "Gallus_gallus"

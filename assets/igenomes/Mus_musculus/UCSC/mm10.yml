@@ -1,5 +1,5 @@
 - genome: "mm10"
-  fasta: "s3://ngi-igenomes/igenomes/Mus_musculus/UCSC/mm10/Sequence/WholeGenomeFasta/genome.fa."
+  fasta: "s3://ngi-igenomes/igenomes/Mus_musculus/UCSC/mm10/Sequence/WholeGenomeFasta/genome.fa"
   fasta_fai: "s3://ngi-igenomes/igenomes/Mus_musculus/UCSC/mm10/Sequence/WholeGenomeFasta/genome.fa.fai"
   source: "UCSC"
   species: "Mus_musculus"

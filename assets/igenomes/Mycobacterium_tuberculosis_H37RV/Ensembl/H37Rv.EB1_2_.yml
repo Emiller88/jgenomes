@@ -1,5 +1,0 @@
-- genome: "H37Rv.EB1_2_"
-  fasta: "s3://ngi-igenomes/igenomes/Mycobacterium_tuberculosis_H37RV/Ensembl/H37Rv.EB1/Sequence/WholeGenomeFasta/genome.fa"
-  fasta_fai: "s3://ngi-igenomes/igenomes/Mycobacterium_tuberculosis_H37RV/Ensembl/H37Rv.EB1/Sequence/WholeGenomeFasta/genome.fa.fai"
-  source: "Ensembl"
-  species: "Mycobacterium_tuberculosis_H37RV"
