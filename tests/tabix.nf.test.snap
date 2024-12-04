@@ -1,18 +1,9 @@
 {
     "Run with profile test with tabix | --input assets/genomes/test/default_extended.yml": {
         "content": [
-            5,
+            4,
             {
-                "TABIX_DBSNP": {
-                    "tabix": 1.2
-                },
-                "TABIX_GERMLINE_RESOURCE": {
-                    "tabix": 1.2
-                },
-                "TABIX_KNOWN_INDELS": {
-                    "tabix": 1.2
-                },
-                "TABIX_KNOWN_SNPS": {
+                "TABIX_TABIX": {
                     "tabix": 1.2
                 },
                 "Workflow": {
@@ -51,22 +42,13 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-11-28T14:57:48.388939938"
+        "timestamp": "2024-12-02T11:21:55.801035083"
     },
     "Run with profile test with tabix | --input assets/genomes/test/default_full.yml": {
         "content": [
-            5,
+            4,
             {
-                "TABIX_DBSNP": {
-                    "tabix": 1.2
-                },
-                "TABIX_GERMLINE_RESOURCE": {
-                    "tabix": 1.2
-                },
-                "TABIX_KNOWN_INDELS": {
-                    "tabix": 1.2
-                },
-                "TABIX_KNOWN_SNPS": {
+                "TABIX_TABIX": {
                     "tabix": 1.2
                 },
                 "Workflow": {
@@ -105,6 +87,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-11-28T14:58:13.905623169"
+        "timestamp": "2024-12-02T11:22:15.160055968"
     }
 }

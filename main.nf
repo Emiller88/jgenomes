@@ -102,19 +102,19 @@ workflow {
 }
 
 output {
-    'bowtie1' {
+    'bowtie1_index' {
         path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/BowtieIndex/" } }
     }
-    'bowtie2' {
+    'bowtie2_index' {
         path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/Bowtie2Index/" } }
     }
-    'bwamem1' {
+    'bwamem1_index' {
         path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/BWAIndex/" } }
     }
-    'bwamem2' {
+    'bwamem2_index' {
         path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/BWAmem2Index/" } }
     }
-    'dragmap' {
+    'dragmap_hashmap' {
         path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/dragmap/" } }
     }
     'fasta' {
@@ -129,56 +129,47 @@ output {
     'fasta_sizes' {
         path { meta, sizes -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/WholeGenomeFasta/${file}" } }
     }
-    'gffread' {
+    'gtf' {
         path { meta, intervals -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/Genes/${file}" } }
     }
-    'hisat2' {
+    'hisat2_index' {
         path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/Hisat2Index/" } }
     }
-    'intervals' {
+    'intervals_bed' {
         path { meta, intervals -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/intervals/${file}" } }
     }
-    'kallisto' {
+    'kallisto_index' {
         path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/KallistoIndex/" } }
     }
-    'msisensorpro' {
+    'msisensorpro_list' {
         path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/msisensorpro/${file}" } }
     }
     'multiqc_data' {
-        path 'multiqc'
+        path { folder -> { file -> "multiqc/multiqc_data" } }
     }
     'multiqc_plots' {
-        path 'multiqc'
+        path { folder -> { file -> "multiqc/multiqc_plots" } }
     }
     'multiqc_report' {
-        path 'multiqc'
+        path { folder -> { file -> "multiqc/multiqc_report" } }
     }
-    'rsem' {
+    'rsem_index' {
         path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/RSEMIndex/" } }
     }
-    'salmon' {
+    'salmon_index' {
         path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/SalmonIndex/" } }
     }
     'splice_sites' {
         path { meta, txt -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/SpliceSites/${file}" } }
     }
-    'star' {
+    'star_index' {
         path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/STARIndex/" } }
     }
     'transcript_fasta' {
         path { meta, fasta -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/TranscriptFasta/${file}" } }
     }
-    'tabix_dbsnp' {
-        path { meta, vcf -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/${meta.source_dbsnp}/${file}" } }
-    }
-    'tabix_germline_resource' {
-        path { meta, vcf -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/${meta.source_germline_resource}/${file}" } }
-    }
-    'tabix_known_indels' {
-        path { meta, vcf -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/${meta.source_known_indels}/${file}" } }
-    }
-    'tabix_known_snps' {
-        path { meta, vcf -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/${meta.source_known_snps}/${file}" } }
+    'vcf_tbi' {
+        path { meta, tbi -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/${meta.source_vcf}/${file}" } }
     }
 }
 /*
@@ -200,28 +191,25 @@ workflow NFCORE_REFERENCES {
     REFERENCES(input, tools)
 
     emit:
-    bowtie1                   = REFERENCES.out.bowtie1
-    bowtie2                   = REFERENCES.out.bowtie2
-    bwamem1                   = REFERENCES.out.bwamem1
-    bwamem2                   = REFERENCES.out.bwamem2
-    dbsnp_vcf_tbi             = REFERENCES.out.dbsnp_vcf_tbi
-    dragmap                   = REFERENCES.out.dragmap
-    fasta                     = REFERENCES.out.fasta
-    fasta_dict                = REFERENCES.out.fasta_dict
-    fasta_fai                 = REFERENCES.out.fasta_fai
-    germline_resource_vcf_tbi = REFERENCES.out.germline_resource_vcf_tbi
-    gffread                   = REFERENCES.out.gff_gtf
-    hisat2                    = REFERENCES.out.hisat2
-    hisat2_splice_sites       = REFERENCES.out.hisat2_splice_sites
-    intervals                 = REFERENCES.out.intervals_bed
-    kallisto                  = REFERENCES.out.kallisto
-    known_indels_vcf_tbi      = REFERENCES.out.known_indels_vcf_tbi
-    known_snps_vcf_tbi        = REFERENCES.out.known_snps_vcf_tbi
-    msisensorpro              = REFERENCES.out.msisensorpro
-    rsem                      = REFERENCES.out.rsem
-    rsem_transcript_fasta     = REFERENCES.out.rsem_transcript_fasta
-    salmon                    = REFERENCES.out.salmon
-    sizes                     = REFERENCES.out.sizes
-    star                      = REFERENCES.out.star
-    versions                  = REFERENCES.out.versions
+    bowtie1_index     = REFERENCES.out.bowtie1_index
+    bowtie2_index     = REFERENCES.out.bowtie2_index
+    bwamem1_index     = REFERENCES.out.bwamem1_index
+    bwamem2_index     = REFERENCES.out.bwamem2_index
+    dragmap_hashmap   = REFERENCES.out.dragmap_hashmap
+    fasta             = REFERENCES.out.fasta
+    fasta_dict        = REFERENCES.out.fasta_dict
+    fasta_fai         = REFERENCES.out.fasta_fai
+    fasta_sizes       = REFERENCES.out.fasta_sizes
+    gtf               = REFERENCES.out.gtf
+    hisat2_index      = REFERENCES.out.hisat2_index
+    splice_sites      = REFERENCES.out.splice_sites
+    intervals_bed     = REFERENCES.out.intervals_bed
+    kallisto_index    = REFERENCES.out.kallisto_index
+    msisensorpro_list = REFERENCES.out.msisensorpro_list
+    rsem_index        = REFERENCES.out.rsem_index
+    transcript_fasta  = REFERENCES.out.transcript_fasta
+    salmon_index      = REFERENCES.out.salmon_index
+    star_index        = REFERENCES.out.star_index
+    vcf_tbi           = REFERENCES.out.vcf_tbi
+    versions          = REFERENCES.out.versions
 }
