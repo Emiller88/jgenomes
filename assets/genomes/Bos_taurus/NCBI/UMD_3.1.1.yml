@@ -1,4 +1,0 @@
-- genome: "UMD_3.1.1"
-  fasta: "s3://ngi-igenomes/igenomes/Bos_taurus/NCBI/UMD_3.1.1/Sequence/WholeGenomeFasta/genome.fa"
-  source: "NCBI"
-  species: "Bos_taurus"

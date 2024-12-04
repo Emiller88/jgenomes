@@ -1,4 +1,0 @@
-- genome: "MSU6"
-  fasta: "s3://ngi-igenomes/igenomes/Oryza_sativa_japonica/Ensembl/MSU6/Sequence/WholeGenomeFasta/genome.fa"
-  source: "Ensembl"
-  species: "Oryza_sativa_japonica"

@@ -1,4 +1,0 @@
-- genome: "TAIR10"
-  fasta: "s3://ngi-igenomes/igenomes/Arabidopsis_thaliana/Ensembl/TAIR10/Sequence/WholeGenomeFasta/genome.fa"
-  source: "Ensembl"
-  species: "Arabidopsis_thaliana"

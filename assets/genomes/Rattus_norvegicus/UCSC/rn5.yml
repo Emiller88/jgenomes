@@ -1,4 +1,0 @@
-- genome: "rn5"
-  fasta: "s3://ngi-igenomes/igenomes/Rattus_norvegicus/UCSC/rn5/Sequence/WholeGenomeFasta/genome.fa"
-  source: "UCSC"
-  species: "Rattus_norvegicus"

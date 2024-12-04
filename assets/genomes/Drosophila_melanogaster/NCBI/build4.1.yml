@@ -1,4 +1,0 @@
-- genome: "build4.1"
-  fasta: "s3://ngi-igenomes/igenomes/Drosophila_melanogaster/NCBI/build4.1/Sequence/WholeGenomeFasta/genome.fa"
-  source: "NCBI"
-  species: "Drosophila_melanogaster"

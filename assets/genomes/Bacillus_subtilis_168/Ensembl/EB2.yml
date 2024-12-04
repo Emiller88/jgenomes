@@ -1,4 +1,0 @@
-- genome: "EB2"
-  fasta: "s3://ngi-igenomes/igenomes/Bacillus_subtilis_168/Ensembl/EB2/Sequence/WholeGenomeFasta/genome.fa"
-  source: "Ensembl"
-  species: "Bacillus_subtilis_168"

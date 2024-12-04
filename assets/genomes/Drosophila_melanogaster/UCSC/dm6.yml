@@ -1,4 +1,0 @@
-- genome: "dm6"
-  fasta: "s3://ngi-igenomes/igenomes/Drosophila_melanogaster/UCSC/dm6/Sequence/WholeGenomeFasta/genome.fa"
-  source: "UCSC"
-  species: "Drosophila_melanogaster"

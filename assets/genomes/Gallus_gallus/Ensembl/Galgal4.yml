@@ -1,4 +1,0 @@
-- genome: "Galgal4"
-  fasta: "s3://ngi-igenomes/igenomes/Gallus_gallus/Ensembl/Galgal4/Sequence/WholeGenomeFasta/genome.fa"
-  source: "Ensembl"
-  species: "Gallus_gallus"

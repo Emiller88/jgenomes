@@ -1,4 +1,0 @@
-- genome: "build3.1"
-  fasta: "s3://ngi-igenomes/igenomes/Pan_troglodytes/NCBI/build3.1/Sequence/WholeGenomeFasta/genome.fa"
-  source: "NCBI"
-  species: "Pan_troglodytes"

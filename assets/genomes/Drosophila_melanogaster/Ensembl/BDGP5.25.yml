@@ -1,4 +1,0 @@
-- genome: "BDGP5.25"
-  fasta: "s3://ngi-igenomes/igenomes/Drosophila_melanogaster/Ensembl/BDGP5.25/Sequence/WholeGenomeFasta/genome.fa"
-  source: "Ensembl"
-  species: "Drosophila_melanogaster"

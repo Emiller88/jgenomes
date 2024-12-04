@@ -1,0 +1,5 @@
+- genome: "2004-02-13"
+  fasta: "s3://ngi-igenomes/igenomes/Bacillus_cereus_ATCC_10987/NCBI/2004-02-13/Sequence/WholeGenomeFasta/genome.fa"
+  source: "NCBI"
+  species: "Bacillus_cereus_ATCC_10987"
+  fasta_fai: "s3://ngi-igenomes/igenomes/Bacillus_cereus_ATCC_10987/NCBI/2004-02-13/Sequence/WholeGenomeFasta/genome.fa.fai"

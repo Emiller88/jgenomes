@@ -1,0 +1,5 @@
+- genome: "hg18"
+  fasta: "s3://ngi-igenomes/igenomes/Homo_sapiens/UCSC/hg18/Sequence/WholeGenomeFasta/genome.fa"
+  source: "UCSC"
+  species: "Homo_sapiens"
+  fasta_fai: "s3://ngi-igenomes/igenomes/Homo_sapiens/UCSC/hg18/Sequence/WholeGenomeFasta/genome.fa.fai"

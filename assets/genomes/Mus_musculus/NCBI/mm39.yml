@@ -1,0 +1,6 @@
+- genome: mm39
+  fasta: https://hgdownload.soe.ucsc.edu/goldenPath/mm39/bigZips/mm39.fa.gz
+  gtf: https://hgdownload.soe.ucsc.edu/goldenPath/mm39/bigZips/genes/mm39.ncbiRefSeq.gtf.gz
+  mito_name: MT
+  site: https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000001635.27/
+  reference_version: GCF_000001635.27

@@ -1,0 +1,5 @@
+- genome: "BDGP6"
+  fasta: "s3://ngi-igenomes/igenomes/Drosophila_melanogaster/Ensembl/BDGP6/Sequence/WholeGenomeFasta/genome.fa"
+  source: "Ensembl"
+  species: "Drosophila_melanogaster"
+  fasta_fai: "s3://ngi-igenomes/igenomes/Drosophila_melanogaster/Ensembl/BDGP6/Sequence/WholeGenomeFasta/genome.fa.fai"

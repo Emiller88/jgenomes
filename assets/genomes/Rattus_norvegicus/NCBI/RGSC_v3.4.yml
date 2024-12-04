@@ -1,4 +1,0 @@
-- genome: "RGSC_v3.4"
-  fasta: "s3://ngi-igenomes/igenomes/Rattus_norvegicus/NCBI/RGSC_v3.4/Sequence/WholeGenomeFasta/genome.fa"
-  source: "NCBI"
-  species: "Rattus_norvegicus"

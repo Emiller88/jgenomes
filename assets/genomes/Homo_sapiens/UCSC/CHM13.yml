@@ -1,4 +1,0 @@
-- genome: "CHM13"
-  fasta: "s3://ngi-igenomes/igenomes/Homo_sapiens/UCSC/CHM13/Sequence/WholeGenomeFasta/genome.fa"
-  source: "UCSC"
-  species: "Homo_sapiens"

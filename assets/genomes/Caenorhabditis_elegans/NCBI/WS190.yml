@@ -1,4 +1,0 @@
-- genome: "WS190"
-  fasta: "s3://ngi-igenomes/igenomes/Caenorhabditis_elegans/NCBI/WS190/Sequence/WholeGenomeFasta/genome.fa"
-  source: "NCBI"
-  species: "Caenorhabditis_elegans"

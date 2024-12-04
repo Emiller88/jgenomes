@@ -1,4 +1,0 @@
-- genome: "BROADD2"
-  fasta: "s3://ngi-igenomes/igenomes/Canis_familiaris/Ensembl/BROADD2/Sequence/WholeGenomeFasta/genome.fa"
-  source: "Ensembl"
-  species: "Canis_familiaris"

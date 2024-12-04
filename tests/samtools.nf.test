@@ -37,13 +37,13 @@ nextflow_pipeline {
         }
     }
 
-    test("Run with profile test for samtools | --input assets/genomes/test/default_extended.yml") {
+    test("Run with profile test for samtools | --input assets/test/default_extended.yml") {
 
         options "-output-dir $outputDir"
 
         when {
             params {
-                input  = "${projectDir}/assets/genomes/test/default_extended.yml"
+                input  = "${projectDir}/assets/test/default_extended.yml"
                 outdir = "$outputDir"
                 tools  = 'faidx,intervals,sizes'
             }
@@ -70,13 +70,13 @@ nextflow_pipeline {
         }
     }
 
-    test("Run with profile test for samtools | --input assets/genomes/test/default_full.yml") {
+    test("Run with profile test for samtools | --input assets/test/default_full.yml") {
 
         options "-output-dir $outputDir"
 
         when {
             params {
-                input  = "${projectDir}/assets/genomes/test/default_full.yml"
+                input  = "${projectDir}/assets/test/default_full.yml"
                 outdir = "$outputDir"
                 tools  = 'faidx,intervals,sizes'
             }

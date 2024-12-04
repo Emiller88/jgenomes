@@ -1,0 +1,5 @@
+- genome: "GRCh38Decoy"
+  fasta: "s3://ngi-igenomes/igenomes/Homo_sapiens/NCBI/GRCh38Decoy/Sequence/WholeGenomeFasta/genome.fa"
+  source: "NCBI"
+  species: "Homo_sapiens"
+  fasta_fai: "s3://ngi-igenomes/igenomes/Homo_sapiens/NCBI/GRCh38Decoy/Sequence/WholeGenomeFasta/genome.fa.fai"

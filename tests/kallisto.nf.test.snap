@@ -52,7 +52,7 @@
         },
         "timestamp": "2024-12-03T14:31:39.422746281"
     },
-    "Run with profile test for kallisto | --input assets/genomes/test/default_extended.yml": {
+    "Run with profile test for kallisto | --input assets/test/default_extended.yml": {
         "content": [
             2,
             {

@@ -1,4 +1,0 @@
-- genome: "1993-04-28"
-  fasta: "s3://ngi-igenomes/igenomes/PhiX/NCBI/1993-04-28/Sequence/WholeGenomeFasta/genome.fa"
-  source: "NCBI"
-  species: "PhiX"

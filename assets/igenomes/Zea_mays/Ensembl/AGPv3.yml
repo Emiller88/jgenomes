@@ -1,0 +1,5 @@
+- genome: "AGPv3"
+  fasta: "s3://ngi-igenomes/igenomes/Zea_mays/Ensembl/AGPv3/Sequence/WholeGenomeFasta/genome.fa"
+  source: "Ensembl"
+  species: "Zea_mays"
+  fasta_fai: "s3://ngi-igenomes/igenomes/Zea_mays/Ensembl/AGPv3/Sequence/WholeGenomeFasta/genome.fa.fai"

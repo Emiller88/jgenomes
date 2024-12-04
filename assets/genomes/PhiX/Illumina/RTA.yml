@@ -1,4 +1,0 @@
-- genome: "RTA"
-  fasta: "s3://ngi-igenomes/igenomes/PhiX/Illumina/RTA/Sequence/WholeGenomeFasta/genome.fa"
-  source: "Illumina"
-  species: "PhiX"

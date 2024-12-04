@@ -1,4 +1,0 @@
-- genome: GRCh37
-  fasta: "s3://ngi-igenomes/igenomes/Homo_sapiens/Ensembl/GRCh37/Sequence/WholeGenomeFasta/genome.fa"
-  species: "Homo_sapiens"
-  source: "Ensembl"

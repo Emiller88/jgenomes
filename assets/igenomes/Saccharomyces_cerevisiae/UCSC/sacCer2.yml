@@ -1,0 +1,5 @@
+- genome: "sacCer2"
+  fasta: "s3://ngi-igenomes/igenomes/Saccharomyces_cerevisiae/UCSC/sacCer2/Sequence/WholeGenomeFasta/genome.fa"
+  source: "UCSC"
+  species: "Saccharomyces_cerevisiae"
+  fasta_fai: "s3://ngi-igenomes/igenomes/Saccharomyces_cerevisiae/UCSC/sacCer2/Sequence/WholeGenomeFasta/genome.fa.fai"

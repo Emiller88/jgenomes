@@ -1,4 +1,0 @@
-- genome: "build2.1"
-  fasta: "s3://ngi-igenomes/igenomes/Saccharomyces_cerevisiae/NCBI/build2.1/Sequence/WholeGenomeFasta/genome.fa"
-  source: "NCBI"
-  species: "Saccharomyces_cerevisiae"

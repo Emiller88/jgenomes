@@ -77,7 +77,7 @@
         },
         "timestamp": "2024-12-03T14:43:57.125501449"
     },
-    "Run with profile test for salmon | --input assets/genomes/test/default_extended.yml": {
+    "Run with profile test for salmon | --input assets/test/default_extended.yml": {
         "content": [
             2,
             {

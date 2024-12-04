@@ -1,5 +1,5 @@
 {
-    "Run with profile test for multiple with globs on s3 | --input assets/genomes/test/pipelines/sarek_s3_muliple_glob.yml": {
+    "Run with profile test for multiple with globs on s3 | --input assets/test/pipelines/sarek_s3_muliple_glob.yml": {
         "content": [
             5,
             {
@@ -48,7 +48,7 @@
         },
         "timestamp": "2024-12-02T12:09:53.42046409"
     },
-    "Run with profile test for multiple | --input assets/genomes/test/default_multiple.yml": {
+    "Run with profile test for multiple | --input assets/test/default_multiple.yml": {
         "content": [
             9,
             {

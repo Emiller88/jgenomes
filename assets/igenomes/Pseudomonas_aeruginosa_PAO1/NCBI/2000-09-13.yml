@@ -1,0 +1,5 @@
+- genome: "2000-09-13"
+  fasta: "s3://ngi-igenomes/igenomes/Pseudomonas_aeruginosa_PAO1/NCBI/2000-09-13/Sequence/WholeGenomeFasta/genome.fa"
+  source: "NCBI"
+  species: "Pseudomonas_aeruginosa_PAO1"
+  fasta_fai: "s3://ngi-igenomes/igenomes/Pseudomonas_aeruginosa_PAO1/NCBI/2000-09-13/Sequence/WholeGenomeFasta/genome.fa.fai"

@@ -1,0 +1,5 @@
+- genome: "IRGSP-1.0"
+  fasta: "s3://ngi-igenomes/igenomes/Oryza_sativa_japonica/Ensembl/IRGSP-1.0/Sequence/WholeGenomeFasta/genome.fa"
+  source: "Ensembl"
+  species: "Oryza_sativa_japonica"
+  fasta_fai: "s3://ngi-igenomes/igenomes/Oryza_sativa_japonica/Ensembl/IRGSP-1.0/Sequence/WholeGenomeFasta/genome.fa.fai"
