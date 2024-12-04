@@ -39,6 +39,7 @@ do
     echo "  source: \"${genome}\"" >> igenomes/${species}/${genome}/${build}.yml
     echo "  species: \"${species}\"" >> igenomes/${species}/${genome}/${build}.yml
     echo "  fasta_fai: \"${i}\"" >> igenomes/${species}/${genome}/${build}.yml
+    sed -i "\|${i::-4}|d" result_manifest.txt
     sed -i "\|${i}|d" result_manifest.txt
 done
 
