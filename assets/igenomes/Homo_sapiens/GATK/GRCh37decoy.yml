@@ -3,3 +3,4 @@
   source: "GATK"
   species: "Homo_sapiens"
   fasta_fai: "s3://ngi-igenomes/igenomes/Homo_sapiens/GATK/GRCh37/Sequence/WholeGenomeFasta/human_g1k_v37_decoy.fasta.fai"
+  fasta_dict: "s3://ngi-igenomes/igenomes/Homo_sapiens/GATK/GRCh37/Sequence/WholeGenomeFasta/human_g1k_v37_decoy.dict"

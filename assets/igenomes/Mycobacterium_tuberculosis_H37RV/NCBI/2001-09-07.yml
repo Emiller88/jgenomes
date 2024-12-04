@@ -3,3 +3,4 @@
   source: "NCBI"
   species: "Mycobacterium_tuberculosis_H37RV"
   fasta_fai: "s3://ngi-igenomes/igenomes/Mycobacterium_tuberculosis_H37RV/NCBI/2001-09-07/Sequence/WholeGenomeFasta/genome.fa.fai"
+  fasta_dict: "s3://ngi-igenomes/igenomes/Mycobacterium_tuberculosis_H37RV/NCBI/2001-09-07/Sequence/WholeGenomeFasta/genome.dict"

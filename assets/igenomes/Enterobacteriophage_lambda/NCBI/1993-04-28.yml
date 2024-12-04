@@ -3,3 +3,4 @@
   source: "NCBI"
   species: "Enterobacteriophage_lambda"
   fasta_fai: "s3://ngi-igenomes/igenomes/Enterobacteriophage_lambda/NCBI/1993-04-28/Sequence/WholeGenomeFasta/genome.fa.fai"
+  fasta_dict: "s3://ngi-igenomes/igenomes/Enterobacteriophage_lambda/NCBI/1993-04-28/Sequence/WholeGenomeFasta/genome.dict"

@@ -3,3 +3,4 @@
   source: "Ensembl"
   species: "Sorghum_bicolor"
   fasta_fai: "s3://ngi-igenomes/igenomes/Sorghum_bicolor/Ensembl/Sbi1/Sequence/WholeGenomeFasta/genome.fa.fai"
+  fasta_dict: "s3://ngi-igenomes/igenomes/Sorghum_bicolor/Ensembl/Sbi1/Sequence/WholeGenomeFasta/genome.dict"

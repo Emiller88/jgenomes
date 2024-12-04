@@ -3,3 +3,4 @@
   source: "Ensembl"
   species: "Rattus_norvegicus"
   fasta_fai: "s3://ngi-igenomes/igenomes/Rattus_norvegicus/Ensembl/RGSC3.4/Sequence/WholeGenomeFasta/genome.fa.fai"
+  fasta_dict: "s3://ngi-igenomes/igenomes/Rattus_norvegicus/Ensembl/RGSC3.4/Sequence/WholeGenomeFasta/genome.dict"

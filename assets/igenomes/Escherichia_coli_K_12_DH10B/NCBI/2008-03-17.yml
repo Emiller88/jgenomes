@@ -3,3 +3,4 @@
   source: "NCBI"
   species: "Escherichia_coli_K_12_DH10B"
   fasta_fai: "s3://ngi-igenomes/igenomes/Escherichia_coli_K_12_DH10B/NCBI/2008-03-17/Sequence/WholeGenomeFasta/genome.fa.fai"
+  fasta_dict: "s3://ngi-igenomes/igenomes/Escherichia_coli_K_12_DH10B/NCBI/2008-03-17/Sequence/WholeGenomeFasta/genome.dict"

@@ -3,3 +3,4 @@
   source: "Ensembl"
   species: "Schizosaccharomyces_pombe"
   fasta_fai: "s3://ngi-igenomes/igenomes/Schizosaccharomyces_pombe/Ensembl/EF1/Sequence/WholeGenomeFasta/genome.fa.fai"
+  fasta_dict: "s3://ngi-igenomes/igenomes/Schizosaccharomyces_pombe/Ensembl/EF1/Sequence/WholeGenomeFasta/genome.dict"

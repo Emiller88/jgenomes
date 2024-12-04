@@ -3,3 +3,4 @@
   source: "Ensembl"
   species: "Caenorhabditis_elegans"
   fasta_fai: "s3://ngi-igenomes/igenomes/Caenorhabditis_elegans/Ensembl/WBcel215/Sequence/WholeGenomeFasta/genome.fa.fai"
+  fasta_dict: "s3://ngi-igenomes/igenomes/Caenorhabditis_elegans/Ensembl/WBcel215/Sequence/WholeGenomeFasta/genome.dict"

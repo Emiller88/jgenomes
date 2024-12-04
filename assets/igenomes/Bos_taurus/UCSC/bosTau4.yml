@@ -3,3 +3,4 @@
   source: "UCSC"
   species: "Bos_taurus"
   fasta_fai: "s3://ngi-igenomes/igenomes/Bos_taurus/UCSC/bosTau4/Sequence/WholeGenomeFasta/genome.fa.fai"
+  fasta_dict: "s3://ngi-igenomes/igenomes/Bos_taurus/UCSC/bosTau4/Sequence/WholeGenomeFasta/genome.dict"
