@@ -6,6 +6,7 @@
   readme: "s3://ngi-igenomes/igenomes/Bos_taurus/NCBI/Btau_4.6.1/Annotation/README.txt"
   gtf: "s3://ngi-igenomes/igenomes/Bos_taurus/NCBI/Btau_4.6.1/Annotation/Genes/genes.gtf"
   fasta_dict: "s3://ngi-igenomes/igenomes/Bos_taurus/NCBI/Btau_4.6.1/Sequence/WholeGenomeFasta/genome.dict"
+  genes_bed: "s3://ngi-igenomes/igenomes/Bos_taurus/NCBI/Btau_4.6.1/Annotation/Genes/genes.bed"
   bowtie1_index: "s3://ngi-igenomes/igenomes/Bos_taurus/NCBI/Btau_4.6.1/Sequence/BowtieIndex/"
   bowtie2_index: "s3://ngi-igenomes/igenomes/Bos_taurus/NCBI/Btau_4.6.1/Sequence/Bowtie2Index/"
   bwamem1_index: "s3://ngi-igenomes/igenomes/Bos_taurus/NCBI/Btau_4.6.1/Sequence/BWAIndex/version0.6.0/"
