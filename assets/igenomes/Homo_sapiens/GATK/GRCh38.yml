@@ -6,3 +6,7 @@
   fasta_dict: "s3://ngi-igenomes/igenomes/Homo_sapiens/GATK/GRCh38/Sequence/WholeGenomeFasta/Homo_sapiens_assembly38.dict"
   bwamem2_index: "s3://ngi-igenomes/igenomes/Homo_sapiens/GATK/GRCh38/Sequence/BWAmem2Index/"
   dragmap_hashtable: "s3://ngi-igenomes/igenomes/Homo_sapiens/GATK/GRCh38/Sequence/dragmap/"
+- genome: "GRCh38"
+  source: "GATK"
+  species: "Homo_sapiens"
+  bwamem1_index: "s3://ngi-igenomes/igenomes/Homo_sapiens/GATK/GRCh38/Sequence/BWAIndex/"
