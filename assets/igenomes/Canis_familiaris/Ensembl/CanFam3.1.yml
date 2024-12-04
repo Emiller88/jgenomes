@@ -7,3 +7,4 @@
   bowtie1_index: "s3://ngi-igenomes/igenomes/Canis_familiaris/Ensembl/CanFam3.1/Sequence/BowtieIndex/"
   bowtie2_index: "s3://ngi-igenomes/igenomes/Canis_familiaris/Ensembl/CanFam3.1/Sequence/Bowtie2Index/"
   bwamem1_index: "s3://ngi-igenomes/igenomes/Canis_familiaris/Ensembl/CanFam3.1/Sequence/BWAIndex/"
+  star_index: "s3://ngi-igenomes/igenomes/Canis_familiaris/Ensembl/CanFam3.1/Sequence/STARIndex/"

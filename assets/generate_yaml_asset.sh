@@ -75,7 +75,7 @@ do
     echo "  bowtie2_index: \"${i}/\"" >> igenomes/${species}/${genome}/${build}.yml
 done
 
-# All source BWAmem1
+# Just first source BWAmem1 (not keeping version0.5.x or version0.6.0 for now)
 cat ngi-igenomes_file_manifest.txt | grep "BWAIndex" | grep -v "version" | rev | cut -d "/" -f 2- | rev | sort -u > all_bwaindex.txt
 
 for i in `cat all_bwaindex.txt`;
@@ -109,6 +109,18 @@ do
     build=$(echo $i | cut -d "/" -f 7)
 
     echo "  dragmap_hashtable: \"${i}/\"" >> igenomes/${species}/${genome}/${build}.yml
+done
+
+# All source star
+cat ngi-igenomes_file_manifest.txt | grep "STARIndex" | rev | cut -d "/" -f 2- | rev | sort -u > all_star.txt
+
+for i in `cat all_star.txt`;
+do
+    species=$(echo $i | cut -d "/" -f 5)
+    genome=$(echo $i | cut -d "/" -f 6)
+    build=$(echo $i | cut -d "/" -f 7)
+
+    echo "  star_index: \"${i}/\"" >> igenomes/${species}/${genome}/${build}.yml
 done
 
 #  Homo_sapiens/GATK/GRCh37.yml should actually be Homo_sapiens/GATK/GRCh37decoy.yml

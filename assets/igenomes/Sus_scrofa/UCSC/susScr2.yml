@@ -7,3 +7,4 @@
   bowtie1_index: "s3://ngi-igenomes/igenomes/Sus_scrofa/UCSC/susScr2/Sequence/BowtieIndex/"
   bowtie2_index: "s3://ngi-igenomes/igenomes/Sus_scrofa/UCSC/susScr2/Sequence/Bowtie2Index/"
   bwamem1_index: "s3://ngi-igenomes/igenomes/Sus_scrofa/UCSC/susScr2/Sequence/BWAIndex/"
+  star_index: "s3://ngi-igenomes/igenomes/Sus_scrofa/UCSC/susScr2/Sequence/STARIndex/"

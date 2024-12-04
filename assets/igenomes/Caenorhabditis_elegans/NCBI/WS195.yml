@@ -7,3 +7,4 @@
   bowtie1_index: "s3://ngi-igenomes/igenomes/Caenorhabditis_elegans/NCBI/WS195/Sequence/BowtieIndex/"
   bowtie2_index: "s3://ngi-igenomes/igenomes/Caenorhabditis_elegans/NCBI/WS195/Sequence/Bowtie2Index/"
   bwamem1_index: "s3://ngi-igenomes/igenomes/Caenorhabditis_elegans/NCBI/WS195/Sequence/BWAIndex/"
+  star_index: "s3://ngi-igenomes/igenomes/Caenorhabditis_elegans/NCBI/WS195/Sequence/STARIndex/"

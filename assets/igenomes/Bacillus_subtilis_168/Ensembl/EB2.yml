@@ -7,3 +7,4 @@
   bowtie1_index: "s3://ngi-igenomes/igenomes/Bacillus_subtilis_168/Ensembl/EB2/Sequence/BowtieIndex/"
   bowtie2_index: "s3://ngi-igenomes/igenomes/Bacillus_subtilis_168/Ensembl/EB2/Sequence/Bowtie2Index/"
   bwamem1_index: "s3://ngi-igenomes/igenomes/Bacillus_subtilis_168/Ensembl/EB2/Sequence/BWAIndex/"
+  star_index: "s3://ngi-igenomes/igenomes/Bacillus_subtilis_168/Ensembl/EB2/Sequence/STARIndex/"

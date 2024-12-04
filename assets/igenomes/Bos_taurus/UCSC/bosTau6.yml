@@ -7,3 +7,4 @@
   bowtie1_index: "s3://ngi-igenomes/igenomes/Bos_taurus/UCSC/bosTau6/Sequence/BowtieIndex/"
   bowtie2_index: "s3://ngi-igenomes/igenomes/Bos_taurus/UCSC/bosTau6/Sequence/Bowtie2Index/"
   bwamem1_index: "s3://ngi-igenomes/igenomes/Bos_taurus/UCSC/bosTau6/Sequence/BWAIndex/"
+  star_index: "s3://ngi-igenomes/igenomes/Bos_taurus/UCSC/bosTau6/Sequence/STARIndex/"
