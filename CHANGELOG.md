@@ -24,6 +24,7 @@ Initial release of nf-core/references, created with the [nf-core](https://nf-co.
 - [42](https://github.com/nf-core/references/pull/42) - Add multiple references build tests
 - [43](https://github.com/nf-core/references/pull/43) - Add support for multiple known_indels_vcf via s3 globs
 - [47](https://github.com/nf-core/references/pull/47) - Add fasta assets for files in igenomes
+- [51](https://github.com/nf-core/references/pull/51) - Add fasta_fai assets for files in igenomes
 
 ### Changed
 
@@ -51,6 +52,7 @@ Initial release of nf-core/references, created with the [nf-core](https://nf-co.
 - [36](https://github.com/nf-core/references/pull/36) - Deal intervals generation
 - [39](https://github.com/nf-core/references/pull/39) - Fix gtf generation and dependencies
 - [50](https://github.com/nf-core/references/pull/50) - Minimal JAVA is 17
+- [51](https://github.com/nf-core/references/pull/51) - Fix missing fasta assets for GATK build
 
 ### Dependencies
 
