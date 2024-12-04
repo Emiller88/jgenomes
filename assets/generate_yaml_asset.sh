@@ -75,8 +75,8 @@ do
     echo "  bowtie2_index: \"${i}/\"" >> igenomes/${species}/${genome}/${build}.yml
 done
 
-# Just first source BWAmem1 (not keeping version0.5.x or version0.6.0 for now)
-cat ngi-igenomes_file_manifest.txt | grep "BWAIndex" | grep -v "version" | rev | cut -d "/" -f 2- | rev | sort -u > all_bwaindex.txt
+# Just LAST source BWAmem1 (SO if we have version0.6.0, we keep it, otherwise it's version0.5.x, and if not the one with no version specified)
+cat ngi-igenomes_file_manifest.txt | grep "BWAIndex" | rev | cut -d "/" -f 2- | rev | sort -u > all_bwaindex.txt
 
 for i in `cat all_bwaindex.txt`;
 do
@@ -84,6 +84,7 @@ do
     genome=$(echo $i | cut -d "/" -f 6)
     build=$(echo $i | cut -d "/" -f 7)
 
+    sed -i '/bwamem1_index/d' igenomes/${species}/${genome}/${build}.yml
     echo "  bwamem1_index: \"${i}/\"" >> igenomes/${species}/${genome}/${build}.yml
 done
 

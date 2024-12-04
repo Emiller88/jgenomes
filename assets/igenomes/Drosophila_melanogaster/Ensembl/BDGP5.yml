@@ -6,5 +6,5 @@
   fasta_dict: "s3://ngi-igenomes/igenomes/Drosophila_melanogaster/Ensembl/BDGP5/Sequence/WholeGenomeFasta/genome.dict"
   bowtie1_index: "s3://ngi-igenomes/igenomes/Drosophila_melanogaster/Ensembl/BDGP5/Sequence/BowtieIndex/"
   bowtie2_index: "s3://ngi-igenomes/igenomes/Drosophila_melanogaster/Ensembl/BDGP5/Sequence/Bowtie2Index/"
-  bwamem1_index: "s3://ngi-igenomes/igenomes/Drosophila_melanogaster/Ensembl/BDGP5/Sequence/BWAIndex/"
+  bwamem1_index: "s3://ngi-igenomes/igenomes/Drosophila_melanogaster/Ensembl/BDGP5/Sequence/BWAIndex/version0.6.0/"
   star_index: "s3://ngi-igenomes/igenomes/Drosophila_melanogaster/Ensembl/BDGP5/Sequence/STARIndex/"

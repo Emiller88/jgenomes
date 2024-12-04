@@ -6,5 +6,5 @@
   fasta_dict: "s3://ngi-igenomes/igenomes/Mycobacterium_tuberculosis_H37RV/NCBI/2001-09-07/Sequence/WholeGenomeFasta/genome.dict"
   bowtie1_index: "s3://ngi-igenomes/igenomes/Mycobacterium_tuberculosis_H37RV/NCBI/2001-09-07/Sequence/BowtieIndex/"
   bowtie2_index: "s3://ngi-igenomes/igenomes/Mycobacterium_tuberculosis_H37RV/NCBI/2001-09-07/Sequence/Bowtie2Index/"
-  bwamem1_index: "s3://ngi-igenomes/igenomes/Mycobacterium_tuberculosis_H37RV/NCBI/2001-09-07/Sequence/BWAIndex/"
+  bwamem1_index: "s3://ngi-igenomes/igenomes/Mycobacterium_tuberculosis_H37RV/NCBI/2001-09-07/Sequence/BWAIndex/version0.6.0/"
   star_index: "s3://ngi-igenomes/igenomes/Mycobacterium_tuberculosis_H37RV/NCBI/2001-09-07/Sequence/STARIndex/"
