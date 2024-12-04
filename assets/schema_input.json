@@ -18,25 +18,10 @@
                 "errorMessage": "Where the references came from",
                 "meta": ["source"]
             },
-            "source_dbsnp": {
+            "source_vcf": {
                 "type": "string",
                 "errorMessage": "Where the references came from",
-                "meta": ["source_dbsnp"]
-            },
-            "source_germline_resource": {
-                "type": "string",
-                "errorMessage": "Where the references came from",
-                "meta": ["source_germline_resource"]
-            },
-            "source_known_indels": {
-                "type": "string",
-                "errorMessage": "Where the references came from",
-                "meta": ["source_known_indels"]
-            },
-            "source_known_snps": {
-                "type": "string",
-                "errorMessage": "Where the references came from",
-                "meta": ["source_known_snps"]
+                "meta": ["source_vcf"]
             },
             "species": {
                 "type": "string",
@@ -88,22 +73,7 @@
                 "pattern": "^\\S+\\.f(ast|n)?a(\\.gz)?$",
                 "errorMessage": "TODO"
             },
-            "dbsnp_vcf": {
-                "type": "string",
-                "pattern": "^\\S+\\.vcf\\.gz$",
-                "errorMessage": "TODO"
-            },
-            "known_snps_vcf": {
-                "type": "string",
-                "pattern": "^\\S+\\.vcf\\.gz$",
-                "errorMessage": "TODO"
-            },
-            "known_indels_vcf": {
-                "type": "string",
-                "pattern": "^\\S+\\.vcf\\.gz$",
-                "errorMessage": "TODO"
-            },
-            "germline_resource_vcf": {
+            "vcf": {
                 "type": "string",
                 "pattern": "^\\S+\\.vcf\\.gz$",
                 "errorMessage": "TODO"

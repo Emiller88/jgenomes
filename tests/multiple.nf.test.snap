@@ -3,7 +3,7 @@
         "content": [
             5,
             {
-                "TABIX_KNOWN_INDELS": {
+                "TABIX_TABIX": {
                     "tabix": 1.2
                 },
                 "Workflow": {
@@ -46,7 +46,7 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-11-28T18:25:56.49079277"
+        "timestamp": "2024-12-02T12:09:53.42046409"
     },
     "Run with profile test for multiple | --input assets/test/default_multiple.yml": {
         "content": [
@@ -135,6 +135,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-11-28T16:56:49.442608122"
+        "timestamp": "2024-12-02T12:27:31.034085088"
     }
 }
