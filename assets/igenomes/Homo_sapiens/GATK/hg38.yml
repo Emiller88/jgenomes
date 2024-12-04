@@ -1,0 +1,5 @@
+- genome: "hg38"
+  fasta: "s3://ngi-igenomes/igenomes/Homo_sapiens/GATK/hg38/Homo_sapiens_assembly38.fasta."
+  fasta_fai: "s3://ngi-igenomes/igenomes/Homo_sapiens/GATK/hg38/Homo_sapiens_assembly38.fasta.fai"
+  source: "GATK"
+  species: "Homo_sapiens"

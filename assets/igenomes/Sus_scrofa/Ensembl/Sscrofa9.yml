@@ -1,4 +1,5 @@
 - genome: "Sscrofa9"
-  fasta: "s3://ngi-igenomes/igenomes/Sus_scrofa/Ensembl/Sscrofa9/Sequence/WholeGenomeFasta/genome.fa"
+  fasta: "s3://ngi-igenomes/igenomes/Sus_scrofa/Ensembl/Sscrofa9/Sequence/WholeGenomeFasta/genome.fa."
+  fasta_fai: "s3://ngi-igenomes/igenomes/Sus_scrofa/Ensembl/Sscrofa9/Sequence/WholeGenomeFasta/genome.fa.fai"
   source: "Ensembl"
   species: "Sus_scrofa"

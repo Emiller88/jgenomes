@@ -1,4 +1,5 @@
 - genome: "Btau_4.0"
-  fasta: "s3://ngi-igenomes/igenomes/Bos_taurus/Ensembl/Btau_4.0/Sequence/WholeGenomeFasta/genome.fa"
+  fasta: "s3://ngi-igenomes/igenomes/Bos_taurus/Ensembl/Btau_4.0/Sequence/WholeGenomeFasta/genome.fa."
+  fasta_fai: "s3://ngi-igenomes/igenomes/Bos_taurus/Ensembl/Btau_4.0/Sequence/WholeGenomeFasta/genome.fa.fai"
   source: "Ensembl"
   species: "Bos_taurus"

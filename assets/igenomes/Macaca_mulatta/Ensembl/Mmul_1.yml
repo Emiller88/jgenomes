@@ -1,4 +1,5 @@
 - genome: "Mmul_1"
-  fasta: "s3://ngi-igenomes/igenomes/Macaca_mulatta/Ensembl/Mmul_1/Sequence/WholeGenomeFasta/genome.fa"
+  fasta: "s3://ngi-igenomes/igenomes/Macaca_mulatta/Ensembl/Mmul_1/Sequence/WholeGenomeFasta/genome.fa."
+  fasta_fai: "s3://ngi-igenomes/igenomes/Macaca_mulatta/Ensembl/Mmul_1/Sequence/WholeGenomeFasta/genome.fa.fai"
   source: "Ensembl"
   species: "Macaca_mulatta"

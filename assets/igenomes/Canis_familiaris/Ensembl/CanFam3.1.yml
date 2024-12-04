@@ -1,4 +1,5 @@
 - genome: "CanFam3.1"
-  fasta: "s3://ngi-igenomes/igenomes/Canis_familiaris/Ensembl/CanFam3.1/Sequence/WholeGenomeFasta/genome.fa"
+  fasta: "s3://ngi-igenomes/igenomes/Canis_familiaris/Ensembl/CanFam3.1/Sequence/WholeGenomeFasta/genome.fa."
+  fasta_fai: "s3://ngi-igenomes/igenomes/Canis_familiaris/Ensembl/CanFam3.1/Sequence/WholeGenomeFasta/genome.fa.fai"
   source: "Ensembl"
   species: "Canis_familiaris"

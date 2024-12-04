@@ -1,4 +1,5 @@
 - genome: "Rnor_5.0"
-  fasta: "s3://ngi-igenomes/igenomes/Rattus_norvegicus/NCBI/Rnor_5.0/Sequence/WholeGenomeFasta/genome.fa"
+  fasta: "s3://ngi-igenomes/igenomes/Rattus_norvegicus/NCBI/Rnor_5.0/Sequence/WholeGenomeFasta/genome.fa."
+  fasta_fai: "s3://ngi-igenomes/igenomes/Rattus_norvegicus/NCBI/Rnor_5.0/Sequence/WholeGenomeFasta/genome.fa.fai"
   source: "NCBI"
   species: "Rattus_norvegicus"

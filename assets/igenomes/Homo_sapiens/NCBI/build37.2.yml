@@ -1,4 +1,5 @@
 - genome: "build37.2"
-  fasta: "s3://ngi-igenomes/igenomes/Homo_sapiens/NCBI/build37.2/Sequence/WholeGenomeFasta/genome.fa"
+  fasta: "s3://ngi-igenomes/igenomes/Homo_sapiens/NCBI/build37.2/Sequence/WholeGenomeFasta/genome.fa."
+  fasta_fai: "s3://ngi-igenomes/igenomes/Homo_sapiens/NCBI/build37.2/Sequence/WholeGenomeFasta/genome.fa.fai"
   source: "NCBI"
   species: "Homo_sapiens"

@@ -1,4 +1,5 @@
 - genome: "Rnor_6.0"
-  fasta: "s3://ngi-igenomes/igenomes/Rattus_norvegicus/Ensembl/Rnor_6.0/Sequence/WholeGenomeFasta/genome.fa"
+  fasta: "s3://ngi-igenomes/igenomes/Rattus_norvegicus/Ensembl/Rnor_6.0/Sequence/WholeGenomeFasta/genome.fa."
+  fasta_fai: "s3://ngi-igenomes/igenomes/Rattus_norvegicus/Ensembl/Rnor_6.0/Sequence/WholeGenomeFasta/genome.fa.fai"
   source: "Ensembl"
   species: "Rattus_norvegicus"
