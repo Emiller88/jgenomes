@@ -6,3 +6,4 @@
   fasta_dict: "s3://ngi-igenomes/igenomes/Rattus_norvegicus/Ensembl/RGSC3.4/Sequence/WholeGenomeFasta/genome.dict"
   bowtie1_index: "s3://ngi-igenomes/igenomes/Rattus_norvegicus/Ensembl/RGSC3.4/Sequence/BowtieIndex/"
   bowtie2_index: "s3://ngi-igenomes/igenomes/Rattus_norvegicus/Ensembl/RGSC3.4/Sequence/Bowtie2Index/"
+  bwamem1_index: "s3://ngi-igenomes/igenomes/Rattus_norvegicus/Ensembl/RGSC3.4/Sequence/BWAIndex/"

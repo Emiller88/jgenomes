@@ -6,3 +6,4 @@
   fasta_dict: "s3://ngi-igenomes/igenomes/Oryza_sativa_japonica/Ensembl/IRGSP-1.0/Sequence/WholeGenomeFasta/genome.dict"
   bowtie1_index: "s3://ngi-igenomes/igenomes/Oryza_sativa_japonica/Ensembl/IRGSP-1.0/Sequence/BowtieIndex/"
   bowtie2_index: "s3://ngi-igenomes/igenomes/Oryza_sativa_japonica/Ensembl/IRGSP-1.0/Sequence/Bowtie2Index/"
+  bwamem1_index: "s3://ngi-igenomes/igenomes/Oryza_sativa_japonica/Ensembl/IRGSP-1.0/Sequence/BWAIndex/"

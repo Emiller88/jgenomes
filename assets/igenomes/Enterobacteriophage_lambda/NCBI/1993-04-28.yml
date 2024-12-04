@@ -6,3 +6,4 @@
   fasta_dict: "s3://ngi-igenomes/igenomes/Enterobacteriophage_lambda/NCBI/1993-04-28/Sequence/WholeGenomeFasta/genome.dict"
   bowtie1_index: "s3://ngi-igenomes/igenomes/Enterobacteriophage_lambda/NCBI/1993-04-28/Sequence/BowtieIndex/"
   bowtie2_index: "s3://ngi-igenomes/igenomes/Enterobacteriophage_lambda/NCBI/1993-04-28/Sequence/Bowtie2Index/"
+  bwamem1_index: "s3://ngi-igenomes/igenomes/Enterobacteriophage_lambda/NCBI/1993-04-28/Sequence/BWAIndex/"

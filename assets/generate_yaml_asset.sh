@@ -31,9 +31,7 @@ do
     build=$(echo $i | cut -d "/" -f 7)
 
     mkdir -p igenomes/${species}/${genome}
-    if [ -f "igenomes/${species}/${genome}/${build}.yml" ]; then
-        build+="_2_"
-    fi
+
     echo "- genome: \"${build}\"" > igenomes/${species}/${genome}/${build}.yml
     echo "  fasta: \"${i::-4}\"" >> igenomes/${species}/${genome}/${build}.yml
     echo "  source: \"${genome}\"" >> igenomes/${species}/${genome}/${build}.yml
@@ -77,17 +75,17 @@ do
     echo "  bowtie2_index: \"${i}/\"" >> igenomes/${species}/${genome}/${build}.yml
 done
 
-# # All source BWAmem
-# cat ngi-igenomes_file_manifest.txt | grep "BWAIndex" | rev | cut -d "/" -f 2- | rev | sort -u > all_bwamem.txt
+# All source BWAmem1
+cat ngi-igenomes_file_manifest.txt | grep "BWAIndex" | grep -v "version" | rev | cut -d "/" -f 2- | rev | sort -u > all_bwaindex.txt
 
-# for i in `cat all_bwamem.txt`;
-# do
-#     species=$(echo $i | cut -d "/" -f 5)
-#     genome=$(echo $i | cut -d "/" -f 6)
-#     build=$(echo $i | cut -d "/" -f 7)
+for i in `cat all_bwaindex.txt`;
+do
+    species=$(echo $i | cut -d "/" -f 5)
+    genome=$(echo $i | cut -d "/" -f 6)
+    build=$(echo $i | cut -d "/" -f 7)
 
-#     echo "  bwamem1_index: \"${i}/\"" >> igenomes/${species}/${genome}/${build}.yml
-# done
+    echo "  bwamem1_index: \"${i}/\"" >> igenomes/${species}/${genome}/${build}.yml
+done
 
 # All source BWAmem2mem
 cat ngi-igenomes_file_manifest.txt | grep "BWAmem2Index" | rev | cut -d "/" -f 2- | rev | sort -u > all_bwamem2mem.txt

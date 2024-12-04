@@ -3,4 +3,5 @@
   source: "UCSC"
   species: "Homo_sapiens"
   fasta_fai: "s3://ngi-igenomes/igenomes/Homo_sapiens/UCSC/CHM13/Sequence/WholeGenomeFasta/genome.fa.fai"
+  bwamem1_index: "s3://ngi-igenomes/igenomes/Homo_sapiens/UCSC/CHM13/Sequence/BWAIndex/"
   bwamem2_index: "s3://ngi-igenomes/igenomes/Homo_sapiens/UCSC/CHM13/Sequence/BWAmem2Index/"

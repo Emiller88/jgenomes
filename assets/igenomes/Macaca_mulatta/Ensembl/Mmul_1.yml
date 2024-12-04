@@ -6,3 +6,4 @@
   fasta_dict: "s3://ngi-igenomes/igenomes/Macaca_mulatta/Ensembl/Mmul_1/Sequence/WholeGenomeFasta/genome.dict"
   bowtie1_index: "s3://ngi-igenomes/igenomes/Macaca_mulatta/Ensembl/Mmul_1/Sequence/BowtieIndex/"
   bowtie2_index: "s3://ngi-igenomes/igenomes/Macaca_mulatta/Ensembl/Mmul_1/Sequence/Bowtie2Index/"
+  bwamem1_index: "s3://ngi-igenomes/igenomes/Macaca_mulatta/Ensembl/Mmul_1/Sequence/BWAIndex/"
