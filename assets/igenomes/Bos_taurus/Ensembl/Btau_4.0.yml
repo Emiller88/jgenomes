@@ -3,4 +3,3 @@
   source: "Ensembl"
   species: "Bos_taurus"
   fasta_fai: "s3://ngi-igenomes/igenomes/Bos_taurus/Ensembl/Btau_4.0/Sequence/WholeGenomeFasta/genome.fa.fai"
-  fasta_dict: "s3://ngi-igenomes/igenomes/Bos_taurus/Ensembl/Btau_4.0/Sequence/WholeGenomeFasta/genome.dict"

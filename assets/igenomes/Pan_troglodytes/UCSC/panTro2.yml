@@ -3,4 +3,3 @@
   source: "UCSC"
   species: "Pan_troglodytes"
   fasta_fai: "s3://ngi-igenomes/igenomes/Pan_troglodytes/UCSC/panTro2/Sequence/WholeGenomeFasta/genome.fa.fai"
-  fasta_dict: "s3://ngi-igenomes/igenomes/Pan_troglodytes/UCSC/panTro2/Sequence/WholeGenomeFasta/genome.dict"

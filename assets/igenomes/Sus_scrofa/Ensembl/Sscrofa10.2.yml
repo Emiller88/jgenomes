@@ -3,4 +3,3 @@
   source: "Ensembl"
   species: "Sus_scrofa"
   fasta_fai: "s3://ngi-igenomes/igenomes/Sus_scrofa/Ensembl/Sscrofa10.2/Sequence/WholeGenomeFasta/genome.fa.fai"
-  fasta_dict: "s3://ngi-igenomes/igenomes/Sus_scrofa/Ensembl/Sscrofa10.2/Sequence/WholeGenomeFasta/genome.dict"

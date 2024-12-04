@@ -3,4 +3,3 @@
   source: "Ensembl"
   species: "Glycine_max"
   fasta_fai: "s3://ngi-igenomes/igenomes/Glycine_max/Ensembl/Gm01/Sequence/WholeGenomeFasta/genome.fa.fai"
-  fasta_dict: "s3://ngi-igenomes/igenomes/Glycine_max/Ensembl/Gm01/Sequence/WholeGenomeFasta/genome.dict"

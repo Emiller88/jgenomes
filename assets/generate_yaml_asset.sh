@@ -13,12 +13,18 @@
 # mv manifest ngi-igenomes_file_manifest.txt
 # rm tmp
 
-# All source fasta
-cat ngi-igenomes_file_manifest.txt | grep "\.fa" | grep -v "\.fa." | grep WholeGenomeFasta | grep -v CT_conversion | grep -v GA_conversion > all_fastas.txt
+# Remove existing assets
+rm -rf igenomes/
 
 # Generate base info in species/genome/build.yml
 
-for i in `cat all_fastas.txt`;
+# All source fasta.fai
+# ALL fais are coming from a fasta file of the same name
+# Hence I use it to generate fasta + fai (and catch with that the fasta that are not following the gemome.fa name scheme)
+
+cat ngi-igenomes_file_manifest.txt | grep "\.fai" | grep -v "Bowtie2Index" | grep -v "fai\.gz" > all_fai.txt
+
+for i in `cat all_fai.txt`;
 do
     species=$(echo $i | cut -d "/" -f 5)
     genome=$(echo $i | cut -d "/" -f 6)
@@ -29,7 +35,25 @@ do
         build+="_2_"
     fi
     echo "- genome: '${build}'" > igenomes/${species}/${genome}/${build}.yml
-    echo "  fasta: '${i}'" >> igenomes/${species}/${genome}/${build}.yml
+    echo "  fasta: '${i::-4}'" >> igenomes/${species}/${genome}/${build}.yml
     echo "  source: '${genome}'" >> igenomes/${species}/${genome}/${build}.yml
     echo "  species:  '${species}'" >> igenomes/${species}/${genome}/${build}.yml
+    echo "  fasta_fai: '${i}'" >> igenomes/${species}/${genome}/${build}.yml
 done
+
+# # All source fasta.dict
+# cat ngi-igenomes_file_manifest.txt | grep "\.dict" | grep -v "dict\.gz" | grep -v "dict\.old" > all_dict.txt
+
+# # Generate base info in species/genome/build.yml
+
+# for i in `cat all_dict.txt`;
+# do
+#     species=$(echo $i | cut -d "/" -f 5)
+#     genome=$(echo $i | cut -d "/" -f 6)
+#     build=$(echo $i | cut -d "/" -f 7)
+
+#     echo "  fasta_dict: '${i}'" >> igenomes/${species}/${genome}/${build}.yml
+# done
+
+#  Homo_sapiens/GATK/GRCh37.yml should actually be Homo_sapiens/GATK/GRCh37decoy.yml
+mv igenomes/Homo_sapiens/GATK/GRCh37.yml igenomes/Homo_sapiens/GATK/GRCh37decoy.yml

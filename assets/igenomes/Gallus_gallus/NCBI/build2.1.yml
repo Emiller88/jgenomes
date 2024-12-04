@@ -3,4 +3,3 @@
   source: "NCBI"
   species: "Gallus_gallus"
   fasta_fai: "s3://ngi-igenomes/igenomes/Gallus_gallus/NCBI/build2.1/Sequence/WholeGenomeFasta/genome.fa.fai"
-  fasta_dict: "s3://ngi-igenomes/igenomes/Gallus_gallus/NCBI/build2.1/Sequence/WholeGenomeFasta/genome.dict"

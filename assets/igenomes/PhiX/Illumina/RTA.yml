@@ -3,4 +3,3 @@
   source: "Illumina"
   species: "PhiX"
   fasta_fai: "s3://ngi-igenomes/igenomes/PhiX/Illumina/RTA/Sequence/WholeGenomeFasta/genome.fa.fai"
-  fasta_dict: "s3://ngi-igenomes/igenomes/PhiX/Illumina/RTA/Sequence/WholeGenomeFasta/genome.dict"

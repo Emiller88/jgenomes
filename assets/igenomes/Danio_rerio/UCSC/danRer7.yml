@@ -3,4 +3,3 @@
   source: "UCSC"
   species: "Danio_rerio"
   fasta_fai: "s3://ngi-igenomes/igenomes/Danio_rerio/UCSC/danRer7/Sequence/WholeGenomeFasta/genome.fa.fai"
-  fasta_dict: "s3://ngi-igenomes/igenomes/Danio_rerio/UCSC/danRer7/Sequence/WholeGenomeFasta/genome.dict"
