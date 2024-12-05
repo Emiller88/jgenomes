@@ -13,3 +13,4 @@
   bismark_index: "s3://ngi-igenomes/igenomes/Homo_sapiens/NCBI/build37.2/Sequence/BismarkIndex/"
   star_index: "s3://ngi-igenomes/igenomes/Homo_sapiens/NCBI/build37.2/Sequence/STARIndex/"
   chromosomes_fasta: "s3://ngi-igenomes/igenomes/Homo_sapiens/NCBI/build37.2/Sequence/Chromosomes/"
+  abundantsequences_fasta: "s3://ngi-igenomes/igenomes/Homo_sapiens/NCBI/build37.2/Sequence/AbundantSequences/"

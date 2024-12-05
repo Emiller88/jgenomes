@@ -11,3 +11,4 @@
   bismark_index: "s3://ngi-igenomes/igenomes/Mycobacterium_tuberculosis_H37RV/NCBI/2001-09-07/Sequence/BismarkIndex/"
   star_index: "s3://ngi-igenomes/igenomes/Mycobacterium_tuberculosis_H37RV/NCBI/2001-09-07/Sequence/STARIndex/"
   chromosomes_fasta: "s3://ngi-igenomes/igenomes/Mycobacterium_tuberculosis_H37RV/NCBI/2001-09-07/Sequence/Chromosomes/"
+  abundantsequences_fasta: "s3://ngi-igenomes/igenomes/Mycobacterium_tuberculosis_H37RV/NCBI/2001-09-07/Sequence/AbundantSequences/"

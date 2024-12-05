@@ -200,6 +200,18 @@ do
     sed -i "\|${i}|d" result_manifest.txt
 done
 
+# All source AbundantSequences fasta
+cat ngi-igenomes_file_manifest.txt | grep "AbundantSequences" | rev | cut -d "/" -f 2- | rev | sort -u > tmp_abundantsequences.txt
+
+for i in `cat tmp_abundantsequences.txt`;
+do
+    species=$(echo $i | cut -d "/" -f 5)
+    genome=$(echo $i | cut -d "/" -f 6)
+    build=$(echo $i | cut -d "/" -f 7)
+
+    echo "  abundantsequences_fasta: \"${i}/\"" >> igenomes/${species}/${genome}/${build}.yml
+    sed -i "\|${i}|d" result_manifest.txt
+done
 
 #  Homo_sapiens/GATK/GRCh37.yml should actually be Homo_sapiens/GATK/GRCh37decoy.yml
 mv igenomes/Homo_sapiens/GATK/GRCh37.yml igenomes/Homo_sapiens/GATK/GRCh37decoy.yml

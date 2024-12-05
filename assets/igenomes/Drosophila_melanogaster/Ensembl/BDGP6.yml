@@ -12,3 +12,4 @@
   bismark_index: "s3://ngi-igenomes/igenomes/Drosophila_melanogaster/Ensembl/BDGP6/Sequence/BismarkIndex/"
   star_index: "s3://ngi-igenomes/igenomes/Drosophila_melanogaster/Ensembl/BDGP6/Sequence/STARIndex/"
   chromosomes_fasta: "s3://ngi-igenomes/igenomes/Drosophila_melanogaster/Ensembl/BDGP6/Sequence/Chromosomes/"
+  abundantsequences_fasta: "s3://ngi-igenomes/igenomes/Drosophila_melanogaster/Ensembl/BDGP6/Sequence/AbundantSequences/"
