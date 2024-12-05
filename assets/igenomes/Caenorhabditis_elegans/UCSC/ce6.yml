@@ -14,3 +14,7 @@
   star_index: "s3://ngi-igenomes/igenomes/Caenorhabditis_elegans/UCSC/ce6/Sequence/STARIndex/"
   chromosomes_fasta: "s3://ngi-igenomes/igenomes/Caenorhabditis_elegans/UCSC/ce6/Sequence/Chromosomes/"
   abundantsequences_fasta: "s3://ngi-igenomes/igenomes/Caenorhabditis_elegans/UCSC/ce6/Sequence/AbundantSequences/"
+  genes_refflat: "s3://ngi-igenomes/igenomes/Caenorhabditis_elegans/UCSC/ce6/Annotation/Genes/refFlat.txt.gz"
+  genome_size_xml: "s3://ngi-igenomes/igenomes/Caenorhabditis_elegans/UCSC/ce6/Sequence/WholeGenomeFasta/GenomeSize.xml"
+  hairpin_fasta: "s3://ngi-igenomes/igenomes/Caenorhabditis_elegans/UCSC/ce6/Annotation/SmallRNA/hairpin.fa"
+  mature_fasta: "s3://ngi-igenomes/igenomes/Caenorhabditis_elegans/UCSC/ce6/Annotation/SmallRNA/mature.fa"

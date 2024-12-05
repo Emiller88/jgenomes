@@ -14,3 +14,7 @@
   star_index: "s3://ngi-igenomes/igenomes/Glycine_max/Ensembl/Gm01/Sequence/STARIndex/"
   chromosomes_fasta: "s3://ngi-igenomes/igenomes/Glycine_max/Ensembl/Gm01/Sequence/Chromosomes/"
   abundantsequences_fasta: "s3://ngi-igenomes/igenomes/Glycine_max/Ensembl/Gm01/Sequence/AbundantSequences/"
+  genes_refflat: "s3://ngi-igenomes/igenomes/Glycine_max/Ensembl/Gm01/Annotation/Genes/refFlat.txt.gz"
+  genome_size_xml: "s3://ngi-igenomes/igenomes/Glycine_max/Ensembl/Gm01/Sequence/WholeGenomeFasta/GenomeSize.xml"
+  hairpin_fasta: "s3://ngi-igenomes/igenomes/Glycine_max/Ensembl/Gm01/Annotation/SmallRNA/hairpin.fa"
+  mature_fasta: "s3://ngi-igenomes/igenomes/Glycine_max/Ensembl/Gm01/Annotation/SmallRNA/mature.fa"

@@ -14,3 +14,7 @@
   star_index: "s3://ngi-igenomes/igenomes/Bos_taurus/UCSC/bosTau7/Sequence/STARIndex/"
   chromosomes_fasta: "s3://ngi-igenomes/igenomes/Bos_taurus/UCSC/bosTau7/Sequence/Chromosomes/"
   abundantsequences_fasta: "s3://ngi-igenomes/igenomes/Bos_taurus/UCSC/bosTau7/Sequence/AbundantSequences/"
+  genes_refflat: "s3://ngi-igenomes/igenomes/Bos_taurus/UCSC/bosTau7/Annotation/Genes/refFlat.txt.gz"
+  genome_size_xml: "s3://ngi-igenomes/igenomes/Bos_taurus/UCSC/bosTau7/Sequence/WholeGenomeFasta/GenomeSize.xml"
+  hairpin_fasta: "s3://ngi-igenomes/igenomes/Bos_taurus/UCSC/bosTau7/Annotation/SmallRNA/hairpin.fa"
+  mature_fasta: "s3://ngi-igenomes/igenomes/Bos_taurus/UCSC/bosTau7/Annotation/SmallRNA/mature.fa"

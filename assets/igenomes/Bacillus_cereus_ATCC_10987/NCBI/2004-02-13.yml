@@ -12,3 +12,6 @@
   star_index: "s3://ngi-igenomes/igenomes/Bacillus_cereus_ATCC_10987/NCBI/2004-02-13/Sequence/STARIndex/"
   chromosomes_fasta: "s3://ngi-igenomes/igenomes/Bacillus_cereus_ATCC_10987/NCBI/2004-02-13/Sequence/Chromosomes/"
   abundantsequences_fasta: "s3://ngi-igenomes/igenomes/Bacillus_cereus_ATCC_10987/NCBI/2004-02-13/Sequence/AbundantSequences/"
+  genes_refgene: "s3://ngi-igenomes/igenomes/Bacillus_cereus_ATCC_10987/NCBI/2004-02-13/Annotation/Genes/refGene.txt"
+  chrom_info: "s3://ngi-igenomes/igenomes/Bacillus_cereus_ATCC_10987/NCBI/2004-02-13/Annotation/Genes/ChromInfo.txt"
+  genome_size_xml: "s3://ngi-igenomes/igenomes/Bacillus_cereus_ATCC_10987/NCBI/2004-02-13/Sequence/WholeGenomeFasta/GenomeSize.xml"

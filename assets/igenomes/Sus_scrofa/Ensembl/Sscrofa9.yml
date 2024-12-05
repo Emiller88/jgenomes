@@ -14,3 +14,7 @@
   star_index: "s3://ngi-igenomes/igenomes/Sus_scrofa/Ensembl/Sscrofa9/Sequence/STARIndex/"
   chromosomes_fasta: "s3://ngi-igenomes/igenomes/Sus_scrofa/Ensembl/Sscrofa9/Sequence/Chromosomes/"
   abundantsequences_fasta: "s3://ngi-igenomes/igenomes/Sus_scrofa/Ensembl/Sscrofa9/Sequence/AbundantSequences/"
+  genes_refflat: "s3://ngi-igenomes/igenomes/Sus_scrofa/Ensembl/Sscrofa9/Annotation/Genes/refFlat.txt.gz"
+  genome_size_xml: "s3://ngi-igenomes/igenomes/Sus_scrofa/Ensembl/Sscrofa9/Sequence/WholeGenomeFasta/GenomeSize.xml"
+  hairpin_fasta: "s3://ngi-igenomes/igenomes/Sus_scrofa/Ensembl/Sscrofa9/Annotation/SmallRNA/hairpin.fa"
+  mature_fasta: "s3://ngi-igenomes/igenomes/Sus_scrofa/Ensembl/Sscrofa9/Annotation/SmallRNA/mature.fa"

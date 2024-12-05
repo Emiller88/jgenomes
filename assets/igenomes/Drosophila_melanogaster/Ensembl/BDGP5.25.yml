@@ -14,3 +14,7 @@
   star_index: "s3://ngi-igenomes/igenomes/Drosophila_melanogaster/Ensembl/BDGP5.25/Sequence/STARIndex/"
   chromosomes_fasta: "s3://ngi-igenomes/igenomes/Drosophila_melanogaster/Ensembl/BDGP5.25/Sequence/Chromosomes/"
   abundantsequences_fasta: "s3://ngi-igenomes/igenomes/Drosophila_melanogaster/Ensembl/BDGP5.25/Sequence/AbundantSequences/"
+  genes_refflat: "s3://ngi-igenomes/igenomes/Drosophila_melanogaster/Ensembl/BDGP5.25/Annotation/Genes/refFlat.txt.gz"
+  genome_size_xml: "s3://ngi-igenomes/igenomes/Drosophila_melanogaster/Ensembl/BDGP5.25/Sequence/WholeGenomeFasta/GenomeSize.xml"
+  hairpin_fasta: "s3://ngi-igenomes/igenomes/Drosophila_melanogaster/Ensembl/BDGP5.25/Annotation/SmallRNA/hairpin.fa"
+  mature_fasta: "s3://ngi-igenomes/igenomes/Drosophila_melanogaster/Ensembl/BDGP5.25/Annotation/SmallRNA/mature.fa"

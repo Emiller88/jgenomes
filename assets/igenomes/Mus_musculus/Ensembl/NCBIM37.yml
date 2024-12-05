@@ -14,3 +14,7 @@
   star_index: "s3://ngi-igenomes/igenomes/Mus_musculus/Ensembl/NCBIM37/Sequence/STARIndex/"
   chromosomes_fasta: "s3://ngi-igenomes/igenomes/Mus_musculus/Ensembl/NCBIM37/Sequence/Chromosomes/"
   abundantsequences_fasta: "s3://ngi-igenomes/igenomes/Mus_musculus/Ensembl/NCBIM37/Sequence/AbundantSequences/"
+  genes_refflat: "s3://ngi-igenomes/igenomes/Mus_musculus/Ensembl/NCBIM37/Annotation/Genes/refFlat.txt.gz"
+  genome_size_xml: "s3://ngi-igenomes/igenomes/Mus_musculus/Ensembl/NCBIM37/Sequence/WholeGenomeFasta/GenomeSize.xml"
+  hairpin_fasta: "s3://ngi-igenomes/igenomes/Mus_musculus/Ensembl/NCBIM37/Annotation/SmallRNA/hairpin.fa"
+  mature_fasta: "s3://ngi-igenomes/igenomes/Mus_musculus/Ensembl/NCBIM37/Annotation/SmallRNA/mature.fa"

@@ -14,3 +14,7 @@
   star_index: "s3://ngi-igenomes/igenomes/Sorghum_bicolor/Ensembl/Sbi1/Sequence/STARIndex/"
   chromosomes_fasta: "s3://ngi-igenomes/igenomes/Sorghum_bicolor/Ensembl/Sbi1/Sequence/Chromosomes/"
   abundantsequences_fasta: "s3://ngi-igenomes/igenomes/Sorghum_bicolor/Ensembl/Sbi1/Sequence/AbundantSequences/"
+  genes_refflat: "s3://ngi-igenomes/igenomes/Sorghum_bicolor/Ensembl/Sbi1/Annotation/Genes/refFlat.txt.gz"
+  genome_size_xml: "s3://ngi-igenomes/igenomes/Sorghum_bicolor/Ensembl/Sbi1/Sequence/WholeGenomeFasta/GenomeSize.xml"
+  hairpin_fasta: "s3://ngi-igenomes/igenomes/Sorghum_bicolor/Ensembl/Sbi1/Annotation/SmallRNA/hairpin.fa"
+  mature_fasta: "s3://ngi-igenomes/igenomes/Sorghum_bicolor/Ensembl/Sbi1/Annotation/SmallRNA/mature.fa"

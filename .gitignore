@@ -12,6 +12,5 @@ null/
 tmp/
 .nf-test
 .vscode
-assets/all_*.txt
-assets/ngi-igenomes_file_manifest.txt
-assets/result_manifest.txt
+assets/*_manifest.txt
+assets/tmp_*.txt

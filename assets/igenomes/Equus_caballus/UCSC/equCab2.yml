@@ -14,3 +14,7 @@
   star_index: "s3://ngi-igenomes/igenomes/Equus_caballus/UCSC/equCab2/Sequence/STARIndex/"
   chromosomes_fasta: "s3://ngi-igenomes/igenomes/Equus_caballus/UCSC/equCab2/Sequence/Chromosomes/"
   abundantsequences_fasta: "s3://ngi-igenomes/igenomes/Equus_caballus/UCSC/equCab2/Sequence/AbundantSequences/"
+  genes_refflat: "s3://ngi-igenomes/igenomes/Equus_caballus/UCSC/equCab2/Annotation/Genes/refFlat.txt.gz"
+  genome_size_xml: "s3://ngi-igenomes/igenomes/Equus_caballus/UCSC/equCab2/Sequence/WholeGenomeFasta/GenomeSize.xml"
+  hairpin_fasta: "s3://ngi-igenomes/igenomes/Equus_caballus/UCSC/equCab2/Annotation/SmallRNA/hairpin.fa"
+  mature_fasta: "s3://ngi-igenomes/igenomes/Equus_caballus/UCSC/equCab2/Annotation/SmallRNA/mature.fa"

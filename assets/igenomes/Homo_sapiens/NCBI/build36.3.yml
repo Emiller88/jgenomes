@@ -14,3 +14,7 @@
   star_index: "s3://ngi-igenomes/igenomes/Homo_sapiens/NCBI/build36.3/Sequence/STARIndex/"
   chromosomes_fasta: "s3://ngi-igenomes/igenomes/Homo_sapiens/NCBI/build36.3/Sequence/Chromosomes/"
   abundantsequences_fasta: "s3://ngi-igenomes/igenomes/Homo_sapiens/NCBI/build36.3/Sequence/AbundantSequences/"
+  genes_refflat: "s3://ngi-igenomes/igenomes/Homo_sapiens/NCBI/build36.3/Annotation/Genes/refFlat.txt.gz"
+  genome_size_xml: "s3://ngi-igenomes/igenomes/Homo_sapiens/NCBI/build36.3/Sequence/WholeGenomeFasta/GenomeSize.xml"
+  hairpin_fasta: "s3://ngi-igenomes/igenomes/Homo_sapiens/NCBI/build36.3/Annotation/SmallRNA/hairpin.fa"
+  mature_fasta: "s3://ngi-igenomes/igenomes/Homo_sapiens/NCBI/build36.3/Annotation/SmallRNA/mature.fa"

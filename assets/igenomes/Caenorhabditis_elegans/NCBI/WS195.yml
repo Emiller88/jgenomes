@@ -14,3 +14,7 @@
   star_index: "s3://ngi-igenomes/igenomes/Caenorhabditis_elegans/NCBI/WS195/Sequence/STARIndex/"
   chromosomes_fasta: "s3://ngi-igenomes/igenomes/Caenorhabditis_elegans/NCBI/WS195/Sequence/Chromosomes/"
   abundantsequences_fasta: "s3://ngi-igenomes/igenomes/Caenorhabditis_elegans/NCBI/WS195/Sequence/AbundantSequences/"
+  genes_refflat: "s3://ngi-igenomes/igenomes/Caenorhabditis_elegans/NCBI/WS195/Annotation/Genes/refFlat.txt.gz"
+  genome_size_xml: "s3://ngi-igenomes/igenomes/Caenorhabditis_elegans/NCBI/WS195/Sequence/WholeGenomeFasta/GenomeSize.xml"
+  hairpin_fasta: "s3://ngi-igenomes/igenomes/Caenorhabditis_elegans/NCBI/WS195/Annotation/SmallRNA/hairpin.fa"
+  mature_fasta: "s3://ngi-igenomes/igenomes/Caenorhabditis_elegans/NCBI/WS195/Annotation/SmallRNA/mature.fa"

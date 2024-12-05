@@ -14,3 +14,7 @@
   star_index: "s3://ngi-igenomes/igenomes/Rattus_norvegicus/UCSC/rn5/Sequence/STARIndex/"
   chromosomes_fasta: "s3://ngi-igenomes/igenomes/Rattus_norvegicus/UCSC/rn5/Sequence/Chromosomes/"
   abundantsequences_fasta: "s3://ngi-igenomes/igenomes/Rattus_norvegicus/UCSC/rn5/Sequence/AbundantSequences/"
+  genes_refflat: "s3://ngi-igenomes/igenomes/Rattus_norvegicus/UCSC/rn5/Annotation/Genes/refFlat.txt.gz"
+  genome_size_xml: "s3://ngi-igenomes/igenomes/Rattus_norvegicus/UCSC/rn5/Sequence/WholeGenomeFasta/GenomeSize.xml"
+  hairpin_fasta: "s3://ngi-igenomes/igenomes/Rattus_norvegicus/UCSC/rn5/Annotation/SmallRNA/hairpin.fa"
+  mature_fasta: "s3://ngi-igenomes/igenomes/Rattus_norvegicus/UCSC/rn5/Annotation/SmallRNA/mature.fa"

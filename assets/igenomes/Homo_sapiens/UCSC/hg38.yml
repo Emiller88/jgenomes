@@ -13,3 +13,8 @@
   star_index: "s3://ngi-igenomes/igenomes/Homo_sapiens/UCSC/hg38/Sequence/STARIndex/"
   chromosomes_fasta: "s3://ngi-igenomes/igenomes/Homo_sapiens/UCSC/hg38/Sequence/Chromosomes/"
   abundantsequences_fasta: "s3://ngi-igenomes/igenomes/Homo_sapiens/UCSC/hg38/Sequence/AbundantSequences/"
+  genes_refflat: "s3://ngi-igenomes/igenomes/Homo_sapiens/UCSC/hg38/Annotation/Genes/refFlat.txt.gz"
+  genes_refgene: "s3://ngi-igenomes/igenomes/Homo_sapiens/UCSC/hg38/Annotation/Genes/refGene.txt"
+  genome_size_xml: "s3://ngi-igenomes/igenomes/Homo_sapiens/UCSC/hg38/Sequence/WholeGenomeFasta/GenomeSize.xml"
+  hairpin_fasta: "s3://ngi-igenomes/igenomes/Homo_sapiens/UCSC/hg38/Annotation/SmallRNA/hairpin.fa"
+  mature_fasta: "s3://ngi-igenomes/igenomes/Homo_sapiens/UCSC/hg38/Annotation/SmallRNA/mature.fa"

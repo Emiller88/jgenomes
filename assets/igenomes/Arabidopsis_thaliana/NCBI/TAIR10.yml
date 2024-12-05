@@ -14,3 +14,7 @@
   star_index: "s3://ngi-igenomes/igenomes/Arabidopsis_thaliana/NCBI/TAIR10/Sequence/STARIndex/"
   chromosomes_fasta: "s3://ngi-igenomes/igenomes/Arabidopsis_thaliana/NCBI/TAIR10/Sequence/Chromosomes/"
   abundantsequences_fasta: "s3://ngi-igenomes/igenomes/Arabidopsis_thaliana/NCBI/TAIR10/Sequence/AbundantSequences/"
+  genes_refflat: "s3://ngi-igenomes/igenomes/Arabidopsis_thaliana/NCBI/TAIR10/Annotation/Genes/refFlat.txt.gz"
+  genome_size_xml: "s3://ngi-igenomes/igenomes/Arabidopsis_thaliana/NCBI/TAIR10/Sequence/WholeGenomeFasta/GenomeSize.xml"
+  hairpin_fasta: "s3://ngi-igenomes/igenomes/Arabidopsis_thaliana/NCBI/TAIR10/Annotation/SmallRNA/hairpin.fa"
+  mature_fasta: "s3://ngi-igenomes/igenomes/Arabidopsis_thaliana/NCBI/TAIR10/Annotation/SmallRNA/mature.fa"

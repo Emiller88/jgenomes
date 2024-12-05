@@ -12,3 +12,6 @@
   star_index: "s3://ngi-igenomes/igenomes/Mycobacterium_tuberculosis_H37RV/NCBI/2001-09-07/Sequence/STARIndex/"
   chromosomes_fasta: "s3://ngi-igenomes/igenomes/Mycobacterium_tuberculosis_H37RV/NCBI/2001-09-07/Sequence/Chromosomes/"
   abundantsequences_fasta: "s3://ngi-igenomes/igenomes/Mycobacterium_tuberculosis_H37RV/NCBI/2001-09-07/Sequence/AbundantSequences/"
+  genes_refgene: "s3://ngi-igenomes/igenomes/Mycobacterium_tuberculosis_H37RV/NCBI/2001-09-07/Annotation/Genes/refGene.txt"
+  chrom_info: "s3://ngi-igenomes/igenomes/Mycobacterium_tuberculosis_H37RV/NCBI/2001-09-07/Annotation/Genes/ChromInfo.txt"
+  genome_size_xml: "s3://ngi-igenomes/igenomes/Mycobacterium_tuberculosis_H37RV/NCBI/2001-09-07/Sequence/WholeGenomeFasta/GenomeSize.xml"

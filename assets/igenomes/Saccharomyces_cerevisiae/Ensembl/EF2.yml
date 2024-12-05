@@ -14,3 +14,5 @@
   star_index: "s3://ngi-igenomes/igenomes/Saccharomyces_cerevisiae/Ensembl/EF2/Sequence/STARIndex/"
   chromosomes_fasta: "s3://ngi-igenomes/igenomes/Saccharomyces_cerevisiae/Ensembl/EF2/Sequence/Chromosomes/"
   abundantsequences_fasta: "s3://ngi-igenomes/igenomes/Saccharomyces_cerevisiae/Ensembl/EF2/Sequence/AbundantSequences/"
+  genes_refflat: "s3://ngi-igenomes/igenomes/Saccharomyces_cerevisiae/Ensembl/EF2/Annotation/Genes/refFlat.txt.gz"
+  genome_size_xml: "s3://ngi-igenomes/igenomes/Saccharomyces_cerevisiae/Ensembl/EF2/Sequence/WholeGenomeFasta/GenomeSize.xml"
