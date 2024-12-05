@@ -10,3 +10,4 @@
   bwamem1_index: "s3://ngi-igenomes/igenomes/Sorangium_cellulosum_So_ce_56/NCBI/2007-11-27/Sequence/BWAIndex/version0.6.0/"
   bismark_index: "s3://ngi-igenomes/igenomes/Sorangium_cellulosum_So_ce_56/NCBI/2007-11-27/Sequence/BismarkIndex/"
   star_index: "s3://ngi-igenomes/igenomes/Sorangium_cellulosum_So_ce_56/NCBI/2007-11-27/Sequence/STARIndex/"
+  chromosomes_fasta: "s3://ngi-igenomes/igenomes/Sorangium_cellulosum_So_ce_56/NCBI/2007-11-27/Sequence/Chromosomes/"

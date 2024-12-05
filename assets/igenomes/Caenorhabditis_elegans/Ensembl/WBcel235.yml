@@ -11,3 +11,4 @@
   bwamem1_index: "s3://ngi-igenomes/igenomes/Caenorhabditis_elegans/Ensembl/WBcel235/Sequence/BWAIndex/version0.6.0/"
   bismark_index: "s3://ngi-igenomes/igenomes/Caenorhabditis_elegans/Ensembl/WBcel235/Sequence/BismarkIndex/"
   star_index: "s3://ngi-igenomes/igenomes/Caenorhabditis_elegans/Ensembl/WBcel235/Sequence/STARIndex/"
+  chromosomes_fasta: "s3://ngi-igenomes/igenomes/Caenorhabditis_elegans/Ensembl/WBcel235/Sequence/Chromosomes/"

@@ -10,3 +10,4 @@
   bwamem1_index: "s3://ngi-igenomes/igenomes/Staphylococcus_aureus_NCTC_8325/NCBI/2006-02-13/Sequence/BWAIndex/version0.6.0/"
   bismark_index: "s3://ngi-igenomes/igenomes/Staphylococcus_aureus_NCTC_8325/NCBI/2006-02-13/Sequence/BismarkIndex/"
   star_index: "s3://ngi-igenomes/igenomes/Staphylococcus_aureus_NCTC_8325/NCBI/2006-02-13/Sequence/STARIndex/"
+  chromosomes_fasta: "s3://ngi-igenomes/igenomes/Staphylococcus_aureus_NCTC_8325/NCBI/2006-02-13/Sequence/Chromosomes/"

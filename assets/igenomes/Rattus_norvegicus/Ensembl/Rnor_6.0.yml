@@ -11,3 +11,4 @@
   bwamem1_index: "s3://ngi-igenomes/igenomes/Rattus_norvegicus/Ensembl/Rnor_6.0/Sequence/BWAIndex/version0.6.0/"
   bismark_index: "s3://ngi-igenomes/igenomes/Rattus_norvegicus/Ensembl/Rnor_6.0/Sequence/BismarkIndex/"
   star_index: "s3://ngi-igenomes/igenomes/Rattus_norvegicus/Ensembl/Rnor_6.0/Sequence/STARIndex/"
+  chromosomes_fasta: "s3://ngi-igenomes/igenomes/Rattus_norvegicus/Ensembl/Rnor_6.0/Sequence/Chromosomes/"

@@ -174,7 +174,7 @@ do
     sed -i "\|${i}|d" result_manifest.txt
 done
 
-# All source star
+# All source star Index
 cat ngi-igenomes_file_manifest.txt | grep "STARIndex" | rev | cut -d "/" -f 2- | rev | sort -u > tmp_star.txt
 
 for i in `cat tmp_star.txt`;
@@ -186,6 +186,20 @@ do
     echo "  star_index: \"${i}/\"" >> igenomes/${species}/${genome}/${build}.yml
     sed -i "\|${i}|d" result_manifest.txt
 done
+
+# All source Chromosomes fasta
+cat ngi-igenomes_file_manifest.txt | grep "Chromosomes" | rev | cut -d "/" -f 2- | rev | sort -u > tmp_chromosomes.txt
+
+for i in `cat tmp_chromosomes.txt`;
+do
+    species=$(echo $i | cut -d "/" -f 5)
+    genome=$(echo $i | cut -d "/" -f 6)
+    build=$(echo $i | cut -d "/" -f 7)
+
+    echo "  chromosomes_fasta: \"${i}/\"" >> igenomes/${species}/${genome}/${build}.yml
+    sed -i "\|${i}|d" result_manifest.txt
+done
+
 
 #  Homo_sapiens/GATK/GRCh37.yml should actually be Homo_sapiens/GATK/GRCh37decoy.yml
 mv igenomes/Homo_sapiens/GATK/GRCh37.yml igenomes/Homo_sapiens/GATK/GRCh37decoy.yml

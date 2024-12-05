@@ -10,3 +10,4 @@
   bwamem1_index: "s3://ngi-igenomes/igenomes/Rhodobacter_sphaeroides_2.4.1/NCBI/2005-10-07/Sequence/BWAIndex/version0.6.0/"
   bismark_index: "s3://ngi-igenomes/igenomes/Rhodobacter_sphaeroides_2.4.1/NCBI/2005-10-07/Sequence/BismarkIndex/"
   star_index: "s3://ngi-igenomes/igenomes/Rhodobacter_sphaeroides_2.4.1/NCBI/2005-10-07/Sequence/STARIndex/"
+  chromosomes_fasta: "s3://ngi-igenomes/igenomes/Rhodobacter_sphaeroides_2.4.1/NCBI/2005-10-07/Sequence/Chromosomes/"

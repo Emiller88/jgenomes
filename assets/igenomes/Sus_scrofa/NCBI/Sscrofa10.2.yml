@@ -12,3 +12,4 @@
   bwamem1_index: "s3://ngi-igenomes/igenomes/Sus_scrofa/NCBI/Sscrofa10.2/Sequence/BWAIndex/version0.6.0/"
   bismark_index: "s3://ngi-igenomes/igenomes/Sus_scrofa/NCBI/Sscrofa10.2/Sequence/BismarkIndex/"
   star_index: "s3://ngi-igenomes/igenomes/Sus_scrofa/NCBI/Sscrofa10.2/Sequence/STARIndex/"
+  chromosomes_fasta: "s3://ngi-igenomes/igenomes/Sus_scrofa/NCBI/Sscrofa10.2/Sequence/Chromosomes/"
