@@ -28,6 +28,7 @@
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/KallistoIndex",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/KallistoIndex/version0.51.1",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/KallistoIndex/version0.51.1/kallisto",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/TranscriptFasta",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/TranscriptFasta/genome.transcripts.fa",
                 "multiqc",
@@ -43,7 +44,6 @@
             ],
             [
                 "GRCh38_chr21.gtf:md5,c552c0aee5f1becb1d3991d21e63a5c1",
-                "version0.51.1:md5,4adc522fa0fdaace79e45bcee7abb865",
                 "genome.transcripts.fa:md5,fd4e06fc250a19351a611a44861b9aea",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
             ]
@@ -52,7 +52,7 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-12-05T15:37:47.995242455"
+        "timestamp": "2024-12-05T15:55:35.924356749"
     },
     "Run with profile test for kallisto | --input assets/test/default_extended.yml": {
         "content": [
@@ -73,6 +73,7 @@
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/KallistoIndex",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/KallistoIndex/version0.51.1",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/KallistoIndex/version0.51.1/kallisto",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/multiqc.log",
@@ -85,7 +86,6 @@
                 "pipeline_info/nf_core_references_software_mqc_versions.yml"
             ],
             [
-                "version0.51.1:md5,e425f39ad34d95970acdb16a706dfbb9",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
             ]
         ],
@@ -93,6 +93,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-12-05T15:37:21.239733377"
+        "timestamp": "2024-12-05T15:55:10.518283725"
     }
 }

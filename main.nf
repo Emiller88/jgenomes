@@ -139,7 +139,7 @@ output {
         path { meta, intervals -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/intervals/${file}" } }
     }
     'kallisto_index' {
-        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/KallistoIndex/version0.51.1" } }
+        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/KallistoIndex/version0.51.1/${file}" } }
     }
     'msisensorpro_list' {
         path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/msisensorpro/${file}" } }
