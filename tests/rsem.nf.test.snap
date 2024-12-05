@@ -57,7 +57,6 @@
             [
                 "GRCh38_chr21.fa:md5,c675070fcf168d7b64cfadc30b5d7b4d",
                 "Genome:md5,612664e3cfde5e1b73ad541d93752b31",
-                "Log.out:md5,63ebdd9d823e1bc2929aa0ba93c995e1",
                 "SA:md5,074ae54177bb7b9cb981382f043f36e5",
                 "SAindex:md5,81a04dbb4a8366c02907ad35218d877e",
                 "chrLength.txt:md5,b0be0a56ddefa84552742c72d4859eac",
@@ -86,7 +85,7 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-12-05T15:42:50.995387106"
+        "timestamp": "2024-12-05T16:01:13.352587524"
     },
     "Run with profile test for rsem | --input GRCh38_chr21.yml": {
         "content": [
@@ -159,7 +158,6 @@
                 "GRCh38_chr21.gtf:md5,c552c0aee5f1becb1d3991d21e63a5c1",
                 "GRCh38_chr21.fa:md5,c675070fcf168d7b64cfadc30b5d7b4d",
                 "Genome:md5,612664e3cfde5e1b73ad541d93752b31",
-                "Log.out:md5,810ffedc0e26770f9b71923e55f55152",
                 "SA:md5,074ae54177bb7b9cb981382f043f36e5",
                 "SAindex:md5,81a04dbb4a8366c02907ad35218d877e",
                 "chrLength.txt:md5,b0be0a56ddefa84552742c72d4859eac",
@@ -189,6 +187,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-12-05T15:44:39.234286812"
+        "timestamp": "2024-12-05T16:03:06.550798189"
     }
 }
