@@ -103,19 +103,19 @@ workflow {
 
 output {
     'bowtie1_index' {
-        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/BowtieIndex/" } }
+        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/BowtieIndex/version1.3.1" } }
     }
     'bowtie2_index' {
-        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/Bowtie2Index/" } }
+        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/Bowtie2Index/version2.5.2" } }
     }
     'bwamem1_index' {
-        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/BWAIndex/" } }
+        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/BWAIndex/version0.7.18" } }
     }
     'bwamem2_index' {
-        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/BWAmem2Index/" } }
+        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/BWAmem2Index/version2.2.1" } }
     }
     'dragmap_hashmap' {
-        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/dragmap/" } }
+        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/dragmap/version1.2.1" } }
     }
     'fasta' {
         path { meta, fasta -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/WholeGenomeFasta/${file}" } }
@@ -133,13 +133,13 @@ output {
         path { meta, intervals -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/Genes/${file}" } }
     }
     'hisat2_index' {
-        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/Hisat2Index/" } }
+        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/Hisat2Index/version2.2.1" } }
     }
     'intervals_bed' {
         path { meta, intervals -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/intervals/${file}" } }
     }
     'kallisto_index' {
-        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/KallistoIndex/" } }
+        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/KallistoIndex/version0.51.1" } }
     }
     'msisensorpro_list' {
         path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/msisensorpro/${file}" } }
@@ -154,16 +154,16 @@ output {
         path { folder -> { file -> "multiqc/multiqc_report" } }
     }
     'rsem_index' {
-        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/RSEMIndex/" } }
+        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/RSEMIndex/version1.3.1" } }
     }
     'salmon_index' {
-        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/SalmonIndex/" } }
+        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/SalmonIndex/version1.10.3" } }
     }
     'splice_sites' {
         path { meta, txt -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/SpliceSites/${file}" } }
     }
     'star_index' {
-        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/STARIndex/" } }
+        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/STARIndex/version2.7.11b" } }
     }
     'transcript_fasta' {
         path { meta, fasta -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/TranscriptFasta/${file}" } }
