@@ -53,11 +53,7 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.2"
         },
-<<<<<<< HEAD
         "timestamp": "2024-12-05T17:53:22.223391773"
-=======
-        "timestamp": "2024-12-05T15:55:35.924356749"
->>>>>>> dev
     },
     "Run with profile test for kallisto | --input assets/test/default_extended.yml": {
         "content": [
@@ -77,14 +73,9 @@
                 "Homo_sapiens/nf-core/references/GRCh38_chr21",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/KallistoIndex",
-<<<<<<< HEAD
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/KallistoIndex/genome.transcripts",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/KallistoIndex/genome.transcripts/version0.51.1",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/KallistoIndex/genome.transcripts/version0.51.1/kallisto",
-=======
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/KallistoIndex/version0.51.1",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/KallistoIndex/version0.51.1/kallisto",
->>>>>>> dev
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/multiqc.log",
@@ -104,10 +95,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.2"
         },
-<<<<<<< HEAD
         "timestamp": "2024-12-05T17:52:47.903698539"
-=======
-        "timestamp": "2024-12-05T15:55:10.518283725"
->>>>>>> dev
     }
 }
