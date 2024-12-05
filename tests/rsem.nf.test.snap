@@ -86,7 +86,11 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.2"
         },
+<<<<<<< HEAD
         "timestamp": "2024-12-05T18:12:25.831925672"
+=======
+        "timestamp": "2024-12-05T16:01:13.352587524"
+>>>>>>> dev
     },
     "Run with profile test for rsem | --input GRCh38_chr21.yml": {
         "content": [
@@ -117,6 +121,7 @@
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Annotation/Genes/GRCh38_chr21.gtf",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/RSEMIndex",
+<<<<<<< HEAD
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/RSEMIndex/GRCh38_chr21",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/RSEMIndex/GRCh38_chr21/version1.3.1",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/RSEMIndex/GRCh38_chr21/version1.3.1/GRCh38_chr21.fa",
@@ -143,6 +148,33 @@
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/RSEMIndex/GRCh38_chr21/version1.3.1/sjdbList.fromGTF.out.tab",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/RSEMIndex/GRCh38_chr21/version1.3.1/sjdbList.out.tab",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/RSEMIndex/GRCh38_chr21/version1.3.1/transcriptInfo.tab",
+=======
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/RSEMIndex/version1.3.1",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/RSEMIndex/version1.3.1/GRCh38_chr21.fa",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/RSEMIndex/version1.3.1/Genome",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/RSEMIndex/version1.3.1/Log.out",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/RSEMIndex/version1.3.1/SA",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/RSEMIndex/version1.3.1/SAindex",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/RSEMIndex/version1.3.1/chrLength.txt",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/RSEMIndex/version1.3.1/chrName.txt",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/RSEMIndex/version1.3.1/chrNameLength.txt",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/RSEMIndex/version1.3.1/chrStart.txt",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/RSEMIndex/version1.3.1/exonGeTrInfo.tab",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/RSEMIndex/version1.3.1/exonInfo.tab",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/RSEMIndex/version1.3.1/geneInfo.tab",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/RSEMIndex/version1.3.1/genome.chrlist",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/RSEMIndex/version1.3.1/genome.grp",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/RSEMIndex/version1.3.1/genome.idx.fa",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/RSEMIndex/version1.3.1/genome.n2g.idx.fa",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/RSEMIndex/version1.3.1/genome.seq",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/RSEMIndex/version1.3.1/genome.ti",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/RSEMIndex/version1.3.1/genome.transcripts.fa",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/RSEMIndex/version1.3.1/genomeParameters.txt",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/RSEMIndex/version1.3.1/sjdbInfo.txt",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/RSEMIndex/version1.3.1/sjdbList.fromGTF.out.tab",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/RSEMIndex/version1.3.1/sjdbList.out.tab",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/RSEMIndex/version1.3.1/transcriptInfo.tab",
+>>>>>>> dev
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/TranscriptFasta",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/TranscriptFasta/genome.transcripts.fa",
                 "multiqc",
@@ -189,6 +221,10 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.2"
         },
+<<<<<<< HEAD
         "timestamp": "2024-12-05T18:14:26.209320615"
+=======
+        "timestamp": "2024-12-05T16:03:06.550798189"
+>>>>>>> dev
     }
 }
