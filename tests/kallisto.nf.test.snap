@@ -27,6 +27,8 @@
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Annotation/Genes/GRCh38_chr21.gtf",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/KallistoIndex",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/KallistoIndex/version0.51.1",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/KallistoIndex/version0.51.1/kallisto",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/TranscriptFasta",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/TranscriptFasta/genome.transcripts.fa",
                 "multiqc",
@@ -50,7 +52,7 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-12-03T14:31:39.422746281"
+        "timestamp": "2024-12-05T15:55:35.924356749"
     },
     "Run with profile test for kallisto | --input assets/test/default_extended.yml": {
         "content": [
@@ -70,6 +72,8 @@
                 "Homo_sapiens/nf-core/references/GRCh38_chr21",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/KallistoIndex",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/KallistoIndex/version0.51.1",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/KallistoIndex/version0.51.1/kallisto",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/multiqc.log",
@@ -89,6 +93,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-12-03T14:31:07.501838885"
+        "timestamp": "2024-12-05T15:55:10.518283725"
     }
 }
