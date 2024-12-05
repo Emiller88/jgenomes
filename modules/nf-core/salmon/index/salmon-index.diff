@@ -2,7 +2,7 @@ Changes in module 'nf-core/salmon/index'
 Changes in 'salmon/index/main.nf':
 --- modules/nf-core/salmon/index/main.nf
 +++ modules/nf-core/salmon/index/main.nf
-@@ -8,12 +8,12 @@
+@@ -8,17 +8,18 @@
          'biocontainers/salmon:1.10.3--h6dccd9a_2' }"
  
      input:
@@ -14,11 +14,17 @@ Changes in 'salmon/index/main.nf':
      output:
 -    path "salmon"      , emit: index
 -    path "versions.yml", emit: versions
-+    tuple val(meta), path("salmon"), emit: index
++    tuple val(meta_out), path("salmon"), emit: index
 +    path "versions.yml",             emit: versions
  
      when:
      task.ext.when == null || task.ext.when
+ 
+     script:
++    meta_out = meta + [source_gff:transcript_fasta.baseName]
+     def args = task.ext.args ?: ''
+     def get_decoy_ids = "grep '^>' $genome_fasta | cut -d ' ' -f 1 | cut -d \$'\\t' -f 1 > decoys.txt"
+     def gentrome      = "gentrome.fa"
 
 'modules/nf-core/salmon/index/meta.yml' is unchanged
 'modules/nf-core/salmon/index/environment.yml' is unchanged

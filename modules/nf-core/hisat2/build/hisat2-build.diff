@@ -1,0 +1,27 @@
+Changes in module 'nf-core/hisat2/build'
+Changes in 'hisat2/build/main.nf':
+--- modules/nf-core/hisat2/build/main.nf
++++ modules/nf-core/hisat2/build/main.nf
+@@ -14,13 +14,14 @@
+     tuple val(meta3), path(splicesites)
+ 
+     output:
+-    tuple val(meta), path("hisat2") , emit: index
++    tuple val(meta_out), path("hisat2") , emit: index
+     path "versions.yml"             , emit: versions
+ 
+     when:
+     task.ext.when == null || task.ext.when
+ 
+     script:
++    meta_out = meta + [source_gff:gtf.baseName]
+     def args = task.ext.args ?: ''
+     def avail_mem = 0
+     if (!task.memory) {
+
+'modules/nf-core/hisat2/build/meta.yml' is unchanged
+'modules/nf-core/hisat2/build/environment.yml' is unchanged
+'modules/nf-core/hisat2/build/tests/main.nf.test.snap' is unchanged
+'modules/nf-core/hisat2/build/tests/main.nf.test' is unchanged
+'modules/nf-core/hisat2/build/tests/tags.yml' is unchanged
+************************************************************

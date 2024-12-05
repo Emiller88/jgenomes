@@ -1,0 +1,27 @@
+Changes in module 'nf-core/star/genomegenerate'
+Changes in 'star/genomegenerate/main.nf':
+--- modules/nf-core/star/genomegenerate/main.nf
++++ modules/nf-core/star/genomegenerate/main.nf
+@@ -12,13 +12,14 @@
+     tuple val(meta2), path(gtf)
+ 
+     output:
+-    tuple val(meta), path("star")  , emit: index
++    tuple val(meta_out), path("star")  , emit: index
+     path "versions.yml"            , emit: versions
+ 
+     when:
+     task.ext.when == null || task.ext.when
+ 
+     script:
++    meta_out = meta + [source_gff:gtf.baseName]
+     def args        = task.ext.args ?: ''
+     def args_list   = args.tokenize()
+     def memory      = task.memory ? "--limitGenomeGenerateRAM ${task.memory.toBytes() - 100000000}" : ''
+
+'modules/nf-core/star/genomegenerate/meta.yml' is unchanged
+'modules/nf-core/star/genomegenerate/environment.yml' is unchanged
+'modules/nf-core/star/genomegenerate/tests/main.nf.test.snap' is unchanged
+'modules/nf-core/star/genomegenerate/tests/main.nf.test' is unchanged
+'modules/nf-core/star/genomegenerate/tests/tags.yml' is unchanged
+************************************************************

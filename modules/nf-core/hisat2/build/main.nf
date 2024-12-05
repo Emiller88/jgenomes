@@ -14,13 +14,14 @@ process HISAT2_BUILD {
     tuple val(meta3), path(splicesites)
 
     output:
-    tuple val(meta), path("hisat2") , emit: index
+    tuple val(meta_out), path("hisat2") , emit: index
     path "versions.yml"             , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
 
     script:
+    meta_out = meta + [source_gff:gtf.baseName]
     def args = task.ext.args ?: ''
     def avail_mem = 0
     if (!task.memory) {

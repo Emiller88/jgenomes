@@ -2,7 +2,7 @@ Changes in module 'nf-core/rsem/preparereference'
 Changes in 'rsem/preparereference/main.nf':
 --- modules/nf-core/rsem/preparereference/main.nf
 +++ modules/nf-core/rsem/preparereference/main.nf
-@@ -8,12 +8,12 @@
+@@ -8,18 +8,19 @@
          'biocontainers/mulled-v2-cf0123ef83b3c38c13e3b0696a3f285d3f20f15b:64aad4a4e144878400649e71f42105311be7ed87-0' }"
  
      input:
@@ -14,11 +14,18 @@ Changes in 'rsem/preparereference/main.nf':
      output:
 -    path "rsem"           , emit: index
 -    path "*transcripts.fa", emit: transcript_fasta
-+    tuple val(meta), path("rsem")           , emit: index
++    tuple val(meta_out), path("rsem")           , emit: index
 +    tuple val(meta), path("*transcripts.fa"), emit: transcript_fasta
      path "versions.yml"   , emit: versions
  
      when:
+     task.ext.when == null || task.ext.when
+ 
+     script:
++    meta_out = meta + [source_gff:gtf.baseName]
+     def args = task.ext.args ?: ''
+     def args2 = task.ext.args2 ?: ''
+     def args_list = args.tokenize()
 
 'modules/nf-core/rsem/preparereference/meta.yml' is unchanged
 'modules/nf-core/rsem/preparereference/environment.yml' is unchanged
