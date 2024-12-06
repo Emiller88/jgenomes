@@ -15,24 +15,24 @@
             },
             "source": {
                 "type": "string",
-                "errorMessage": "Where the references came from",
+                "errorMessage": "Source of genome must be provided and cannot contain spaces",
                 "meta": ["source"]
             },
             "source_vcf": {
                 "type": "string",
-                "errorMessage": "Where the references came from",
+                "errorMessage": "Source of the VCF file must be provided and cannot contain spaces",
                 "default": "unknown",
                 "meta": ["source_vcf"]
             },
-            "source_gff": {
+            "reference_version": {
                 "type": "string",
-                "errorMessage": "Where the references came from",
+                "errorMessage": "What is the version of the reference used to create gff/gtf and transcript related files",
                 "default": "unknown",
-                "meta": ["source_gff"]
+                "meta": ["reference_version"]
             },
             "species": {
                 "type": "string",
-                "errorMessage": "Species of the reference",
+                "errorMessage": "Species of the reference, cannot contain spaces",
                 "meta": ["species"]
             },
             "intervals_bed": {

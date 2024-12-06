@@ -135,9 +135,9 @@ output {
     'hisat2_index' {
         path { meta, index ->
             { file ->
-                meta.source_gff == "unknown"
+                meta.reference_version == "unknown"
                     ? "${meta.species}/${meta.source}/${meta.id}/Sequence/Hisat2Index/version2.2.1"
-                    : "${meta.species}/${meta.source}/${meta.id}/Sequence/Hisat2Index/${meta.source_gff}/version2.2.1"
+                    : "${meta.species}/${meta.source}/${meta.id}/Sequence/Hisat2Index/${meta.reference_version}/version2.2.1"
             }
         }
     }
@@ -147,9 +147,9 @@ output {
     'kallisto_index' {
         path { meta, index ->
             { file ->
-                meta.source_gff == "unknown"
+                meta.reference_version == "unknown"
                     ? "${meta.species}/${meta.source}/${meta.id}/Sequence/KallistoIndex/version0.51.1/${file}"
-                    : "${meta.species}/${meta.source}/${meta.id}/Sequence/KallistoIndex/${meta.source_gff}/version0.51.1/${file}"
+                    : "${meta.species}/${meta.source}/${meta.id}/Sequence/KallistoIndex/${meta.reference_version}/version0.51.1/${file}"
             }
         }
     }
@@ -168,18 +168,18 @@ output {
     'rsem_index' {
         path { meta, index ->
             { file ->
-                meta.source_gff == "unknown"
+                meta.reference_version == "unknown"
                     ? "${meta.species}/${meta.source}/${meta.id}/Sequence/RSEMIndex/version1.3.1"
-                    : "${meta.species}/${meta.source}/${meta.id}/Sequence/RSEMIndex/${meta.source_gff}/version1.3.1"
+                    : "${meta.species}/${meta.source}/${meta.id}/Sequence/RSEMIndex/${meta.reference_version}/version1.3.1"
             }
         }
     }
     'salmon_index' {
         path { meta, index ->
             { file ->
-                meta.source_gff == "unknown"
+                meta.reference_version == "unknown"
                     ? "${meta.species}/${meta.source}/${meta.id}/Sequence/SalmonIndex/version1.10.3"
-                    : "${meta.species}/${meta.source}/${meta.id}/Sequence/SalmonIndex/${meta.source_gff}/version1.10.3"
+                    : "${meta.species}/${meta.source}/${meta.id}/Sequence/SalmonIndex/${meta.reference_version}/version1.10.3"
             }
         }
     }
@@ -189,9 +189,9 @@ output {
     'star_index' {
         path { meta, index ->
             { file ->
-                meta.source_gff == "unknown"
+                meta.reference_version == "unknown"
                     ? "${meta.species}/${meta.source}/${meta.id}/Sequence/STARIndex/version2.7.11b"
-                    : "${meta.species}/${meta.source}/${meta.id}/Sequence/STARIndex/${meta.source_gff}/version2.7.11b"
+                    : "${meta.species}/${meta.source}/${meta.id}/Sequence/STARIndex/${meta.reference_version}/version2.7.11b"
             }
         }
     }
