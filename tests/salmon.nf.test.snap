@@ -76,7 +76,7 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-12-05T16:05:26.021361965"
+        "timestamp": "2024-12-06T11:43:27.413672277"
     },
     "Run with profile test for salmon | --input assets/test/default_extended.yml": {
         "content": [
@@ -96,22 +96,23 @@
                 "Homo_sapiens/nf-core/references/GRCh38_chr21",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/SalmonIndex",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/SalmonIndex/version1.10.3",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/SalmonIndex/version1.10.3/complete_ref_lens.bin",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/SalmonIndex/version1.10.3/ctable.bin",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/SalmonIndex/version1.10.3/ctg_offsets.bin",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/SalmonIndex/version1.10.3/duplicate_clusters.tsv",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/SalmonIndex/version1.10.3/info.json",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/SalmonIndex/version1.10.3/mphf.bin",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/SalmonIndex/version1.10.3/pos.bin",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/SalmonIndex/version1.10.3/pre_indexing.log",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/SalmonIndex/version1.10.3/rank.bin",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/SalmonIndex/version1.10.3/refAccumLengths.bin",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/SalmonIndex/version1.10.3/ref_indexing.log",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/SalmonIndex/version1.10.3/reflengths.bin",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/SalmonIndex/version1.10.3/refseq.bin",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/SalmonIndex/version1.10.3/seq.bin",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/SalmonIndex/version1.10.3/versionInfo.json",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/SalmonIndex/CUSTOM",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/SalmonIndex/CUSTOM/version1.10.3",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/SalmonIndex/CUSTOM/version1.10.3/complete_ref_lens.bin",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/SalmonIndex/CUSTOM/version1.10.3/ctable.bin",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/SalmonIndex/CUSTOM/version1.10.3/ctg_offsets.bin",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/SalmonIndex/CUSTOM/version1.10.3/duplicate_clusters.tsv",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/SalmonIndex/CUSTOM/version1.10.3/info.json",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/SalmonIndex/CUSTOM/version1.10.3/mphf.bin",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/SalmonIndex/CUSTOM/version1.10.3/pos.bin",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/SalmonIndex/CUSTOM/version1.10.3/pre_indexing.log",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/SalmonIndex/CUSTOM/version1.10.3/rank.bin",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/SalmonIndex/CUSTOM/version1.10.3/refAccumLengths.bin",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/SalmonIndex/CUSTOM/version1.10.3/ref_indexing.log",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/SalmonIndex/CUSTOM/version1.10.3/reflengths.bin",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/SalmonIndex/CUSTOM/version1.10.3/refseq.bin",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/SalmonIndex/CUSTOM/version1.10.3/seq.bin",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/SalmonIndex/CUSTOM/version1.10.3/versionInfo.json",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/multiqc.log",
@@ -141,6 +142,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-12-05T16:04:33.548164895"
+        "timestamp": "2024-12-06T11:57:24.351180092"
     }
 }

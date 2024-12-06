@@ -21,7 +21,14 @@
             "source_vcf": {
                 "type": "string",
                 "errorMessage": "Where the references came from",
+                "default": "unknown",
                 "meta": ["source_vcf"]
+            },
+            "source_gff": {
+                "type": "string",
+                "errorMessage": "Where the references came from",
+                "default": "unknown",
+                "meta": ["source_gff"]
             },
             "species": {
                 "type": "string",

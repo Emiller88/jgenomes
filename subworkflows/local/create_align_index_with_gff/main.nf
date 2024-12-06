@@ -57,6 +57,7 @@ workflow CREATE_ALIGN_INDEX_WITH_GFF {
 
             HISAT2_EXTRACTSPLICESITES(gtf_hisat2)
 
+            versions = versions.mix(HISAT2_EXTRACTSPLICESITES.out.versions)
             splice_sites = input_splice_sites.mix(HISAT2_EXTRACTSPLICESITES.out.txt)
 
             if (run_hisat2) {
@@ -68,7 +69,6 @@ workflow CREATE_ALIGN_INDEX_WITH_GFF {
 
                 hisat2_index = HISAT2_BUILD.out.index
 
-                versions = versions.mix(HISAT2_EXTRACTSPLICESITES.out.versions)
                 versions = versions.mix(HISAT2_BUILD.out.versions)
             }
         }
