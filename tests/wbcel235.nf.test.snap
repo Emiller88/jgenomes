@@ -1,7 +1,7 @@
 {
     "Run with profile test for WBCEL235 | --input assets/genomes/Caenorhabditis_elegans/NCBI/WBcel235.yml": {
         "content": [
-            11,
+            10,
             {
                 "BUILD_INTERVALS": {
                     "gawk": "5.3.0"
@@ -11,9 +11,6 @@
                 },
                 "GATK4_CREATESEQUENCEDICTIONARY": {
                     "gatk4": "4.6.1.0"
-                },
-                "GFFREAD": {
-                    "gffread": "0.12.7"
                 },
                 "GUNZIP_FASTA": {
                     "gunzip": 1.1
@@ -48,7 +45,6 @@
                 "Caenorhabditis_elegans/NCBI/WBcel235/Annotation/Genes",
                 "Caenorhabditis_elegans/NCBI/WBcel235/Annotation/Genes/GCF_000002985.6_WBcel235_genomic.gff",
                 "Caenorhabditis_elegans/NCBI/WBcel235/Annotation/Genes/GCF_000002985.6_WBcel235_genomic.gtf",
-                "Caenorhabditis_elegans/NCBI/WBcel235/Annotation/Genes/WBcel235.gtf",
                 "Caenorhabditis_elegans/NCBI/WBcel235/Annotation/intervals",
                 "Caenorhabditis_elegans/NCBI/WBcel235/Annotation/intervals/WBcel235.bed",
                 "Caenorhabditis_elegans/NCBI/WBcel235/Sequence",
@@ -123,7 +119,6 @@
             [
                 "GCF_000002985.6_WBcel235_genomic.gff:md5,4ecdb82b6f15e9223aa3197f5f38be29",
                 "GCF_000002985.6_WBcel235_genomic.gtf:md5,7bdf9e5149fba51317db2cb2c5ba5736",
-                "WBcel235.gtf:md5,f0bcf50329545fb8e31287abe85526cb",
                 "WBcel235.bed:md5,84cb3d6e8ed7c8475fc9735b19b66908",
                 "GCF_000002985.6_WBcel235_genomic.amb:md5,a0741fa25fb4e5a52ac61ecc5b679ac2",
                 "GCF_000002985.6_WBcel235_genomic.ann:md5,7e46a49f983e0ca1fb6ee14be12251d3",
@@ -178,6 +173,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-12-06T17:12:06.049521896"
+        "timestamp": "2024-12-06T17:46:32.324839323"
     }
 }

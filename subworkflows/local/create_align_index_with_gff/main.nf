@@ -35,9 +35,12 @@ workflow CREATE_ALIGN_INDEX_WITH_GFF {
     versions = Channel.empty()
 
     if (run_hisat2 || run_kallisto || run_rsem || run_rsem_make_transcript_fasta || run_salmon || run_star) {
+        gff_gffread = input_gff.map { meta, map_gff ->
+            return meta.run_gffread ? [meta, map_gff] : null
+        }
 
         GFFREAD(
-            input_gff,
+            gff_gffread,
             []
         )
 
