@@ -129,8 +129,11 @@ output {
     'fasta_sizes' {
         path { meta, sizes -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/WholeGenomeFasta/${file}" } }
     }
+    'gff' {
+        path { meta, gff -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/Genes/${file}" } }
+    }
     'gtf' {
-        path { meta, intervals -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/Genes/${file}" } }
+        path { meta, gtf -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/Genes/${file}" } }
     }
     'hisat2_index' {
         path { meta, index ->

@@ -6,3 +6,4 @@
   reference_version: GCF_000001405.40
   site: https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000001405.40
   source: Gencode
+  species: Homo_sapiens

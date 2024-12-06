@@ -3,6 +3,7 @@ include { CREATE_ALIGN_INDEX_WITH_GFF } from '../../subworkflows/local/create_al
 include { INDEX_FASTA                 } from '../../subworkflows/local/index_fasta'
 include { INDEX_VCF                   } from '../../subworkflows/local/index_vcf'
 include { SAMPLESHEET_TO_CHANNEL      } from '../../subworkflows/local/samplesheet_to_channel'
+include { UNCOMPRESS_REFERENCES       } from '../../subworkflows/local/uncompress_references'
 
 workflow REFERENCES {
     take:
@@ -15,15 +16,31 @@ workflow REFERENCES {
     SAMPLESHEET_TO_CHANNEL(reference)
 
     intervals_bed = SAMPLESHEET_TO_CHANNEL.out.intervals_bed
-    fasta = SAMPLESHEET_TO_CHANNEL.out.fasta
     fasta_dict = SAMPLESHEET_TO_CHANNEL.out.fasta_dict
     fasta_fai = SAMPLESHEET_TO_CHANNEL.out.fasta_fai
     fasta_sizes = SAMPLESHEET_TO_CHANNEL.out.fasta_sizes
-    gff = SAMPLESHEET_TO_CHANNEL.out.gff
-    gtf = SAMPLESHEET_TO_CHANNEL.out.gtf
     splice_sites = SAMPLESHEET_TO_CHANNEL.out.splice_sites
     transcript_fasta = SAMPLESHEET_TO_CHANNEL.out.transcript_fasta
     vcf = SAMPLESHEET_TO_CHANNEL.out.vcf
+
+    fasta_input = SAMPLESHEET_TO_CHANNEL.out.fasta.branch { meta, fasta_map ->
+        decompress_fasta: meta.decompress_fasta
+        other: true
+    }
+    gff_input = SAMPLESHEET_TO_CHANNEL.out.gff.branch { meta, gff_map ->
+        decompress_gff: meta.decompress_gff
+        other: true
+    }
+    gtf_input = SAMPLESHEET_TO_CHANNEL.out.gtf.branch { meta, gtf_map ->
+        decompress_gtf: meta.decompress_gtf
+        other: true
+    }
+
+    UNCOMPRESS_REFERENCES(fasta_input.decompress_fasta, gff_input.decompress_gff, gtf_input.decompress_gtf)
+
+    fasta = fasta_input.other.mix(UNCOMPRESS_REFERENCES.out.fasta)
+    gff = gff_input.other.mix(UNCOMPRESS_REFERENCES.out.gff)
+    gtf = gtf_input.other.mix(UNCOMPRESS_REFERENCES.out.gtf)
 
     CREATE_ALIGN_INDEX(
         fasta,
@@ -91,6 +108,7 @@ workflow REFERENCES {
     versions = versions.mix(CREATE_ALIGN_INDEX_WITH_GFF.out.versions)
     versions = versions.mix(INDEX_FASTA.out.versions)
     versions = versions.mix(INDEX_VCF.out.versions)
+    versions = versions.mix(UNCOMPRESS_REFERENCES.out.versions)
 
     emit:
     bowtie1_index     // channel: [meta, BowtieIndex/]
@@ -102,6 +120,7 @@ workflow REFERENCES {
     fasta_dict        // channel: [meta, *.fa(sta).dict]
     fasta_fai         // channel: [meta, *.fa(sta).fai]
     fasta_sizes       // channel: [meta, *.fa(sta).sizes]
+    gff               // channel: [meta, gff]
     gtf               // channel: [meta, gtf]
     hisat2_index      // channel: [meta, Hisat2Index/]
     intervals_bed     // channel: [meta, *.bed]
@@ -125,6 +144,7 @@ workflow REFERENCES {
     fasta_dict >> 'fasta_dict'
     fasta_fai >> 'fasta_fai'
     fasta_sizes >> 'fasta_sizes'
+    gff >> 'gff'
     gtf >> 'gtf'
     hisat2_index >> 'hisat2_index'
     intervals_bed >> 'intervals_bed'
