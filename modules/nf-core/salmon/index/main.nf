@@ -12,14 +12,13 @@ process SALMON_INDEX {
     tuple val(meta2), path(transcript_fasta)
 
     output:
-    tuple val(meta_out), path("salmon"), emit: index
+    tuple val(meta), path("salmon"), emit: index
     path "versions.yml",             emit: versions
 
     when:
     task.ext.when == null || task.ext.when
 
     script:
-    meta_out = meta + [source_gff:transcript_fasta.baseName]
     def args = task.ext.args ?: ''
     def get_decoy_ids = "grep '^>' $genome_fasta | cut -d ' ' -f 1 | cut -d \$'\\t' -f 1 > decoys.txt"
     def gentrome      = "gentrome.fa"

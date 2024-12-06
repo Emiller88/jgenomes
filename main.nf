@@ -133,13 +133,25 @@ output {
         path { meta, intervals -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/Genes/${file}" } }
     }
     'hisat2_index' {
-        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/Hisat2Index/${meta.source_gff}/version2.2.1" } }
+        path { meta, index ->
+            { file ->
+                meta.source_gff == "unknown"
+                    ? "${meta.species}/${meta.source}/${meta.id}/Sequence/Hisat2Index/version2.2.1"
+                    : "${meta.species}/${meta.source}/${meta.id}/Sequence/Hisat2Index/${meta.source_gff}/version2.2.1"
+            }
+        }
     }
     'intervals_bed' {
         path { meta, intervals -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/intervals/${file}" } }
     }
     'kallisto_index' {
-        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/KallistoIndex/${meta.source_gff}/version0.51.1/${file}" } }
+        path { meta, index ->
+            { file ->
+                meta.source_gff == "unknown"
+                    ? "${meta.species}/${meta.source}/${meta.id}/Sequence/KallistoIndex/version0.51.1/${file}"
+                    : "${meta.species}/${meta.source}/${meta.id}/Sequence/KallistoIndex/${meta.source_gff}/version0.51.1/${file}"
+            }
+        }
     }
     'msisensorpro_list' {
         path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Annotation/msisensorpro/${file}" } }
@@ -154,16 +166,34 @@ output {
         path { folder -> { file -> "multiqc/multiqc_report" } }
     }
     'rsem_index' {
-        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/RSEMIndex/${meta.source_gff}/version1.3.1" } }
+        path { meta, index ->
+            { file ->
+                meta.source_gff == "unknown"
+                    ? "${meta.species}/${meta.source}/${meta.id}/Sequence/RSEMIndex/version1.3.1"
+                    : "${meta.species}/${meta.source}/${meta.id}/Sequence/RSEMIndex/${meta.source_gff}/version1.3.1"
+            }
+        }
     }
     'salmon_index' {
-        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/SalmonIndex/${meta.source_gff}/version1.10.3" } }
+        path { meta, index ->
+            { file ->
+                meta.source_gff == "unknown"
+                    ? "${meta.species}/${meta.source}/${meta.id}/Sequence/SalmonIndex/version1.10.3"
+                    : "${meta.species}/${meta.source}/${meta.id}/Sequence/SalmonIndex/${meta.source_gff}/version1.10.3"
+            }
+        }
     }
     'splice_sites' {
         path { meta, txt -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/SpliceSites/${file}" } }
     }
     'star_index' {
-        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/STARIndex/${meta.source_gff}/version2.7.11b" } }
+        path { meta, index ->
+            { file ->
+                meta.source_gff == "unknown"
+                    ? "${meta.species}/${meta.source}/${meta.id}/Sequence/STARIndex/version2.7.11b"
+                    : "${meta.species}/${meta.source}/${meta.id}/Sequence/STARIndex/${meta.source_gff}/version2.7.11b"
+            }
+        }
     }
     'transcript_fasta' {
         path { meta, fasta -> { file -> "${meta.species}/${meta.source}/${meta.id}/Sequence/TranscriptFasta/${file}" } }

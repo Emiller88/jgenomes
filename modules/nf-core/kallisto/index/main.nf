@@ -11,14 +11,13 @@ process KALLISTO_INDEX {
     tuple val(meta), path(fasta)
 
     output:
-    tuple val(meta_out), path("kallisto")  , emit: index
+    tuple val(meta), path("kallisto")  , emit: index
     path "versions.yml"                , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
 
     script:
-    meta_out = meta + [source_gff:fasta.baseName]
     def args = task.ext.args ?: ''
     """
     kallisto \\

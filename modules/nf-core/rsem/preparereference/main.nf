@@ -12,7 +12,7 @@ process RSEM_PREPAREREFERENCE {
     tuple val(meta2), path(gtf)
 
     output:
-    tuple val(meta_out), path("rsem")           , emit: index
+    tuple val(meta), path("rsem")           , emit: index
     tuple val(meta), path("*transcripts.fa"), emit: transcript_fasta
     path "versions.yml"   , emit: versions
 
@@ -20,7 +20,6 @@ process RSEM_PREPAREREFERENCE {
     task.ext.when == null || task.ext.when
 
     script:
-    meta_out = meta + [source_gff:gtf.baseName]
     def args = task.ext.args ?: ''
     def args2 = task.ext.args2 ?: ''
     def args_list = args.tokenize()

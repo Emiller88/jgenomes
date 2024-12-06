@@ -17,16 +17,16 @@
                 "Homo_sapiens/nf-core/references/GRCh38_chr21",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/GRCh38_chr21",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/GRCh38_chr21/version2.2.1",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/GRCh38_chr21/version2.2.1/GRCh38_chr21.1.ht2",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/GRCh38_chr21/version2.2.1/GRCh38_chr21.2.ht2",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/GRCh38_chr21/version2.2.1/GRCh38_chr21.3.ht2",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/GRCh38_chr21/version2.2.1/GRCh38_chr21.4.ht2",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/GRCh38_chr21/version2.2.1/GRCh38_chr21.5.ht2",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/GRCh38_chr21/version2.2.1/GRCh38_chr21.6.ht2",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/GRCh38_chr21/version2.2.1/GRCh38_chr21.7.ht2",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/GRCh38_chr21/version2.2.1/GRCh38_chr21.8.ht2",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/CUSTOM",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/CUSTOM/version2.2.1",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/CUSTOM/version2.2.1/GRCh38_chr21.1.ht2",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/CUSTOM/version2.2.1/GRCh38_chr21.2.ht2",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/CUSTOM/version2.2.1/GRCh38_chr21.3.ht2",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/CUSTOM/version2.2.1/GRCh38_chr21.4.ht2",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/CUSTOM/version2.2.1/GRCh38_chr21.5.ht2",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/CUSTOM/version2.2.1/GRCh38_chr21.6.ht2",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/CUSTOM/version2.2.1/GRCh38_chr21.7.ht2",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/CUSTOM/version2.2.1/GRCh38_chr21.8.ht2",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/multiqc.log",
@@ -54,7 +54,7 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-12-05T17:50:52.053323321"
+        "timestamp": "2024-12-06T11:47:41.58238436"
     },
     "Run with profile test for hisat2 | --input GRCh38_chr21.yml": {
         "content": [
@@ -83,16 +83,15 @@
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Annotation/Genes/GRCh38_chr21.gtf",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/GRCh38_chr21",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/GRCh38_chr21/version2.2.1",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/GRCh38_chr21/version2.2.1/GRCh38_chr21.1.ht2",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/GRCh38_chr21/version2.2.1/GRCh38_chr21.2.ht2",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/GRCh38_chr21/version2.2.1/GRCh38_chr21.3.ht2",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/GRCh38_chr21/version2.2.1/GRCh38_chr21.4.ht2",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/GRCh38_chr21/version2.2.1/GRCh38_chr21.5.ht2",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/GRCh38_chr21/version2.2.1/GRCh38_chr21.6.ht2",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/GRCh38_chr21/version2.2.1/GRCh38_chr21.7.ht2",
-                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/GRCh38_chr21/version2.2.1/GRCh38_chr21.8.ht2",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/version2.2.1",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/version2.2.1/GRCh38_chr21.1.ht2",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/version2.2.1/GRCh38_chr21.2.ht2",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/version2.2.1/GRCh38_chr21.3.ht2",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/version2.2.1/GRCh38_chr21.4.ht2",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/version2.2.1/GRCh38_chr21.5.ht2",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/version2.2.1/GRCh38_chr21.6.ht2",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/version2.2.1/GRCh38_chr21.7.ht2",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/version2.2.1/GRCh38_chr21.8.ht2",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/SpliceSites",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/SpliceSites/GRCh38_chr21.splice_sites.txt",
                 "multiqc",
@@ -124,6 +123,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-12-05T17:52:28.323161796"
+        "timestamp": "2024-12-06T11:33:17.476760832"
     }
 }
