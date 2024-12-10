@@ -28,7 +28,7 @@
                 "type": "string",
                 "errorMessage": "What is the version of the reference used to create gff/gtf and transcript related files",
                 "default": "unknown",
-                "meta": ["reference_version"]
+                "meta": ["source_version"]
             },
             "species": {
                 "type": "string",
