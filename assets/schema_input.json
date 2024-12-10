@@ -11,7 +11,7 @@
                 "type": "string",
                 "pattern": "^\\S+$",
                 "errorMessage": "Genome name must be provided and cannot contain spaces",
-                "meta": ["genome"]
+                "meta": ["genome", "id"]
             },
             "source": {
                 "type": "string",
@@ -143,6 +143,11 @@
             "vcf": {
                 "type": "string",
                 "pattern": "^\\S+\\.vcf\\.gz$",
+                "errorMessage": "TODO"
+            },
+            "vcf_tbi": {
+                "type": "string",
+                "pattern": "^\\S+\\.vcf\\.gz\\.tbi$",
                 "errorMessage": "TODO"
             }
         },
