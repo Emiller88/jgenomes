@@ -3,7 +3,7 @@
   gff: https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_45/gencode.v45.chr_patch_hapl_scaff.annotation.gff3.gz
   gtf: https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_45/gencode.v45.chr_patch_hapl_scaff.annotation.gtf.gz
   mito_name: MT
-  reference_version: GCF_000001405.40
+  source_version: GCF_000001405.40
   site: https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000001405.40
   source: Gencode
   species: Homo_sapiens

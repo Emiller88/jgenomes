@@ -50,6 +50,17 @@
                 }
             }
         },
+        "building_index_options": {
+            "title": "Building index options",
+            "type": "object",
+            "description": "",
+            "default": "",
+            "properties": {
+                "kallisto_make_unique": {
+                    "type": "boolean"
+                }
+            }
+        },
         "institutional_config_options": {
             "title": "Institutional config options",
             "type": "object",
@@ -193,6 +204,9 @@
     "allOf": [
         {
             "$ref": "#/$defs/input_output_options"
+        },
+        {
+            "$ref": "#/$defs/building_index_options"
         },
         {
             "$ref": "#/$defs/institutional_config_options"

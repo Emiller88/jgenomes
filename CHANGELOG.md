@@ -26,6 +26,9 @@ Initial release of nf-core/references, created with the [nf-core](https://nf-co.
 - [47](https://github.com/nf-core/references/pull/47) - Add fasta assets for files in igenomes
 - [51](https://github.com/nf-core/references/pull/51) - Add fasta_fai assets for files in igenomes
 - [52](https://github.com/nf-core/references/pull/52) - Add abundantsequences_fasta, bismark_index, bowtie1_index, bowtie2_index, bwamem1_index, bwamem2_index, chrom_info, chromosomes_fasta, dragmap_hashtable, fasta_dict, genes_bed, genes_refflat, genes_refgene, genome_size_xml, gtf, hairpin_fasta, mature_fasta, readme, source, source_vcf, species, star_index and vcf assets for files in igenomes
+- [56](https://github.com/nf-core/references/pull/56) - Add fields for bowtie1_index, bowtie2_index, bwamem1_index, bwamem2_index, dragmap_hashtable, hisat2_index, kallisto_index, msisensorpro_list, rsem_index, salmon_index, star_index, vcf_tbi in assets
+- [56](https://github.com/nf-core/references/pull/56) - Add new params: kallisto_make_unique to use the --make-unique option for kallisto
+- [56](https://github.com/nf-core/references/pull/56) - New file assets/genomes/Caenorhabditis_elegans/NCBI/WBcel235_updated.yml, build from assets/genomes/Caenorhabditis_elegans/NCBI/WBcel235.yml
 
 ### Changed
 
@@ -44,6 +47,7 @@ Initial release of nf-core/references, created with the [nf-core](https://nf-co.
 - [48](https://github.com/nf-core/references/pull/48) - Code refactoring (new subworfklows for each type of operations)
 - [49](https://github.com/nf-core/references/pull/49) - Better publishing for all files
 - [53](https://github.com/nf-core/references/pull/53) - Better publishing for all aligner indexes
+- [56](https://github.com/nf-core/references/pull/56) - reference_version -> source_version
 
 ### Fixed
 
@@ -55,6 +59,7 @@ Initial release of nf-core/references, created with the [nf-core](https://nf-co.
 - [39](https://github.com/nf-core/references/pull/39) - Fix gtf generation and dependencies
 - [50](https://github.com/nf-core/references/pull/50) - Minimal JAVA is 17
 - [51](https://github.com/nf-core/references/pull/51) - Fix missing fasta assets for GATK build
+- [56](https://github.com/nf-core/references/pull/56) - Add new logic for skip creation of existing assets
 
 ### Dependencies
 

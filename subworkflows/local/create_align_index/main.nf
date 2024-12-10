@@ -23,35 +23,55 @@ workflow CREATE_ALIGN_INDEX {
     versions = Channel.empty()
 
     if (run_bowtie1) {
-        BOWTIE1_BUILD(fasta)
+        fasta_bowtie1 = fasta.map { meta, map_fasta ->
+            return meta.run_bowtie1 ? [meta, map_fasta] : null
+        }
+
+        BOWTIE1_BUILD(fasta_bowtie1)
 
         bowtie1_index = BOWTIE1_BUILD.out.index
         versions = versions.mix(BOWTIE1_BUILD.out.versions)
     }
 
     if (run_bowtie2) {
-        BOWTIE2_BUILD(fasta)
+        fasta_bowtie2 = fasta.map { meta, map_fasta ->
+            return meta.run_bowtie2 ? [meta, map_fasta] : null
+        }
+
+        BOWTIE2_BUILD(fasta_bowtie2)
 
         bowtie2_index = BOWTIE2_BUILD.out.index
         versions = versions.mix(BOWTIE2_BUILD.out.versions)
     }
 
     if (run_bwamem1) {
-        BWAMEM1_INDEX(fasta)
+        fasta_bwamem1 = fasta.map { meta, map_fasta ->
+            return meta.run_bwamem1 ? [meta, map_fasta] : null
+        }
+
+        BWAMEM1_INDEX(fasta_bwamem1)
 
         bwamem1_index = BWAMEM1_INDEX.out.index
         versions = versions.mix(BWAMEM1_INDEX.out.versions)
     }
 
     if (run_bwamem2) {
-        BWAMEM2_INDEX(fasta)
+        fasta_bwamem2 = fasta.map { meta, map_fasta ->
+            return meta.run_bwamem2 ? [meta, map_fasta] : null
+        }
+
+        BWAMEM2_INDEX(fasta_bwamem2)
 
         bwamem2_index = BWAMEM2_INDEX.out.index
         versions = versions.mix(BWAMEM2_INDEX.out.versions)
     }
 
     if (run_dragmap) {
-        DRAGMAP_HASHTABLE(fasta)
+        fasta_dragmap = fasta.map { meta, map_fasta ->
+            return meta.run_dragmap ? [meta, map_fasta] : null
+        }
+
+        DRAGMAP_HASHTABLE(fasta_dragmap)
 
         dragmap_hashmap = DRAGMAP_HASHTABLE.out.hashmap
         versions = versions.mix(DRAGMAP_HASHTABLE.out.versions)

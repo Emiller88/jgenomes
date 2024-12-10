@@ -3,8 +3,11 @@
 # Download or regenerate manifest file
 
 # Command line flags
-while getopts ":dr" opt; do
+while getopts ":adr" opt; do
     case $opt in
+        a)
+            NEW_MANIFEST=true
+            ;;
         d)
             DOWNLOAD_MANIFEST=true
             ;;
@@ -13,38 +16,53 @@ while getopts ":dr" opt; do
             ;;
         \?)
             echo "Invalid option: -$OPTARG" 1>&2
-            print_usage
             exit 1;
             ;;
     esac
 done
 
 if [[ ${DOWNLOAD_MANIFEST} ]]; then
-    rm -f igenomes_manifest.txt
+    rm -f manifest.txt
     echo "Downloading manifest"
-    wget https://raw.githubusercontent.com/ewels/AWS-iGenomes/refs/heads/master/ngi-igenomes_file_manifest.txt -O igenomes_manifest.txt
+    wget https://raw.githubusercontent.com/ewels/AWS-iGenomes/refs/heads/master/ngi-igenomes_file_manifest.txt -O manifest.txt
 fi
 
 if [[ ${REGENERATE_MANIFEST} ]]; then
-    rm -f igenomes_manifest.txt
+    rm -f manifest.txt
     echo "Regenerating manifest"
     # cf https://github.com/ewels/AWS-iGenomes/pull/22
     aws s3 --no-sign-request ls --recursive s3://ngi-igenomes/igenomes/ | cut -d "/" -f 2- > tmp
     for i in `cat tmp`; do
         if [[ ! $i =~ /$ ]]; then
-            echo s3://ngi-igenomes/igenomes/$i >> manifest
+            echo s3://ngi-igenomes/igenomes/$i >> tmp_manifest
         fi
     done
-    mv manifest igenomes_manifest.txt
+    mv tmp_manifest manifest.txt
 
     rm tmp
 fi
 
-total_files=$(wc -l igenomes_manifest.txt | cut -d " " -f 1)
+if [[ ${NEW_MANIFEST} ]]; then
+    rm -f manifest.txt
+    echo "Regenerating NEW manifest"
+    # cf https://github.com/ewels/AWS-iGenomes/pull/22
+
+    aws s3 --profile igenomes ls --recursive s3://nf-core-references-scratch/genomes/ | grep -v "pipeline_info" | cut -d "/" -f 2- > tmp
+    for i in `cat tmp`; do
+        if [[ ! $i =~ /$ ]]; then
+            echo s3://nf-core-references-scratch/genomes/$i >> tmp_manifest
+        fi
+    done
+    mv tmp_manifest manifest.txt
+
+    rm tmp
+fi
+
+total_files=$(wc -l manifest.txt | cut -d " " -f 1)
 
 echo "Number of files in manifest: $total_files"
 
-cp igenomes_manifest.txt leftover_manifest.txt
+cp manifest.txt leftover_manifest.txt
 
 # Remove existing assets
 rm -rf igenomes/
@@ -55,7 +73,7 @@ rm -rf igenomes/
 # ALL fai are coming from a fasta file of the same name
 # Hence I use it to generate fasta + fai (and catch with that the fasta that are not following the gemome.fa name scheme)
 
-cat igenomes_manifest.txt | grep "\.fai" | grep -v "Bowtie2Index" | grep -v "fai\.gz" > tmp_fai.txt
+cat manifest.txt | grep "\.fai" | grep -v "Bowtie2Index" | grep -v "fai\.gz" > tmp_fai.txt
 
 echo "Populating assets for fasta and fai"
 
@@ -79,7 +97,7 @@ do
 done
 
 # All source README
-cat igenomes_manifest.txt | grep "README" | grep -v "Archives" | grep -v "beagle" | grep -v "plink" | grep -v "PhiX\/Illumina\/RTA\/Annotation\/README\.txt" > tmp_readme.txt
+cat manifest.txt | grep "README" | grep -v "Archives" | grep -v "beagle" | grep -v "plink" | grep -v "PhiX\/Illumina\/RTA\/Annotation\/README\.txt" > tmp_readme.txt
 
 echo "Populating assets for README"
 
@@ -93,7 +111,7 @@ do
 done
 
 # All source gtf (removing the onces coming from gencode)
-cat igenomes_manifest.txt | grep "\.gtf" | grep -v "gtf\." | grep -v "STARIndex" | grep -v "Genes\.gencode" > tmp_gtf.txt
+cat manifest.txt | grep "\.gtf" | grep -v "gtf\." | grep -v "STARIndex" | grep -v "Genes\.gencode" > tmp_gtf.txt
 
 echo "Populating assets for GTF"
 
@@ -107,7 +125,7 @@ do
 done
 
 # All source fasta.dict
-cat igenomes_manifest.txt | grep "\.dict" | grep -v "dict\.gz" | grep -v "dict\.old" > tmp_dict.txt
+cat manifest.txt | grep "\.dict" | grep -v "dict\.gz" | grep -v "dict\.old" > tmp_dict.txt
 
 echo "Populating assets for fasta.dict"
 
@@ -121,7 +139,7 @@ do
 done
 
 # All source genes.bed
-cat igenomes_manifest.txt | grep "genes\.bed" > tmp_bed.txt
+cat manifest.txt | grep "genes\.bed" > tmp_bed.txt
 
 echo "Populating assets for genes.bed"
 
@@ -135,7 +153,7 @@ do
 done
 
 # All source BowtieIndex
-cat igenomes_manifest.txt | grep "BowtieIndex" | grep -v "MDSBowtieIndex" | rev | cut -d "/" -f 2- | rev | sort -u > tmp_bowtie.txt
+cat manifest.txt | grep "BowtieIndex" | grep -v "MDSBowtieIndex" | rev | cut -d "/" -f 2- | rev | sort -u > tmp_bowtie.txt
 
 echo "Populating assets for BowtieIndex"
 
@@ -149,7 +167,7 @@ do
 done
 
 # All source Bowtie2Index
-cat igenomes_manifest.txt | grep "Bowtie2Index" | rev | cut -d "/" -f 2- | rev | sort -u > tmp_bowtie2.txt
+cat manifest.txt | grep "Bowtie2Index" | rev | cut -d "/" -f 2- | rev | sort -u > tmp_bowtie2.txt
 
 echo "Populating assets for Bowtie2Index"
 
@@ -163,7 +181,7 @@ do
 done
 
 # All source BWAIndex (we have version0.6.0, version0.5.x, and no version specified)
-cat igenomes_manifest.txt | grep "BWAIndex" | rev | cut -d "/" -f 2- | rev | sort -u > tmp_bwaindex.txt
+cat manifest.txt | grep "BWAIndex" | rev | cut -d "/" -f 2- | rev | sort -u > tmp_bwaindex.txt
 
 echo "Populating assets for BWAIndex"
 
@@ -180,7 +198,7 @@ do
 done
 
 # All source BWAmem2mem
-cat igenomes_manifest.txt | grep "BWAmem2Index" | rev | cut -d "/" -f 2- | rev | sort -u > tmp_bwamem2mem.txt
+cat manifest.txt | grep "BWAmem2Index" | rev | cut -d "/" -f 2- | rev | sort -u > tmp_bwamem2mem.txt
 
 echo "Populating assets for BWAmem2Index"
 
@@ -194,7 +212,7 @@ do
 done
 
 # All source Dragmap
-cat igenomes_manifest.txt | grep "dragmap" | rev | cut -d "/" -f 2- | rev | sort -u > tmp_dragmap.txt
+cat manifest.txt | grep "dragmap" | rev | cut -d "/" -f 2- | rev | sort -u > tmp_dragmap.txt
 
 echo "Populating assets for DragmapHashtable"
 
@@ -208,7 +226,7 @@ do
 done
 
 # All source BismarkIndex
-cat igenomes_manifest.txt | grep "BismarkIndex\/genome\.fa" | rev | cut -d "/" -f 2- | rev | sort -u > tmp_bismark.txt
+cat manifest.txt | grep "BismarkIndex\/genome\.fa" | rev | cut -d "/" -f 2- | rev | sort -u > tmp_bismark.txt
 
 echo "Populating assets for BismarkIndex"
 
@@ -222,7 +240,7 @@ do
 done
 
 # All source star Index
-cat igenomes_manifest.txt | grep "STARIndex" | rev | cut -d "/" -f 2- | rev | sort -u > tmp_star.txt
+cat manifest.txt | grep "STARIndex" | rev | cut -d "/" -f 2- | rev | sort -u > tmp_star.txt
 
 echo "Populating assets for STARIndex"
 
@@ -236,7 +254,7 @@ do
 done
 
 # All source Chromosomes fasta
-cat igenomes_manifest.txt | grep "Chromosomes" | rev | cut -d "/" -f 2- | rev | sort -u > tmp_chromosomes.txt
+cat manifest.txt | grep "Chromosomes" | rev | cut -d "/" -f 2- | rev | sort -u > tmp_chromosomes.txt
 
 echo "Populating assets for Chromosomes fasta"
 
@@ -250,7 +268,7 @@ do
 done
 
 # All source AbundantSequences fasta
-cat igenomes_manifest.txt | grep "AbundantSequences" | rev | cut -d "/" -f 2- | rev | sort -u > tmp_abundantsequences.txt
+cat manifest.txt | grep "AbundantSequences" | rev | cut -d "/" -f 2- | rev | sort -u > tmp_abundantsequences.txt
 
 echo "Populating assets for AbundantSequences fasta"
 
@@ -264,7 +282,7 @@ do
 done
 
 # All source refFlat (removing the ones coming from gencode)
-cat igenomes_manifest.txt | grep "refFlat\.txt" | grep -v "\.gz\.bak" | grep -v "Genes\.gencode" > tmp_refflat.txt
+cat manifest.txt | grep "refFlat\.txt" | grep -v "\.gz\.bak" | grep -v "Genes\.gencode" > tmp_refflat.txt
 
 echo "Populating assets for refFlat"
 
@@ -278,7 +296,7 @@ do
 done
 
 # All source refgene
-cat igenomes_manifest.txt | grep "refGene\.txt" | grep -v "Archives" | grep -v "\.gz\.bak" > tmp_refgene.txt
+cat manifest.txt | grep "refGene\.txt" | grep -v "Archives" | grep -v "\.gz\.bak" > tmp_refgene.txt
 
 echo "Populating assets for refgene"
 
@@ -292,7 +310,7 @@ do
 done
 
 # All source ChromInfo.txt
-cat igenomes_manifest.txt | grep "ChromInfo\.txt" | grep -v "Archives" > tmp_chrominfo.txt
+cat manifest.txt | grep "ChromInfo\.txt" | grep -v "Archives" > tmp_chrominfo.txt
 
 echo "Populating assets for ChromInfo.txt"
 
@@ -306,7 +324,7 @@ do
 done
 
 # All source GenomeSize.xml (removing the old ones)
-cat igenomes_manifest.txt | grep "GenomeSize\.xml" | grep -v "\.old" > tmp_GenomeSize.txt
+cat manifest.txt | grep "GenomeSize\.xml" | grep -v "\.old" > tmp_GenomeSize.txt
 
 echo "Populating assets for GenomeSize.xml"
 
@@ -320,7 +338,7 @@ do
 done
 
 # All source hairpin.fa
-cat igenomes_manifest.txt | grep "SmallRNA\/hairpin\.fa" > tmp_hairpin.txt
+cat manifest.txt | grep "SmallRNA\/hairpin\.fa" > tmp_hairpin.txt
 
 echo "Populating assets for hairpin.fa"
 
@@ -334,7 +352,7 @@ do
 done
 
 # All source mature.fa
-cat igenomes_manifest.txt | grep "SmallRNA\/mature\.fa" > tmp_mature.txt
+cat manifest.txt | grep "SmallRNA\/mature\.fa" > tmp_mature.txt
 
 echo "Populating assets for mature.fa"
 
@@ -348,7 +366,7 @@ do
 done
 
 # All source vcf
-cat igenomes_manifest.txt | grep "\.vcf" | grep -v "\.idx" | grep -v "\.tbi" | grep -v "\.md5" > tmp_vcf.txt
+cat manifest.txt | grep "\.vcf" | grep -v "\.idx" | grep -v "\.tbi" | grep -v "\.md5" > tmp_vcf.txt
 
 echo "Populating assets for vcf"
 
