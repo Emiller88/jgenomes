@@ -11,7 +11,7 @@
                 "type": "string",
                 "pattern": "^\\S+$",
                 "errorMessage": "Genome name must be provided and cannot contain spaces",
-                "meta": ["id"]
+                "meta": ["genome"]
             },
             "source": {
                 "type": "string",
@@ -24,7 +24,7 @@
                 "default": "unknown",
                 "meta": ["source_vcf"]
             },
-            "reference_version": {
+            "source_version": {
                 "type": "string",
                 "errorMessage": "What is the version of the reference used to create gff/gtf and transcript related files",
                 "default": "unknown",
@@ -35,9 +35,28 @@
                 "errorMessage": "Species of the reference, cannot contain spaces",
                 "meta": ["species"]
             },
-            "intervals_bed": {
+            "bed12": {
                 "type": "string",
-                "pattern": "^\\S+\\.bed$",
+                "errorMessage": "TODO"
+            },
+            "bowtie1_index": {
+                "type": "string",
+                "errorMessage": "TODO"
+            },
+            "bowtie2_index": {
+                "type": "string",
+                "errorMessage": "TODO"
+            },
+            "bwamem1_index": {
+                "type": "string",
+                "errorMessage": "TODO"
+            },
+            "bwamem2_index": {
+                "type": "string",
+                "errorMessage": "TODO"
+            },
+            "dragmap_hashtable": {
+                "type": "string",
                 "errorMessage": "TODO"
             },
             "fasta": {
@@ -70,9 +89,50 @@
                 "pattern": "^\\S+\\.gtf(\\.gz)?$",
                 "errorMessage": "TODO"
             },
+            "hisat2_index": {
+                "type": "string",
+                "errorMessage": "TODO"
+            },
+            "intervals_bed": {
+                "type": "string",
+                "pattern": "^\\S+\\.bed$",
+                "errorMessage": "TODO"
+            },
+            "kallisto_index": {
+                "type": "string",
+                "errorMessage": "TODO"
+            },
+            "macs_gsize": {
+                "type": "number",
+                "errorMessage": "TODO"
+            },
+            "mito_name": {
+                "type": "string",
+                "errorMessage": "TODO"
+            },
+            "msisensorpro_list": {
+                "type": "string",
+                "errorMessage": "TODO"
+            },
+            "readme": {
+                "type": "string",
+                "errorMessage": "TODO"
+            },
+            "rsem_index": {
+                "type": "string",
+                "errorMessage": "TODO"
+            },
+            "salmon_index": {
+                "type": "string",
+                "errorMessage": "TODO"
+            },
             "splice_sites": {
                 "type": "string",
                 "pattern": "^\\S+(\\.splice_sites)(\\.txt)?$",
+                "errorMessage": "TODO"
+            },
+            "star_index": {
+                "type": "string",
                 "errorMessage": "TODO"
             },
             "transcript_fasta": {
@@ -83,22 +143,6 @@
             "vcf": {
                 "type": "string",
                 "pattern": "^\\S+\\.vcf\\.gz$",
-                "errorMessage": "TODO"
-            },
-            "readme": {
-                "type": "string",
-                "errorMessage": "TODO"
-            },
-            "bed12": {
-                "type": "string",
-                "errorMessage": "TODO"
-            },
-            "mito_name": {
-                "type": "string",
-                "errorMessage": "TODO"
-            },
-            "macs_gsize": {
-                "type": "integer",
                 "errorMessage": "TODO"
             }
         },

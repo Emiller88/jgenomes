@@ -23,7 +23,11 @@ workflow INDEX_FASTA {
     versions = Channel.empty()
 
     if (run_createsequencedictionary) {
-        GATK4_CREATESEQUENCEDICTIONARY(fasta)
+        fasta_gat4kdict = fasta.map { meta, map_fasta ->
+            return meta.run_gat4kdict ? [meta, map_fasta] : null
+        }
+
+        GATK4_CREATESEQUENCEDICTIONARY(fasta_gat4kdict)
 
         fasta_dict = GATK4_CREATESEQUENCEDICTIONARY.out.dict
         versions = versions.mix(GATK4_CREATESEQUENCEDICTIONARY.out.versions)
@@ -56,7 +60,11 @@ workflow INDEX_FASTA {
     }
 
     if (run_msisensorpro) {
-        MSISENSORPRO_SCAN(fasta)
+        fasta_msisensorpro = fasta.map { meta, map_fasta ->
+            return meta.run_msisensorpro ? [meta, map_fasta] : null
+        }
+
+        MSISENSORPRO_SCAN(fasta_msisensorpro)
 
         msisensorpro_list = MSISENSORPRO_SCAN.out.list
         versions = versions.mix(MSISENSORPRO_SCAN.out.versions)
