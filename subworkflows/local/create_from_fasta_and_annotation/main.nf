@@ -7,7 +7,7 @@ include { RSEM_PREPAREREFERENCE as RSEM_PREPAREREFERENCE_GENOME } from '../../..
 include { SALMON_INDEX                                          } from '../../../modules/nf-core/salmon/index'
 include { STAR_GENOMEGENERATE                                   } from '../../../modules/nf-core/star/genomegenerate'
 
-workflow CREATE_ALIGN_INDEX_WITH_GFF {
+workflow CREATE_FROM_FASTA_AND_ANNOTATION {
     take:
     fasta                          // channel: [meta, fasta]
     input_gff                      // channel: [meta, gff]

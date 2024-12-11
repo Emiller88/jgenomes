@@ -6,7 +6,7 @@ include { GUNZIP as GUNZIP_FASTA } from '../../../modules/nf-core/gunzip'
 include { GUNZIP as GUNZIP_GTF   } from '../../../modules/nf-core/gunzip'
 include { GUNZIP as GUNZIP_GFF   } from '../../../modules/nf-core/gunzip'
 
-workflow UNCOMPRESS_REFERENCES {
+workflow UNCOMPRESS_ASSET {
     take:
     fasta_input // channel: [meta, fasta]
     gff_input   // channel: [meta, gff]
