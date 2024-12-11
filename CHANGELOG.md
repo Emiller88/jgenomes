@@ -49,6 +49,7 @@ Initial release of nf-core/references, created with the [nf-core](https://nf-co.
 - [53](https://github.com/nf-core/references/pull/53) - Better publishing for all aligner indexes
 - [56](https://github.com/nf-core/references/pull/56) - reference_version -> source_version
 - [60](https://github.com/nf-core/references/pull/60) - Just 2 shards in CI instead of 5
+- [61](https://github.com/nf-core/references/pull/61) - Move assets in nf-core/references-assets
 
 ### Fixed
 
