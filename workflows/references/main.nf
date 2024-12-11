@@ -30,15 +30,18 @@ workflow REFERENCES {
         decompress_fasta: meta.decompress_fasta
         other: true
     }
+
     gff_input = ASSET_TO_CHANNEL.out.gff.branch { meta, _gff ->
         decompress_gff: meta.decompress_gff
         other: true
     }
+
     gtf_input = ASSET_TO_CHANNEL.out.gtf.branch { meta, _gtf ->
         decompress_gtf: meta.decompress_gtf
         other: true
     }
 
+    // Uncompress any assets that need to be
     UNCOMPRESS_ASSET(fasta_input.decompress_fasta, gff_input.decompress_gff, gtf_input.decompress_gtf)
 
     // This covers a mixture of compress and uncompress assets
@@ -46,6 +49,7 @@ workflow REFERENCES {
     gff = gff_input.other.mix(UNCOMPRESS_ASSET.out.gff)
     gtf = gtf_input.other.mix(UNCOMPRESS_ASSET.out.gtf)
 
+    // Create reference assets from fasta only
     CREATE_FROM_FASTA_ONLY(
         fasta,
         fasta_fai,
@@ -61,6 +65,7 @@ workflow REFERENCES {
         tools.split(',').contains('sizes')
     )
 
+    // Create reference assets from fasta and annotation (gff derived (so gff, gtf and transcript_fasta))
     CREATE_FROM_FASTA_AND_ANNOTATION(
         fasta,
         gff,
@@ -76,16 +81,11 @@ workflow REFERENCES {
         tools.split(',').contains('star')
     )
 
+    // Index VCF
     INDEX_VCF(
         vcf,
         tools.split(',').contains('tabix')
     )
-
-    bowtie1_index = CREATE_FROM_FASTA_ONLY.out.bowtie1_index
-    bowtie2_index = CREATE_FROM_FASTA_ONLY.out.bowtie2_index
-    bwamem1_index = CREATE_FROM_FASTA_ONLY.out.bwamem1_index
-    bwamem2_index = CREATE_FROM_FASTA_ONLY.out.bwamem2_index
-    dragmap_hashmap = CREATE_FROM_FASTA_ONLY.out.dragmap_hashmap
 
     // This works with a mixture of input and computed assets
     fasta_dict = fasta_dict.mix(CREATE_FROM_FASTA_ONLY.out.fasta_dict)
@@ -97,14 +97,20 @@ workflow REFERENCES {
     transcript_fasta = transcript_fasta.mix(CREATE_FROM_FASTA_AND_ANNOTATION.out.transcript_fasta)
 
     // TODO: This does not work YET with a mixture of input and computed assets
+    bowtie1_index = CREATE_FROM_FASTA_ONLY.out.bowtie1_index
+    bowtie2_index = CREATE_FROM_FASTA_ONLY.out.bowtie2_index
+    bwamem1_index = CREATE_FROM_FASTA_ONLY.out.bwamem1_index
+    bwamem2_index = CREATE_FROM_FASTA_ONLY.out.bwamem2_index
+    dragmap_hashmap = CREATE_FROM_FASTA_ONLY.out.dragmap_hashmap
     hisat2_index = CREATE_FROM_FASTA_AND_ANNOTATION.out.hisat2_index
     kallisto_index = CREATE_FROM_FASTA_AND_ANNOTATION.out.kallisto_index
+    msisensorpro_list = CREATE_FROM_FASTA_ONLY.out.msisensorpro_list
     rsem_index = CREATE_FROM_FASTA_AND_ANNOTATION.out.rsem_index
     salmon_index = CREATE_FROM_FASTA_AND_ANNOTATION.out.salmon_index
     star_index = CREATE_FROM_FASTA_AND_ANNOTATION.out.star_index
-    msisensorpro_list = CREATE_FROM_FASTA_ONLY.out.msisensorpro_list
     vcf_tbi = INDEX_VCF.out.vcf_tbi
 
+    // TODO: Refactor this with topics
     versions = versions.mix(CREATE_FROM_FASTA_ONLY.out.versions)
     versions = versions.mix(CREATE_FROM_FASTA_AND_ANNOTATION.out.versions)
     versions = versions.mix(INDEX_VCF.out.versions)
@@ -116,10 +122,10 @@ workflow REFERENCES {
     bwamem1_index     // channel: [meta, BWAmemIndex/]
     bwamem2_index     // channel: [meta, BWAmem2memIndex/]
     dragmap_hashmap   // channel: [meta, DragmapHashtable/]
-    fasta             // channel: [meta, *.fa(sta)]
-    fasta_dict        // channel: [meta, *.fa(sta).dict]
-    fasta_fai         // channel: [meta, *.fa(sta).fai]
-    fasta_sizes       // channel: [meta, *.fa(sta).sizes]
+    fasta             // channel: [meta, *.f(ast|n)?a]
+    fasta_dict        // channel: [meta, *.f(ast|n)?a.dict]
+    fasta_fai         // channel: [meta, *.f(ast|n)?a.fai]
+    fasta_sizes       // channel: [meta, *.f(ast|n)?a.sizes]
     gff               // channel: [meta, gff]
     gtf               // channel: [meta, gtf]
     hisat2_index      // channel: [meta, Hisat2Index/]
@@ -131,7 +137,7 @@ workflow REFERENCES {
     splice_sites      // channel: [meta, *.splice_sites.txt]
     star_index        // channel: [meta, STARIndex/]
     transcript_fasta  // channel: [meta, *.transcripts.fasta]
-    vcf_tbi           // channel: [meta, *.vcf.tbi]
+    vcf_tbi           // channel: [meta, *.vcf.gz.tbi]
     versions          // channel: [versions.yml]
 
     publish:

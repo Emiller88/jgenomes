@@ -148,7 +148,7 @@ output {
     }
     'kallisto_index' {
         path { meta, _kallisto_index ->
-            { _file ->
+            { file ->
                 meta.source_version == "unknown"
                     ? "${meta.species}/${meta.source}/${meta.genome}/Sequence/KallistoIndex/version0.51.1/${file}"
                     : "${meta.species}/${meta.source}/${meta.genome}/Sequence/KallistoIndex/${meta.source_version}/version0.51.1/${file}"
@@ -156,7 +156,7 @@ output {
         }
     }
     'msisensorpro_list' {
-        path { meta, _index -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Annotation/msisensorpro/${file}" } }
+        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Annotation/msisensorpro/${file}" } }
     }
     'multiqc_data' {
         path { _multiqc_data -> { _file -> "multiqc/multiqc_data" } }
