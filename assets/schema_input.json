@@ -89,11 +89,13 @@
                 "errorMessage": "TODO"
             },
             "gff": {
+                "meta": ["gff"],
                 "type": "string",
                 "pattern": "^\\S+\\.gff(\\.gz)?$",
                 "errorMessage": "TODO"
             },
             "gtf": {
+                "meta": ["gtf"],
                 "type": "string",
                 "pattern": "^\\S+\\.gtf(\\.gz)?$",
                 "errorMessage": "TODO"
