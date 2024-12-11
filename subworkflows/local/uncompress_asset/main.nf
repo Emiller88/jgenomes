@@ -15,14 +15,14 @@ workflow UNCOMPRESS_ASSET {
     main:
     versions = Channel.empty()
 
-    fasta_input = fasta_input.map { meta, fasta_map ->
-        meta.decompress_fasta ? [meta, fasta_map] : null
+    fasta_input = fasta_input.map { meta, fasta ->
+        meta.decompress_fasta ? [meta, fasta] : null
     }
-    gff_input = gff_input.map { meta, gff_map ->
-        meta.decompress_gff ? [meta, gff_map] : null
+    gff_input = gff_input.map { meta, gff ->
+        meta.decompress_gff ? [meta, gff] : null
     }
-    gtf_input = gtf_input.map { meta, gtf_map ->
-        meta.decompress_gtf ? [meta, gtf_map] : null
+    gtf_input = gtf_input.map { meta, gtf ->
+        meta.decompress_gtf ? [meta, gtf] : null
     }
 
     GUNZIP_FASTA(fasta_input)

@@ -7,7 +7,7 @@ include { UNCOMPRESS_ASSET                 } from '../../subworkflows/local/unco
 workflow REFERENCES {
     take:
     asset // Channel: [meta, fasta]
-    tools // List: Can contain any combination of bowtie,bowtie2,bwamem1,bwamem2,createsequencedictionary,dragmap,faidx,gffread,intervals,hisat2,hisat2_extractsplicesites,kallisto,msisensorpro,rsem,rsem_make_transcripts_fasta,salmon,star,tabix
+    tools // List: Can contain any combination of tools of the list of available tools, or just no_tools
 
     main:
     versions = Channel.empty()
@@ -26,15 +26,15 @@ workflow REFERENCES {
 
     // Assess if assets needs to be uncompress or not
     // (We do not uncompress VCFs)
-    fasta_input = ASSET_TO_CHANNEL.out.fasta.branch { meta, fasta_map ->
+    fasta_input = ASSET_TO_CHANNEL.out.fasta.branch { meta, _fasta ->
         decompress_fasta: meta.decompress_fasta
         other: true
     }
-    gff_input = ASSET_TO_CHANNEL.out.gff.branch { meta, gff_map ->
+    gff_input = ASSET_TO_CHANNEL.out.gff.branch { meta, _gff ->
         decompress_gff: meta.decompress_gff
         other: true
     }
-    gtf_input = ASSET_TO_CHANNEL.out.gtf.branch { meta, gtf_map ->
+    gtf_input = ASSET_TO_CHANNEL.out.gtf.branch { meta, _gtf ->
         decompress_gtf: meta.decompress_gtf
         other: true
     }

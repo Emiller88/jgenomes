@@ -11,7 +11,7 @@ include { SAMTOOLS_FAIDX                 } from '../../../modules/nf-core/samtoo
 workflow CREATE_FROM_FASTA_ONLY {
     take:
     fasta                        // channel: [meta, fasta]
-    input_fasta_fai              // channel: [meta, fasta_fai]
+    fasta_fai                    // channel: [meta, fasta_fai]
     run_bowtie1                  // boolean: true/false
     run_bowtie2                  // boolean: true/false
     run_bwamem1                  // boolean: true/false
@@ -38,8 +38,8 @@ workflow CREATE_FROM_FASTA_ONLY {
     versions = Channel.empty()
 
     if (run_bowtie1) {
-        fasta_bowtie1 = fasta.map { meta, map_fasta ->
-            return meta.run_bowtie1 ? [meta, map_fasta] : null
+        fasta_bowtie1 = fasta.map { meta, _fasta ->
+            return meta.run_bowtie1 ? [meta, _fasta] : null
         }
 
         BOWTIE1_BUILD(fasta_bowtie1)
@@ -49,8 +49,8 @@ workflow CREATE_FROM_FASTA_ONLY {
     }
 
     if (run_bowtie2) {
-        fasta_bowtie2 = fasta.map { meta, map_fasta ->
-            return meta.run_bowtie2 ? [meta, map_fasta] : null
+        fasta_bowtie2 = fasta.map { meta, _fasta ->
+            return meta.run_bowtie2 ? [meta, _fasta] : null
         }
 
         BOWTIE2_BUILD(fasta_bowtie2)
@@ -60,8 +60,8 @@ workflow CREATE_FROM_FASTA_ONLY {
     }
 
     if (run_bwamem1) {
-        fasta_bwamem1 = fasta.map { meta, map_fasta ->
-            return meta.run_bwamem1 ? [meta, map_fasta] : null
+        fasta_bwamem1 = fasta.map { meta, _fasta ->
+            return meta.run_bwamem1 ? [meta, _fasta] : null
         }
 
         BWAMEM1_INDEX(fasta_bwamem1)
@@ -71,8 +71,8 @@ workflow CREATE_FROM_FASTA_ONLY {
     }
 
     if (run_bwamem2) {
-        fasta_bwamem2 = fasta.map { meta, map_fasta ->
-            return meta.run_bwamem2 ? [meta, map_fasta] : null
+        fasta_bwamem2 = fasta.map { meta, _fasta ->
+            return meta.run_bwamem2 ? [meta, _fasta] : null
         }
 
         BWAMEM2_INDEX(fasta_bwamem2)
@@ -82,8 +82,8 @@ workflow CREATE_FROM_FASTA_ONLY {
     }
 
     if (run_dragmap) {
-        fasta_dragmap = fasta.map { meta, map_fasta ->
-            return meta.run_dragmap ? [meta, map_fasta] : null
+        fasta_dragmap = fasta.map { meta, _fasta ->
+            return meta.run_dragmap ? [meta, _fasta] : null
         }
 
         DRAGMAP_HASHTABLE(fasta_dragmap)
@@ -93,8 +93,8 @@ workflow CREATE_FROM_FASTA_ONLY {
     }
 
     if (run_createsequencedictionary) {
-        fasta_gat4kdict = fasta.map { meta, map_fasta ->
-            return meta.run_gat4kdict ? [meta, map_fasta] : null
+        fasta_gat4kdict = fasta.map { meta, _fasta ->
+            return meta.run_gat4kdict ? [meta, _fasta] : null
         }
 
         GATK4_CREATESEQUENCEDICTIONARY(fasta_gat4kdict)
@@ -104,8 +104,8 @@ workflow CREATE_FROM_FASTA_ONLY {
     }
 
     if (run_faidx || run_intervals || run_sizes) {
-        fasta_samtools = fasta.map { meta, map_fasta ->
-            return meta.run_faidx ? [meta, map_fasta] : null
+        fasta_samtools = fasta.map { meta, _fasta ->
+            return meta.run_faidx ? [meta, _fasta] : null
         }
 
         SAMTOOLS_FAIDX(
@@ -114,13 +114,13 @@ workflow CREATE_FROM_FASTA_ONLY {
             run_sizes
         )
 
-        fasta_fai = input_fasta_fai.mix(SAMTOOLS_FAIDX.out.fai)
+        fasta_fai = fasta_fai.mix(SAMTOOLS_FAIDX.out.fai)
         fasta_sizes = SAMTOOLS_FAIDX.out.sizes
         versions = versions.mix(SAMTOOLS_FAIDX.out.versions)
 
         if (run_intervals) {
-            fasta_fai_intervals = fasta_fai.map { meta, map_fasta_fai ->
-                return meta.run_intervals ? [meta, map_fasta_fai] : null
+            fasta_fai_intervals = fasta_fai.map { meta, _fasta_fai ->
+                return meta.run_intervals ? [meta, _fasta_fai] : null
             }
 
             BUILD_INTERVALS(fasta_fai_intervals, [])
@@ -130,8 +130,8 @@ workflow CREATE_FROM_FASTA_ONLY {
     }
 
     if (run_msisensorpro) {
-        fasta_msisensorpro = fasta.map { meta, map_fasta ->
-            return meta.run_msisensorpro ? [meta, map_fasta] : null
+        fasta_msisensorpro = fasta.map { meta, _fasta ->
+            return meta.run_msisensorpro ? [meta, _fasta] : null
         }
 
         MSISENSORPRO_SCAN(fasta_msisensorpro)
