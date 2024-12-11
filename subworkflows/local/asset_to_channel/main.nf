@@ -13,8 +13,8 @@ workflow ASSET_TO_CHANNEL {
         return meta.intervals_bed ? [meta, meta.intervals_bed] : null
     }
 
-    fasta = asset.map { meta, _fasta ->
-        return _fasta ? [meta + [decompress_fasta: _fasta.endsWith('.gz') ?: false] + [run_bowtie1: meta.bowtie1_index ? false : true] + [run_bowtie2: meta.bowtie2_index ? false : true] + [run_bwamem1: meta.bwamem1_index ? false : true] + [run_bwamem2: meta.bwamem2_index ? false : true] + [run_dragmap: meta.dragmap_hashtable ? false : true] + [run_faidx: meta.fasta_fai && meta.fasta_sizes ? false : true] + [run_gatkdict: meta.fasta_dict ? false : true] + [run_hisat2: meta.hisat2_index ? false : true] + [run_intervals: meta.intervals_bed ? false : true] + [run_kallisto: meta.kallisto_index ? false : true] + [run_msisenpro: meta.msisensorpro_list ? false : true] + [run_rsem: meta.rsem_index ? false : true] + [run_rsem_make_transcript_fasta: meta.transcript_fasta ? false : true] + [run_salmon: meta.salmon_index ? false : true] + [run_star: meta.star_index ? false : true], _fasta] : null
+    fasta = asset.map { meta, fasta_ ->
+        return fasta_ ? [meta + [decompress_fasta: fasta_.endsWith('.gz') ?: false] + [run_bowtie1: meta.bowtie1_index ? false : true] + [run_bowtie2: meta.bowtie2_index ? false : true] + [run_bwamem1: meta.bwamem1_index ? false : true] + [run_bwamem2: meta.bwamem2_index ? false : true] + [run_dragmap: meta.dragmap_hashtable ? false : true] + [run_faidx: meta.fasta_fai && meta.fasta_sizes ? false : true] + [run_gatkdict: meta.fasta_dict ? false : true] + [run_hisat2: meta.hisat2_index ? false : true] + [run_intervals: meta.intervals_bed ? false : true] + [run_kallisto: meta.kallisto_index ? false : true] + [run_msisenpro: meta.msisensorpro_list ? false : true] + [run_rsem: meta.rsem_index ? false : true] + [run_rsem_make_transcript_fasta: meta.transcript_fasta ? false : true] + [run_salmon: meta.salmon_index ? false : true] + [run_star: meta.star_index ? false : true], fasta_] : null
     }
 
     fasta_dict = asset.map { meta, _fasta ->
@@ -29,8 +29,8 @@ workflow ASSET_TO_CHANNEL {
         return meta.fasta_sizes ? [meta, meta.fasta_sizes] : null
     }
 
-    gff = asset.map { meta, _fasta ->
-        return meta.gff && !meta.gtf ? [meta + [decompress_gff: meta.gff.endsWith('.gz') ?: false] + [run_gffread: _fasta ?: false] + [run_hisat2: meta.splice_sites ? false : true], meta.gff] : null
+    gff = asset.map { meta, fasta_ ->
+        return meta.gff && !meta.gtf ? [meta + [decompress_gff: meta.gff.endsWith('.gz') ?: false] + [run_gffread: fasta_ ?: false] + [run_hisat2: meta.splice_sites ? false : true], meta.gff] : null
     }
 
     gtf = asset.map { meta, _fasta ->

@@ -102,41 +102,41 @@ workflow {
 
 output {
     'bowtie1_index' {
-        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Sequence/BowtieIndex/version1.3.1" } }
+        path { meta, _bowtie1_index -> { _file -> "${meta.species}/${meta.source}/${meta.genome}/Sequence/BowtieIndex/version1.3.1" } }
     }
     'bowtie2_index' {
-        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Sequence/Bowtie2Index/version2.5.2" } }
+        path { meta, _bowtie2_index -> { _file -> "${meta.species}/${meta.source}/${meta.genome}/Sequence/Bowtie2Index/version2.5.2" } }
     }
     'bwamem1_index' {
-        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Sequence/BWAIndex/version0.7.18" } }
+        path { meta, _bwamem1_index -> { _file -> "${meta.species}/${meta.source}/${meta.genome}/Sequence/BWAIndex/version0.7.18" } }
     }
     'bwamem2_index' {
-        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Sequence/BWAmem2Index/version2.2.1" } }
+        path { meta, _bwamem2_index -> { _file -> "${meta.species}/${meta.source}/${meta.genome}/Sequence/BWAmem2Index/version2.2.1" } }
     }
     'dragmap_hashmap' {
-        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Sequence/dragmap/version1.2.1" } }
+        path { meta, _index -> { _file -> "${meta.species}/${meta.source}/${meta.genome}/Sequence/dragmap/version1.2.1" } }
     }
     'fasta' {
-        path { meta, fasta -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Sequence/WholeGenomeFasta/${file}" } }
+        path { meta, _fasta -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Sequence/WholeGenomeFasta/${file}" } }
     }
     'fasta_dict' {
-        path { meta, dict -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Sequence/WholeGenomeFasta/${file}" } }
+        path { meta, _fasta_dict -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Sequence/WholeGenomeFasta/${file}" } }
     }
     'fasta_fai' {
-        path { meta, fai -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Sequence/WholeGenomeFasta/${file}" } }
+        path { meta, _fasta_fai -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Sequence/WholeGenomeFasta/${file}" } }
     }
     'fasta_sizes' {
-        path { meta, sizes -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Sequence/WholeGenomeFasta/${file}" } }
+        path { meta, _fasta_sizes -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Sequence/WholeGenomeFasta/${file}" } }
     }
     'gff' {
-        path { meta, gff -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Annotation/Genes/${file}" } }
+        path { meta, _gff -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Annotation/Genes/${file}" } }
     }
     'gtf' {
-        path { meta, gtf -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Annotation/Genes/${file}" } }
+        path { meta, _gtf -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Annotation/Genes/${file}" } }
     }
     'hisat2_index' {
-        path { meta, index ->
-            { file ->
+        path { meta, _hisat2_index ->
+            { _file ->
                 meta.source_version == "unknown"
                     ? "${meta.species}/${meta.source}/${meta.genome}/Sequence/Hisat2Index/version2.2.1"
                     : "${meta.species}/${meta.source}/${meta.genome}/Sequence/Hisat2Index/${meta.source_version}/version2.2.1"
@@ -144,11 +144,11 @@ output {
         }
     }
     'intervals_bed' {
-        path { meta, intervals -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Annotation/intervals/${file}" } }
+        path { meta, _intervals_bed -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Annotation/intervals/${file}" } }
     }
     'kallisto_index' {
-        path { meta, index ->
-            { file ->
+        path { meta, _kallisto_index ->
+            { _file ->
                 meta.source_version == "unknown"
                     ? "${meta.species}/${meta.source}/${meta.genome}/Sequence/KallistoIndex/version0.51.1/${file}"
                     : "${meta.species}/${meta.source}/${meta.genome}/Sequence/KallistoIndex/${meta.source_version}/version0.51.1/${file}"
@@ -156,20 +156,20 @@ output {
         }
     }
     'msisensorpro_list' {
-        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Annotation/msisensorpro/${file}" } }
+        path { meta, _index -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Annotation/msisensorpro/${file}" } }
     }
     'multiqc_data' {
-        path { folder -> { file -> "multiqc/multiqc_data" } }
+        path { _multiqc_data -> { _file -> "multiqc/multiqc_data" } }
     }
     'multiqc_plots' {
-        path { folder -> { file -> "multiqc/multiqc_plots" } }
+        path { _multiqc_plots -> { _file -> "multiqc/multiqc_plots" } }
     }
     'multiqc_report' {
-        path { folder -> { file -> "multiqc/multiqc_report" } }
+        path { _multiqc_report -> { _file -> "multiqc/multiqc_report" } }
     }
     'rsem_index' {
-        path { meta, index ->
-            { file ->
+        path { meta, _rsem_index ->
+            { _file ->
                 meta.source_version == "unknown"
                     ? "${meta.species}/${meta.source}/${meta.genome}/Sequence/RSEMIndex/version1.3.1"
                     : "${meta.species}/${meta.source}/${meta.genome}/Sequence/RSEMIndex/${meta.source_version}/version1.3.1"
@@ -177,8 +177,8 @@ output {
         }
     }
     'salmon_index' {
-        path { meta, index ->
-            { file ->
+        path { meta, _salmon_index ->
+            { _file ->
                 meta.source_version == "unknown"
                     ? "${meta.species}/${meta.source}/${meta.genome}/Sequence/SalmonIndex/version1.10.3"
                     : "${meta.species}/${meta.source}/${meta.genome}/Sequence/SalmonIndex/${meta.source_version}/version1.10.3"
@@ -186,11 +186,11 @@ output {
         }
     }
     'splice_sites' {
-        path { meta, txt -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Sequence/SpliceSites/${file}" } }
+        path { meta, _splice_sites -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Sequence/SpliceSites/${file}" } }
     }
     'star_index' {
-        path { meta, index ->
-            { file ->
+        path { meta, _star_index ->
+            { _file ->
                 meta.source_version == "unknown"
                     ? "${meta.species}/${meta.source}/${meta.genome}/Sequence/STARIndex/version2.7.11b"
                     : "${meta.species}/${meta.source}/${meta.genome}/Sequence/STARIndex/${meta.source_version}/version2.7.11b"
@@ -198,10 +198,10 @@ output {
         }
     }
     'transcript_fasta' {
-        path { meta, fasta -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Sequence/TranscriptFasta/${file}" } }
+        path { meta, _transcript_fasta -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Sequence/TranscriptFasta/${file}" } }
     }
     'vcf_tbi' {
-        path { meta, tbi -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Annotation/${meta.source_vcf}/${file}" } }
+        path { meta, _vcf_tbi -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Annotation/${meta.source_vcf}/${file}" } }
     }
 }
 /*

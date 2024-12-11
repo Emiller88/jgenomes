@@ -29,6 +29,7 @@ Initial release of nf-core/references, created with the [nf-core](https://nf-co.
 - [56](https://github.com/nf-core/references/pull/56) - Add fields for bowtie1_index, bowtie2_index, bwamem1_index, bwamem2_index, dragmap_hashtable, hisat2_index, kallisto_index, msisensorpro_list, rsem_index, salmon_index, star_index, vcf_tbi in assets
 - [56](https://github.com/nf-core/references/pull/56) - Add new params: kallisto_make_unique to use the --make-unique option for kallisto
 - [56](https://github.com/nf-core/references/pull/56) - New file assets/genomes/Caenorhabditis_elegans/NCBI/WBcel235_updated.yml, build from assets/genomes/Caenorhabditis_elegans/NCBI/WBcel235.yml
+- [62](https://github.com/nf-core/references/pull/62) - Added comments to the code
 
 ### Changed
 
@@ -66,5 +67,17 @@ Initial release of nf-core/references, created with the [nf-core](https://nf-co.
 - [62](https://github.com/nf-core/references/pull/62) - Remove failure when no tools are specified, because one might just want to unpack assets
 
 ### Dependencies
+
+### Subworkflows
+
+| Old name                    | New name                         |
+| --------------------------- | -------------------------------- |
+| SAMPLESHEET_TO_CHANNEL      | ASSET_TO_CHANNEL                 |
+| CREATE_ALIGN_INDEX_WITH_GFF | CREATE_FROM_FASTA_AND_ANNOTATION |
+| CREATE_ALIGN_INDEX          | CREATE_FROM_FASTA_ONLY           |
+| INDEX_FASTA                 | CREATE_FROM_FASTA_ONLY           |
+| UNCOMPRESS_REFERENCES       | UNCOMPRESS_ASSET                 |
+
+If two subworkflows end up with the same name, it means that they have been merged into one.
 
 ### Deprecated
