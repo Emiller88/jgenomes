@@ -52,7 +52,7 @@ workflow {
         error("EXIT: No tools specified")
     }
 
-    NFCORE_REFERENCES(PIPELINE_INITIALISATION.out.samplesheet, params.tools)
+    NFCORE_REFERENCES(PIPELINE_INITIALISATION.out.asset, params.tools)
 
     ch_multiqc_files = Channel.empty()
 
