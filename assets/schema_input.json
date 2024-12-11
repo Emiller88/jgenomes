@@ -36,26 +36,32 @@
                 "meta": ["species"]
             },
             "bed12": {
+                "meta": ["bed12"],
                 "type": "string",
                 "errorMessage": "TODO"
             },
             "bowtie1_index": {
+                "meta": ["bowtie1_index"],
                 "type": "string",
                 "errorMessage": "TODO"
             },
             "bowtie2_index": {
+                "meta": ["bowtie2_index"],
                 "type": "string",
                 "errorMessage": "TODO"
             },
             "bwamem1_index": {
+                "meta": ["bwamem1_index"],
                 "type": "string",
                 "errorMessage": "TODO"
             },
             "bwamem2_index": {
+                "meta": ["bwamem2_index"],
                 "type": "string",
                 "errorMessage": "TODO"
             },
             "dragmap_hashtable": {
+                "meta": ["dragmap_hashtable"],
                 "type": "string",
                 "errorMessage": "TODO"
             },
@@ -65,87 +71,106 @@
                 "errorMessage": "TODO"
             },
             "fasta_dict": {
+                "meta": ["fasta_dict"],
                 "type": "string",
                 "pattern": "^\\S+\\.dict(\\.gz)?$",
                 "errorMessage": "TODO"
             },
             "fasta_fai": {
+                "meta": ["fasta_fai"],
                 "type": "string",
                 "pattern": "^\\S+\\.f(ast|n)?a\\.fai(\\.gz)?$",
                 "errorMessage": "TODO"
             },
             "fasta_sizes": {
+                "meta": ["fasta_sizes"],
                 "type": "string",
                 "pattern": "^\\S+\\.f(ast|n)?a\\.sizes(\\.gz)?$",
                 "errorMessage": "TODO"
             },
             "gff": {
+                "meta": ["gff"],
                 "type": "string",
                 "pattern": "^\\S+\\.gff(\\.gz)?$",
                 "errorMessage": "TODO"
             },
             "gtf": {
+                "meta": ["gtf"],
                 "type": "string",
                 "pattern": "^\\S+\\.gtf(\\.gz)?$",
                 "errorMessage": "TODO"
             },
             "hisat2_index": {
+                "meta": ["hisat2_index"],
                 "type": "string",
                 "errorMessage": "TODO"
             },
             "intervals_bed": {
+                "meta": ["intervals_bed"],
                 "type": "string",
                 "pattern": "^\\S+\\.bed$",
                 "errorMessage": "TODO"
             },
             "kallisto_index": {
+                "meta": ["kallisto_index"],
                 "type": "string",
                 "errorMessage": "TODO"
             },
             "macs_gsize": {
+                "meta": ["macs_gsize"],
                 "type": "number",
                 "errorMessage": "TODO"
             },
             "mito_name": {
+                "meta": ["mito_name"],
                 "type": "string",
                 "errorMessage": "TODO"
             },
             "msisensorpro_list": {
+                "meta": ["msisensorpro_list"],
                 "type": "string",
                 "errorMessage": "TODO"
             },
             "readme": {
+                "meta": ["readme"],
                 "type": "string",
                 "errorMessage": "TODO"
             },
             "rsem_index": {
+                "meta": ["rsem_index"],
                 "type": "string",
                 "errorMessage": "TODO"
             },
             "salmon_index": {
+                "meta": ["salmon_index"],
                 "type": "string",
                 "errorMessage": "TODO"
             },
             "splice_sites": {
+                "meta": ["splice_sites"],
                 "type": "string",
                 "pattern": "^\\S+(\\.splice_sites)(\\.txt)?$",
                 "errorMessage": "TODO"
             },
             "star_index": {
+                "meta": ["star_index"],
                 "type": "string",
                 "errorMessage": "TODO"
             },
             "transcript_fasta": {
+                "meta": ["transcript_fasta"],
                 "type": "string",
                 "pattern": "^\\S+\\.f(ast|n)?a(\\.gz)?$",
                 "errorMessage": "TODO"
             },
             "vcf": {
+                "meta": ["vcf"],
                 "type": "string",
                 "pattern": "^\\S+\\.vcf\\.gz$",
                 "errorMessage": "TODO"
             },
             "vcf_tbi": {
+                "meta": ["vcf_tbi"],
                 "type": "string",
                 "pattern": "^\\S+\\.vcf\\.gz\\.tbi$",
                 "errorMessage": "TODO"

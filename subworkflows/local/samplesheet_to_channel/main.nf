@@ -1,48 +1,48 @@
 workflow SAMPLESHEET_TO_CHANNEL {
     take:
-    reference // channel: [meta, bed12, bowtie1_index, bowtie2_index, bwamem1_index, bwamem2_index, dragmap_hashtable, fasta, fasta_dict, fasta_fai, fasta_sizes, gff, gtf, hisat2_index, intervals_bed, kallisto_index, macs_gsize, mito_name, msisensorpro_list, readme, rsem_index, salmon_index, splice_sites, star_index, transcript_fasta, vcf, vcf_tbi]
+    reference // channel: [meta, fasta]
 
     main:
 
-    intervals_bed = reference.map { meta, input_bed12, input_bowtie1_index, input_bowtie2_index, input_bwamem1_index, input_bwamem2_index, input_dragmap_hashtable, input_fasta, input_fasta_dict, input_fasta_fai, input_fasta_sizes, input_gff, input_gtf, input_hisat2_index, input_intervals_bed, input_kallisto_index, input_macs_gsize, input_mito_name, input_msisensorpro_list, input_readme, input_rsem_index, input_salmon_index, input_splice_sites, input_star_index, input_transcript_fasta, input_vcf, input_vcf_tbi ->
-        return input_intervals_bed ? [meta, input_intervals_bed] : null
+    intervals_bed = reference.map { meta, fasta ->
+        return meta.intervals_bed ? [meta, meta.intervals_bed] : null
     }
 
-    fasta = reference.map { meta, input_bed12, input_bowtie1_index, input_bowtie2_index, input_bwamem1_index, input_bwamem2_index, input_dragmap_hashtable, input_fasta, input_fasta_dict, input_fasta_fai, input_fasta_sizes, input_gff, input_gtf, input_hisat2_index, input_intervals_bed, input_kallisto_index, input_macs_gsize, input_mito_name, input_msisensorpro_list, input_readme, input_rsem_index, input_salmon_index, input_splice_sites, input_star_index, input_transcript_fasta, input_vcf, input_vcf_tbi ->
-        return input_fasta ? [meta + [decompress_fasta: input_fasta.endsWith('.gz') ?: false] + [run_bowtie1: input_bowtie1_index ? false : true] + [run_bowtie2: input_bowtie2_index ? false : true] + [run_bwamem1: input_bwamem1_index ? false : true] + [run_bwamem2: input_bwamem2_index ? false : true] + [run_dragmap: input_dragmap_hashtable ? false : true] + [run_faidx: input_fasta_fai && input_fasta_sizes ? false : true] + [run_gatkdict: input_fasta_dict ? false : true] + [run_hisat2: input_hisat2_index ? false : true] + [run_intervals: input_intervals_bed ? false : true] + [run_kallisto: input_kallisto_index ? false : true] + [run_msisenpro: input_msisensorpro_list ? false : true] + [run_rsem: input_rsem_index ? false : true] + [run_rsem_make_transcript_fasta: input_transcript_fasta ? false : true] + [run_salmon: input_salmon_index ? false : true] + [run_star: input_star_index ? false : true], input_fasta] : null
+    fasta = reference.map { meta, fasta ->
+        return fasta ? [meta + [decompress_fasta: fasta.endsWith('.gz') ?: false] + [run_bowtie1: meta.bowtie1_index ? false : true] + [run_bowtie2: meta.bowtie2_index ? false : true] + [run_bwamem1: meta.bwamem1_index ? false : true] + [run_bwamem2: meta.bwamem2_index ? false : true] + [run_dragmap: meta.dragmap_hashtable ? false : true] + [run_faidx: meta.fasta_fai && meta.fasta_sizes ? false : true] + [run_gatkdict: meta.fasta_dict ? false : true] + [run_hisat2: meta.hisat2_index ? false : true] + [run_intervals: meta.intervals_bed ? false : true] + [run_kallisto: meta.kallisto_index ? false : true] + [run_msisenpro: meta.msisensorpro_list ? false : true] + [run_rsem: meta.rsem_index ? false : true] + [run_rsem_make_transcript_fasta: meta.transcript_fasta ? false : true] + [run_salmon: meta.salmon_index ? false : true] + [run_star: meta.star_index ? false : true], fasta] : null
     }
 
-    fasta_dict = reference.map { meta, input_bed12, input_bowtie1_index, input_bowtie2_index, input_bwamem1_index, input_bwamem2_index, input_dragmap_hashtable, input_fasta, input_fasta_dict, input_fasta_fai, input_fasta_sizes, input_gff, input_gtf, input_hisat2_index, input_intervals_bed, input_kallisto_index, input_macs_gsize, input_mito_name, input_msisensorpro_list, input_readme, input_rsem_index, input_salmon_index, input_splice_sites, input_star_index, input_transcript_fasta, input_vcf, input_vcf_tbi ->
-        return input_fasta_dict ? [meta, input_fasta_dict] : null
+    fasta_dict = reference.map { meta, fasta ->
+        return meta.fasta_dict ? [meta, meta.fasta_dict] : null
     }
 
-    fasta_fai = reference.map { meta, input_bed12, input_bowtie1_index, input_bowtie2_index, input_bwamem1_index, input_bwamem2_index, input_dragmap_hashtable, input_fasta, input_fasta_dict, input_fasta_fai, input_fasta_sizes, input_gff, input_gtf, input_hisat2_index, input_intervals_bed, input_kallisto_index, input_macs_gsize, input_mito_name, input_msisensorpro_list, input_readme, input_rsem_index, input_salmon_index, input_splice_sites, input_star_index, input_transcript_fasta, input_vcf, input_vcf_tbi ->
-        return input_fasta_fai ? [meta + [run_intervals: input_intervals_bed ? false : true], input_fasta_fai] : null
+    fasta_fai = reference.map { meta, fasta ->
+        return meta.fasta_fai ? [meta + [run_intervals: meta.intervals_bed ? false : true], meta.fasta_fai] : null
     }
 
-    fasta_sizes = reference.map { meta, input_bed12, input_bowtie1_index, input_bowtie2_index, input_bwamem1_index, input_bwamem2_index, input_dragmap_hashtable, input_fasta, input_fasta_dict, input_fasta_fai, input_fasta_sizes, input_gff, input_gtf, input_hisat2_index, input_intervals_bed, input_kallisto_index, input_macs_gsize, input_mito_name, input_msisensorpro_list, input_readme, input_rsem_index, input_salmon_index, input_splice_sites, input_star_index, input_transcript_fasta, input_vcf, input_vcf_tbi ->
-        return input_fasta_sizes ? [meta, input_fasta_sizes] : null
+    fasta_sizes = reference.map { meta, fasta ->
+        return meta.fasta_sizes ? [meta, meta.fasta_sizes] : null
     }
 
-    gff = reference.map { meta, input_bed12, input_bowtie1_index, input_bowtie2_index, input_bwamem1_index, input_bwamem2_index, input_dragmap_hashtable, input_fasta, input_fasta_dict, input_fasta_fai, input_fasta_sizes, input_gff, input_gtf, input_hisat2_index, input_intervals_bed, input_kallisto_index, input_macs_gsize, input_mito_name, input_msisensorpro_list, input_readme, input_rsem_index, input_salmon_index, input_splice_sites, input_star_index, input_transcript_fasta, input_vcf, input_vcf_tbi ->
-        return input_gff && !input_gtf ? [meta + [decompress_gff: input_gff.endsWith('.gz') ?: false] + [run_gffread: input_fasta ?: false] + [run_hisat2: input_splice_sites ? false : true], input_gff] : null
+    gff = reference.map { meta, fasta ->
+        return meta.gff && !meta.gtf ? [meta + [decompress_gff: meta.gff.endsWith('.gz') ?: false] + [run_gffread: fasta ?: false] + [run_hisat2: meta.splice_sites ? false : true], meta.gff] : null
     }
 
-    gtf = reference.map { meta, input_bed12, input_bowtie1_index, input_bowtie2_index, input_bwamem1_index, input_bwamem2_index, input_dragmap_hashtable, input_fasta, input_fasta_dict, input_fasta_fai, input_fasta_sizes, input_gff, input_gtf, input_hisat2_index, input_intervals_bed, input_kallisto_index, input_macs_gsize, input_mito_name, input_msisensorpro_list, input_readme, input_rsem_index, input_salmon_index, input_splice_sites, input_star_index, input_transcript_fasta, input_vcf, input_vcf_tbi ->
-        return input_gtf ? [meta + [decompress_gtf: input_gtf.endsWith('.gz') ?: false] + [run_hisat2: input_splice_sites ? false : true], input_gtf] : null
+    gtf = reference.map { meta, fasta ->
+        return meta.gtf ? [meta + [decompress_gtf: meta.gtf.endsWith('.gz') ?: false] + [run_hisat2: meta.splice_sites ? false : true], meta.gtf] : null
     }
 
-    splice_sites = reference.map { meta, input_bed12, input_bowtie1_index, input_bowtie2_index, input_bwamem1_index, input_bwamem2_index, input_dragmap_hashtable, input_fasta, input_fasta_dict, input_fasta_fai, input_fasta_sizes, input_gff, input_gtf, input_hisat2_index, input_intervals_bed, input_kallisto_index, input_macs_gsize, input_mito_name, input_msisensorpro_list, input_readme, input_rsem_index, input_salmon_index, input_splice_sites, input_star_index, input_transcript_fasta, input_vcf, input_vcf_tbi ->
-        return input_splice_sites ? [meta, input_splice_sites] : null
+    splice_sites = reference.map { meta, fasta ->
+        return meta.splice_sites ? [meta, meta.splice_sites] : null
     }
 
-    transcript_fasta = reference.map { meta, input_bed12, input_bowtie1_index, input_bowtie2_index, input_bwamem1_index, input_bwamem2_index, input_dragmap_hashtable, input_fasta, input_fasta_dict, input_fasta_fai, input_fasta_sizes, input_gff, input_gtf, input_hisat2_index, input_intervals_bed, input_kallisto_index, input_macs_gsize, input_mito_name, input_msisensorpro_list, input_readme, input_rsem_index, input_salmon_index, input_splice_sites, input_star_index, input_transcript_fasta, input_vcf, input_vcf_tbi ->
-        return input_transcript_fasta ? [meta + [decompress_fasta: input_fasta.endsWith('.gz') ?: false] + [run_hisat2: input_hisat2_index ? false : true] + [run_kallisto: input_kallisto_index ? false : true] + [run_rsem: input_rsem_index ? false : true] + [run_salmon: input_salmon_index ? false : true] + [run_star: input_star_index ? false : true], input_transcript_fasta] : null
+    transcript_fasta = reference.map { meta, fasta ->
+        return meta.transcript_fasta ? [meta + [decompress_fasta: fasta.endsWith('.gz') ?: false] + [run_hisat2: meta.hisat2_index ? false : true] + [run_kallisto: meta.kallisto_index ? false : true] + [run_rsem: meta.rsem_index ? false : true] + [run_salmon: meta.salmon_index ? false : true] + [run_star: meta.star_index ? false : true], meta.transcript_fasta] : null
     }
 
     vcf = reference
-        .map { meta, input_bed12, input_bowtie1_index, input_bowtie2_index, input_bwamem1_index, input_bwamem2_index, input_dragmap_hashtable, input_fasta, input_fasta_dict, input_fasta_fai, input_fasta_sizes, input_gff, input_gtf, input_hisat2_index, input_intervals_bed, input_kallisto_index, input_macs_gsize, input_mito_name, input_msisensorpro_list, input_readme, input_rsem_index, input_salmon_index, input_splice_sites, input_star_index, input_transcript_fasta, input_vcf, input_vcf_tbi ->
-            return input_vcf && !input_vcf_tbi ? [meta, file(input_vcf)] : null
+        .map { meta, fasta ->
+            return meta.vcf && !meta.vcf_tbi ? [meta, file(meta.vcf)] : null
         }
         .transpose()
 

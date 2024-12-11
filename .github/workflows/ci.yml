@@ -25,7 +25,7 @@ concurrency:
 jobs:
   test:
     runs-on: ubuntu-latest
-    name: "Test ${{ matrix.filter }} | ${{ matrix.profile }} | ${{ matrix.NXF_VER }} | ${{ matrix.shard }}/5"
+    name: "Test ${{ matrix.filter }} | ${{ matrix.profile }} | ${{ matrix.NXF_VER }} | ${{ matrix.shard }}/2"
     strategy:
       fail-fast: false
       matrix:
@@ -35,7 +35,7 @@ jobs:
         filter: ["pipeline"]
         # filter: ["process", "workflow", "function", "pipeline"]
         profile: ["conda", "docker", "singularity"]
-        shard: [1, 2, 3, 4, 5]
+        shard: [1, 2]
         isMaster:
           - ${{ github.base_ref == 'master' }}
         exclude:
@@ -113,27 +113,27 @@ jobs:
         run: |
           echo "## nf-test tests summary :rocket:" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "This \`${{ matrix.filter }}\` ${{ matrix.shard }}/5 shard was run on \`${{ matrix.profile }}\` | \`NXF_VER=${{ matrix.NXF_VER }}\`, and contains the following test(s):" >> $GITHUB_STEP_SUMMARY
+          echo "This \`${{ matrix.filter }}\` ${{ matrix.shard }}/2 shard was run on \`${{ matrix.profile }}\` | \`NXF_VER=${{ matrix.NXF_VER }}\`, and contains the following test(s):" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           nf-test test \
             --ci \
             --dryRun \
             --junitxml="TEST-${{ matrix.filter }}_${{ matrix.profile }}_${{ matrix.shard }}.xml" \
-            --shard ${{ matrix.shard }}/5 \
+            --shard ${{ matrix.shard }}/2 \
             --changed-since HEAD^ \
             --follow-dependencies \
             --profile "+${{ matrix.profile }}" \
             --filter ${{ matrix.filter }} \
             | grep PASSED | cut -d "'" -f 2 | sed 's/^/- /' | sort -u >> $GITHUB_STEP_SUMMARY
 
-      - name: "Run tests | ${{ matrix.filter }}_${{ matrix.profile }} | ${{ matrix.shard }}/5"
+      - name: "Run tests | ${{ matrix.filter }}_${{ matrix.profile }} | ${{ matrix.shard }}/2"
         run: |
           nf-test test \
               --ci \
               --debug \
               --verbose \
               --junitxml="TEST-${{ matrix.filter }}_${{ matrix.profile }}_${{ matrix.shard }}.xml" \
-              --shard ${{ matrix.shard }}/5 \
+              --shard ${{ matrix.shard }}/2 \
               --changed-since HEAD^ \
               --follow-dependencies \
               --profile "+${{ matrix.profile }}" \
