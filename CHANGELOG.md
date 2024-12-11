@@ -52,6 +52,7 @@ Initial release of nf-core/references, created with the [nf-core](https://nf-co.
 - [59](https://github.com/nf-core/references/pull/59) - Simplify input structure
 - [60](https://github.com/nf-core/references/pull/60) - Just 2 shards in CI instead of 5
 - [62](https://github.com/nf-core/references/pull/62) - samplesheet -> asset
+- [62](https://github.com/nf-core/references/pull/62) - Refactor and simplify codebase
 
 ### Fixed
 
