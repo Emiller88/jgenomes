@@ -21,6 +21,8 @@
 
 **nf-core/references** is a bioinformatics pipeline that build references.
 
+Assets are stored in [references-assets](https://github.com/nf-core/references-assets).
+
 ## How to hack on it
 
 0. Have docker, and Nextflow installed
