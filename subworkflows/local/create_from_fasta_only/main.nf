@@ -30,7 +30,6 @@ workflow CREATE_FROM_FASTA_ONLY {
     bwamem2_index = Channel.empty()
     dragmap_hashmap = Channel.empty()
     fasta_dict = Channel.empty()
-    fasta_fai = Channel.empty()
     fasta_sizes = Channel.empty()
     intervals_bed = Channel.empty()
     msisensorpro_list = Channel.empty()
