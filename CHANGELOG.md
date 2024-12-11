@@ -48,6 +48,7 @@ Initial release of nf-core/references, created with the [nf-core](https://nf-co.
 - [49](https://github.com/nf-core/references/pull/49) - Better publishing for all files
 - [53](https://github.com/nf-core/references/pull/53) - Better publishing for all aligner indexes
 - [56](https://github.com/nf-core/references/pull/56) - reference_version -> source_version
+- [62](https://github.com/nf-core/references/pull/62) - samplesheet -> asset
 
 ### Fixed
 
@@ -60,6 +61,7 @@ Initial release of nf-core/references, created with the [nf-core](https://nf-co.
 - [50](https://github.com/nf-core/references/pull/50) - Minimal JAVA is 17
 - [51](https://github.com/nf-core/references/pull/51) - Fix missing fasta assets for GATK build
 - [56](https://github.com/nf-core/references/pull/56) - Add new logic for skip creation of existing assets
+- [62](https://github.com/nf-core/references/pull/62) - Remove failure when no tools are specified, because one might just want to unpack assets
 
 ### Dependencies
 
