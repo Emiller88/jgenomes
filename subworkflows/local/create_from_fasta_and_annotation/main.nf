@@ -23,14 +23,11 @@ workflow CREATE_FROM_FASTA_AND_ANNOTATION {
     run_star                       // boolean: true/false
 
     main:
-    gtf = Channel.empty()
     hisat2_index = Channel.empty()
     kallisto_index = Channel.empty()
     rsem_index = Channel.empty()
     salmon_index = Channel.empty()
-    splice_sites = Channel.empty()
     star_index = Channel.empty()
-    transcript_fasta = Channel.empty()
 
     versions = Channel.empty()
 
