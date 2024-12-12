@@ -1,57 +1,72 @@
-include { CREATE_ALIGN_INDEX          } from '../../subworkflows/local/create_align_index'
-include { CREATE_ALIGN_INDEX_WITH_GFF } from '../../subworkflows/local/create_align_index_with_gff'
-include { INDEX_FASTA                 } from '../../subworkflows/local/index_fasta'
-include { INDEX_VCF                   } from '../../subworkflows/local/index_vcf'
-include { SAMPLESHEET_TO_CHANNEL      } from '../../subworkflows/local/samplesheet_to_channel'
-include { UNCOMPRESS_REFERENCES       } from '../../subworkflows/local/uncompress_references'
+include { ASSET_TO_CHANNEL                 } from '../../subworkflows/local/asset_to_channel'
+include { CREATE_FROM_FASTA_AND_ANNOTATION } from '../../subworkflows/local/create_from_fasta_and_annotation'
+include { CREATE_FROM_FASTA_ONLY           } from '../../subworkflows/local/create_from_fasta_only'
+include { INDEX_VCF                        } from '../../subworkflows/local/index_vcf'
+include { UNCOMPRESS_ASSET                 } from '../../subworkflows/local/uncompress_asset'
 
 workflow REFERENCES {
     take:
-    reference // fasta, gff, gtf, splice_sites, transcript_fasta, vcf
-    tools     // bowtie|bowtie2|bwamem1|bwamem2|createsequencedictionary|dragmap|faidx|gffread|intervals|hisat2|hisat2_extractsplicesites|kallisto|msisensorpro|rsem|rsem_make_transcripts_fasta|salmon|star|tabix
+    asset // Channel: [meta, fasta]
+    tools // List: Can contain any combination of tools of the list of available tools, or just no_tools
 
     main:
     versions = Channel.empty()
 
-    SAMPLESHEET_TO_CHANNEL(reference)
+    // Create channels from the input file(s)
+    // Channels are empty when not needed
+    ASSET_TO_CHANNEL(asset)
 
-    intervals_bed = SAMPLESHEET_TO_CHANNEL.out.intervals_bed
-    fasta_dict = SAMPLESHEET_TO_CHANNEL.out.fasta_dict
-    fasta_fai = SAMPLESHEET_TO_CHANNEL.out.fasta_fai
-    fasta_sizes = SAMPLESHEET_TO_CHANNEL.out.fasta_sizes
-    splice_sites = SAMPLESHEET_TO_CHANNEL.out.splice_sites
-    transcript_fasta = SAMPLESHEET_TO_CHANNEL.out.transcript_fasta
-    vcf = SAMPLESHEET_TO_CHANNEL.out.vcf
+    intervals_bed = ASSET_TO_CHANNEL.out.intervals_bed
+    fasta_dict = ASSET_TO_CHANNEL.out.fasta_dict
+    fasta_fai = ASSET_TO_CHANNEL.out.fasta_fai
+    fasta_sizes = ASSET_TO_CHANNEL.out.fasta_sizes
+    splice_sites = ASSET_TO_CHANNEL.out.splice_sites
+    transcript_fasta = ASSET_TO_CHANNEL.out.transcript_fasta
+    vcf = ASSET_TO_CHANNEL.out.vcf
 
-    fasta_input = SAMPLESHEET_TO_CHANNEL.out.fasta.branch { meta, fasta_map ->
+    // Assess if assets needs to be uncompress or not
+    // (We do not uncompress VCFs)
+    fasta_input = ASSET_TO_CHANNEL.out.fasta.branch { meta, _fasta ->
         decompress_fasta: meta.decompress_fasta
         other: true
     }
-    gff_input = SAMPLESHEET_TO_CHANNEL.out.gff.branch { meta, gff_map ->
+
+    gff_input = ASSET_TO_CHANNEL.out.gff.branch { meta, _gff ->
         decompress_gff: meta.decompress_gff
         other: true
     }
-    gtf_input = SAMPLESHEET_TO_CHANNEL.out.gtf.branch { meta, gtf_map ->
+
+    gtf_input = ASSET_TO_CHANNEL.out.gtf.branch { meta, _gtf ->
         decompress_gtf: meta.decompress_gtf
         other: true
     }
 
-    UNCOMPRESS_REFERENCES(fasta_input.decompress_fasta, gff_input.decompress_gff, gtf_input.decompress_gtf)
+    // Uncompress any assets that need to be
+    UNCOMPRESS_ASSET(fasta_input.decompress_fasta, gff_input.decompress_gff, gtf_input.decompress_gtf)
 
-    fasta = fasta_input.other.mix(UNCOMPRESS_REFERENCES.out.fasta)
-    gff = gff_input.other.mix(UNCOMPRESS_REFERENCES.out.gff)
-    gtf = gtf_input.other.mix(UNCOMPRESS_REFERENCES.out.gtf)
+    // This covers a mixture of compress and uncompress assets
+    fasta = fasta_input.other.mix(UNCOMPRESS_ASSET.out.fasta)
+    gff = gff_input.other.mix(UNCOMPRESS_ASSET.out.gff)
+    gtf = gtf_input.other.mix(UNCOMPRESS_ASSET.out.gtf)
 
-    CREATE_ALIGN_INDEX(
+    // Create reference assets from fasta only
+    CREATE_FROM_FASTA_ONLY(
         fasta,
+        fasta_fai,
         tools.split(',').contains('bowtie1'),
         tools.split(',').contains('bowtie2'),
         tools.split(',').contains('bwamem1'),
         tools.split(',').contains('bwamem2'),
-        tools.split(',').contains('dragmap')
+        tools.split(',').contains('createsequencedictionary'),
+        tools.split(',').contains('dragmap'),
+        tools.split(',').contains('faidx'),
+        tools.split(',').contains('intervals'),
+        tools.split(',').contains('msisensorpro'),
+        tools.split(',').contains('sizes')
     )
 
-    CREATE_ALIGN_INDEX_WITH_GFF(
+    // Create reference assets from fasta and annotation (gff derived (so gff, gtf and transcript_fasta))
+    CREATE_FROM_FASTA_AND_ANNOTATION(
         fasta,
         gff,
         gtf,
@@ -66,49 +81,40 @@ workflow REFERENCES {
         tools.split(',').contains('star')
     )
 
-    INDEX_FASTA(
-        fasta,
-        fasta_fai,
-        tools.split(',').contains('createsequencedictionary'),
-        tools.split(',').contains('faidx'),
-        tools.split(',').contains('intervals'),
-        tools.split(',').contains('msisensorpro'),
-        tools.split(',').contains('sizes')
-    )
-
+    // Index VCF
     INDEX_VCF(
         vcf,
         tools.split(',').contains('tabix')
     )
 
-    bowtie1_index = CREATE_ALIGN_INDEX.out.bowtie1_index
-    bowtie2_index = CREATE_ALIGN_INDEX.out.bowtie2_index
-    bwamem1_index = CREATE_ALIGN_INDEX.out.bwamem1_index
-    bwamem2_index = CREATE_ALIGN_INDEX.out.bwamem2_index
-    dragmap_hashmap = CREATE_ALIGN_INDEX.out.dragmap_hashmap
+    // This works with a mixture of input and computed assets
+    fasta_dict = fasta_dict.mix(CREATE_FROM_FASTA_ONLY.out.fasta_dict)
+    fasta_fai = fasta_fai.mix(CREATE_FROM_FASTA_ONLY.out.fasta_fai)
+    fasta_sizes = fasta_sizes.mix(CREATE_FROM_FASTA_ONLY.out.fasta_sizes)
+    gtf = gtf.mix(CREATE_FROM_FASTA_AND_ANNOTATION.out.gtf)
+    intervals_bed = intervals_bed.mix(CREATE_FROM_FASTA_ONLY.out.intervals_bed)
+    splice_sites = splice_sites.mix(CREATE_FROM_FASTA_AND_ANNOTATION.out.splice_sites)
+    transcript_fasta = transcript_fasta.mix(CREATE_FROM_FASTA_AND_ANNOTATION.out.transcript_fasta)
 
-    gtf = gtf.mix(CREATE_ALIGN_INDEX_WITH_GFF.out.gtf)
-    hisat2_index = CREATE_ALIGN_INDEX_WITH_GFF.out.hisat2_index
-    splice_sites = splice_sites.mix(CREATE_ALIGN_INDEX_WITH_GFF.out.splice_sites)
-    kallisto_index = CREATE_ALIGN_INDEX_WITH_GFF.out.kallisto_index
-    rsem_index = CREATE_ALIGN_INDEX_WITH_GFF.out.rsem_index
-    transcript_fasta = transcript_fasta.mix(CREATE_ALIGN_INDEX_WITH_GFF.out.transcript_fasta)
-    salmon_index = CREATE_ALIGN_INDEX_WITH_GFF.out.salmon_index
-    star_index = CREATE_ALIGN_INDEX_WITH_GFF.out.star_index
-
-    fasta_dict = fasta_dict.mix(INDEX_FASTA.out.fasta_dict)
-    fasta_fai = fasta_fai.mix(INDEX_FASTA.out.fasta_fai)
-    intervals_bed = intervals_bed.mix(INDEX_FASTA.out.intervals_bed)
-    fasta_sizes = fasta_sizes.mix(INDEX_FASTA.out.fasta_sizes)
-    msisensorpro_list = INDEX_FASTA.out.msisensorpro_list
-
+    // TODO: This does not work YET with a mixture of input and computed assets
+    bowtie1_index = CREATE_FROM_FASTA_ONLY.out.bowtie1_index
+    bowtie2_index = CREATE_FROM_FASTA_ONLY.out.bowtie2_index
+    bwamem1_index = CREATE_FROM_FASTA_ONLY.out.bwamem1_index
+    bwamem2_index = CREATE_FROM_FASTA_ONLY.out.bwamem2_index
+    dragmap_hashmap = CREATE_FROM_FASTA_ONLY.out.dragmap_hashmap
+    hisat2_index = CREATE_FROM_FASTA_AND_ANNOTATION.out.hisat2_index
+    kallisto_index = CREATE_FROM_FASTA_AND_ANNOTATION.out.kallisto_index
+    msisensorpro_list = CREATE_FROM_FASTA_ONLY.out.msisensorpro_list
+    rsem_index = CREATE_FROM_FASTA_AND_ANNOTATION.out.rsem_index
+    salmon_index = CREATE_FROM_FASTA_AND_ANNOTATION.out.salmon_index
+    star_index = CREATE_FROM_FASTA_AND_ANNOTATION.out.star_index
     vcf_tbi = INDEX_VCF.out.vcf_tbi
 
-    versions = versions.mix(CREATE_ALIGN_INDEX.out.versions)
-    versions = versions.mix(CREATE_ALIGN_INDEX_WITH_GFF.out.versions)
-    versions = versions.mix(INDEX_FASTA.out.versions)
+    // TODO: Refactor this with topics
+    versions = versions.mix(CREATE_FROM_FASTA_ONLY.out.versions)
+    versions = versions.mix(CREATE_FROM_FASTA_AND_ANNOTATION.out.versions)
     versions = versions.mix(INDEX_VCF.out.versions)
-    versions = versions.mix(UNCOMPRESS_REFERENCES.out.versions)
+    versions = versions.mix(UNCOMPRESS_ASSET.out.versions)
 
     emit:
     bowtie1_index     // channel: [meta, BowtieIndex/]
@@ -116,10 +122,10 @@ workflow REFERENCES {
     bwamem1_index     // channel: [meta, BWAmemIndex/]
     bwamem2_index     // channel: [meta, BWAmem2memIndex/]
     dragmap_hashmap   // channel: [meta, DragmapHashtable/]
-    fasta             // channel: [meta, *.fa(sta)]
-    fasta_dict        // channel: [meta, *.fa(sta).dict]
-    fasta_fai         // channel: [meta, *.fa(sta).fai]
-    fasta_sizes       // channel: [meta, *.fa(sta).sizes]
+    fasta             // channel: [meta, *.f(ast|n)?a]
+    fasta_dict        // channel: [meta, *.f(ast|n)?a.dict]
+    fasta_fai         // channel: [meta, *.f(ast|n)?a.fai]
+    fasta_sizes       // channel: [meta, *.f(ast|n)?a.sizes]
     gff               // channel: [meta, gff]
     gtf               // channel: [meta, gtf]
     hisat2_index      // channel: [meta, Hisat2Index/]
@@ -131,7 +137,7 @@ workflow REFERENCES {
     splice_sites      // channel: [meta, *.splice_sites.txt]
     star_index        // channel: [meta, STARIndex/]
     transcript_fasta  // channel: [meta, *.transcripts.fasta]
-    vcf_tbi           // channel: [meta, *.vcf.tbi]
+    vcf_tbi           // channel: [meta, *.vcf.gz.tbi]
     versions          // channel: [versions.yml]
 
     publish:

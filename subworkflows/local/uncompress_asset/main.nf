@@ -6,28 +6,30 @@ include { GUNZIP as GUNZIP_FASTA } from '../../../modules/nf-core/gunzip'
 include { GUNZIP as GUNZIP_GTF   } from '../../../modules/nf-core/gunzip'
 include { GUNZIP as GUNZIP_GFF   } from '../../../modules/nf-core/gunzip'
 
-workflow UNCOMPRESS_REFERENCES {
+workflow UNCOMPRESS_ASSET {
     take:
-    fasta_input // channel: [meta, fasta]
-    gff_input   // channel: [meta, gff]
-    gtf_input   // channel: [meta, gtf]
+    fasta // channel: [meta, fasta]
+    gff   // channel: [meta, gff]
+    gtf   // channel: [meta, gtf]
 
     main:
     versions = Channel.empty()
 
-    fasta_input = fasta_input.map { meta, fasta_map ->
-        meta.decompress_fasta ? [meta, fasta_map] : null
-    }
-    gff_input = gff_input.map { meta, gff_map ->
-        meta.decompress_gff ? [meta, gff_map] : null
-    }
-    gtf_input = gtf_input.map { meta, gtf_map ->
-        meta.decompress_gtf ? [meta, gtf_map] : null
+    fasta = fasta.map { meta, fasta_ ->
+        meta.decompress_fasta ? [meta, fasta_] : null
     }
 
-    GUNZIP_FASTA(fasta_input)
-    GUNZIP_GFF(gff_input)
-    GUNZIP_GTF(gtf_input)
+    gff = gff.map { meta, gff_ ->
+        meta.decompress_gff ? [meta, gff_] : null
+    }
+
+    gtf = gtf.map { meta, gtf_ ->
+        meta.decompress_gtf ? [meta, gtf_] : null
+    }
+
+    GUNZIP_FASTA(fasta)
+    GUNZIP_GFF(gff)
+    GUNZIP_GTF(gtf)
 
     fasta = GUNZIP_FASTA.out.gunzip
     gff = GUNZIP_GFF.out.gunzip

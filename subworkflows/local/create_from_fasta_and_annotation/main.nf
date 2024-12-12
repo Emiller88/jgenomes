@@ -7,13 +7,13 @@ include { RSEM_PREPAREREFERENCE as RSEM_PREPAREREFERENCE_GENOME } from '../../..
 include { SALMON_INDEX                                          } from '../../../modules/nf-core/salmon/index'
 include { STAR_GENOMEGENERATE                                   } from '../../../modules/nf-core/star/genomegenerate'
 
-workflow CREATE_ALIGN_INDEX_WITH_GFF {
+workflow CREATE_FROM_FASTA_AND_ANNOTATION {
     take:
     fasta                          // channel: [meta, fasta]
-    input_gff                      // channel: [meta, gff]
-    input_gtf                      // channel: [meta, gtf]
-    input_splice_sites             // channel: [meta, splice_sites]
-    input_transcript_fasta         // channel: [meta, transcript_fasta]
+    gff                            // channel: [meta, gff]
+    gtf                            // channel: [meta, gtf]
+    splice_sites                   // channel: [meta, splice_sites]
+    transcript_fasta               // channel: [meta, transcript_fasta]
     run_hisat2                     // boolean: true/false
     run_hisat2_extractsplicesites  // boolean: true/false
     run_kallisto                   // boolean: true/false
@@ -23,20 +23,17 @@ workflow CREATE_ALIGN_INDEX_WITH_GFF {
     run_star                       // boolean: true/false
 
     main:
-    gtf = Channel.empty()
     hisat2_index = Channel.empty()
     kallisto_index = Channel.empty()
     rsem_index = Channel.empty()
     salmon_index = Channel.empty()
-    splice_sites = Channel.empty()
     star_index = Channel.empty()
-    transcript_fasta = Channel.empty()
 
     versions = Channel.empty()
 
     if (run_hisat2 || run_kallisto || run_rsem || run_rsem_make_transcript_fasta || run_salmon || run_star) {
-        gff_gffread = input_gff.map { meta, map_gff ->
-            return meta.run_gffread ? [meta, map_gff] : null
+        gff_gffread = gff.map { meta, gff_ ->
+            return meta.run_gffread ? [meta, gff_] : null
         }
 
         GFFREAD(
@@ -46,26 +43,26 @@ workflow CREATE_ALIGN_INDEX_WITH_GFF {
 
         versions = versions.mix(GFFREAD.out.versions)
 
-        gtf = input_gtf
+        gtf = gtf
             .mix(GFFREAD.out.gtf)
             .groupTuple()
-            .map { meta, file ->
-                return file[1] ? [meta, file[1]] : [meta, file]
+            .map { meta, gtf_ ->
+                return gtf_[1] ? [meta, gtf_[1]] : [meta, gtf_]
             }
 
         if (run_hisat2 || run_hisat2_extractsplicesites) {
-            gtf_hisat2 = gtf.map { meta, map_gtf ->
-                return meta.run_hisat2 ? [meta, map_gtf] : null
+            gtf_hisat2 = gtf.map { meta, gtf_ ->
+                return meta.run_hisat2 ? [meta, gtf_] : null
             }
 
             HISAT2_EXTRACTSPLICESITES(gtf_hisat2)
 
             versions = versions.mix(HISAT2_EXTRACTSPLICESITES.out.versions)
-            splice_sites = input_splice_sites.mix(HISAT2_EXTRACTSPLICESITES.out.txt)
+            splice_sites = splice_sites.mix(HISAT2_EXTRACTSPLICESITES.out.txt)
 
             if (run_hisat2) {
-                fasta_hisat2 = fasta.map { meta, map_fasta ->
-                    return meta.run_hisat2 ? [meta, map_fasta] : null
+                fasta_hisat2 = fasta.map { meta, fasta_ ->
+                    return meta.run_hisat2 ? [meta, fasta_] : null
                 }
 
                 HISAT2_BUILD(
@@ -81,8 +78,8 @@ workflow CREATE_ALIGN_INDEX_WITH_GFF {
         }
 
         if (run_kallisto || run_rsem_make_transcript_fasta || run_salmon) {
-            fasta_make_transcripts_fasta = fasta.map { meta, map_fasta ->
-                return meta.run_rsem_make_transcript_fasta ? [meta, map_fasta] : null
+            fasta_make_transcripts_fasta = fasta.map { meta, fasta_ ->
+                return meta.run_rsem_make_transcript_fasta ? [meta, fasta_] : null
             }
 
             MAKE_TRANSCRIPTS_FASTA(
@@ -91,11 +88,11 @@ workflow CREATE_ALIGN_INDEX_WITH_GFF {
             )
             versions = versions.mix(MAKE_TRANSCRIPTS_FASTA.out.versions)
 
-            transcript_fasta = input_transcript_fasta.mix(MAKE_TRANSCRIPTS_FASTA.out.transcript_fasta)
+            transcript_fasta = transcript_fasta.mix(MAKE_TRANSCRIPTS_FASTA.out.transcript_fasta)
 
             if (run_kallisto) {
-                transcript_fasta_kallisto = transcript_fasta.map { meta, map_transcript_fasta ->
-                    return meta.run_kallisto ? [meta, map_transcript_fasta] : null
+                transcript_fasta_kallisto = transcript_fasta.map { meta, transcript_fasta_ ->
+                    return meta.run_kallisto ? [meta, transcript_fasta_] : null
                 }
 
                 KALLISTO_INDEX(transcript_fasta_kallisto)
@@ -105,12 +102,12 @@ workflow CREATE_ALIGN_INDEX_WITH_GFF {
             }
 
             if (run_salmon) {
-                fasta_salmon = fasta.map { meta, map_fasta ->
-                    return meta.run_salmon ? [meta, map_fasta] : null
+                fasta_salmon = fasta.map { meta, fasta_ ->
+                    return meta.run_salmon ? [meta, fasta_] : null
                 }
 
-                transcript_fasta_salmon = transcript_fasta.map { meta, map_transcript_fasta ->
-                    return meta.run_salmon ? [meta, map_transcript_fasta] : null
+                transcript_fasta_salmon = transcript_fasta.map { meta, transcript_fasta_ ->
+                    return meta.run_salmon ? [meta, transcript_fasta_] : null
                 }
 
                 SALMON_INDEX(
@@ -124,8 +121,8 @@ workflow CREATE_ALIGN_INDEX_WITH_GFF {
         }
 
         if (run_rsem) {
-            fasta_rsem = fasta.map { meta, map_fasta ->
-                return meta.run_rsem ? [meta, map_fasta] : null
+            fasta_rsem = fasta.map { meta, fasta_ ->
+                return meta.run_rsem ? [meta, fasta_] : null
             }
 
             RSEM_PREPAREREFERENCE_GENOME(fasta_rsem, gtf)
@@ -135,10 +132,9 @@ workflow CREATE_ALIGN_INDEX_WITH_GFF {
         }
 
         if (run_star) {
-            fasta_star = fasta.map { meta, map_fasta ->
-                return meta.run_star ? [meta, map_fasta] : null
+            fasta_star = fasta.map { meta, fasta_ ->
+                return meta.run_star ? [meta, fasta_] : null
             }
-
 
             STAR_GENOMEGENERATE(fasta_star, gtf)
 

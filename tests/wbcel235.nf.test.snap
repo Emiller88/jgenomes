@@ -1,5 +1,5 @@
 {
-    "Run with profile test for WBCEL235 | --input assets/genomes/Caenorhabditis_elegans/NCBI/WBcel235.yml": {
+    "Run with profile test for WBCEL235 | --input Caenorhabditis_elegans/NCBI/WBcel235.yml": {
         "content": [
             9,
             {
