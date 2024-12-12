@@ -15,18 +15,21 @@
             },
             "source": {
                 "type": "string",
+                "pattern": "^\\S+$",
                 "errorMessage": "Source of genome must be provided and cannot contain spaces",
                 "meta": ["source"]
             },
             "source_vcf": {
                 "type": "string",
-                "errorMessage": "Source of the VCF file must be provided and cannot contain spaces",
+                "pattern": "^\\S+$",
+                "errorMessage": "Source of the VCF, cannot contain spaces",
                 "default": "unknown",
                 "meta": ["source_vcf"]
             },
             "source_version": {
                 "type": "string",
-                "errorMessage": "What is the version of the reference used to create gff/gtf and transcript related files",
+                "pattern": "^\\S+$",
+                "errorMessage": "Source version used to create annotation files (gff/gtf related files), cannot contain spaces",
                 "default": "unknown",
                 "meta": ["source_version"]
             },
@@ -43,78 +46,78 @@
             "bowtie1_index": {
                 "meta": ["bowtie1_index"],
                 "type": "string",
-                "errorMessage": "TODO"
+                "errorMessage": "Bowtie1 index"
             },
             "bowtie2_index": {
                 "meta": ["bowtie2_index"],
                 "type": "string",
-                "errorMessage": "TODO"
+                "errorMessage": "Bowtie2 index"
             },
             "bwamem1_index": {
                 "meta": ["bwamem1_index"],
                 "type": "string",
-                "errorMessage": "TODO"
+                "errorMessage": "BWA-MEM index"
             },
             "bwamem2_index": {
                 "meta": ["bwamem2_index"],
                 "type": "string",
-                "errorMessage": "TODO"
+                "errorMessage": "BWA-MEM2 index"
             },
             "dragmap_hashtable": {
                 "meta": ["dragmap_hashtable"],
                 "type": "string",
-                "errorMessage": "TODO"
+                "errorMessage": "Dragmap hashtable"
             },
             "fasta": {
                 "type": "string",
                 "pattern": "^\\S+\\.f(ast|n)?a(\\.gz)?$",
-                "errorMessage": "TODO"
+                "errorMessage": "Fasta file [required when creating a reference]"
             },
             "fasta_dict": {
                 "meta": ["fasta_dict"],
                 "type": "string",
                 "pattern": "^\\S+\\.dict(\\.gz)?$",
-                "errorMessage": "TODO"
+                "errorMessage": "Fasta dictionary"
             },
             "fasta_fai": {
                 "meta": ["fasta_fai"],
                 "type": "string",
                 "pattern": "^\\S+\\.f(ast|n)?a\\.fai(\\.gz)?$",
-                "errorMessage": "TODO"
+                "errorMessage": "Fasta index"
             },
             "fasta_sizes": {
                 "meta": ["fasta_sizes"],
                 "type": "string",
                 "pattern": "^\\S+\\.f(ast|n)?a\\.sizes(\\.gz)?$",
-                "errorMessage": "TODO"
+                "errorMessage": "Fasta sizes"
             },
             "gff": {
                 "meta": ["gff"],
                 "type": "string",
                 "pattern": "^\\S+\\.gff(\\.gz)?$",
-                "errorMessage": "TODO"
+                "errorMessage": "GFF3 file, required when no GTF is provided and wanting to build a reference needing such genes annotation"
             },
             "gtf": {
                 "meta": ["gtf"],
                 "type": "string",
                 "pattern": "^\\S+\\.gtf(\\.gz)?$",
-                "errorMessage": "TODO"
+                "errorMessage": "GTF file, required when no GFF3 is provided and wanting to build a reference needing such genes annotation"
             },
             "hisat2_index": {
                 "meta": ["hisat2_index"],
                 "type": "string",
-                "errorMessage": "TODO"
+                "errorMessage": "HISAT2 index"
             },
             "intervals_bed": {
                 "meta": ["intervals_bed"],
                 "type": "string",
                 "pattern": "^\\S+\\.bed$",
-                "errorMessage": "TODO"
+                "errorMessage": "Fasta intervals bed"
             },
             "kallisto_index": {
                 "meta": ["kallisto_index"],
                 "type": "string",
-                "errorMessage": "TODO"
+                "errorMessage": "Kallisto index"
             },
             "macs_gsize": {
                 "meta": ["macs_gsize"],
@@ -129,51 +132,51 @@
             "msisensorpro_list": {
                 "meta": ["msisensorpro_list"],
                 "type": "string",
-                "errorMessage": "TODO"
+                "errorMessage": "MSIsensor-pro list"
             },
             "readme": {
                 "meta": ["readme"],
                 "type": "string",
-                "errorMessage": "TODO"
+                "errorMessage": "README file describing the reference"
             },
             "rsem_index": {
                 "meta": ["rsem_index"],
                 "type": "string",
-                "errorMessage": "TODO"
+                "errorMessage": "RSEM index"
             },
             "salmon_index": {
                 "meta": ["salmon_index"],
                 "type": "string",
-                "errorMessage": "TODO"
+                "errorMessage": "Salmon index"
             },
             "splice_sites": {
                 "meta": ["splice_sites"],
                 "type": "string",
                 "pattern": "^\\S+(\\.splice_sites)(\\.txt)?$",
-                "errorMessage": "TODO"
+                "errorMessage": "Splice sites [can be generated with HISAT2]"
             },
             "star_index": {
                 "meta": ["star_index"],
                 "type": "string",
-                "errorMessage": "TODO"
+                "errorMessage": "STAR index"
             },
             "transcript_fasta": {
                 "meta": ["transcript_fasta"],
                 "type": "string",
                 "pattern": "^\\S+\\.f(ast|n)?a(\\.gz)?$",
-                "errorMessage": "TODO"
+                "errorMessage": "Transcript fasta [can be generated with RSEM]"
             },
             "vcf": {
                 "meta": ["vcf"],
                 "type": "string",
                 "pattern": "^\\S+\\.vcf\\.gz$",
-                "errorMessage": "TODO"
+                "errorMessage": "VCF file"
             },
             "vcf_tbi": {
                 "meta": ["vcf_tbi"],
                 "type": "string",
                 "pattern": "^\\S+\\.vcf\\.gz\\.tbi$",
-                "errorMessage": "TODO"
+                "errorMessage": "VCF tabix indexed"
             }
         },
         "required": ["genome", "source", "species"]
