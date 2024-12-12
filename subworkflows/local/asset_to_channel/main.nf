@@ -62,7 +62,7 @@ workflow ASSET_TO_CHANNEL {
     // If we already have the vcf_tbi, then we don't need to index the vcf
     vcf = asset
         .map { meta, _fasta ->
-            return meta.vcf && !meta.vcf_tbi ? [reduce(meta), file(meta.vcf)] : null
+            return meta.vcf ? [reduce(meta) + [run_tabix: meta.vcf_tbi ? false : true], file(meta.vcf)] : null
         }
         .transpose()
 

@@ -11,7 +11,11 @@ workflow INDEX_VCF {
 
 
     if (run_tabix) {
-        TABIX_TABIX(vcf)
+        vcf_tabix = vcf.map { meta, vcf_ ->
+            return meta.run_tabix ? [meta, vcf_] : null
+        }
+
+        TABIX_TABIX(vcf_tabix)
 
         vcf_tbi = TABIX_TABIX.out.tbi
         versions = TABIX_TABIX.out.versions
