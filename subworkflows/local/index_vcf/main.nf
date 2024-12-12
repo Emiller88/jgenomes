@@ -18,7 +18,7 @@ workflow INDEX_VCF {
         TABIX_TABIX(vcf_tabix)
 
         vcf_tbi = TABIX_TABIX.out.tbi
-        versions = TABIX_TABIX.out.versions
+        versions = versions.mix(TABIX_TABIX.out.versions)
     }
 
     emit:
