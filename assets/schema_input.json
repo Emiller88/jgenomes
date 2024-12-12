@@ -144,6 +144,11 @@
                 "type": "string",
                 "errorMessage": "RSEM index"
             },
+            "site": {
+                "meta": ["site"],
+                "type": "string",
+                "errorMessage": "Website of origin of the reference"
+            },
             "salmon_index": {
                 "meta": ["salmon_index"],
                 "type": "string",
