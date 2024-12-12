@@ -12,6 +12,3 @@ null/
 tmp/
 .nf-test
 .vscode
-assets/manifest.txt
-assets/*_manifest.txt
-assets/tmp_*.txt

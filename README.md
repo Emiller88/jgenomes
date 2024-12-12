@@ -19,54 +19,84 @@
 
 ## Introduction
 
-**nf-core/references** is a bioinformatics pipeline that build references.
+**nf-core/references** is a bioinformatics pipeline that build references, for multiple use cases.
+
+It is primarily designed to build references for common organisms and store it on [AWS igenomes](https://github.com/ewels/AWS-iGenomes/).
+
+From a fasta file, it will be able to build the following references:
+
+- Bowtie1 index
+- Bowtie2 index
+- BWA-MEM index
+- BWA-MEM2 index
+- DRAGMAP hashtable
+- Fasta dictionary (with GATK4)
+- Fasta fai (with SAMtools)
+- Fasta sizes (with SAMtools)
+- Fasta intervals bed (with GATK4)
+- MSIsensor-pro list
+
+With an additional annotation file describing the genes (either GFF3 or GTF), it will be able to build the following references:
+
+- GTF (from GFF3 with GFFREAD)
+- HISAT2 index
+- Kallisto index
+- RSEM index
+- Salmon index
+- Splice sites (with HISAT2)
+- STAR index
+- Transcript fasta (with RSEM)
+
+With a vcf file, it will tabix index it.
+
+## Assets
 
 Assets are stored in [references-assets](https://github.com/nf-core/references-assets).
 
-## How to hack on it
-
-0. Have docker, and Nextflow installed
-1. `nextflow run main.nf`
-
-## Some thoughts on reference building:
-
-- We could use the glob and if you just drop a fasta in s3 bucket it'll get picked up and new resources built
-  - Could take this a step further and make it a little config file that has the fasta, gtf, genome_size etc.
-- How do we avoid rebuilding? Ideally we should build once on a new minor release of an aligner/reference. IMO kinda low priority because the main cost is going to be egress, not compute.
-- How much effort is too much effort?
-  - Should it be as easy as adding a file on s3?
-    - No that shouldn't be a requirement, should be able to link to a reference externally(A "source of truth" ie an FTP link), and the workflow will build the references
-    - So like mulled biocontainers, just make a PR to the samplesheet and boom new reference in the s3 bucket if it's approved?
-
-# Roadmap
-
-PoC:
-
-- Replace aws-igenomes
-  - bwa, bowtie2, star, bismark need to be built
-  - fasta, gtf, bed12, mito_name, macs_gsize blacklist, copied over
-
-Other nice things to have:
-
-- Building our test-datasets
-- Downsampling for a unified genomics test dataset creation, (Thinking about viralitegration/rnaseq/wgs) and spiking in test cases of interest(Specific variants for example)
-
 ## Credits
 
-nf-core/references was originally written by @maxulysse | @edmundmiller | @ewels.
+nf-core/references was originally written by [Maxime U Garcia](https://github.com/maxulysse) | [Edmund Miller](https://github.com/edmundmiller) | [Phil Ewels](https://github.com/ewels).
 
 We thank the following people for their extensive assistance in the development of this pipeline:
 
-- @adamrtalbot
-- @drpatelh
-- @FriederikeHanssen
-- @pinin4fjords
+- [Adam Talbot](https://github.com/adamrtalbot)
+- [Friederike Hanssen](https://github.com/FriederikeHanssen)
+- [Harshil Patel](https://github.com/drpatelh)
+- [Jonathan Manning](https://github.com/pinin4fjords)
 
 ## Contributions and Support
 
 If you would like to contribute to this pipeline, please see the [contributing guidelines](.github/CONTRIBUTING.md).
 
 For further information or help, don't hesitate to get in touch on the [Slack `#references` channel](https://nfcore.slack.com/channels/references) (you can join with [this invite](https://nf-co.re/join/slack)).
+
+### How to hack on it
+
+0. Have docker, and Nextflow installed
+1. `nextflow run main.nf`
+
+### Some thoughts on reference building
+
+- We could use the glob and if you just drop a fasta in s3 bucket it'll get picked up and new resources built
+  - Could take this a step further and make it a little config file that has the fasta, gtf, genome_size etc.
+- How do we avoid rebuilding? Ideally we should build once on a new minor release of an aligner/reference. IMO kinda low priority because the main cost is going to be egress, not compute.
+- How much effort is too much effort?
+  - Should it be as easy as adding a file on s3?
+    - No that shouldn't be a requirement, should be able to link to a reference externally (A "source of truth" ie an FTP link), and the workflow will build the references
+    - So like mulled biocontainers, just make a PR to the samplesheet and boom new reference in the s3 bucket if it's approved?
+
+### Roadmap
+
+PoC for v1.0:
+
+- Replace aws-igenomes
+  - bwa, bowtie2, star, bismark need to be built
+  - fasta, gtf, bed12, mito_name, macs_gsize, blacklist, copied over
+
+Other nice things to have:
+
+- Building our test-datasets
+- Down-sampling for a unified genomics test dataset creation, (Thinking about viralitegration/rnaseq/wgs) and spiking in test cases of interest (Specific variants for example)
 
 ## Citations
 
