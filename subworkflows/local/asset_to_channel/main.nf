@@ -40,7 +40,7 @@ workflow ASSET_TO_CHANNEL {
     // If ends with .gz, decompress it
     // If any of the asset exists, then adding run_tools to false and skip the asset creation from the annotation derived file (gff, gtf or transcript_fasta)
     gff = asset.map { meta, fasta_ ->
-        return meta.gff && !meta.gtf ? [reduce(meta) + [decompress_gff: meta.gff.endsWith('.gz') ?: false] + [run_gffread: fasta_ ?: false] + [run_hisat2: meta.splice_sites ? false : true], meta.gff] : null
+        return meta.gff ? [reduce(meta) + [decompress_gff: meta.gff.endsWith('.gz') ?: false] + [run_gffread: fasta_ && !meta.gtf ?: false] + [run_hisat2: meta.splice_sites ? false : true], meta.gff] : null
     }
 
     // If ends with .gz, decompress it
