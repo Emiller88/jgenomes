@@ -163,21 +163,21 @@ output {
                 }
                 else if (meta.file == "rsem_index") {
                     meta.source_version == "unknown"
-                        ? "${meta.species}/${meta.source}/${meta.genome}/Sequence/RSEMIndex/version1.3.1/${file}"
-                        : "${meta.species}/${meta.source}/${meta.genome}/Sequence/RSEMIndex/${meta.source_version}/version1.3.1/${file}"
+                        ? "${meta.species}/${meta.source}/${meta.genome}/Sequence/RSEMIndex/version1.3.1/"
+                        : "${meta.species}/${meta.source}/${meta.genome}/Sequence/RSEMIndex/${meta.source_version}/version1.3.1/"
                 }
                 else if (meta.file == "salmon_index") {
                     meta.source_version == "unknown"
-                        ? "${meta.species}/${meta.source}/${meta.genome}/Sequence/SalmonIndex/version1.10.3/${file}"
-                        : "${meta.species}/${meta.source}/${meta.genome}/Sequence/SalmonIndex/${meta.source_version}/version1.10.3/${file}"
+                        ? "${meta.species}/${meta.source}/${meta.genome}/Sequence/SalmonIndex/version1.10.3/"
+                        : "${meta.species}/${meta.source}/${meta.genome}/Sequence/SalmonIndex/${meta.source_version}/version1.10.3/"
                 }
                 else if (meta.file == "splice_sites") {
                     "${meta.species}/${meta.source}/${meta.genome}/Annotation/SpliceSites/${file}"
                 }
                 else if (meta.file == "star_index") {
                     meta.source_version == "unknown"
-                        ? "${meta.species}/${meta.source}/${meta.genome}/Sequence/STARIndex/version2.7.11b/${file}"
-                        : "${meta.species}/${meta.source}/${meta.genome}/Sequence/STARIndex/${meta.source_version}/version2.7.11b/${file}"
+                        ? "${meta.species}/${meta.source}/${meta.genome}/Sequence/STARIndex/version2.7.11b/"
+                        : "${meta.species}/${meta.source}/${meta.genome}/Sequence/STARIndex/${meta.source_version}/version2.7.11b/"
                 }
                 else if (meta.file == "transcript_fasta") {
                     "${meta.species}/${meta.source}/${meta.genome}/Sequence/TranscriptFasta/${file}"
