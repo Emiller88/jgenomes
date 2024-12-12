@@ -116,6 +116,33 @@ workflow REFERENCES {
     versions = versions.mix(INDEX_VCF.out.versions)
     versions = versions.mix(UNCOMPRESS_ASSET.out.versions)
 
+    references = Channel
+        .empty()
+        .mix(
+            bowtie1_index.map { meta, reference -> [meta + [file: 'bowtie1_index'], reference] },
+            bowtie2_index.map { meta, reference -> [meta + [file: 'bowtie2_index'], reference] },
+            bwamem1_index.map { meta, reference -> [meta + [file: 'bwamem1_index'], reference] },
+            bwamem2_index.map { meta, reference -> [meta + [file: 'bwamem2_index'], reference] },
+            dragmap_hashmap.map { meta, reference -> [meta + [file: 'dragmap_hashmap'], reference] },
+            fasta.map { meta, reference -> [meta + [file: 'fasta'], reference] },
+            fasta_dict.map { meta, reference -> [meta + [file: 'fasta_dict'], reference] },
+            fasta_fai.map { meta, reference -> [meta + [file: 'fasta_fai'], reference] },
+            fasta_sizes.map { meta, reference -> [meta + [file: 'fasta_sizes'], reference] },
+            gff.map { meta, reference -> [meta + [file: 'gff'], reference] },
+            gtf.map { meta, reference -> [meta + [file: 'gtf'], reference] },
+            hisat2_index.map { meta, reference -> [meta + [file: 'hisat2_index'], reference] },
+            intervals_bed.map { meta, reference -> [meta + [file: 'intervals_bed'], reference] },
+            kallisto_index.map { meta, reference -> [meta + [file: 'kallisto_index'], reference] },
+            msisensorpro_list.map { meta, reference -> [meta + [file: 'msisensorpro_list'], reference] },
+            rsem_index.map { meta, reference -> [meta + [file: 'rsem_index'], reference] },
+            salmon_index.map { meta, reference -> [meta + [file: 'salmon_index'], reference] },
+            splice_sites.map { meta, reference -> [meta + [file: 'splice_sites'], reference] },
+            star_index.map { meta, reference -> [meta + [file: 'star_index'], reference] },
+            transcript_fasta.map { meta, reference -> [meta + [file: 'transcript_fasta'], reference] },
+            vcf.map { meta, reference -> [meta + [file: 'vcf'], reference] },
+            vcf_tbi.map { meta, reference -> [meta + [file: 'vcf_tbi'], reference] }
+        )
+
     emit:
     bowtie1_index     // channel: [meta, BowtieIndex/]
     bowtie2_index     // channel: [meta, Bowtie2Index/]
@@ -132,34 +159,16 @@ workflow REFERENCES {
     intervals_bed     // channel: [meta, *.bed]
     kallisto_index    // channel: [meta, KallistoIndex]
     msisensorpro_list // channel: [meta, *.list]
+    references        // channel: [meta, *]
     rsem_index        // channel: [meta, RSEMIndex/]
     salmon_index      // channel: [meta, SalmonIndex/]
     splice_sites      // channel: [meta, *.splice_sites.txt]
     star_index        // channel: [meta, STARIndex/]
     transcript_fasta  // channel: [meta, *.transcripts.fasta]
+    vcf               // channel: [meta, *.vcf.gz]
     vcf_tbi           // channel: [meta, *.vcf.gz.tbi]
     versions          // channel: [versions.yml]
 
     publish:
-    bowtie1_index >> 'bowtie1_index'
-    bowtie2_index >> 'bowtie2_index'
-    bwamem1_index >> 'bwamem1_index'
-    bwamem2_index >> 'bwamem2_index'
-    dragmap_hashmap >> 'dragmap_hashmap'
-    fasta >> 'fasta'
-    fasta_dict >> 'fasta_dict'
-    fasta_fai >> 'fasta_fai'
-    fasta_sizes >> 'fasta_sizes'
-    gff >> 'gff'
-    gtf >> 'gtf'
-    hisat2_index >> 'hisat2_index'
-    intervals_bed >> 'intervals_bed'
-    kallisto_index >> 'kallisto_index'
-    msisensorpro_list >> 'msisensorpro_list'
-    rsem_index >> 'rsem_index'
-    salmon_index >> 'salmon_index'
-    splice_sites >> 'splice_sites'
-    star_index >> 'star_index'
-    transcript_fasta >> 'transcript_fasta'
-    vcf_tbi >> 'vcf_tbi'
+    references >> 'references'
 }

@@ -8,6 +8,7 @@
                 }
             },
             [
+                "index.json",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/multiqc.log",
@@ -55,6 +56,7 @@
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/WholeGenomeFasta",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/WholeGenomeFasta/GRCh38_chr21.fa.fai",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/WholeGenomeFasta/GRCh38_chr21.fa.sizes",
+                "index.json",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/multiqc.log",
@@ -98,6 +100,7 @@
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Annotation",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Annotation/intervals",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Annotation/intervals/GRCh38_chr21.bed",
+                "index.json",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/multiqc.log",
