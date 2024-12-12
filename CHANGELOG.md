@@ -54,6 +54,7 @@ Initial release of nf-core/references, created with the [nf-core](https://nf-co.
 - [61](https://github.com/nf-core/references/pull/61) - Move assets in nf-core/references-assets
 - [62](https://github.com/nf-core/references/pull/62) - samplesheet -> asset
 - [62](https://github.com/nf-core/references/pull/62) - Refactor and simplify codebase
+- [63](https://github.com/nf-core/references/pull/63) - Unpack gff even when gtf is present
 
 ### Fixed
 
