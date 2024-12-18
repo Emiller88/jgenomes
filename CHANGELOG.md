@@ -30,7 +30,7 @@ Initial release of nf-core/references, created with the [nf-core](https://nf-co.
 - [56](https://github.com/nf-core/references/pull/56) - Add new params: kallisto_make_unique to use the --make-unique option for kallisto
 - [56](https://github.com/nf-core/references/pull/56) - New file assets/genomes/Caenorhabditis_elegans/NCBI/WBcel235_updated.yml, build from assets/genomes/Caenorhabditis_elegans/NCBI/WBcel235.yml
 - [62](https://github.com/nf-core/references/pull/62) - Added comments to the code
-- [68](https://github.com/nf-core/references/pull/68) - Output vcf asset
+- [66](https://github.com/nf-core/references/pull/66) - Output index
 
 ### Changed
 
