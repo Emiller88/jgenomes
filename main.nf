@@ -155,16 +155,10 @@ output {
         }
     }
     'msisensorpro_list' {
-        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Annotation/msisensorpro/${file}" } }
+        path { meta, _msisensorpro_list -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Annotation/msisensorpro/${file}" } }
     }
-    'multiqc_data' {
-        path { _multiqc_data -> { _file -> "multiqc/multiqc_data" } }
-    }
-    'multiqc_plots' {
-        path { _multiqc_plots -> { _file -> "multiqc/multiqc_plots" } }
-    }
-    'multiqc_report' {
-        path { _multiqc_report -> { _file -> "multiqc/multiqc_report" } }
+    'multiqc' {
+        path "multiqc"
     }
     'rsem_index' {
         path { meta, _rsem_index ->
@@ -199,6 +193,9 @@ output {
     'transcript_fasta' {
         path { meta, _transcript_fasta -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Sequence/TranscriptFasta/${file}" } }
     }
+    // 'vcf' {
+    //     path { meta, _vcf -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Annotation/${meta.source_vcf}/${file}" } }
+    // }
     'vcf_tbi' {
         path { meta, _vcf_tbi -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Annotation/${meta.source_vcf}/${file}" } }
     }
@@ -233,14 +230,15 @@ workflow NFCORE_REFERENCES {
     fasta_sizes       = REFERENCES.out.fasta_sizes
     gtf               = REFERENCES.out.gtf
     hisat2_index      = REFERENCES.out.hisat2_index
-    splice_sites      = REFERENCES.out.splice_sites
     intervals_bed     = REFERENCES.out.intervals_bed
     kallisto_index    = REFERENCES.out.kallisto_index
     msisensorpro_list = REFERENCES.out.msisensorpro_list
     rsem_index        = REFERENCES.out.rsem_index
-    transcript_fasta  = REFERENCES.out.transcript_fasta
     salmon_index      = REFERENCES.out.salmon_index
+    splice_sites      = REFERENCES.out.splice_sites
     star_index        = REFERENCES.out.star_index
+    transcript_fasta  = REFERENCES.out.transcript_fasta
+    // vcf               = REFERENCES.out.vcf
     vcf_tbi           = REFERENCES.out.vcf_tbi
     versions          = REFERENCES.out.versions
 }

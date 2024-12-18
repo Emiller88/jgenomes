@@ -14,57 +14,36 @@ workflow ASSET_TO_CHANNEL {
 
     def reduce = { meta -> meta.subMap(['genome', 'id', 'source', 'source_vcf', 'source_version', 'species']) }
 
-    intervals_bed = asset.map { meta, _fasta ->
-        return meta.intervals_bed ? [reduce(meta), meta.intervals_bed] : null
-    }
+    intervals_bed = asset.map { meta, _fasta -> meta.intervals_bed ? [reduce(meta), meta.intervals_bed] : null }
 
     // If ends with .gz, decompress it
     // If any of the asset exists, then adding run_tools to false and skip the asset creation from the fasta file
-    fasta = asset.map { meta, fasta_ ->
-        return fasta_ ? [reduce(meta) + [decompress_fasta: fasta_.endsWith('.gz') ?: false] + [run_bowtie1: meta.bowtie1_index ? false : true] + [run_bowtie2: meta.bowtie2_index ? false : true] + [run_bwamem1: meta.bwamem1_index ? false : true] + [run_bwamem2: meta.bwamem2_index ? false : true] + [run_dragmap: meta.dragmap_hashtable ? false : true] + [run_faidx: meta.fasta_fai && meta.fasta_sizes ? false : true] + [run_gatkdict: meta.fasta_dict ? false : true] + [run_hisat2: meta.hisat2_index ? false : true] + [run_intervals: meta.intervals_bed ? false : true] + [run_kallisto: meta.kallisto_index ? false : true] + [run_msisenpro: meta.msisensorpro_list ? false : true] + [run_rsem: meta.rsem_index ? false : true] + [run_rsem_make_transcript_fasta: meta.transcript_fasta ? false : true] + [run_salmon: meta.salmon_index ? false : true] + [run_star: meta.star_index ? false : true], fasta_] : null
-    }
+    fasta = asset.map { meta, fasta_ -> fasta_ ? [reduce(meta) + [decompress_fasta: fasta_.endsWith('.gz') ?: false] + [run_bowtie1: meta.bowtie1_index ? false : true] + [run_bowtie2: meta.bowtie2_index ? false : true] + [run_bwamem1: meta.bwamem1_index ? false : true] + [run_bwamem2: meta.bwamem2_index ? false : true] + [run_dragmap: meta.dragmap_hashtable ? false : true] + [run_faidx: meta.fasta_fai && meta.fasta_sizes ? false : true] + [run_gatkdict: meta.fasta_dict ? false : true] + [run_hisat2: meta.hisat2_index ? false : true] + [run_intervals: meta.intervals_bed ? false : true] + [run_kallisto: meta.kallisto_index ? false : true] + [run_msisenpro: meta.msisensorpro_list ? false : true] + [run_rsem: meta.rsem_index ? false : true] + [run_rsem_make_transcript_fasta: meta.transcript_fasta ? false : true] + [run_salmon: meta.salmon_index ? false : true] + [run_star: meta.star_index ? false : true], fasta_] : null }
 
-    fasta_dict = asset.map { meta, _fasta ->
-        return meta.fasta_dict ? [reduce(meta), meta.fasta_dict] : null
-    }
+    fasta_dict = asset.map { meta, _fasta -> meta.fasta_dict ? [reduce(meta), meta.fasta_dict] : null }
 
     // If we have intervals_bed, then we don't need to run faidx
-    fasta_fai = asset.map { meta, _fasta ->
-        return meta.fasta_fai ? [reduce(meta) + [run_intervals: meta.intervals_bed ? false : true], meta.fasta_fai] : null
-    }
+    fasta_fai = asset.map { meta, _fasta -> meta.fasta_fai ? [reduce(meta) + [run_intervals: meta.intervals_bed ? false : true], meta.fasta_fai] : null }
 
-    fasta_sizes = asset.map { meta, _fasta ->
-        return meta.fasta_sizes ? [reduce(meta), meta.fasta_sizes] : null
-    }
+    fasta_sizes = asset.map { meta, _fasta -> meta.fasta_sizes ? [reduce(meta), meta.fasta_sizes] : null }
 
     // If ends with .gz, decompress it
     // If any of the asset exists, then adding run_tools to false and skip the asset creation from the annotation derived file (gff, gtf or transcript_fasta)
-    gff = asset.map { meta, fasta_ ->
-        return meta.gff ? [reduce(meta) + [decompress_gff: meta.gff.endsWith('.gz') ?: false] + [run_gffread: fasta_ && !meta.gtf ?: false] + [run_hisat2: meta.splice_sites ? false : true], meta.gff] : null
-    }
+    gff = asset.map { meta, fasta_ -> meta.gff ? [reduce(meta) + [decompress_gff: meta.gff.endsWith('.gz') ?: false] + [run_gffread: fasta_ && !meta.gtf ?: false] + [run_hisat2: meta.splice_sites ? false : true], meta.gff] : null }
 
     // If ends with .gz, decompress it
     // If any of the asset exists, then adding run_tools to false and skip the asset creation from the annotation derived file (gff, gtf or transcript_fasta)
-    gtf = asset.map { meta, _fasta ->
-        return meta.gtf ? [reduce(meta) + [decompress_gtf: meta.gtf.endsWith('.gz') ?: false] + [run_hisat2: meta.splice_sites ? false : true], meta.gtf] : null
-    }
+    gtf = asset.map { meta, _fasta -> meta.gtf ? [reduce(meta) + [decompress_gtf: meta.gtf.endsWith('.gz') ?: false] + [run_hisat2: meta.splice_sites ? false : true], meta.gtf] : null }
 
-    splice_sites = asset.map { meta, _fasta ->
-        return meta.splice_sites ? [reduce(meta), meta.splice_sites] : null
-    }
+    splice_sites = asset.map { meta, _fasta -> meta.splice_sites ? [reduce(meta), meta.splice_sites] : null }
 
     // If any of the asset exists, then adding run_tools to false and skip the asset creation from the annotation derived file (gff, gtf or transcript_fasta)
-    transcript_fasta = asset.map { meta, _fasta ->
-        return meta.transcript_fasta ? [reduce(meta) + [run_hisat2: meta.hisat2_index ? false : true] + [run_kallisto: meta.kallisto_index ? false : true] + [run_rsem: meta.rsem_index ? false : true] + [run_salmon: meta.salmon_index ? false : true] + [run_star: meta.star_index ? false : true], meta.transcript_fasta] : null
-    }
+    transcript_fasta = asset.map { meta, _fasta -> meta.transcript_fasta ? [reduce(meta) + [run_hisat2: meta.hisat2_index ? false : true] + [run_kallisto: meta.kallisto_index ? false : true] + [run_rsem: meta.rsem_index ? false : true] + [run_salmon: meta.salmon_index ? false : true] + [run_star: meta.star_index ? false : true], meta.transcript_fasta] : null }
 
     // Using transpose here because we want to catch vcf with globs in the path because of nf-core/Sarek
+    // return a file, because we can catch globs this way, but it create issues with publishing
     // If we already have the vcf_tbi, then we don't need to index the vcf
-    vcf = asset
-        .map { meta, _fasta ->
-            return meta.vcf && !meta.vcf_tbi ? [reduce(meta), file(meta.vcf)] : null
-        }
-        .transpose()
+    vcf = asset.map { meta, _fasta -> meta.vcf ? [reduce(meta) + [run_tabix: meta.vcf_tbi ? false : true], file(meta.vcf)] : null }.transpose()
 
     emit:
     intervals_bed    // channel: [meta, *.bed]

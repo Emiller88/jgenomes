@@ -32,9 +32,7 @@ workflow CREATE_FROM_FASTA_AND_ANNOTATION {
     versions = Channel.empty()
 
     if (run_hisat2 || run_kallisto || run_rsem || run_rsem_make_transcript_fasta || run_salmon || run_star) {
-        gff_gffread = gff.map { meta, gff_ ->
-            return meta.run_gffread ? [meta, gff_] : null
-        }
+        gff_gffread = gff.map { meta, gff_ -> meta.run_gffread ? [meta, gff_] : null }
 
         GFFREAD(
             gff_gffread,
@@ -46,14 +44,10 @@ workflow CREATE_FROM_FASTA_AND_ANNOTATION {
         gtf = gtf
             .mix(GFFREAD.out.gtf)
             .groupTuple()
-            .map { meta, gtf_ ->
-                return gtf_[1] ? [meta, gtf_[1]] : [meta, gtf_]
-            }
+            .map { meta, gtf_ -> gtf_[1] ? [meta, gtf_[1]] : [meta, gtf_] }
 
         if (run_hisat2 || run_hisat2_extractsplicesites) {
-            gtf_hisat2 = gtf.map { meta, gtf_ ->
-                return meta.run_hisat2 ? [meta, gtf_] : null
-            }
+            gtf_hisat2 = gtf.map { meta, gtf_ -> meta.run_hisat2 ? [meta, gtf_] : null }
 
             HISAT2_EXTRACTSPLICESITES(gtf_hisat2)
 
@@ -61,9 +55,7 @@ workflow CREATE_FROM_FASTA_AND_ANNOTATION {
             splice_sites = splice_sites.mix(HISAT2_EXTRACTSPLICESITES.out.txt)
 
             if (run_hisat2) {
-                fasta_hisat2 = fasta.map { meta, fasta_ ->
-                    return meta.run_hisat2 ? [meta, fasta_] : null
-                }
+                fasta_hisat2 = fasta.map { meta, fasta_ -> meta.run_hisat2 ? [meta, fasta_] : null }
 
                 HISAT2_BUILD(
                     fasta_hisat2,
@@ -78,9 +70,7 @@ workflow CREATE_FROM_FASTA_AND_ANNOTATION {
         }
 
         if (run_kallisto || run_rsem_make_transcript_fasta || run_salmon) {
-            fasta_make_transcripts_fasta = fasta.map { meta, fasta_ ->
-                return meta.run_rsem_make_transcript_fasta ? [meta, fasta_] : null
-            }
+            fasta_make_transcripts_fasta = fasta.map { meta, fasta_ -> meta.run_rsem_make_transcript_fasta ? [meta, fasta_] : null }
 
             MAKE_TRANSCRIPTS_FASTA(
                 fasta_make_transcripts_fasta,
@@ -91,9 +81,7 @@ workflow CREATE_FROM_FASTA_AND_ANNOTATION {
             transcript_fasta = transcript_fasta.mix(MAKE_TRANSCRIPTS_FASTA.out.transcript_fasta)
 
             if (run_kallisto) {
-                transcript_fasta_kallisto = transcript_fasta.map { meta, transcript_fasta_ ->
-                    return meta.run_kallisto ? [meta, transcript_fasta_] : null
-                }
+                transcript_fasta_kallisto = transcript_fasta.map { meta, transcript_fasta_ -> meta.run_kallisto ? [meta, transcript_fasta_] : null }
 
                 KALLISTO_INDEX(transcript_fasta_kallisto)
 
@@ -102,13 +90,9 @@ workflow CREATE_FROM_FASTA_AND_ANNOTATION {
             }
 
             if (run_salmon) {
-                fasta_salmon = fasta.map { meta, fasta_ ->
-                    return meta.run_salmon ? [meta, fasta_] : null
-                }
+                fasta_salmon = fasta.map { meta, fasta_ -> meta.run_salmon ? [meta, fasta_] : null }
 
-                transcript_fasta_salmon = transcript_fasta.map { meta, transcript_fasta_ ->
-                    return meta.run_salmon ? [meta, transcript_fasta_] : null
-                }
+                transcript_fasta_salmon = transcript_fasta.map { meta, transcript_fasta_ -> meta.run_salmon ? [meta, transcript_fasta_] : null }
 
                 SALMON_INDEX(
                     fasta_salmon,
@@ -121,9 +105,7 @@ workflow CREATE_FROM_FASTA_AND_ANNOTATION {
         }
 
         if (run_rsem) {
-            fasta_rsem = fasta.map { meta, fasta_ ->
-                return meta.run_rsem ? [meta, fasta_] : null
-            }
+            fasta_rsem = fasta.map { meta, fasta_ -> meta.run_rsem ? [meta, fasta_] : null }
 
             RSEM_PREPAREREFERENCE_GENOME(fasta_rsem, gtf)
 
@@ -132,9 +114,7 @@ workflow CREATE_FROM_FASTA_AND_ANNOTATION {
         }
 
         if (run_star) {
-            fasta_star = fasta.map { meta, fasta_ ->
-                return meta.run_star ? [meta, fasta_] : null
-            }
+            fasta_star = fasta.map { meta, fasta_ -> meta.run_star ? [meta, fasta_] : null }
 
             STAR_GENOMEGENERATE(fasta_star, gtf)
 

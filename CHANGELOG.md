@@ -30,6 +30,7 @@ Initial release of nf-core/references, created with the [nf-core](https://nf-co.
 - [56](https://github.com/nf-core/references/pull/56) - Add new params: kallisto_make_unique to use the --make-unique option for kallisto
 - [56](https://github.com/nf-core/references/pull/56) - New file assets/genomes/Caenorhabditis_elegans/NCBI/WBcel235_updated.yml, build from assets/genomes/Caenorhabditis_elegans/NCBI/WBcel235.yml
 - [62](https://github.com/nf-core/references/pull/62) - Added comments to the code
+- [68](https://github.com/nf-core/references/pull/68) - Output vcf asset
 
 ### Changed
 
@@ -56,6 +57,7 @@ Initial release of nf-core/references, created with the [nf-core](https://nf-co.
 - [62](https://github.com/nf-core/references/pull/62) - Refactor and simplify codebase
 - [63](https://github.com/nf-core/references/pull/63) - Unpack gff even when gtf is present
 - [64](https://github.com/nf-core/references/pull/64) - Improve documentation
+- [68](https://github.com/nf-core/references/pull/68) - Minor refactoring
 
 ### Fixed
 

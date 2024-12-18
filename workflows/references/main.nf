@@ -137,6 +137,7 @@ workflow REFERENCES {
     splice_sites      // channel: [meta, *.splice_sites.txt]
     star_index        // channel: [meta, STARIndex/]
     transcript_fasta  // channel: [meta, *.transcripts.fasta]
+    // vcf               // channel: [meta, *.vcf.gz]
     vcf_tbi           // channel: [meta, *.vcf.gz.tbi]
     versions          // channel: [versions.yml]
 
@@ -161,5 +162,6 @@ workflow REFERENCES {
     splice_sites >> 'splice_sites'
     star_index >> 'star_index'
     transcript_fasta >> 'transcript_fasta'
+    // vcf >> 'vcf'
     vcf_tbi >> 'vcf_tbi'
 }
