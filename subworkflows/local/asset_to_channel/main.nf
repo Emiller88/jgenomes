@@ -44,17 +44,6 @@ workflow ASSET_TO_CHANNEL {
     // If we already have the vcf_tbi, then we don't need to index the vcf
     vcf = asset.map { meta, _fasta -> meta.vcf ? [reduce(meta) + [run_tabix: meta.vcf_tbi ? false : true], file(meta.vcf)] : null }.transpose()
 
-    intervals_bed.view { "intervals_bed: " + it }
-    fasta.view { "fasta: " + it }
-    fasta_dict.view { "fasta_dict: " + it }
-    fasta_fai.view { "fasta_fai: " + it }
-    fasta_sizes.view { "fasta_sizes: " + it }
-    gff.view { "gff: " + it }
-    gtf.view { "gtf: " + it }
-    splice_sites.view { "splice_sites: " + it }
-    transcript_fasta.view { "transcript_fasta: " + it }
-    vcf.view { "vcf: " + it }
-
     emit:
     intervals_bed    // channel: [meta, *.bed]
     fasta            // channel: [meta, *.f(ast|n)?a]
