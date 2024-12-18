@@ -49,7 +49,7 @@ workflow REFERENCES {
     gff = gff_input.other.mix(UNCOMPRESS_ASSET.out.gff)
     gtf = gtf_input.other.mix(UNCOMPRESS_ASSET.out.gtf)
 
-    // Create reference_ assets from fasta only
+    // Create reference assets from fasta only
     CREATE_FROM_FASTA_ONLY(
         fasta,
         fasta_fai,
@@ -65,7 +65,7 @@ workflow REFERENCES {
         tools.split(',').contains('sizes')
     )
 
-    // Create reference_ assets from fasta and annotation (gff derived (so gff, gtf and transcript_fasta))
+    // Create reference assets from fasta and annotation (gff derived (so gff, gtf and transcript_fasta))
     CREATE_FROM_FASTA_AND_ANNOTATION(
         fasta,
         gff,
