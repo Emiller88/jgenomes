@@ -116,6 +116,8 @@ workflow REFERENCES {
     versions = versions.mix(INDEX_VCF.out.versions)
     versions = versions.mix(UNCOMPRESS_ASSET.out.versions)
 
+    vcf.view()
+
     emit:
     bowtie1_index     // channel: [meta, BowtieIndex/]
     bowtie2_index     // channel: [meta, Bowtie2Index/]
@@ -137,7 +139,7 @@ workflow REFERENCES {
     splice_sites      // channel: [meta, *.splice_sites.txt]
     star_index        // channel: [meta, STARIndex/]
     transcript_fasta  // channel: [meta, *.transcripts.fasta]
-    vcf               // channel: [meta, *.vcf.gz]
+    // vcf               // channel: [meta, *.vcf.gz]
     vcf_tbi           // channel: [meta, *.vcf.gz.tbi]
     versions          // channel: [versions.yml]
 
@@ -162,6 +164,6 @@ workflow REFERENCES {
     splice_sites >> 'splice_sites'
     star_index >> 'star_index'
     transcript_fasta >> 'transcript_fasta'
-    vcf >> 'vcf'
+    // vcf >> 'vcf'
     vcf_tbi >> 'vcf_tbi'
 }

@@ -16,9 +16,7 @@ workflow UNCOMPRESS_ASSET {
     versions = Channel.empty()
 
     fasta = fasta.map { meta, fasta_ -> meta.decompress_fasta ? [meta, fasta_] : null }
-
     gff = gff.map { meta, gff_ -> meta.decompress_gff ? [meta, gff_] : null }
-
     gtf = gtf.map { meta, gtf_ -> meta.decompress_gtf ? [meta, gtf_] : null }
 
     GUNZIP_FASTA(fasta)
