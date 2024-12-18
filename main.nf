@@ -100,14 +100,8 @@ workflow {
 }
 
 output {
-    'multiqc_data' {
-        path { _multiqc_data -> { _file -> "multiqc/multiqc_data" } }
-    }
-    'multiqc_plots' {
-        path { _multiqc_plots -> { _file -> "multiqc/multiqc_plots" } }
-    }
-    'multiqc_report' {
-        path { _multiqc_report -> { file -> "multiqc/${file}" } }
+    'multiqc' {
+        path "multiqc"
     }
     'references' {
         path { meta, _file ->
@@ -182,9 +176,9 @@ output {
                 else if (meta.file == "transcript_fasta") {
                     "${meta.species}/${meta.source}/${meta.genome}/Sequence/TranscriptFasta/${file}"
                 }
-                else if (meta.file == "vcf") {
-                    "${meta.species}/${meta.source}/${meta.genome}/Annotation/${meta.source_vcf}/${file}"
-                }
+                // else if (meta.file == "vcf") {
+                //     "${meta.species}/${meta.source}/${meta.genome}/Annotation/${meta.source_vcf}/${file}"
+                // }
                 else if (meta.file == "vcf_tbi") {
                     "${meta.species}/${meta.source}/${meta.genome}/Annotation/${meta.source_vcf}/${file}"
                 }
@@ -239,7 +233,7 @@ workflow NFCORE_REFERENCES {
     splice_sites      = REFERENCES.out.splice_sites
     star_index        = REFERENCES.out.star_index
     transcript_fasta  = REFERENCES.out.transcript_fasta
-    vcf               = REFERENCES.out.vcf
+    // vcf               = REFERENCES.out.vcf
     vcf_tbi           = REFERENCES.out.vcf_tbi
     versions          = REFERENCES.out.versions
 }
