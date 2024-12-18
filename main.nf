@@ -94,16 +94,16 @@ workflow {
     )
 
     publish:
-    multiqc_data >> 'multiqc_data'
-    multiqc_plots >> 'multiqc_plots'
-    multiqc_report >> 'multiqc_report'
+    multiqc_data >> 'multiqc'
+    multiqc_plots >> 'multiqc'
+    multiqc_report >> 'multiqc'
 }
 
 output {
     'multiqc' {
         path "multiqc"
     }
-    'references' {
+    'reference' {
         path { meta, _file ->
             { file ->
                 if (meta.file == "bowtie1_index") {
@@ -176,9 +176,9 @@ output {
                 else if (meta.file == "transcript_fasta") {
                     "${meta.species}/${meta.source}/${meta.genome}/Sequence/TranscriptFasta/${file}"
                 }
-                // else if (meta.file == "vcf") {
-                //     "${meta.species}/${meta.source}/${meta.genome}/Annotation/${meta.source_vcf}/${file}"
-                // }
+                else if (meta.file == "vcf") {
+                    "${meta.species}/${meta.source}/${meta.genome}/Annotation/${meta.source_vcf}/${file}"
+                }
                 else if (meta.file == "vcf_tbi") {
                     "${meta.species}/${meta.source}/${meta.genome}/Annotation/${meta.source_vcf}/${file}"
                 }
@@ -213,27 +213,6 @@ workflow NFCORE_REFERENCES {
     REFERENCES(input, tools)
 
     emit:
-    bowtie1_index     = REFERENCES.out.bowtie1_index
-    bowtie2_index     = REFERENCES.out.bowtie2_index
-    bwamem1_index     = REFERENCES.out.bwamem1_index
-    bwamem2_index     = REFERENCES.out.bwamem2_index
-    dragmap_hashmap   = REFERENCES.out.dragmap_hashmap
-    fasta             = REFERENCES.out.fasta
-    fasta_dict        = REFERENCES.out.fasta_dict
-    fasta_fai         = REFERENCES.out.fasta_fai
-    fasta_sizes       = REFERENCES.out.fasta_sizes
-    gtf               = REFERENCES.out.gtf
-    hisat2_index      = REFERENCES.out.hisat2_index
-    intervals_bed     = REFERENCES.out.intervals_bed
-    kallisto_index    = REFERENCES.out.kallisto_index
-    msisensorpro_list = REFERENCES.out.msisensorpro_list
-    references        = REFERENCES.out.references
-    rsem_index        = REFERENCES.out.rsem_index
-    salmon_index      = REFERENCES.out.salmon_index
-    splice_sites      = REFERENCES.out.splice_sites
-    star_index        = REFERENCES.out.star_index
-    transcript_fasta  = REFERENCES.out.transcript_fasta
-    // vcf               = REFERENCES.out.vcf
-    vcf_tbi           = REFERENCES.out.vcf_tbi
-    versions          = REFERENCES.out.versions
+    reference = REFERENCES.out.reference
+    versions  = REFERENCES.out.versions
 }
