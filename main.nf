@@ -227,14 +227,14 @@ workflow NFCORE_REFERENCES {
     fasta_sizes       = REFERENCES.out.fasta_sizes
     gtf               = REFERENCES.out.gtf
     hisat2_index      = REFERENCES.out.hisat2_index
-    splice_sites      = REFERENCES.out.splice_sites
     intervals_bed     = REFERENCES.out.intervals_bed
     kallisto_index    = REFERENCES.out.kallisto_index
     msisensorpro_list = REFERENCES.out.msisensorpro_list
     rsem_index        = REFERENCES.out.rsem_index
-    transcript_fasta  = REFERENCES.out.transcript_fasta
     salmon_index      = REFERENCES.out.salmon_index
+    splice_sites      = REFERENCES.out.splice_sites
     star_index        = REFERENCES.out.star_index
+    transcript_fasta  = REFERENCES.out.transcript_fasta
     vcf_tbi           = REFERENCES.out.vcf_tbi
     versions          = REFERENCES.out.versions
 }
