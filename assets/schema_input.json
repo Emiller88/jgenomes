@@ -13,6 +13,13 @@
                 "errorMessage": "Genome name must be provided, cannot contain spaces",
                 "meta": ["genome", "id"]
             },
+            "site": {
+                "meta": ["site"],
+                "type": "string",
+                "default": "unknown",
+                "pattern": "^\\S+$",
+                "errorMessage": "Website of origin of the reference, cannot contain spaces"
+            },
             "source": {
                 "type": "string",
                 "pattern": "^\\S+$",
@@ -156,12 +163,6 @@
                 "pattern": "^\\S+$",
                 "type": "string",
                 "errorMessage": "RSEM index, cannot contain spaces"
-            },
-            "site": {
-                "meta": ["site"],
-                "type": "string",
-                "pattern": "^\\S+$",
-                "errorMessage": "Website of origin of the reference, cannot contain spaces"
             },
             "salmon_index": {
                 "meta": ["salmon_index"],
