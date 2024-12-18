@@ -166,7 +166,7 @@ output {
                         : "${meta.species}/${meta.source}/${meta.genome}/Sequence/SalmonIndex/${meta.source_version}/version1.10.3/"
                 }
                 else if (meta.file == "splice_sites") {
-                    "${meta.species}/${meta.source}/${meta.genome}/Annotation/SpliceSites/${file}"
+                    "${meta.species}/${meta.source}/${meta.genome}/Sequence/SpliceSites/${file}"
                 }
                 else if (meta.file == "star_index") {
                     meta.source_version == "unknown"
