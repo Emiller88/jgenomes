@@ -94,9 +94,9 @@ workflow {
     )
 
     publish:
-    multiqc_data >> 'multiqc_data'
-    multiqc_plots >> 'multiqc_plots'
-    multiqc_report >> 'multiqc_report'
+    multiqc_data >> 'multiqc'
+    multiqc_plots >> 'multiqc'
+    multiqc_report >> 'multiqc'
 }
 
 output {
@@ -155,16 +155,10 @@ output {
         }
     }
     'msisensorpro_list' {
-        path { meta, index -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Annotation/msisensorpro/${file}" } }
+        path { meta, _msisensorpro_list -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Annotation/msisensorpro/${file}" } }
     }
-    'multiqc_data' {
-        path "multiqc/multiqc_data"
-    }
-    'multiqc_plots' {
-        path "multiqc/multiqc_plots"
-    }
-    'multiqc_report' {
-        path "multiqc/multiqc_report"
+    'multiqc' {
+        path "multiqc"
     }
     'rsem_index' {
         path { meta, _rsem_index ->
