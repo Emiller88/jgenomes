@@ -193,6 +193,9 @@ output {
     'transcript_fasta' {
         path { meta, _transcript_fasta -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Sequence/TranscriptFasta/${file}" } }
     }
+    'vcf' {
+        path { meta, _vcf -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Annotation/${meta.source_vcf}/${file}" } }
+    }
     'vcf_tbi' {
         path { meta, _vcf_tbi -> { file -> "${meta.species}/${meta.source}/${meta.genome}/Annotation/${meta.source_vcf}/${file}" } }
     }
@@ -235,6 +238,7 @@ workflow NFCORE_REFERENCES {
     splice_sites      = REFERENCES.out.splice_sites
     star_index        = REFERENCES.out.star_index
     transcript_fasta  = REFERENCES.out.transcript_fasta
+    vcf               = REFERENCES.out.vcf
     vcf_tbi           = REFERENCES.out.vcf_tbi
     versions          = REFERENCES.out.versions
 }
