@@ -116,8 +116,6 @@ workflow REFERENCES {
     versions = versions.mix(INDEX_VCF.out.versions)
     versions = versions.mix(UNCOMPRESS_ASSET.out.versions)
 
-    vcf.view()
-
     emit:
     bowtie1_index     // channel: [meta, BowtieIndex/]
     bowtie2_index     // channel: [meta, Bowtie2Index/]
