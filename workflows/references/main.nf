@@ -62,7 +62,7 @@ workflow REFERENCES {
         tools.split(',').contains('faidx'),
         tools.split(',').contains('intervals'),
         tools.split(',').contains('msisensorpro'),
-        tools.split(',').contains('sizes')
+        tools.split(',').contains('sizes'),
     )
 
     // Create reference assets from fasta and annotation (gff derived (so gff, gtf and transcript_fasta))
@@ -78,13 +78,13 @@ workflow REFERENCES {
         tools.split(',').contains('rsem'),
         tools.split(',').contains('rsem_make_transcript_fasta'),
         tools.split(',').contains('salmon'),
-        tools.split(',').contains('star')
+        tools.split(',').contains('star'),
     )
 
     // Index VCF
     INDEX_VCF(
         vcf,
-        tools.split(',').contains('tabix')
+        tools.split(',').contains('tabix'),
     )
 
     // This works with a mixture of input and computed assets
@@ -139,8 +139,8 @@ workflow REFERENCES {
             splice_sites.map { meta, reference_ -> [meta + [file: 'splice_sites'], reference_] },
             star_index.map { meta, reference_ -> [meta + [file: 'star_index'], reference_] },
             transcript_fasta.map { meta, reference_ -> [meta + [file: 'transcript_fasta'], reference_] },
-            // vcf.map { meta, reference_ -> [meta + [file: 'vcf'], reference_] },
-            vcf_tbi.map { meta, reference_ -> [meta + [file: 'vcf_tbi'], reference_] }
+            vcf.map { meta, reference_ -> [meta + [file: 'vcf'], reference_] },
+            vcf_tbi.map { meta, reference_ -> [meta + [file: 'vcf_tbi'], reference_] },
         )
 
     emit:
