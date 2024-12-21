@@ -16,7 +16,7 @@ workflow ASSET_TO_CHANNEL {
 
     intervals_bed_branch = asset.branch { meta, _fasta ->
         file: meta.intervals_bed
-        return [reduce(meta), file(meta.intervals_bed)]
+        return [reduce(meta), meta.intervals_bed]
         other: true
         return null
     }
@@ -27,7 +27,7 @@ workflow ASSET_TO_CHANNEL {
     // If any of the asset exists, then adding run_tools to false and skip the asset creation from the fasta file
     fasta_branch = asset.branch { meta, fasta_ ->
         file: fasta_
-        return [reduce(meta) + [decompress_fasta: fasta_.endsWith('.gz') ?: false] + [run_bowtie1: meta.bowtie1_index ? false : true] + [run_bowtie2: meta.bowtie2_index ? false : true] + [run_bwamem1: meta.bwamem1_index ? false : true] + [run_bwamem2: meta.bwamem2_index ? false : true] + [run_dragmap: meta.dragmap_hashtable ? false : true] + [run_faidx: meta.fasta_fai && meta.fasta_sizes ? false : true] + [run_gatkdict: meta.fasta_dict ? false : true] + [run_hisat2: meta.hisat2_index ? false : true] + [run_intervals: meta.intervals_bed ? false : true] + [run_kallisto: meta.kallisto_index ? false : true] + [run_msisenpro: meta.msisensorpro_list ? false : true] + [run_rsem: meta.rsem_index ? false : true] + [run_rsem_make_transcript_fasta: meta.transcript_fasta ? false : true] + [run_salmon: meta.salmon_index ? false : true] + [run_star: meta.star_index ? false : true], file(fasta_)]
+        return [reduce(meta) + [decompress_fasta: fasta_.endsWith('.gz') ?: false] + [run_bowtie1: meta.bowtie1_index ? false : true] + [run_bowtie2: meta.bowtie2_index ? false : true] + [run_bwamem1: meta.bwamem1_index ? false : true] + [run_bwamem2: meta.bwamem2_index ? false : true] + [run_dragmap: meta.dragmap_hashtable ? false : true] + [run_faidx: meta.fasta_fai && meta.fasta_sizes ? false : true] + [run_gatkdict: meta.fasta_dict ? false : true] + [run_hisat2: meta.hisat2_index ? false : true] + [run_intervals: meta.intervals_bed ? false : true] + [run_kallisto: meta.kallisto_index ? false : true] + [run_msisenpro: meta.msisensorpro_list ? false : true] + [run_rsem: meta.rsem_index ? false : true] + [run_rsem_make_transcript_fasta: meta.transcript_fasta ? false : true] + [run_salmon: meta.salmon_index ? false : true] + [run_star: meta.star_index ? false : true], fasta_]
         other: true
         return null
     }
@@ -36,7 +36,7 @@ workflow ASSET_TO_CHANNEL {
 
     fasta_dict_branch = asset.branch { meta, _fasta ->
         file: meta.fasta_dict
-        return [reduce(meta), file(meta.fasta_dict)]
+        return [reduce(meta), meta.fasta_dict]
         other: true
         return null
     }
@@ -46,7 +46,7 @@ workflow ASSET_TO_CHANNEL {
     // If we have intervals_bed, then we don't need to run faidx
     fasta_fai_branch = asset.branch { meta, _fasta ->
         file: meta.fasta_fai
-        return [reduce(meta) + [run_intervals: meta.intervals_bed ? false : true], file(meta.fasta_fai)]
+        return [reduce(meta) + [run_intervals: meta.intervals_bed ? false : true], meta.fasta_fai]
         other: true
         return null
     }
@@ -55,7 +55,7 @@ workflow ASSET_TO_CHANNEL {
 
     fasta_sizes_branch = asset.branch { meta, _fasta ->
         file: meta.fasta_sizes
-        return [reduce(meta), file(meta.fasta_sizes)]
+        return [reduce(meta), meta.fasta_sizes]
         other: true
         return null
     }
@@ -66,7 +66,7 @@ workflow ASSET_TO_CHANNEL {
     // If any of the asset exists, then adding run_tools to false and skip the asset creation from the annotation derived file (gff, gtf or transcript_fasta)
     gff_branch = asset.branch { meta, fasta_ ->
         file: meta.gff
-        return [reduce(meta) + [decompress_gff: meta.gff.endsWith('.gz') ?: false] + [run_gffread: fasta_ && !meta.gtf ?: false] + [run_hisat2: meta.splice_sites ? false : true], file(meta.gff)]
+        return [reduce(meta) + [decompress_gff: meta.gff.endsWith('.gz') ?: false] + [run_gffread: fasta_ && !meta.gtf ?: false] + [run_hisat2: meta.splice_sites ? false : true], meta.gff]
         other: true
         return null
     }
@@ -77,7 +77,7 @@ workflow ASSET_TO_CHANNEL {
     // If any of the asset exists, then adding run_tools to false and skip the asset creation from the annotation derived file (gff, gtf or transcript_fasta)
     gtf_branch = asset.branch { meta, _fasta ->
         file: meta.gtf
-        return [reduce(meta) + [decompress_gtf: meta.gtf.endsWith('.gz') ?: false] + [run_hisat2: meta.splice_sites ? false : true], file(meta.gtf)]
+        return [reduce(meta) + [decompress_gtf: meta.gtf.endsWith('.gz') ?: false] + [run_hisat2: meta.splice_sites ? false : true], meta.gtf]
         other: true
         return null
     }
@@ -86,7 +86,7 @@ workflow ASSET_TO_CHANNEL {
 
     splice_sites_branch = asset.branch { meta, _fasta ->
         file: meta.splice_sites
-        return [reduce(meta), file(meta.splice_sites)]
+        return [reduce(meta), meta.splice_sites]
         other: true
         return null
     }
@@ -96,7 +96,7 @@ workflow ASSET_TO_CHANNEL {
     // If any of the asset exists, then adding run_tools to false and skip the asset creation from the annotation derived file (gff, gtf or transcript_fasta)
     transcript_fasta_branch = asset.branch { meta, _fasta ->
         file: meta.transcript_fasta
-        return [reduce(meta) + [run_hisat2: meta.hisat2_index ? false : true] + [run_kallisto: meta.kallisto_index ? false : true] + [run_rsem: meta.rsem_index ? false : true] + [run_salmon: meta.salmon_index ? false : true] + [run_star: meta.star_index ? false : true], file(meta.transcript_fasta)]
+        return [reduce(meta) + [run_hisat2: meta.hisat2_index ? false : true] + [run_kallisto: meta.kallisto_index ? false : true] + [run_rsem: meta.rsem_index ? false : true] + [run_salmon: meta.salmon_index ? false : true] + [run_star: meta.star_index ? false : true], meta.transcript_fasta]
         other: true
         return null
     }
