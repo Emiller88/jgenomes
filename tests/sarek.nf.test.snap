@@ -64,6 +64,7 @@
                 "Homo_sapiens/nf-core/references/testdata.GRCh38_chr22/Sequence/dragmap/version1.2.1/reference.bin",
                 "Homo_sapiens/nf-core/references/testdata.GRCh38_chr22/Sequence/dragmap/version1.2.1/repeat_mask.bin",
                 "Homo_sapiens/nf-core/references/testdata.GRCh38_chr22/Sequence/dragmap/version1.2.1/str_table.bin",
+                "index.json",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/multiqc.log",

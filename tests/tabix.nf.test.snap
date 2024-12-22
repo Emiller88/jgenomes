@@ -8,6 +8,7 @@
                 }
             },
             [
+                "index.json",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/multiqc.log",
@@ -50,6 +51,7 @@
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Annotation/GATK_BUNDLE/dbsnp_146.hg38.vcf.gz.tbi",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Annotation/GATK_BUNDLE/gnomAD.r2.1.1.vcf.gz.tbi",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Annotation/GATK_BUNDLE/mills_and_1000G.indels.vcf.gz.tbi",
+                "index.json",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/multiqc.log",

@@ -62,7 +62,7 @@ workflow REFERENCES {
         tools.split(',').contains('faidx'),
         tools.split(',').contains('intervals'),
         tools.split(',').contains('msisensorpro'),
-        tools.split(',').contains('sizes')
+        tools.split(',').contains('sizes'),
     )
 
     // Create reference assets from fasta and annotation (gff derived (so gff, gtf and transcript_fasta))
@@ -78,13 +78,13 @@ workflow REFERENCES {
         tools.split(',').contains('rsem'),
         tools.split(',').contains('rsem_make_transcript_fasta'),
         tools.split(',').contains('salmon'),
-        tools.split(',').contains('star')
+        tools.split(',').contains('star'),
     )
 
     // Index VCF
     INDEX_VCF(
         vcf,
-        tools.split(',').contains('tabix')
+        tools.split(',').contains('tabix'),
     )
 
     // This works with a mixture of input and computed assets
@@ -116,52 +116,37 @@ workflow REFERENCES {
     versions = versions.mix(INDEX_VCF.out.versions)
     versions = versions.mix(UNCOMPRESS_ASSET.out.versions)
 
+    reference = Channel
+        .empty()
+        .mix(
+            bowtie1_index.map { meta, reference_ -> [meta + [file: 'bowtie1_index'], reference_] },
+            bowtie2_index.map { meta, reference_ -> [meta + [file: 'bowtie2_index'], reference_] },
+            bwamem1_index.map { meta, reference_ -> [meta + [file: 'bwamem1_index'], reference_] },
+            bwamem2_index.map { meta, reference_ -> [meta + [file: 'bwamem2_index'], reference_] },
+            dragmap_hashmap.map { meta, reference_ -> [meta + [file: 'dragmap_hashmap'], reference_] },
+            fasta.map { meta, reference_ -> [meta + [file: 'fasta'], reference_] },
+            fasta_dict.map { meta, reference_ -> [meta + [file: 'fasta_dict'], reference_] },
+            fasta_fai.map { meta, reference_ -> [meta + [file: 'fasta_fai'], reference_] },
+            fasta_sizes.map { meta, reference_ -> [meta + [file: 'fasta_sizes'], reference_] },
+            gff.map { meta, reference_ -> [meta + [file: 'gff'], reference_] },
+            gtf.map { meta, reference_ -> [meta + [file: 'gtf'], reference_] },
+            hisat2_index.map { meta, reference_ -> [meta + [file: 'hisat2_index'], reference_] },
+            intervals_bed.map { meta, reference_ -> [meta + [file: 'intervals_bed'], reference_] },
+            kallisto_index.map { meta, reference_ -> [meta + [file: 'kallisto_index'], reference_] },
+            msisensorpro_list.map { meta, reference_ -> [meta + [file: 'msisensorpro_list'], reference_] },
+            rsem_index.map { meta, reference_ -> [meta + [file: 'rsem_index'], reference_] },
+            salmon_index.map { meta, reference_ -> [meta + [file: 'salmon_index'], reference_] },
+            splice_sites.map { meta, reference_ -> [meta + [file: 'splice_sites'], reference_] },
+            star_index.map { meta, reference_ -> [meta + [file: 'star_index'], reference_] },
+            transcript_fasta.map { meta, reference_ -> [meta + [file: 'transcript_fasta'], reference_] },
+            // vcf.map { meta, reference_ -> [meta + [file: 'vcf'], reference_] },
+            vcf_tbi.map { meta, reference_ -> [meta + [file: 'vcf_tbi'], reference_] },
+        )
+
     emit:
-    bowtie1_index     // channel: [meta, BowtieIndex/]
-    bowtie2_index     // channel: [meta, Bowtie2Index/]
-    bwamem1_index     // channel: [meta, BWAmemIndex/]
-    bwamem2_index     // channel: [meta, BWAmem2memIndex/]
-    dragmap_hashmap   // channel: [meta, DragmapHashtable/]
-    fasta             // channel: [meta, *.f(ast|n)?a]
-    fasta_dict        // channel: [meta, *.f(ast|n)?a.dict]
-    fasta_fai         // channel: [meta, *.f(ast|n)?a.fai]
-    fasta_sizes       // channel: [meta, *.f(ast|n)?a.sizes]
-    gff               // channel: [meta, gff]
-    gtf               // channel: [meta, gtf]
-    hisat2_index      // channel: [meta, Hisat2Index/]
-    intervals_bed     // channel: [meta, *.bed]
-    kallisto_index    // channel: [meta, KallistoIndex]
-    msisensorpro_list // channel: [meta, *.list]
-    rsem_index        // channel: [meta, RSEMIndex/]
-    salmon_index      // channel: [meta, SalmonIndex/]
-    splice_sites      // channel: [meta, *.splice_sites.txt]
-    star_index        // channel: [meta, STARIndex/]
-    transcript_fasta  // channel: [meta, *.transcripts.fasta]
-    // vcf               // channel: [meta, *.vcf.gz]
-    vcf_tbi           // channel: [meta, *.vcf.gz.tbi]
-    versions          // channel: [versions.yml]
+    reference // channel: [meta, *]
+    versions  // channel: [versions.yml]
 
     publish:
-    bowtie1_index >> 'bowtie1_index'
-    bowtie2_index >> 'bowtie2_index'
-    bwamem1_index >> 'bwamem1_index'
-    bwamem2_index >> 'bwamem2_index'
-    dragmap_hashmap >> 'dragmap_hashmap'
-    fasta >> 'fasta'
-    fasta_dict >> 'fasta_dict'
-    fasta_fai >> 'fasta_fai'
-    fasta_sizes >> 'fasta_sizes'
-    gff >> 'gff'
-    gtf >> 'gtf'
-    hisat2_index >> 'hisat2_index'
-    intervals_bed >> 'intervals_bed'
-    kallisto_index >> 'kallisto_index'
-    msisensorpro_list >> 'msisensorpro_list'
-    rsem_index >> 'rsem_index'
-    salmon_index >> 'salmon_index'
-    splice_sites >> 'splice_sites'
-    star_index >> 'star_index'
-    transcript_fasta >> 'transcript_fasta'
-    // vcf >> 'vcf'
-    vcf_tbi >> 'vcf_tbi'
+    reference >> 'reference'
 }

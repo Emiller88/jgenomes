@@ -70,6 +70,7 @@
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/WholeGenomeFasta",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/WholeGenomeFasta/GRCh38_chr21.fa.fai",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/WholeGenomeFasta/GRCh38_chr21.fa.sizes",
+                "index.json",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/multiqc.log",
