@@ -13,7 +13,7 @@ workflow REFERENCES {
     versions = Channel.empty()
 
     // Create channels from the input file(s)
-    // Channels are empty when not needed
+    // Channels are empty when no assets are corresponding
     ASSET_TO_CHANNEL(asset)
 
     intervals_bed = ASSET_TO_CHANNEL.out.intervals_bed
@@ -44,7 +44,7 @@ workflow REFERENCES {
     // Uncompress any assets that need to be
     UNCOMPRESS_ASSET(fasta_input.decompress_fasta, gff_input.decompress_gff, gtf_input.decompress_gtf)
 
-    // This covers a mixture of compress and uncompress assets
+    // This covers a mixture of compressed and uncompressed assets
     fasta = fasta_input.other.mix(UNCOMPRESS_ASSET.out.fasta)
     gff = gff_input.other.mix(UNCOMPRESS_ASSET.out.gff)
     gtf = gtf_input.other.mix(UNCOMPRESS_ASSET.out.gtf)
@@ -65,7 +65,7 @@ workflow REFERENCES {
         tools.split(',').contains('sizes'),
     )
 
-    // Create reference assets from fasta and annotation (gff derived (so gff, gtf and transcript_fasta))
+    // Create reference assets from fasta and gene annotation (so gff, gtf and transcript_fasta)
     CREATE_FROM_FASTA_AND_ANNOTATION(
         fasta,
         gff,
@@ -139,6 +139,7 @@ workflow REFERENCES {
             splice_sites.map { meta, reference_ -> [meta + [file: 'splice_sites'], reference_] },
             star_index.map { meta, reference_ -> [meta + [file: 'star_index'], reference_] },
             transcript_fasta.map { meta, reference_ -> [meta + [file: 'transcript_fasta'], reference_] },
+            // Cannot output vcf properly yet
             // vcf.map { meta, reference_ -> [meta + [file: 'vcf'], reference_] },
             vcf_tbi.map { meta, reference_ -> [meta + [file: 'vcf_tbi'], reference_] },
         )

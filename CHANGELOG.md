@@ -58,6 +58,7 @@ Initial release of nf-core/references, created with the [nf-core](https://nf-co.
 - [63](https://github.com/nf-core/references/pull/63) - Unpack gff even when gtf is present
 - [64](https://github.com/nf-core/references/pull/64) - Improve documentation
 - [68](https://github.com/nf-core/references/pull/68) - Minor refactoring
+- [69](https://github.com/nf-core/references/pull/69) - Better comments
 
 ### Fixed
 
