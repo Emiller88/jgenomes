@@ -11,6 +11,7 @@ workflow INDEX_VCF {
 
 
     if (run_tabix) {
+        // Do not run TABIX_TABIX if the condition is false
         vcf_tabix = vcf.map { meta, vcf_ -> meta.run_tabix ? [meta, vcf_] : null }
 
         TABIX_TABIX(vcf_tabix)

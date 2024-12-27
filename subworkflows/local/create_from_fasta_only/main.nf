@@ -37,6 +37,7 @@ workflow CREATE_FROM_FASTA_ONLY {
     versions = Channel.empty()
 
     if (run_bowtie1) {
+        // Do not run BOWTIE1_BUILD if the condition is false
         fasta_bowtie1 = fasta.map { meta, fasta_ -> meta.run_bowtie1 ? [meta, fasta_] : null }
 
         BOWTIE1_BUILD(fasta_bowtie1)
@@ -46,6 +47,7 @@ workflow CREATE_FROM_FASTA_ONLY {
     }
 
     if (run_bowtie2) {
+        // Do not run BOWTIE2_BUILD if the condition is false
         fasta_bowtie2 = fasta.map { meta, fasta_ -> meta.run_bowtie2 ? [meta, fasta_] : null }
 
         BOWTIE2_BUILD(fasta_bowtie2)
@@ -55,6 +57,7 @@ workflow CREATE_FROM_FASTA_ONLY {
     }
 
     if (run_bwamem1) {
+        // Do not run BWAMEM1_INDEX if the condition is false
         fasta_bwamem1 = fasta.map { meta, fasta_ -> meta.run_bwamem1 ? [meta, fasta_] : null }
 
         BWAMEM1_INDEX(fasta_bwamem1)
@@ -64,6 +67,7 @@ workflow CREATE_FROM_FASTA_ONLY {
     }
 
     if (run_bwamem2) {
+        // Do not run BWAMEM2_INDEX if the condition is false
         fasta_bwamem2 = fasta.map { meta, fasta_ -> meta.run_bwamem2 ? [meta, fasta_] : null }
 
         BWAMEM2_INDEX(fasta_bwamem2)
@@ -73,6 +77,7 @@ workflow CREATE_FROM_FASTA_ONLY {
     }
 
     if (run_dragmap) {
+        // Do not run DRAGMAP_HASHTABLE if the condition is false
         fasta_dragmap = fasta.map { meta, fasta_ -> meta.run_dragmap ? [meta, fasta_] : null }
 
         DRAGMAP_HASHTABLE(fasta_dragmap)
@@ -82,7 +87,8 @@ workflow CREATE_FROM_FASTA_ONLY {
     }
 
     if (run_createsequencedictionary) {
-        fasta_gat4kdict = fasta.map { meta, fasta_ -> meta.run_gat4kdict ? [meta, fasta_] : null }
+        // Do not run GATK4_CREATESEQUENCEDICTIONARY if the condition is false
+        fasta_gat4kdict = fasta.map { meta, fasta_ -> meta.run_createsequencedictionary ? [meta, fasta_] : null }
 
         GATK4_CREATESEQUENCEDICTIONARY(fasta_gat4kdict)
 
@@ -91,12 +97,13 @@ workflow CREATE_FROM_FASTA_ONLY {
     }
 
     if (run_faidx || run_intervals || run_sizes) {
+        // Do not run SAMTOOLS_FAIDX if the condition is false
         fasta_samtools = fasta.map { meta, fasta_ -> meta.run_faidx ? [meta, fasta_] : null }
 
         SAMTOOLS_FAIDX(
             fasta_samtools,
             [[id: 'no_fai'], []],
-            run_sizes
+            run_sizes,
         )
 
         fasta_fai = fasta_fai.mix(SAMTOOLS_FAIDX.out.fai)
@@ -104,6 +111,7 @@ workflow CREATE_FROM_FASTA_ONLY {
         versions = versions.mix(SAMTOOLS_FAIDX.out.versions)
 
         if (run_intervals) {
+            // Do not run BUILD_INTERVALS if the condition is false
             fasta_fai_intervals = fasta_fai.map { meta, fasta_fai_ -> meta.run_intervals ? [meta, fasta_fai_] : null }
 
             BUILD_INTERVALS(fasta_fai_intervals, [])
@@ -113,6 +121,7 @@ workflow CREATE_FROM_FASTA_ONLY {
     }
 
     if (run_msisensorpro) {
+        // Do not run MSISENSORPRO_SCAN if the condition is false
         fasta_msisensorpro = fasta.map { meta, fasta_ -> meta.run_msisensorpro ? [meta, fasta_] : null }
 
         MSISENSORPRO_SCAN(fasta_msisensorpro)
