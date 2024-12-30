@@ -7,7 +7,7 @@
                     "tabix": 1.2
                 },
                 "Workflow": {
-                    "nf-core/references": "v1.0dev"
+                    "nf-core/references": "v0.1"
                 }
             },
             [
@@ -63,7 +63,7 @@
                     "samtools": 1.21
                 },
                 "Workflow": {
-                    "nf-core/references": "v1.0dev"
+                    "nf-core/references": "v0.1"
                 }
             },
             [
