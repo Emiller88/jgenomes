@@ -14,7 +14,7 @@
                     "star": "2.7.10a"
                 },
                 "Workflow": {
-                    "nf-core/references": "v1.0dev"
+                    "nf-core/references": "v0.1"
                 }
             },
             [
@@ -63,7 +63,7 @@
                     "kallisto": "0.51.1"
                 },
                 "Workflow": {
-                    "nf-core/references": "v1.0dev"
+                    "nf-core/references": "v0.1"
                 }
             },
             [

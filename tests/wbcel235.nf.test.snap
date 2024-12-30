@@ -31,7 +31,7 @@
                     "gawk": "5.1.0"
                 },
                 "Workflow": {
-                    "nf-core/references": "v1.0dev"
+                    "nf-core/references": "v0.1"
                 }
             },
             [
