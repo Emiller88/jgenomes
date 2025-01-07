@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- [71](https://github.com/nf-core/references/pull/71) - Compress vcf files when they are not already compressed
+- [72](https://github.com/nf-core/references/pull/72) - Compress vcf files when they are not already compressed
 
 ### Changed
 
