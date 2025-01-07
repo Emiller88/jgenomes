@@ -191,7 +191,7 @@
             "vcf": {
                 "meta": ["vcf"],
                 "type": "string",
-                "pattern": "^\\S+\\.vcf\\.gz$",
+                "pattern": "^\\S+\\.vcf(\\.gz)?$",
                 "errorMessage": "VCF file, cannot contain spaces"
             },
             "vcf_tbi": {

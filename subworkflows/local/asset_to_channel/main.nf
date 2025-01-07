@@ -143,7 +143,8 @@ workflow ASSET_TO_CHANNEL {
     vcf_branch = asset.branch { meta, _fasta ->
         file: meta.vcf
         // If we already have the vcf_tbi, then we don't need to index the vcf
-        def meta_extra = [run_tabix: meta.vcf_tbi ? false : true]
+        def meta_extra = [run_tabix: meta.vcf_tbi || meta.vcf.endsWith('.vcf') ? false : true]
+        meta_extra += [compress_vcf: meta.vcf.endsWith('.vcf') ?: false]
         // return a file, because we can catch globs this way, but it create issues with publishing
         return [reduce(meta) + meta_extra, file(meta.vcf)]
         other: true
