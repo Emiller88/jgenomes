@@ -11,9 +11,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- [73](https://github.com/nf-core/references/pull/73) - Update modules
+
 ### Fixed
 
 ### Dependencies
+
+| modules                           | old version | new version |
+| --------------------------------- | ----------- | ----------- |
+| gunzip                            | 1.1         | 1.13        |
+| samtools (in star/genomegenerate) | 1.20        | 1.21        |
 
 ### Subworkflows
 
