@@ -81,17 +81,17 @@
                 "gnomAD.r2.1.1.vcf.gz.tbi:md5,d95bc4bd1eee441d13ed99f0f3d501f8",
                 "mills_and_1000G.indels.vcf.gz.tbi:md5,1bb7ab8f22eb798efd796439d3b29b7a",
                 "testdata.GRCh38_chr22.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7",
-                "genome.amb:md5,1891c1de381b3a96d4e72f590fde21.0.0dev",
+                "genome.amb:md5,1891c1de381b3a96d4e72f590fde20c1",
                 "genome.ann:md5,2df4aa2d7580639fa0fcdbcad5e2e969",
-                "genome.bwt:md5,815eded87e4cb6b1.0.0devdaab5c4d6e30af",
+                "genome.bwt:md5,815eded87e4cb6b0f1daab5c4d6e30af",
                 "genome.pac:md5,8569fbdb2c98c6fb16dfa73d8eacb070",
                 "genome.sa:md5,e7cff62b919448a3a3d0fe4aaf427594",
                 "genome.fasta.0123:md5,d73300d44f733bcdb7c988fc3ff3e3e9",
-                "genome.fasta.amb:md5,1891c1de381b3a96d4e72f590fde21.0.0dev",
+                "genome.fasta.amb:md5,1891c1de381b3a96d4e72f590fde20c1",
                 "genome.fasta.ann:md5,2df4aa2d7580639fa0fcdbcad5e2e969",
                 "genome.fasta.bwt.2bit.64:md5,cd4bdf496eab05228a50c45ee43c1ed0",
                 "genome.fasta.pac:md5,8569fbdb2c98c6fb16dfa73d8eacb070",
-                "genome.fasta.fai:md5,3520cd31.0.0devb100e55f578db9c855f685",
+                "genome.fasta.fai:md5,3520cd30e1b100e55f578db9c855f685",
                 "hash_table.cmp:md5,1caab4ffc89f81ace615a2e813295cf4",
                 "ref_index.bin:md5,dbb5c7d26b974e0ac338024fe4535044",
                 "reference.bin:md5,be67b80ee48aa96b383fd72f1ccfefea",
@@ -104,6 +104,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2024-12-11.0.0dev3:45:37.140557415"
+        "timestamp": "2024-12-10T13:45:37.140557415"
     }
 }

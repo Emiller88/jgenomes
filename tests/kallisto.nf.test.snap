@@ -4,7 +4,7 @@
             4,
             {
                 "GFFREAD": {
-                    "gffread": "1.0.0dev2.7"
+                    "gffread": "0.12.7"
                 },
                 "KALLISTO_INDEX": {
                     "kallisto": "0.51.1"
@@ -45,7 +45,7 @@
             ],
             [
                 "GRCh38_chr21.gtf:md5,c552c0aee5f1becb1d3991d21e63a5c1",
-                "genome.transcripts.fa:md5,fd4e06fc251.0.0dev9351a611a44861b9aea",
+                "genome.transcripts.fa:md5,fd4e06fc250a19351a611a44861b9aea",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
             ]
         ],

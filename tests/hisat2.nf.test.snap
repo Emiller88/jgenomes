@@ -62,7 +62,7 @@
             4,
             {
                 "GFFREAD": {
-                    "gffread": "1.0.0dev2.7"
+                    "gffread": "0.12.7"
                 },
                 "HISAT2_BUILD": {
                     "hisat2": "2.2.1"
