@@ -1,2 +1,14 @@
+nf_core_version: 3.1.1
 repository_type: pipeline
-nf_core_version: "2.14.1"
+template:
+  author: "@maxulysse"
+  description: help community build references
+  force: false
+  is_nfcore: true
+  name: references
+  org: nf-core
+  outdir: .
+  skip_features:
+    - fastqc
+    - igenomes
+  version: 1.0dev
