@@ -14,7 +14,7 @@
                     "salmon": "1.10.3"
                 },
                 "Workflow": {
-                    "nf-core/references": "v0.1"
+                    "nf-core/references": "v1.0.0dev"
                 }
             },
             [
@@ -87,7 +87,7 @@
                     "salmon": "1.10.3"
                 },
                 "Workflow": {
-                    "nf-core/references": "v0.1"
+                    "nf-core/references": "v1.0.0dev"
                 }
             },
             [

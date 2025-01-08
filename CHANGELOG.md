@@ -8,10 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - [72](https://github.com/nf-core/references/pull/72) - Compress vcf files when they are not already compressed
+- [74](https://github.com/nf-core/references/pull/74) - Add DOI
 
 ### Changed
 
 - [73](https://github.com/nf-core/references/pull/73) - Update modules
+- [74](https://github.com/nf-core/references/pull/74) - Back to dev
 
 ### Fixed
 
