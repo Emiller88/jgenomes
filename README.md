@@ -77,7 +77,7 @@ Assets are stored in [references-assets](https://github.com/nf-core/references-a
   vcf: "https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/dbsnp_146.hg38.vcf.gz"
 ```
 
-Each line represents a source for building a reference, a reference already built or a metadata.
+Each line represents a source for building a reference, a reference already built, or metadata.
 
 Now, you can run the pipeline using:
 
