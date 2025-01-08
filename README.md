@@ -6,7 +6,9 @@
 </h1>
 
 [![GitHub Actions CI Status](https://github.com/nf-core/references/actions/workflows/ci.yml/badge.svg)](https://github.com/nf-core/references/actions/workflows/ci.yml)
-[![GitHub Actions Linting Status](https://github.com/nf-core/references/actions/workflows/linting.yml/badge.svg)](https://github.com/nf-core/references/actions/workflows/linting.yml)[![AWS CI](https://img.shields.io/badge/CI%20tests-full%20size-FF9900?labelColor=000000&logo=Amazon%20AWS)](https://nf-co.re/references/results)[![Cite with Zenodo](http://img.shields.io/badge/DOI-10.5281/zenodo.14576225-1073c8?labelColor=000000)](https://doi.org/10.5281/zenodo.14576225)
+[![GitHub Actions Linting Status](https://github.com/nf-core/references/actions/workflows/linting.yml/badge.svg)](https://github.com/nf-core/references/actions/workflows/linting.yml)
+[![AWS CI](https://img.shields.io/badge/CI%20tests-full%20size-FF9900?labelColor=000000&logo=Amazon%20AWS)](https://nf-co.re/references/results)
+[![Cite with Zenodo](http://img.shields.io/badge/DOI-10.5281/zenodo.14576225-1073c8?labelColor=000000)](https://doi.org/10.5281/zenodo.14576225)
 [![nf-test](https://img.shields.io/badge/unit_tests-nf--test-337ab7.svg)](https://www.nf-test.com)
 
 [![Nextflow](https://img.shields.io/badge/nextflow%20DSL2-%E2%89%A524.10.1-23aa62.svg)](https://www.nextflow.io/)
@@ -15,13 +17,16 @@
 [![run with singularity](https://img.shields.io/badge/run%20with-singularity-1d355c.svg?labelColor=000000)](https://sylabs.io/docs/)
 [![Launch on Seqera Platform](https://img.shields.io/badge/Launch%20%F0%9F%9A%80-Seqera%20Platform-%234256e7)](https://cloud.seqera.io/launch?pipeline=https://github.com/nf-core/references)
 
-[![Get help on Slack](http://img.shields.io/badge/slack-nf--core%20%23references-4A154B?labelColor=000000&logo=slack)](https://nfcore.slack.com/channels/references)[![Follow on Twitter](http://img.shields.io/badge/twitter-%40nf__core-1DA1F2?labelColor=000000&logo=twitter)](https://twitter.com/nf_core)[![Follow on Mastodon](https://img.shields.io/badge/mastodon-nf__core-6364ff?labelColor=FFFFFF&logo=mastodon)](https://mstdn.science/@nf_core)[![Watch on YouTube](http://img.shields.io/badge/youtube-nf--core-FF0000?labelColor=000000&logo=youtube)](https://www.youtube.com/c/nf-core)
+[![Get help on Slack](http://img.shields.io/badge/slack-nf--core%20%23references-4A154B?labelColor=000000&logo=slack)](https://nfcore.slack.com/channels/references)
+[![Follow on Twitter](http://img.shields.io/badge/twitter-%40nf__core-1DA1F2?labelColor=000000&logo=twitter)](https://twitter.com/nf_core)
+[![Follow on Mastodon](https://img.shields.io/badge/mastodon-nf__core-6364ff?labelColor=FFFFFF&logo=mastodon)](https://mstdn.science/@nf_core)
+[![Watch on YouTube](http://img.shields.io/badge/youtube-nf--core-FF0000?labelColor=000000&logo=youtube)](https://www.youtube.com/c/nf-core)
 
 ## Introduction
 
 **nf-core/references** is a bioinformatics pipeline that build references, for multiple use cases.
 
-It is primarily designed to build references for common organisms and store it on [AWS igenomes](https://github.com/ewels/AWS-iGenomes/).
+It is primarily designed to build references for common organisms and store it on [AWS iGenomes](https://github.com/ewels/AWS-iGenomes/).
 
 From a fasta file, it will be able to build the following references:
 
@@ -52,6 +57,47 @@ With a vcf file, it will compress it, if it was not already compressed, and tabi
 ## Assets
 
 Assets are stored in [references-assets](https://github.com/nf-core/references-assets).
+
+## Running
+
+> [!NOTE]
+> If you are new to Nextflow and nf-core, please refer to [this page](https://nf-co.re/docs/usage/installation) on how to set-up Nextflow.Make sure to [test your setup](https://nf-co.re/docs/usage/introduction#how-to-run-a-pipeline) with `-profile test` before running the workflow on actual data.
+
+`asset.yml`:
+
+```yml
+- genome: GRCh38_chr21
+  fasta: "https://raw.githubusercontent.com/nf-core/test-datasets/references/references/GRCh38_chr21/GRCh38_chr21.fa"
+  gtf: "https://raw.githubusercontent.com/nf-core/test-datasets/references/references/GRCh38_chr21/GRCh38_chr21.gtf"
+  source_version: "CUSTOM"
+  readme: "https://raw.githubusercontent.com/nf-core/test-datasets/references/references/GRCh38_chr21/README.md"
+  source: "nf-core/references"
+  source_vcf: "GATK_BUNDLE"
+  species: "Homo_sapiens"
+  vcf: "https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/dbsnp_146.hg38.vcf.gz"
+```
+
+Each line represents a source for building a reference, a reference already built, or metadata.
+
+Now, you can run the pipeline using:
+
+```bash
+nextflow run nf-core/references \
+   -profile <docker/singularity/.../institute> \
+   --input asset.yml \
+   --outdir <OUTDIR>
+```
+
+> [!WARNING]
+> Please provide pipeline parameters via the CLI or Nextflow `-params-file` option. Custom config files including those provided by the `-c` Nextflow option can be used to provide any configuration _**except for parameters**_; see [docs](https://nf-co.re/docs/usage/getting_started/configuration#custom-configuration-files).
+
+For more details and further functionality, please refer to the [usage documentation](https://nf-co.re/references/usage) and the [parameter documentation](https://nf-co.re/references/parameters).
+
+## Pipeline output
+
+To see the results of an example test run with a full size dataset refer to the [results](https://nf-co.re/references/results) tab on the nf-core website pipeline page.
+For more details about the output files and reports, please refer to the
+[output documentation](https://nf-co.re/references/output).
 
 ## Credits
 

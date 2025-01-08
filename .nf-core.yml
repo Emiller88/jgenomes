@@ -1,8 +1,13 @@
-bump_version: null
-lint: null
-nf_core_version: 3.0.2
-org_path: null
+nf_core_version: 3.1.1
 repository_type: pipeline
+lint:
+  files_unchanged:
+    - .github/workflows/branch.yml
+    - .github/workflows/linting.yml
+  actions_awsfulltest: false
+  files_exist:
+    - conf/igenomes.config
+    - conf/igenomes_ignored.config
 template:
   author: "@maxulysse"
   description: help community build references
@@ -15,4 +20,3 @@ template:
     - fastqc
     - igenomes
   version: 1.0dev
-update: null

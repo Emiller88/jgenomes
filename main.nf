@@ -27,7 +27,8 @@ include { MULTIQC                 } from './modules/nf-core/multiqc/main'
 include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_references_pipeline'
 include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_references_pipeline'
 
-include { REFERENCES              } from "./workflows/references/main"
+include { REFERENCES              } from "./workflows/references"
+
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     RUN MAIN WORKFLOW
@@ -36,13 +37,14 @@ include { REFERENCES              } from "./workflows/references/main"
 
 workflow {
     main:
+
     // SUBWORKFLOW: Run initialisation tasks
     PIPELINE_INITIALISATION(
         params.version,
         params.validate_params,
         args,
         params.outdir,
-        params.input
+        params.input,
     )
 
     // WORKFLOW: Run main workflow
@@ -73,16 +75,14 @@ workflow {
         ch_multiqc_custom_config.toList(),
         ch_multiqc_logo.toList(),
         [],
-        []
+        [],
     )
 
     multiqc_data = MULTIQC.out.data
     multiqc_plots = MULTIQC.out.plots
     multiqc_report = MULTIQC.out.report
 
-    //
     // SUBWORKFLOW: Run completion tasks
-    //
     PIPELINE_COMPLETION(
         params.email,
         params.email_on_fail,
@@ -90,7 +90,7 @@ workflow {
         params.outdir,
         params.monochrome_logs,
         params.hook_url,
-        MULTIQC.out.report.toList()
+        MULTIQC.out.report.toList(),
     )
 
     publish:
