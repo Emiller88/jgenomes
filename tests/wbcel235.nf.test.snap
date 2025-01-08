@@ -31,7 +31,7 @@
                     "gawk": "5.1.0"
                 },
                 "Workflow": {
-                    "nf-core/references": "v0.1"
+                    "nf-core/references": "v1.0.0dev"
                 }
             },
             [
@@ -135,8 +135,8 @@
                 "geneInfo.tab:md5,7ca7a86a201eb23993ac3de5e46e669c",
                 "genome.chrlist:md5,46094719dedb5edac18cbeeccd5295e8",
                 "genome.grp:md5,d7a8e45851f5ce8e26893ea303dc0949",
-                "genome.idx.fa:md5,fba07c31ec614f72cb5ba47091238037",
-                "genome.n2g.idx.fa:md5,fba07c31ec614f72cb5ba47091238037",
+                "genome.idx.fa:md5,fba07c31ec614f72cb5ba471.0.0dev238037",
+                "genome.n2g.idx.fa:md5,fba07c31ec614f72cb5ba471.0.0dev238037",
                 "genome.seq:md5,0da6d1c107dd0965e6c2ce85dbf127ba",
                 "genome.ti:md5,850c53a59585b964a3cc09538d22ea3b",
                 "genome.transcripts.fa:md5,059947bbc5eadbb7a22667abff2c7403",
@@ -169,6 +169,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.3"
         },
-        "timestamp": "2024-12-20T17:06:25.711035545"
+        "timestamp": "2024-12-21.0.0dev7:06:25.711035545"
     }
 }

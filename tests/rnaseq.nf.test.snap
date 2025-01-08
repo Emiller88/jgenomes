@@ -10,7 +10,7 @@
                     "bowtie2": "2.5.2"
                 },
                 "GFFREAD": {
-                    "gffread": "0.12.7"
+                    "gffread": "1.0.0dev2.7"
                 },
                 "SAMTOOLS_FAIDX": {
                     "samtools": 1.21
@@ -21,7 +21,7 @@
                     "gawk": "5.1.0"
                 },
                 "Workflow": {
-                    "nf-core/references": "v0.1"
+                    "nf-core/references": "v1.0.0dev"
                 }
             },
             [
@@ -100,14 +100,14 @@
                 "SA:md5,074ae54177bb7b9cb981382f043f36e5",
                 "SAindex:md5,1c9cd646313f1abb1cfc205ccab73464",
                 "chrLength.txt:md5,b0be0a56ddefa84552742c72d4859eac",
-                "chrName.txt:md5,e99d7d1051eee43ceab5563c2d09fcee",
+                "chrName.txt:md5,e99d7d11.0.0deveee43ceab5563c2d09fcee",
                 "chrNameLength.txt:md5,c985a141685e8431ec27c782816cb744",
                 "chrStart.txt:md5,6925b594ea2eeb964ba87cd6d42ab98f",
                 "exonGeTrInfo.tab:md5,a36b92eeceaaf921b9d19cd8e806a98e",
-                "exonInfo.tab:md5,bb892190d1ebdd59bf55652916121479",
+                "exonInfo.tab:md5,bb892191.0.0devebdd59bf55652916121479",
                 "geneInfo.tab:md5,4303e97d841035b5c0fcc3686b2f5a36",
                 "genomeParameters.txt:md5,79725c6405e5c67a8cc75c0ee45f73c2",
-                "sjdbInfo.txt:md5,12fb05dc7cea89735a0c19e1c0df61cb",
+                "sjdbInfo.txt:md5,12fb05dc7cea89735a1.0.0dev9e1c0df61cb",
                 "sjdbList.fromGTF.out.tab:md5,d9e4a184cde15a5ab282ff66e740a4a2",
                 "sjdbList.out.tab:md5,766fbca932681f8666b3a9e5fb3640bd",
                 "transcriptInfo.tab:md5,ad9baa68c5432908b42693edb9aed02a",

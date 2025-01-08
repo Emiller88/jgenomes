@@ -7,7 +7,7 @@
                     "hisat2": "2.2.1"
                 },
                 "Workflow": {
-                    "nf-core/references": "v0.1"
+                    "nf-core/references": "v1.0.0dev"
                 }
             },
             [
@@ -62,7 +62,7 @@
             4,
             {
                 "GFFREAD": {
-                    "gffread": "0.12.7"
+                    "gffread": "1.0.0dev2.7"
                 },
                 "HISAT2_BUILD": {
                     "hisat2": "2.2.1"
@@ -71,7 +71,7 @@
                     "hisat2": "2.2.1"
                 },
                 "Workflow": {
-                    "nf-core/references": "v0.1"
+                    "nf-core/references": "v1.0.0dev"
                 }
             },
             [

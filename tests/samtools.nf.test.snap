@@ -4,7 +4,7 @@
             1,
             {
                 "Workflow": {
-                    "nf-core/references": "v0.1"
+                    "nf-core/references": "v1.0.0dev"
                 }
             },
             [
@@ -41,7 +41,7 @@
                     "samtools": 1.21
                 },
                 "Workflow": {
-                    "nf-core/references": "v0.1"
+                    "nf-core/references": "v1.0.0dev"
                 }
             },
             [
@@ -89,7 +89,7 @@
                     "gawk": "5.3.0"
                 },
                 "Workflow": {
-                    "nf-core/references": "v0.1"
+                    "nf-core/references": "v1.0.0dev"
                 }
             },
             [
