@@ -57,7 +57,10 @@
             "default": "",
             "properties": {
                 "kallisto_make_unique": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Make --make-unique flag for kallisto index",
+                    "fa_icon": "fas fa-toolbox",
+                    "default": false
                 }
             }
         },
