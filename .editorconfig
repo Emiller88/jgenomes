@@ -35,3 +35,11 @@ indent_style = unset
 # ignore ro-crate metadata files
 [**/ro-crate-metadata.json]
 insert_final_newline = unset
+
+# ignore nf-test snapshots
+[*.nf.test.snap]
+charset = unset
+end_of_line = unset
+insert_final_newline = unset
+trim_trailing_whitespace = unset
+indent_style = unset
