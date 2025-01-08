@@ -17,7 +17,7 @@
                 },
                 "STAR_GENOMEGENERATE": {
                     "star": "2.7.11b",
-                    "samtools": 1.2,
+                    "samtools": 1.21,
                     "gawk": "5.1.0"
                 },
                 "Workflow": {
@@ -118,8 +118,8 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.2"
+            "nextflow": "24.10.3"
         },
-        "timestamp": "2024-12-06T11:37:48.115918724"
+        "timestamp": "2025-01-08T12:22:22.93802882"
     }
 }
