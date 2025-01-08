@@ -47,7 +47,7 @@ With an additional annotation file describing the genes (either GFF3 or GTF), it
 - STAR index
 - Transcript fasta (with RSEM)
 
-With a vcf file, it will tabix index it.
+With a vcf file, it will compress it, if it was not already compressed, and tabix index it.
 
 ## Assets
 

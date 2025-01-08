@@ -25,3 +25,8 @@
   source_vcf: "GATK_BUNDLE"
   species: "Homo_sapiens"
   vcf: "https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/mills_and_1000G.indels.vcf.gz"
+- genome: "GRCh38_MT"
+  source: "nf-core/references"
+  source_vcf: "genmod_compound"
+  species: "Homo_sapiens"
+  vcf: "https://raw.githubusercontent.com/nf-core/test-datasets/refs/heads/modules/data/genomics/homo_sapiens/genome/vcf/genmod_compound.vcf"
