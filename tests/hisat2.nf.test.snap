@@ -1,0 +1,130 @@
+{
+    "Run with profile test for hisat2 | --input assets/test/default_extended.yml": {
+        "content": [
+            2,
+            {
+                "HISAT2_BUILD": {
+                    "hisat2": "2.2.1"
+                },
+                "Workflow": {
+                    "nf-core/references": "v1.0.0dev"
+                }
+            },
+            [
+                "Homo_sapiens",
+                "Homo_sapiens/nf-core",
+                "Homo_sapiens/nf-core/references",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/CUSTOM",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/CUSTOM/version2.2.1",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/CUSTOM/version2.2.1/GRCh38_chr21.1.ht2",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/CUSTOM/version2.2.1/GRCh38_chr21.2.ht2",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/CUSTOM/version2.2.1/GRCh38_chr21.3.ht2",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/CUSTOM/version2.2.1/GRCh38_chr21.4.ht2",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/CUSTOM/version2.2.1/GRCh38_chr21.5.ht2",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/CUSTOM/version2.2.1/GRCh38_chr21.6.ht2",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/CUSTOM/version2.2.1/GRCh38_chr21.7.ht2",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/CUSTOM/version2.2.1/GRCh38_chr21.8.ht2",
+                "index.json",
+                "multiqc",
+                "multiqc/multiqc_data",
+                "multiqc/multiqc_data/multiqc.log",
+                "multiqc/multiqc_data/multiqc_citations.txt",
+                "multiqc/multiqc_data/multiqc_data.json",
+                "multiqc/multiqc_data/multiqc_software_versions.txt",
+                "multiqc/multiqc_data/multiqc_sources.txt",
+                "multiqc/multiqc_report.html",
+                "pipeline_info",
+                "pipeline_info/nf_core_references_software_mqc_versions.yml"
+            ],
+            [
+                "GRCh38_chr21.1.ht2:md5,eb322cf410ecc616d7fe63cc1be2785b",
+                "GRCh38_chr21.2.ht2:md5,46be3356d4c236ebd5d1e52e9eaf4e12",
+                "GRCh38_chr21.3.ht2:md5,dbf5af96efd98d6b03f1e5d2baed848a",
+                "GRCh38_chr21.4.ht2:md5,bd952f748321c4c230671e8fce7b1650",
+                "GRCh38_chr21.5.ht2:md5,103032edf695164b32cc9e6781e8f08b",
+                "GRCh38_chr21.6.ht2:md5,242e36d01cd1719b6bd05f157c644eed",
+                "GRCh38_chr21.7.ht2:md5,24e7d0673a77e07fbe40400f9a6b3db6",
+                "GRCh38_chr21.8.ht2:md5,5e0626bdb7f7a267990f72ae45c3e44a",
+                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.2"
+        },
+        "timestamp": "2024-12-06T11:47:41.58238436"
+    },
+    "Run with profile test for hisat2 | --input GRCh38_chr21.yml": {
+        "content": [
+            4,
+            {
+                "GFFREAD": {
+                    "gffread": "0.12.7"
+                },
+                "HISAT2_BUILD": {
+                    "hisat2": "2.2.1"
+                },
+                "HISAT2_EXTRACTSPLICESITES": {
+                    "hisat2": "2.2.1"
+                },
+                "Workflow": {
+                    "nf-core/references": "v1.0.0dev"
+                }
+            },
+            [
+                "Homo_sapiens",
+                "Homo_sapiens/nf-core",
+                "Homo_sapiens/nf-core/references",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Annotation",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Annotation/Genes",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Annotation/Genes/GRCh38_chr21.gtf",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/version2.2.1",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/version2.2.1/GRCh38_chr21.1.ht2",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/version2.2.1/GRCh38_chr21.2.ht2",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/version2.2.1/GRCh38_chr21.3.ht2",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/version2.2.1/GRCh38_chr21.4.ht2",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/version2.2.1/GRCh38_chr21.5.ht2",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/version2.2.1/GRCh38_chr21.6.ht2",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/version2.2.1/GRCh38_chr21.7.ht2",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/Hisat2Index/version2.2.1/GRCh38_chr21.8.ht2",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/SpliceSites",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/SpliceSites/GRCh38_chr21.splice_sites.txt",
+                "index.json",
+                "multiqc",
+                "multiqc/multiqc_data",
+                "multiqc/multiqc_data/multiqc.log",
+                "multiqc/multiqc_data/multiqc_citations.txt",
+                "multiqc/multiqc_data/multiqc_data.json",
+                "multiqc/multiqc_data/multiqc_software_versions.txt",
+                "multiqc/multiqc_data/multiqc_sources.txt",
+                "multiqc/multiqc_report.html",
+                "pipeline_info",
+                "pipeline_info/nf_core_references_software_mqc_versions.yml"
+            ],
+            [
+                "GRCh38_chr21.gtf:md5,c552c0aee5f1becb1d3991d21e63a5c1",
+                "GRCh38_chr21.1.ht2:md5,eb322cf410ecc616d7fe63cc1be2785b",
+                "GRCh38_chr21.2.ht2:md5,46be3356d4c236ebd5d1e52e9eaf4e12",
+                "GRCh38_chr21.3.ht2:md5,dbf5af96efd98d6b03f1e5d2baed848a",
+                "GRCh38_chr21.4.ht2:md5,bd952f748321c4c230671e8fce7b1650",
+                "GRCh38_chr21.5.ht2:md5,103032edf695164b32cc9e6781e8f08b",
+                "GRCh38_chr21.6.ht2:md5,242e36d01cd1719b6bd05f157c644eed",
+                "GRCh38_chr21.7.ht2:md5,24e7d0673a77e07fbe40400f9a6b3db6",
+                "GRCh38_chr21.8.ht2:md5,5e0626bdb7f7a267990f72ae45c3e44a",
+                "GRCh38_chr21.splice_sites.txt:md5,291af43cd5b00eeb15277f90a76e77f8",
+                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.2"
+        },
+        "timestamp": "2024-12-06T11:33:17.476760832"
+    }
+}

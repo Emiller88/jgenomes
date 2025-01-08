@@ -1,0 +1,20 @@
+Changes in module 'nf-core/hisat2/build'
+Changes in 'hisat2/build/main.nf':
+--- modules/nf-core/hisat2/build/main.nf
++++ modules/nf-core/hisat2/build/main.nf
+@@ -33,7 +33,7 @@
+     def ss = ''
+     def exon = ''
+     def extract_exons = ''
+-    def hisat2_build_memory = params.hisat2_build_memory ? (params.hisat2_build_memory as MemoryUnit).toGiga() : 0
++    def hisat2_build_memory = params.hisat2_build_memory ? (params.hisat2_build_memory as nextflow.util.MemoryUnit).toGiga() : 0
+     if (avail_mem >= hisat2_build_memory) {
+         log.info "[HISAT2 index build] At least ${hisat2_build_memory} GB available, so using splice sites and exons to build HISAT2 index"
+         extract_exons = gtf ? "hisat2_extract_exons.py $gtf > ${gtf.baseName}.exons.txt" : ""
+
+'modules/nf-core/hisat2/build/meta.yml' is unchanged
+'modules/nf-core/hisat2/build/environment.yml' is unchanged
+'modules/nf-core/hisat2/build/tests/main.nf.test.snap' is unchanged
+'modules/nf-core/hisat2/build/tests/main.nf.test' is unchanged
+'modules/nf-core/hisat2/build/tests/tags.yml' is unchanged
+************************************************************

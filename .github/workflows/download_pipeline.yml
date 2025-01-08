@@ -94,6 +94,13 @@ jobs:
           echo "Initial container image count: $image_count"
           echo "IMAGE_COUNT_INITIAL=$image_count" >> "$GITHUB_OUTPUT"
 
+      - name: Count the downloaded number of container images
+        id: count_initial
+        run: |
+          image_count=$(ls -1 ./singularity_container_images | wc -l | xargs)
+          echo "Initial container image count: $image_count"
+          echo "IMAGE_COUNT_INITIAL=$image_count" >> ${GITHUB_ENV}
+
       - name: Run the downloaded pipeline (stub)
         id: stub_run_pipeline
         continue-on-error: true

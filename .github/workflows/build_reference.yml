@@ -1,0 +1,49 @@
+name: Build reference genomes that changed
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "assets/genomes/*.yml"
+
+jobs:
+  run-tower:
+    name: Run AWS full tests
+    if: github.repository == 'nf-core/nascent'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Find changed genomes
+        id: changed-genome-files
+        uses: tj-actions/changed-files@v42
+        with:
+          files: |
+            assets/genomes/*.yml
+      - name: Concatinate all the yamls together
+        if: steps.changed-files-specific.outputs.any_changed == 'true'
+        env:
+          CHANGED_FILES: ${{ steps.changed-files-specific.outputs.all_changed_files }}
+        run: cat ${CHANGED_FILES} > samplesheet.yml
+      # - name: Upload samplesheet.yml to s3 or Tower Datasets
+      #   run: TODO
+      - name: Launch workflow via tower
+        uses: seqeralabs/action-tower-launch@v2
+        with:
+          workspace_id: ${{ secrets.TOWER_WORKSPACE_ID }}
+          access_token: ${{ secrets.TOWER_ACCESS_TOKEN }}
+          compute_env: ${{ secrets.TOWER_COMPUTE_ENV }}
+          revision: ${{ github.sha }}
+          workdir: s3://${{ secrets.AWS_S3_SCRATCH_BUCKET }}/work
+          parameters: |
+            {
+              "input": "samplesheet.yml"
+              "hook_url": "${{ secrets.MEGATESTS_ALERTS_SLACK_HOOK_URL }}",
+              "outdir": "s3://${{ secrets.AWS_S3_BUCKET }}/nascent/results-${{ github.sha }}"
+            }
+          profiles: cloud
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Tower debug log file
+          path: |
+            tower_action_*.log
+            tower_action_*.json

@@ -4,7 +4,7 @@
     <img alt="nf-core/references" src="docs/images/nf-core-references_logo_light.png">
   </picture>
 </h1>[![GitHub Actions CI Status](https://github.com/nf-core/references/actions/workflows/ci.yml/badge.svg)](https://github.com/nf-core/references/actions/workflows/ci.yml)
-[![GitHub Actions Linting Status](https://github.com/nf-core/references/actions/workflows/linting.yml/badge.svg)](https://github.com/nf-core/references/actions/workflows/linting.yml)[![AWS CI](https://img.shields.io/badge/CI%20tests-full%20size-FF9900?labelColor=000000&logo=Amazon%20AWS)](https://nf-co.re/references/results)[![Cite with Zenodo](http://img.shields.io/badge/DOI-10.5281/zenodo.XXXXXXX-1073c8?labelColor=000000)](https://doi.org/10.5281/zenodo.XXXXXXX)
+[![GitHub Actions Linting Status](https://github.com/nf-core/references/actions/workflows/linting.yml/badge.svg)](https://github.com/nf-core/references/actions/workflows/linting.yml)[![AWS CI](https://img.shields.io/badge/CI%20tests-full%20size-FF9900?labelColor=000000&logo=Amazon%20AWS)](https://nf-co.re/references/results)[![Cite with Zenodo](http://img.shields.io/badge/DOI-10.5281/zenodo.14576225-1073c8?labelColor=000000)](https://doi.org/10.5281/zenodo.14576225)
 [![nf-test](https://img.shields.io/badge/unit_tests-nf--test-337ab7.svg)](https://www.nf-test.com)
 
 [![Nextflow](https://img.shields.io/badge/nextflow%20DSL2-%E2%89%A524.04.2-23aa62.svg)](https://www.nextflow.io/)
@@ -17,42 +17,62 @@
 
 ## Introduction
 
-**nf-core/references** is a bioinformatics pipeline that ...
+**nf-core/references** is a bioinformatics pipeline that build references, for multiple use cases.
 
-<!-- TODO nf-core:
-   Complete this sentence with a 2-3 sentence summary of what types of data the pipeline ingests, a brief overview of the
-   major pipeline sections and the types of output it produces. You're giving an overview to someone new
-   to nf-core here, in 15-20 seconds. For an example, see https://github.com/nf-core/rnaseq/blob/master/README.md#introduction
--->
+It is primarily designed to build references for common organisms and store it on [AWS igenomes](https://github.com/ewels/AWS-iGenomes/).
 
-<!-- TODO nf-core: Include a figure that guides the user through the major workflow steps. Many nf-core
-     workflows use the "tube map" design for that. See https://nf-co.re/docs/contributing/design_guidelines#examples for examples.   -->
-<!-- TODO nf-core: Fill in short bullet-pointed list of the default steps in the pipeline -->2. Present QC for raw reads ([`MultiQC`](http://multiqc.info/))
+From a fasta file, it will be able to build the following references:
 
-## Usage
+- Bowtie1 index
+- Bowtie2 index
+- BWA-MEM index
+- BWA-MEM2 index
+- DRAGMAP hashtable
+- Fasta dictionary (with GATK4)
+- Fasta fai (with SAMtools)
+- Fasta sizes (with SAMtools)
+- Fasta intervals bed (with GATK4)
+- MSIsensor-pro list
+
+With an additional annotation file describing the genes (either GFF3 or GTF), it will be able to build the following references:
+
+- GTF (from GFF3 with GFFREAD)
+- HISAT2 index
+- Kallisto index
+- RSEM index
+- Salmon index
+- Splice sites (with HISAT2)
+- STAR index
+- Transcript fasta (with RSEM)
+
+With a vcf file, it will compress it, if it was not already compressed, and tabix index it.
+
+## Assets
+
+Assets are stored in [references-assets](https://github.com/nf-core/references-assets).
+
+## Running
 
 > [!NOTE]
 > If you are new to Nextflow and nf-core, please refer to [this page](https://nf-co.re/docs/usage/installation) on how to set-up Nextflow.Make sure to [test your setup](https://nf-co.re/docs/usage/introduction#how-to-run-a-pipeline) with `-profile test` before running the workflow on actual data.
 
-<!-- TODO nf-core: Describe the minimum required steps to execute the pipeline, e.g. how to prepare samplesheets.
-     Explain what rows and columns represent. For instance (please edit as appropriate):
+`asset.yml`:
 
-First, prepare a samplesheet with your input data that looks as follows:
-
-`samplesheet.csv`:
-
-```csv
-sample,fastq_1,fastq_2
-CONTROL_REP1,AEG588A1_S1_L002_R1_001.fastq.gz,AEG588A1_S1_L002_R2_001.fastq.gz
+```yml
+- genome: GRCh38_chr21
+  fasta: "https://raw.githubusercontent.com/nf-core/test-datasets/references/references/GRCh38_chr21/GRCh38_chr21.fa"
+  gtf: "https://raw.githubusercontent.com/nf-core/test-datasets/references/references/GRCh38_chr21/GRCh38_chr21.gtf"
+  source_version: "CUSTOM"
+  readme: "https://raw.githubusercontent.com/nf-core/test-datasets/references/references/GRCh38_chr21/README.md"
+  source: "nf-core/references"
+  source_vcf: "GATK_BUNDLE"
+  species: "Homo_sapiens"
+  vcf: "https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/dbsnp_146.hg38.vcf.gz"
 ```
 
-Each row represents a fastq file (single-end) or a pair of fastq files (paired end).
-
--->
+Each line represents a source for building a reference, a reference already built or a metadata.
 
 Now, you can run the pipeline using:
-
-<!-- TODO nf-core: update the following command to include all required parameters for a minimal example -->
 
 ```bash
 nextflow run nf-core/references \
@@ -74,11 +94,14 @@ For more details about the output files and reports, please refer to the
 
 ## Credits
 
-nf-core/references was originally written by @maxulysse.
+nf-core/references was originally written by [Maxime U Garcia](https://github.com/maxulysse) | [Edmund Miller](https://github.com/edmundmiller) | [Phil Ewels](https://github.com/ewels).
 
 We thank the following people for their extensive assistance in the development of this pipeline:
 
-<!-- TODO nf-core: If applicable, make list of people who have also contributed -->
+- [Adam Talbot](https://github.com/adamrtalbot)
+- [Friederike Hanssen](https://github.com/FriederikeHanssen)
+- [Harshil Patel](https://github.com/drpatelh)
+- [Jonathan Manning](https://github.com/pinin4fjords)
 
 ## Contributions and Support
 
@@ -86,10 +109,39 @@ If you would like to contribute to this pipeline, please see the [contributing g
 
 For further information or help, don't hesitate to get in touch on the [Slack `#references` channel](https://nfcore.slack.com/channels/references) (you can join with [this invite](https://nf-co.re/join/slack)).
 
+### How to hack on it
+
+0. Have docker, and Nextflow installed
+1. `nextflow run main.nf`
+
+### Some thoughts on reference building
+
+- We could use the glob and if you just drop a fasta in s3 bucket it'll get picked up and new resources built
+  - Could take this a step further and make it a little config file that has the fasta, gtf, genome_size etc.
+- How do we avoid rebuilding? Ideally we should build once on a new minor release of an aligner/reference. IMO kinda low priority because the main cost is going to be egress, not compute.
+- How much effort is too much effort?
+  - Should it be as easy as adding a file on s3?
+    - No that shouldn't be a requirement, should be able to link to a reference externally (A "source of truth" ie an FTP link), and the workflow will build the references
+    - So like mulled biocontainers, just make a PR to the samplesheet and boom new reference in the s3 bucket if it's approved?
+
+### Roadmap
+
+PoC for v1.0:
+
+- Replace aws-igenomes
+  - bwa, bowtie2, star, bismark need to be built
+  - fasta, gtf, bed12, mito_name, macs_gsize, blacklist, copied over
+
+Other nice things to have:
+
+- Building our test-datasets
+- Down-sampling for a unified genomics test dataset creation, (Thinking about viralitegration/rnaseq/wgs) and spiking in test cases of interest (Specific variants for example)
+
 ## Citations
 
-<!-- TODO nf-core: Add citation for pipeline after first release. Uncomment lines below and update Zenodo doi and badge at the top of this file. -->
-<!-- If you use nf-core/references for your analysis, please cite it using the following doi: [10.5281/zenodo.XXXXXX](https://doi.org/10.5281/zenodo.XXXXXX) --><!-- TODO nf-core: Add bibliography of tools and data used in your pipeline -->
+If you use nf-core/references for your analysis, please cite it using the following doi: [10.5281/zenodo.14576225](https://doi.org/10.5281/zenodo.14576225)
+
+<!-- TODO nf-core: Add bibliography of tools and data used in your pipeline -->
 
 An extensive list of references for the tools used by the pipeline can be found in the [`CITATIONS.md`](CITATIONS.md) file.
 

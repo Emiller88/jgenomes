@@ -1,0 +1,38 @@
+Changes in module 'nf-core/dragmap/hashtable'
+Changes in 'dragmap/hashtable/main.nf':
+--- modules/nf-core/dragmap/hashtable/main.nf
++++ modules/nf-core/dragmap/hashtable/main.nf
+@@ -4,8 +4,8 @@
+ 
+     conda "${moduleDir}/environment.yml"
+     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+-        'https://depot.galaxyproject.org/singularity/dragmap:1.3.0--h91baf5a_3':
+-        'biocontainers/dragmap:1.3.0--h91baf5a_3' }"
++        'https://depot.galaxyproject.org/singularity/dragmap:1.2.1--h72d16da_1':
++        'biocontainers/dragmap:1.2.1--h72d16da_1' }"
+ 
+     input:
+     tuple val(meta), path(fasta)
+@@ -33,15 +33,4 @@
+         dragmap: \$(echo \$(dragen-os --version 2>&1))
+     END_VERSIONS
+     """
+-
+-    stub:
+-    """
+-    mkdir dragmap
+-
+-    cat <<-END_VERSIONS > versions.yml
+-    "${task.process}":
+-        dragmap: \$(echo \$(dragen-os --version 2>&1))
+-    END_VERSIONS
+-    """
+-
+ }
+
+'modules/nf-core/dragmap/hashtable/meta.yml' is unchanged
+'modules/nf-core/dragmap/hashtable/environment.yml' is unchanged
+'modules/nf-core/dragmap/hashtable/tests/main.nf.test.snap' is unchanged
+'modules/nf-core/dragmap/hashtable/tests/main.nf.test' is unchanged
+'modules/nf-core/dragmap/hashtable/tests/tags.yml' is unchanged
+************************************************************

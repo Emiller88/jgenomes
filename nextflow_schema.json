@@ -18,7 +18,7 @@
                     "exists": true,
                     "schema": "assets/schema_input.json",
                     "mimetype": "text/csv",
-                    "pattern": "^\\S+\\.csv$",
+                    "pattern": "^\\S+\\.(csv|tsv|yaml|yml)$",
                     "description": "Path to comma-separated file containing information about the samples in the experiment.",
                     "help_text": "You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row. See [usage docs](https://nf-co.re/references/usage#samplesheet-input).",
                     "fa_icon": "fas fa-file-csv"
@@ -28,6 +28,13 @@
                     "format": "directory-path",
                     "description": "The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.",
                     "fa_icon": "fas fa-folder-open"
+                },
+                "tools": {
+                    "type": "string",
+                    "fa_icon": "fas fa-toolbox",
+                    "description": "Tools to use for building references.",
+                    "help_text": "Multiple tools separated with commas.",
+                    "pattern": "^((bowtie1|bowtie2|bwamem1|bwamem2|createsequencedictionary|dragmap|faidx|gffread|hisat2|hisat2_extractsplicesites|intervals|kallisto|msisensorpro|rsem|rsem_make_transcript_fasta|salmon|sizes|star|tabix)?,?)*(?<!,)$"
                 },
                 "email": {
                     "type": "string",
@@ -40,6 +47,17 @@
                     "type": "string",
                     "description": "MultiQC report title. Printed as page header, used for filename if not otherwise specified.",
                     "fa_icon": "fas fa-file-signature"
+                }
+            }
+        },
+        "building_index_options": {
+            "title": "Building index options",
+            "type": "object",
+            "description": "",
+            "default": "",
+            "properties": {
+                "kallisto_make_unique": {
+                    "type": "boolean"
                 }
             }
         },
@@ -192,6 +210,9 @@
     "allOf": [
         {
             "$ref": "#/$defs/input_output_options"
+        },
+        {
+            "$ref": "#/$defs/building_index_options"
         },
         {
             "$ref": "#/$defs/institutional_config_options"
