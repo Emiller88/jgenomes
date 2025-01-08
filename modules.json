@@ -64,7 +64,8 @@
                     "hisat2/build": {
                         "branch": "master",
                         "git_sha": "9a1e8bb6a5d205cf7807dcefca872a3314b2f3e6",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/hisat2/build/hisat2-build.diff"
                     },
                     "hisat2/extractsplicesites": {
                         "branch": "master",
