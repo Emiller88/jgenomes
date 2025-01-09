@@ -14,3 +14,7 @@
   species: "Homo_sapiens"
   source: "nf-core/references"
   vcf: "https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/mills_and_1000G.indels.vcf.gz"
+- genome: "testdata.GRCh38_chr21"
+  species: "Homo_sapiens"
+  source: "nf-core/references"
+  chr_dir: "https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/chr21/sequence/chromosomes.tar.gz"

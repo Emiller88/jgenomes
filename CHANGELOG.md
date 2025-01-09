@@ -24,6 +24,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | --------------------------------- | ----------- | ----------- |
 | gunzip                            | 1.1         | 1.13        |
 | samtools (in star/genomegenerate) | 1.20        | 1.21        |
+| untar                             |             | 1.34        |
+| unzip                             |             | 16.02       |
 
 ### Subworkflows
 

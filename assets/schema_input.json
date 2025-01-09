@@ -46,6 +46,24 @@
                 "errorMessage": "Species of the reference, cannot contain spaces",
                 "meta": ["species"]
             },
+            "ascat_alleles": {
+                "meta": ["ascat_alleles"],
+                "pattern": "^\\S+$",
+                "type": "string",
+                "errorMessage": "TODO"
+            },
+            "ascat_loci": {
+                "meta": ["ascat_loci"],
+                "pattern": "^\\S+$",
+                "type": "string",
+                "errorMessage": "TODO"
+            },
+            "ascat_loci_gc": {
+                "meta": ["ascat_loci_gc"],
+                "pattern": "^\\S+$",
+                "type": "string",
+                "errorMessage": "TODO"
+            },
             "bed12": {
                 "meta": ["bed12"],
                 "pattern": "^\\S+$",
@@ -81,6 +99,12 @@
                 "pattern": "^\\S+$",
                 "type": "string",
                 "errorMessage": "DRAGMAP hashtable, cannot contain spaces"
+            },
+            "chr_dir": {
+                "meta": ["chr_dir"],
+                "pattern": "^\\S+$",
+                "type": "string",
+                "errorMessage": "TODO"
             },
             "fasta": {
                 "type": "string",

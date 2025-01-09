@@ -26,6 +26,32 @@ workflow REFERENCES {
 
     // Assess if assets needs to be uncompress or not
     // (We do not uncompress VCFs)
+
+    ascat_alleles_input = ASSET_TO_CHANNEL.out.ascat_alleles.branch { meta, _ascat_alleles ->
+        decompress_ascat_alleles: meta.decompress_ascat_alleles
+        other: true
+    }
+
+    ascat_loci_input = ASSET_TO_CHANNEL.out.ascat_loci.branch { meta, _ascat_loci ->
+        decompress_ascat_loci: meta.decompress_ascat_loci
+        other: true
+    }
+
+    ascat_loci_gc_input = ASSET_TO_CHANNEL.out.ascat_loci_gc.branch { meta, _ascat_loci_gc ->
+        decompress_ascat_loci_gc: meta.decompress_ascat_loci_gc
+        other: true
+    }
+
+    ascat_loci_rt_input = ASSET_TO_CHANNEL.out.ascat_loci_rt.branch { meta, _ascat_loci_rt ->
+        decompress_ascat_loci_rt: meta.decompress_ascat_loci_rt
+        other: true
+    }
+
+    chr_dir_input = ASSET_TO_CHANNEL.out.chr_dir.branch { meta, _chr_dir ->
+        decompress_chr_dir: meta.decompress_chr_dir
+        other: true
+    }
+
     fasta_input = ASSET_TO_CHANNEL.out.fasta.branch { meta, _fasta ->
         decompress_fasta: meta.decompress_fasta
         other: true
@@ -42,9 +68,23 @@ workflow REFERENCES {
     }
 
     // Uncompress any assets that need to be
-    UNCOMPRESS_ASSET(fasta_input.decompress_fasta, gff_input.decompress_gff, gtf_input.decompress_gtf)
+    UNCOMPRESS_ASSET(
+        ascat_alleles_input.decompress_ascat_alleles,
+        ascat_loci_input.decompress_ascat_loci,
+        ascat_loci_gc_input.decompress_ascat_loci_gc,
+        ascat_loci_rt_input.decompress_ascat_loci_rt,
+        chr_dir_input.decompress_chr_dir,
+        fasta_input.decompress_fasta,
+        gff_input.decompress_gff,
+        gtf_input.decompress_gtf,
+    )
 
     // This covers a mixture of compressed and uncompressed assets
+    ascat_alleles = ascat_alleles_input.other.mix(UNCOMPRESS_ASSET.out.ascat_alleles)
+    ascat_loci = ascat_loci_input.other.mix(UNCOMPRESS_ASSET.out.ascat_loci)
+    ascat_loci_gc = ascat_loci_gc_input.other.mix(UNCOMPRESS_ASSET.out.ascat_loci_gc)
+    ascat_loci_rt = ascat_loci_rt_input.other.mix(UNCOMPRESS_ASSET.out.ascat_loci_rt)
+    chr_dir = chr_dir_input.other.mix(UNCOMPRESS_ASSET.out.chr_dir)
     fasta = fasta_input.other.mix(UNCOMPRESS_ASSET.out.fasta)
     gff = gff_input.other.mix(UNCOMPRESS_ASSET.out.gff)
     gtf = gtf_input.other.mix(UNCOMPRESS_ASSET.out.gtf)
@@ -119,10 +159,17 @@ workflow REFERENCES {
     reference = Channel
         .empty()
         .mix(
+            // Cannot output properly yet
+            // ascat_alleles.map { meta, reference_ -> [meta + [file: 'ascat_alleles'], reference_] },
+            // ascat_loci.map { meta, reference_ -> [meta + [file: 'ascat_loci'], reference_] },
+            // ascat_loci_gc.map { meta, reference_ -> [meta + [file: 'ascat_loci_gc'], reference_] },
+            // ascat_loci_rt.map { meta, reference_ -> [meta + [file: 'ascat_loci_rt'], reference_] },
             bowtie1_index.map { meta, reference_ -> [meta + [file: 'bowtie1_index'], reference_] },
             bowtie2_index.map { meta, reference_ -> [meta + [file: 'bowtie2_index'], reference_] },
             bwamem1_index.map { meta, reference_ -> [meta + [file: 'bwamem1_index'], reference_] },
             bwamem2_index.map { meta, reference_ -> [meta + [file: 'bwamem2_index'], reference_] },
+            // Cannot output properly yet
+            // chr_dir.map { meta, reference_ -> [meta + [file: 'chr_dir'], reference_] },
             dragmap_hashmap.map { meta, reference_ -> [meta + [file: 'dragmap_hashmap'], reference_] },
             fasta.map { meta, reference_ -> [meta + [file: 'fasta'], reference_] },
             fasta_dict.map { meta, reference_ -> [meta + [file: 'fasta_dict'], reference_] },
@@ -139,7 +186,7 @@ workflow REFERENCES {
             splice_sites.map { meta, reference_ -> [meta + [file: 'splice_sites'], reference_] },
             star_index.map { meta, reference_ -> [meta + [file: 'star_index'], reference_] },
             transcript_fasta.map { meta, reference_ -> [meta + [file: 'transcript_fasta'], reference_] },
-            // Cannot output vcf properly yet
+            // Cannot output properly yet
             // vcf.map { meta, reference_ -> [meta + [file: 'vcf'], reference_] },
             vcf_tbi.map { meta, reference_ -> [meta + [file: 'vcf_tbi'], reference_] },
         )

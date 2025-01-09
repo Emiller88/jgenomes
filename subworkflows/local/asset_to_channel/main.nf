@@ -13,6 +13,56 @@ workflow ASSET_TO_CHANNEL {
     // Add a field here if it is a relevant meta data
     def reduce = { meta -> meta.subMap(['genome', 'id', 'source', 'source_vcf', 'source_version', 'species']) }
 
+    ascat_alleles_branch = asset.branch { meta, _fasta ->
+        file: meta.ascat_alleles
+        def meta_extra = [decompress_ascat_alleles: meta.ascat_alleles.endsWith('.zip') ?: false]
+        return [reduce(meta) + meta_extra, meta.ascat_alleles]
+        other: true
+        // If the asset doesn't exist, then we return nothing
+        return null
+    }
+    ascat_alleles = ascat_alleles_branch.file
+
+    ascat_loci_branch = asset.branch { meta, _fasta ->
+        file: meta.ascat_loci
+        def meta_extra = [decompress_ascat_loci: meta.ascat_loci.endsWith('.zip') ?: false]
+        return [reduce(meta) + meta_extra, meta.ascat_loci]
+        other: true
+        // If the asset doesn't exist, then we return nothing
+        return null
+    }
+    ascat_loci = ascat_loci_branch.file
+
+    ascat_loci_gc_branch = asset.branch { meta, _fasta ->
+        file: meta.ascat_loci_gc
+        def meta_extra = [decompress_ascat_loci_gc: meta.ascat_loci_gc.endsWith('.zip') ?: false]
+        return [reduce(meta) + meta_extra, meta.ascat_loci_gc]
+        other: true
+        // If the asset doesn't exist, then we return nothing
+        return null
+    }
+    ascat_loci_gc = ascat_loci_gc_branch.file
+
+    ascat_loci_rt_branch = asset.branch { meta, _fasta ->
+        file: meta.ascat_loci_rt
+        def meta_extra = [decompress_ascat_loci_rt: meta.ascat_loci_rt.endsWith('.zip') ?: false]
+        return [reduce(meta) + meta_extra, meta.ascat_loci_rt]
+        other: true
+        // If the asset doesn't exist, then we return nothing
+        return null
+    }
+    ascat_loci_rt = ascat_loci_rt_branch.file
+
+    chr_dir_branch = asset.branch { meta, _fasta ->
+        file: meta.chr_dir
+        def meta_extra = [decompress_chr_dir: meta.chr_dir.endsWith('.tar.gz') ?: false]
+        return [reduce(meta) + meta_extra, meta.chr_dir]
+        other: true
+        // If the asset doesn't exist, then we return nothing
+        return null
+    }
+    chr_dir = chr_dir_branch.file
+
     intervals_bed_branch = asset.branch { meta, _fasta ->
         file: meta.intervals_bed
         return [reduce(meta), meta.intervals_bed]
@@ -155,6 +205,11 @@ workflow ASSET_TO_CHANNEL {
     vcf = vcf_branch.file.transpose()
 
     emit:
+    ascat_alleles    // channel: [meta, *.ascat_alleles.txt]
+    ascat_loci       // channel: [meta, *.ascat_loci.txt]
+    ascat_loci_gc    // channel: [meta, *.ascat_loci_gc.txt]
+    ascat_loci_rt    // channel: [meta, *.ascat_loci_rt.txt]
+    chr_dir          // channel: [meta, *.chr_dir]
     intervals_bed    // channel: [meta, *.bed]
     fasta            // channel: [meta, *.f(ast|n)?a]
     fasta_dict       // channel: [meta, *.f(ast|n)?a.dict]
