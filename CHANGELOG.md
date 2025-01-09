@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [72](https://github.com/nf-core/references/pull/72) - Compress vcf files when they are not already compressed
 - [74](https://github.com/nf-core/references/pull/74) - Add DOI
+- [76](https://github.com/nf-core/references/pull/76) - Add untar and unzip
 
 ### Changed
 
@@ -26,6 +27,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | samtools (in star/genomegenerate) | 1.20        | 1.21        |
 | untar                             |             | 1.34        |
 | unzip                             |             | 16.02       |
+
+> NB: Dependency has been updated if both old and new version information is present.
+> NB: Dependency has been added if just the new version information is present.
+> NB: Dependency has been removed if new version information isn't present.
 
 ### Subworkflows
 
@@ -107,7 +112,7 @@ Tar is a dark grey color ( #383838), and the Tarasque is a legendary dragon from
 
 ### Subworkflows
 
-| Old name                    | New name                         |
+| old name                    | new name                         |
 | --------------------------- | -------------------------------- |
 | SAMPLESHEET_TO_CHANNEL      | ASSET_TO_CHANNEL                 |
 | CREATE_ALIGN_INDEX_WITH_GFF | CREATE_FROM_FASTA_AND_ANNOTATION |
@@ -115,6 +120,9 @@ Tar is a dark grey color ( #383838), and the Tarasque is a legendary dragon from
 | INDEX_FASTA                 | CREATE_FROM_FASTA_ONLY           |
 | UNCOMPRESS_REFERENCES       | UNCOMPRESS_ASSET                 |
 
-If two subworkflows end up with the same name, it means that they have been merged into one.
+> NB: Subworkflow has been updated if both old and new name is present.
+> NB: Subworkflow has been added if just the new name is present.
+> NB: Subworkflow has been removed if new name isn't present.
+> NB: Subworkflows have been merged if several subworkflows have the same new name.
 
 ### Deprecated
