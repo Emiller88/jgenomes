@@ -1,13 +1,16 @@
 {
     "Run with profile test for WBCEL235 | --input Caenorhabditis_elegans/NCBI/WBcel235.yml": {
         "content": [
-            9,
+            10,
             {
                 "BUILD_INTERVALS": {
                     "gawk": "5.3.0"
                 },
                 "BWAMEM1_INDEX": {
                     "bwa": "0.7.18-r1243-dirty"
+                },
+                "GATK4_CREATESEQUENCEDICTIONARY": {
+                    "gatk4": "4.6.1.0"
                 },
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
@@ -99,6 +102,7 @@
                 "Caenorhabditis_elegans/NCBI/WBcel235/Sequence/STARIndex/GCF_000002985.6/version2.7.11b/sjdbList.out.tab",
                 "Caenorhabditis_elegans/NCBI/WBcel235/Sequence/STARIndex/GCF_000002985.6/version2.7.11b/transcriptInfo.tab",
                 "Caenorhabditis_elegans/NCBI/WBcel235/Sequence/WholeGenomeFasta",
+                "Caenorhabditis_elegans/NCBI/WBcel235/Sequence/WholeGenomeFasta/GCF_000002985.6_WBcel235_genomic.dict",
                 "Caenorhabditis_elegans/NCBI/WBcel235/Sequence/WholeGenomeFasta/GCF_000002985.6_WBcel235_genomic.fna",
                 "Caenorhabditis_elegans/NCBI/WBcel235/Sequence/WholeGenomeFasta/GCF_000002985.6_WBcel235_genomic.fna.fai",
                 "index.json",
@@ -160,6 +164,7 @@
                 "sjdbList.fromGTF.out.tab:md5,4f2624ef95a62a02428294eeb4e5a00a",
                 "sjdbList.out.tab:md5,c2fef538a9a54c9391fd4e47fc71e21e",
                 "transcriptInfo.tab:md5,b3355cc97ab9381c53ebb02684d26350",
+                "GCF_000002985.6_WBcel235_genomic.dict:md5,95224495c9500f3283bbf009ffd0d990",
                 "GCF_000002985.6_WBcel235_genomic.fna:md5,2fa2b1575d9e722f076bafcf3b755fed",
                 "GCF_000002985.6_WBcel235_genomic.fna.fai:md5,5765b3ad41f8ad61dc582fba226214bf",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
@@ -169,6 +174,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.3"
         },
-        "timestamp": "2025-01-08T13:02:55.980449639"
+        "timestamp": "2025-01-09T17:08:15.313945179"
     }
 }

@@ -51,13 +51,16 @@
     },
     "Run with profile test for multiple | --input assets/test/default_multiple.yml": {
         "content": [
-            7,
+            9,
             {
                 "BUILD_INTERVALS": {
                     "gawk": "5.3.0"
                 },
                 "BWAMEM1_INDEX": {
                     "bwa": "0.7.18-r1243-dirty"
+                },
+                "GATK4_CREATESEQUENCEDICTIONARY": {
+                    "gatk4": "4.6.1.0"
                 },
                 "SAMTOOLS_FAIDX": {
                     "samtools": 1.21
@@ -83,6 +86,7 @@
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/BWAIndex/version0.7.18/GRCh38_chr21.pac",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/BWAIndex/version0.7.18/GRCh38_chr21.sa",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/WholeGenomeFasta",
+                "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/WholeGenomeFasta/GRCh38_chr21.dict",
                 "Homo_sapiens/nf-core/references/GRCh38_chr21/Sequence/WholeGenomeFasta/GRCh38_chr21.fa.fai",
                 "Homo_sapiens/nf-core/references/testdata.GRCh38_chr22",
                 "Homo_sapiens/nf-core/references/testdata.GRCh38_chr22/Annotation",
@@ -97,6 +101,7 @@
                 "Homo_sapiens/nf-core/references/testdata.GRCh38_chr22/Sequence/BWAIndex/version0.7.18/genome.pac",
                 "Homo_sapiens/nf-core/references/testdata.GRCh38_chr22/Sequence/BWAIndex/version0.7.18/genome.sa",
                 "Homo_sapiens/nf-core/references/testdata.GRCh38_chr22/Sequence/WholeGenomeFasta",
+                "Homo_sapiens/nf-core/references/testdata.GRCh38_chr22/Sequence/WholeGenomeFasta/genome.dict",
                 "Homo_sapiens/nf-core/references/testdata.GRCh38_chr22/Sequence/WholeGenomeFasta/genome.fasta.fai",
                 "index.json",
                 "multiqc",
@@ -117,6 +122,7 @@
                 "GRCh38_chr21.bwt:md5,a5015025a0ae077c011833bd73651794",
                 "GRCh38_chr21.pac:md5,8c08bed90eb472d0d35451e378e399f3",
                 "GRCh38_chr21.sa:md5,9abb4ddd6fb4eab96b79f48540882329",
+                "GRCh38_chr21.dict:md5,40482944b1a51af140a397e2544b6ed4",
                 "GRCh38_chr21.fa.fai:md5,6ea51e1c1231da5e49212ea9f493d703",
                 "testdata.GRCh38_chr22.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7",
                 "genome.amb:md5,1891c1de381b3a96d4e72f590fde20c1",
@@ -124,14 +130,15 @@
                 "genome.bwt:md5,815eded87e4cb6b0f1daab5c4d6e30af",
                 "genome.pac:md5,8569fbdb2c98c6fb16dfa73d8eacb070",
                 "genome.sa:md5,e7cff62b919448a3a3d0fe4aaf427594",
+                "genome.dict:md5,2433fe2ba31257337bf4c4bd4cb8da15",
                 "genome.fasta.fai:md5,3520cd30e1b100e55f578db9c855f685",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.2"
+            "nextflow": "24.10.3"
         },
-        "timestamp": "2024-12-10T13:44:39.079626708"
+        "timestamp": "2025-01-09T16:59:54.759898863"
     }
 }

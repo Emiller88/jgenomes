@@ -19,6 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- [77](https://github.com/nf-core/references/pull/77) - Fix createsequencedictionary usage
+
 ### Dependencies
 
 | modules                           | old version | new version |
