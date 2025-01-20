@@ -44,7 +44,7 @@ workflow {
         params.validate_params,
         args,
         params.outdir,
-        params.asset,
+        params.input,
     )
 
     // WORKFLOW: Run main workflow
