@@ -29,7 +29,7 @@ workflow PIPELINE_INITIALISATION {
     validate_params   // boolean: Boolean whether to validate parameters against the schema at runtime
     nextflow_cli_args //   array: List of positional nextflow CLI args
     outdir            //  string: The output directory where the results will be saved
-    input             //  string: Path to input samplesheet
+    asset             //  string: Path to asset yaml file
 
     main:
 
@@ -62,9 +62,9 @@ workflow PIPELINE_INITIALISATION {
     )
 
     //
-    // Create channel from input file provided through params.input
+    // Create channel from asset file provided through params.asset
     //
-    ch_asset = Channel.fromList(samplesheetToList(input, "${projectDir}/assets/schema_input.json"))
+    ch_asset = Channel.fromList(samplesheetToList(asset, "${projectDir}/assets/schema_asset.json"))
 
     emit:
     asset    = ch_asset

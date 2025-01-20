@@ -10,17 +10,17 @@
             "type": "object",
             "fa_icon": "fas fa-terminal",
             "description": "Define where the pipeline should find input data and save output data.",
-            "required": ["input", "outdir"],
+            "required": ["asset", "outdir"],
             "properties": {
-                "input": {
+                "asset": {
                     "type": "string",
                     "format": "file-path",
                     "exists": true,
-                    "schema": "assets/schema_input.json",
+                    "schema": "assets/schema_asset.json",
                     "mimetype": "text/csv",
-                    "pattern": "^\\S+\\.(csv|tsv|yaml|yml)$",
-                    "description": "Path to comma-separated file containing information about the samples in the experiment.",
-                    "help_text": "You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row. See [usage docs](https://nf-co.re/references/usage#samplesheet-input).",
+                    "pattern": "^\\S+\\.(yaml|yml)$",
+                    "description": "Path to yaml file containing information about the genome(s) and files to use for building references.",
+                    "help_text": "You will need to create an asset file with information about the genome(s) before running the pipeline. Use this parameter to specify its location. It has to be a yaml file. See [usage docs](https://nf-co.re/references/usage#asset).",
                     "fa_icon": "fas fa-file-csv"
                 },
                 "outdir": {
