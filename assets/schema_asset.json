@@ -26,13 +26,6 @@
                 "errorMessage": "Source of genome must be provided, cannot contain spaces",
                 "meta": ["source"]
             },
-            "source_vcf": {
-                "type": "string",
-                "pattern": "^\\S+$",
-                "errorMessage": "Source of the VCF, cannot contain spaces",
-                "default": "unknown",
-                "meta": ["source_vcf"]
-            },
             "source_version": {
                 "type": "string",
                 "pattern": "^\\S+$",
@@ -213,16 +206,186 @@
                 "errorMessage": "Transcript fasta [can be generated with RSEM], cannot contain spaces"
             },
             "vcf": {
+                "type": "object",
                 "meta": ["vcf"],
-                "type": "string",
-                "pattern": "^\\S+\\.vcf(\\.gz)?$",
-                "errorMessage": "VCF file, cannot contain spaces"
+                "properties": {
+                    "dbsnp": {
+                        "type": "object",
+                        "properties": {
+                            "file": {
+                                "errorMessage": "VCF file (can be bgzipped), cannot contain spaces",
+                                "meta": ["dbsnp"],
+                                "pattern": "^\\S+\\.vcf(\\.gz)?$",
+                                "type": "string"
+                            },
+                            "source": {
+                                "type": "string",
+                                "pattern": "^\\S+$",
+                                "errorMessage": "Source of dbsnp, cannot contain spaces",
+                                "meta": ["source_dbsnp"]
+                            }
+                        }
+                    },
+                    "germline_resource": {
+                        "type": "object",
+                        "properties": {
+                            "file": {
+                                "errorMessage": "VCF file (can be bgzipped), cannot contain spaces",
+                                "meta": ["germline_resource"],
+                                "pattern": "^\\S+\\.vcf(\\.gz)?$",
+                                "type": "string"
+                            },
+                            "source": {
+                                "errorMessage": "Source of germline_resource, cannot contain spaces",
+                                "meta": ["source_germline_resource"],
+                                "pattern": "^\\S+$",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "known_indels": {
+                        "type": "object",
+                        "properties": {
+                            "file": {
+                                "errorMessage": "VCF file (can be bgzipped), cannot contain spaces",
+                                "meta": ["known_indels"],
+                                "pattern": "^\\S+\\.vcf(\\.gz)?$",
+                                "type": "string"
+                            },
+                            "source": {
+                                "errorMessage": "Source of known_indels, cannot contain spaces",
+                                "meta": ["source_known_indels"],
+                                "pattern": "^\\S+$",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "known_snps": {
+                        "type": "object",
+                        "properties": {
+                            "file": {
+                                "errorMessage": "VCF file (can be bgzipped), cannot contain spaces",
+                                "meta": ["known_snps"],
+                                "pattern": "^\\S+\\.vcf(\\.gz)?$",
+                                "type": "string"
+                            },
+                            "source": {
+                                "errorMessage": "Source of known_snps, cannot contain spaces",
+                                "meta": ["source_known_snps"],
+                                "pattern": "^\\S+$",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "pon": {
+                        "type": "object",
+                        "properties": {
+                            "file": {
+                                "errorMessage": "VCF file (can be bgzipped), cannot contain spaces",
+                                "meta": ["pon"],
+                                "pattern": "^\\S+\\.vcf(\\.gz)?$",
+                                "type": "string"
+                            },
+                            "source": {
+                                "errorMessage": "Source of pon, cannot contain spaces",
+                                "meta": ["source_pon"],
+                                "pattern": "^\\S+$",
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
             },
             "vcf_tbi": {
+                "type": "object",
                 "meta": ["vcf_tbi"],
-                "type": "string",
-                "pattern": "^\\S+\\.vcf\\.gz\\.tbi$",
-                "errorMessage": "VCF tabix indexed, cannot contain spaces"
+                "properties": {
+                    "dbsnp": {
+                        "type": "object",
+                        "properties": {
+                            "file": {
+                                "errorMessage": "VCF tabix index, cannot contain spaces",
+                                "meta": ["dbsnp"],
+                                "pattern": "^\\S+\\.vcf\\.gz\\.tbi$",
+                                "type": "string"
+                            },
+                            "source": {
+                                "type": "string",
+                                "pattern": "^\\S+$",
+                                "errorMessage": "Source of dbsnp, cannot contain spaces",
+                                "meta": ["source_dbsnp"]
+                            }
+                        }
+                    },
+                    "germline_resource": {
+                        "type": "object",
+                        "properties": {
+                            "file": {
+                                "errorMessage": "VCF tabix index, cannot contain spaces",
+                                "meta": ["germline_resource"],
+                                "pattern": "^\\S+\\.vcf\\.gz\\.tbi$",
+                                "type": "string"
+                            },
+                            "source": {
+                                "errorMessage": "Source of germline_resource, cannot contain spaces",
+                                "meta": ["source_germline_resource"],
+                                "pattern": "^\\S+$",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "known_indels": {
+                        "type": "object",
+                        "properties": {
+                            "file": {
+                                "errorMessage": "VCF tabix index, cannot contain spaces",
+                                "meta": ["known_indels"],
+                                "pattern": "^\\S+\\.vcf\\.gz\\.tbi$",
+                                "type": "string"
+                            },
+                            "source": {
+                                "errorMessage": "Source of known_indels, cannot contain spaces",
+                                "meta": ["source_known_indels"],
+                                "pattern": "^\\S+$",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "known_snps": {
+                        "type": "object",
+                        "properties": {
+                            "file": {
+                                "errorMessage": "VCF tabix index, cannot contain spaces",
+                                "meta": ["known_snps"],
+                                "pattern": "^\\S+\\.vcf\\.gz\\.tbi$",
+                                "type": "string"
+                            },
+                            "source": {
+                                "errorMessage": "Source of known_snps, cannot contain spaces",
+                                "meta": ["source_known_snps"],
+                                "pattern": "^\\S+$",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "pon": {
+                        "type": "object",
+                        "properties": {
+                            "file": {
+                                "errorMessage": "VCF tabix index, cannot contain spaces",
+                                "meta": ["pon"],
+                                "pattern": "^\\S+\\.vcf\\.gz\\.tbi$",
+                                "type": "string"
+                            },
+                            "source": {
+                                "errorMessage": "Source of pon, cannot contain spaces",
+                                "meta": ["source_pon"],
+                                "pattern": "^\\S+$",
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
             }
         },
         "required": ["genome", "source", "species"]
