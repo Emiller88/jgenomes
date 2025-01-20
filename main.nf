@@ -201,16 +201,16 @@ output {
 */
 
 //
-// WORKFLOW: Run main analysis pipeline depending on type of input
+// WORKFLOW: Build references depending on type of asset and the tools specified
 //
 workflow NFCORE_REFERENCES {
     take:
-    input // channel: asset reference yml file read in from --input
+    asset // channel: asset reference yml file read in from --asset
     tools // list of tools to use to build references
 
     main:
     // WORKFLOW: Run pipeline
-    REFERENCES(input, tools)
+    REFERENCES(asset, tools)
 
     emit:
     reference = REFERENCES.out.reference
