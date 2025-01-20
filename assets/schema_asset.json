@@ -265,31 +265,31 @@
                 "pattern": "^\\S+$",
                 "type": "string"
             },
-            "vcf_tib_dbsnp": {
+            "vcf_tbi_dbsnp": {
                 "errorMessage": "VCF file (can be bgzipped), cannot contain spaces",
                 "meta": ["dbsnp"],
                 "pattern": "^\\S+\\.vcf(\\.gz)?$",
                 "type": "string"
             },
-            "vcf_tib_germline_resource": {
+            "vcf_tbi_germline_resource": {
                 "errorMessage": "VCF file (can be bgzipped), cannot contain spaces",
                 "meta": ["germline_resource"],
                 "pattern": "^\\S+\\.vcf(\\.gz)?$",
                 "type": "string"
             },
-            "vcf_tib_known_indels": {
+            "vcf_tbi_known_indels": {
                 "errorMessage": "VCF file (can be bgzipped), cannot contain spaces",
                 "meta": ["known_indels"],
                 "pattern": "^\\S+\\.vcf(\\.gz)?$",
                 "type": "string"
             },
-            "vcf_tib_known_snps": {
+            "vcf_tbi_known_snps": {
                 "errorMessage": "VCF file (can be bgzipped), cannot contain spaces",
                 "meta": ["known_snps"],
                 "pattern": "^\\S+\\.vcf(\\.gz)?$",
                 "type": "string"
             },
-            "vcf_tib_pon": {
+            "vcf_tbi_pon": {
                 "errorMessage": "VCF file (can be bgzipped), cannot contain spaces",
                 "meta": ["pon"],
                 "pattern": "^\\S+\\.vcf(\\.gz)?$",
