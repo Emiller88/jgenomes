@@ -10,10 +10,12 @@
 
 ## Asset input
 
-You will need to create an asset yaml file with information about the genome(s) and files to use for building references before running the pipeline. Use this parameter to specify its location. It has to be a yaml file.
+You will need to create an asset yaml file with information about the genome(s) and files to use for building references before running the pipeline.
+Use this parameter to specify its location.
+It has to be a yaml file.
 
 ```bash
---asset '[path to asset file]'
+--input '[path to asset file]'
 ```
 
 ### Multiple genomes
@@ -31,7 +33,7 @@ An [example asset](../assets/asset.yml) has been provided with the pipeline.
 The typical command for running the pipeline is as follows:
 
 ```bash
-nextflow run nf-core/references --asset ./asset.yml --outdir ./results  -profile docker
+nextflow run nf-core/references --input ./asset.yml --outdir ./results  -profile docker
 ```
 
 This will launch the pipeline with the `docker` configuration profile. See below for more information about profiles.
@@ -61,7 +63,7 @@ nextflow run nf-core/references -profile docker -params-file params.yaml
 with:
 
 ```yaml title="params.yaml"
-asset: './asset.yml'
+input: './asset.yml'
 outdir: './results/'
 <...>
 ```
