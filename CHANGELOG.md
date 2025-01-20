@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [73](https://github.com/nf-core/references/pull/73) - Update modules
 - [74](https://github.com/nf-core/references/pull/74) - Back to dev
 - [75](https://github.com/nf-core/references/pull/75) - Template update for nf-core/tools v3.1.1
+- [78](https://github.com/nf-core/references/pull/78) - Rename input to asset
 
 ### Fixed
 
