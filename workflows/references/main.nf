@@ -190,8 +190,6 @@ workflow REFERENCES {
             vcf_tbi.map { meta, reference_ -> [meta + [file: 'vcf_tbi'], reference_] },
         )
 
-    reference.view()
-
     emit:
     reference // channel: [meta, *]
     versions  // channel: [versions.yml]

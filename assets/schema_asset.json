@@ -207,7 +207,7 @@
             },
             "vcf_dbsnp": {
                 "errorMessage": "VCF file (can be bgzipped), cannot contain spaces",
-                "meta": ["dbsnp"],
+                "meta": ["vcf_dbsnp"],
                 "pattern": "^\\S+\\.vcf(\\.gz)?$",
                 "type": "string"
             },
@@ -215,83 +215,83 @@
                 "type": "string",
                 "pattern": "^\\S+$",
                 "errorMessage": "Source of dbsnp, cannot contain spaces",
-                "meta": ["source_dbsnp"]
+                "meta": ["vcf_dbsnp_source"]
+            },
+            "vcf_dbsnp_tbi": {
+                "errorMessage": "VCF file (can be bgzipped), cannot contain spaces",
+                "meta": ["vcf_dbsnp_tbi"],
+                "pattern": "^\\S+\\.vcf(\\.gz)?$",
+                "type": "string"
             },
             "vcf_germline_resource": {
                 "errorMessage": "VCF file (can be bgzipped), cannot contain spaces",
-                "meta": ["germline_resource"],
+                "meta": ["vcf_germline_resource"],
                 "pattern": "^\\S+\\.vcf(\\.gz)?$",
                 "type": "string"
             },
             "vcf_germline_resource_source": {
                 "errorMessage": "Source of germline_resource, cannot contain spaces",
-                "meta": ["source_germline_resource"],
+                "meta": ["vcf_germline_resource_source"],
                 "pattern": "^\\S+$",
+                "type": "string"
+            },
+            "vcf_germline_resource_tbi": {
+                "errorMessage": "VCF file (can be bgzipped), cannot contain spaces",
+                "meta": ["vcf_germline_resource_tbi"],
+                "pattern": "^\\S+\\.vcf(\\.gz)?$",
                 "type": "string"
             },
             "vcf_known_indels": {
                 "errorMessage": "VCF file (can be bgzipped), cannot contain spaces",
-                "meta": ["known_indels"],
+                "meta": ["vcf_known_indels"],
                 "pattern": "^\\S+\\.vcf(\\.gz)?$",
                 "type": "string"
             },
             "vcf_known_indels_source": {
                 "errorMessage": "Source of known_indels, cannot contain spaces",
-                "meta": ["source_known_indels"],
+                "meta": ["vcf_known_indels_source"],
                 "pattern": "^\\S+$",
+                "type": "string"
+            },
+            "vcf_known_indels_tbi": {
+                "errorMessage": "VCF file (can be bgzipped), cannot contain spaces",
+                "meta": ["vcf_known_indels_tbi"],
+                "pattern": "^\\S+\\.vcf(\\.gz)?$",
                 "type": "string"
             },
             "vcf_known_snps": {
                 "errorMessage": "VCF file (can be bgzipped), cannot contain spaces",
-                "meta": ["known_snps"],
+                "meta": ["vcf_known_snps"],
                 "pattern": "^\\S+\\.vcf(\\.gz)?$",
                 "type": "string"
             },
             "vcf_known_snps_source": {
                 "errorMessage": "Source of known_snps, cannot contain spaces",
-                "meta": ["source_known_snps"],
+                "meta": ["vcf_known_snps_source"],
                 "pattern": "^\\S+$",
+                "type": "string"
+            },
+            "vcf_known_snps_tbi": {
+                "errorMessage": "VCF file (can be bgzipped), cannot contain spaces",
+                "meta": ["vcf_known_snps_tbi"],
+                "pattern": "^\\S+\\.vcf(\\.gz)?$",
                 "type": "string"
             },
             "vcf_pon": {
                 "errorMessage": "VCF file (can be bgzipped), cannot contain spaces",
-                "meta": ["pon"],
+                "meta": ["vcf_pon"],
                 "pattern": "^\\S+\\.vcf(\\.gz)?$",
                 "type": "string"
             },
             "vcf_pon_source": {
                 "errorMessage": "Source of pon, cannot contain spaces",
-                "meta": ["source_pon"],
+                "meta": ["vcf_pon_source"],
                 "pattern": "^\\S+$",
                 "type": "string"
             },
-            "vcf_tbi_dbsnp": {
+            "vcf_pon_tbi": {
                 "errorMessage": "VCF file (can be bgzipped), cannot contain spaces",
-                "meta": ["dbsnp"],
-                "pattern": "^\\S+\\.vcf(\\.gz)?$",
-                "type": "string"
-            },
-            "vcf_tbi_germline_resource": {
-                "errorMessage": "VCF file (can be bgzipped), cannot contain spaces",
-                "meta": ["germline_resource"],
-                "pattern": "^\\S+\\.vcf(\\.gz)?$",
-                "type": "string"
-            },
-            "vcf_tbi_known_indels": {
-                "errorMessage": "VCF file (can be bgzipped), cannot contain spaces",
-                "meta": ["known_indels"],
-                "pattern": "^\\S+\\.vcf(\\.gz)?$",
-                "type": "string"
-            },
-            "vcf_tbi_known_snps": {
-                "errorMessage": "VCF file (can be bgzipped), cannot contain spaces",
-                "meta": ["known_snps"],
-                "pattern": "^\\S+\\.vcf(\\.gz)?$",
-                "type": "string"
-            },
-            "vcf_tbi_pon": {
-                "errorMessage": "VCF file (can be bgzipped), cannot contain spaces",
-                "meta": ["pon"],
+                "meta": ["vcf_pon_tbi"],
                 "pattern": "^\\S+\\.vcf(\\.gz)?$",
                 "type": "string"
             }

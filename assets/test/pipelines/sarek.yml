@@ -1,5 +1,5 @@
 - genome: testdata.GRCh38_chr22
-  chr_dir: "https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/chr21/sequence/chromosomes.tar.gz"
+  chr_dir: https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/chr21/sequence/chromosomes.tar.gz
   fasta: https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/genome.fasta
   source: nf-core/references
   species: Homo_sapiens
