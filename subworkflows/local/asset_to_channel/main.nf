@@ -252,7 +252,7 @@ workflow ASSET_TO_CHANNEL {
         return null
     }
 
-    vcf = Channel.empty().mix(dbsnp_branch.file, germline_resource_branch.file, known_indels_branch.file, known_snps_branch.file, pon_branch.file)
+    vcf = Channel.empty().mix(dbsnp_branch.file, germline_resource_branch.file, known_indels_branch.file, known_snps_branch.file, pon_branch.file).transpose()
 
     emit:
     ascat_alleles    // channel: [meta, *.ascat_alleles.txt]
