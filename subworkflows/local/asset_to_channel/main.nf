@@ -193,11 +193,12 @@ workflow ASSET_TO_CHANNEL {
 
     dbsnp_branch = asset.branch { meta, _fasta ->
         file: meta.vcf.dbsnp.vcf
+
         // If we already have the vcf_tbi, then we don't need to index the vcf
         def meta_extra = [run_tabix: meta.vcf.dbsnp.vcf_tbi || meta.vcf.dbsnp.vcf.endsWith('.vcf') ? false : true]
         meta_extra += [compress_vcf: meta.vcf.dbsnp.vcf.endsWith('.vcf') ?: false]
         meta_extra += [type: 'dbsnp', source_vcf: meta.vcf.dbsnp.vcf_source]
-        return [reduce(meta) + meta_extra, meta.vcf.dbsnp.vcf]
+        return [reduce(meta) + meta_extra, meta.vcf.dbsnp.vcf.contains('{') ? file(meta.vcf.dbsnp.vcf) : meta.vcf.dbsnp.vcf]
         other: true
         // If the asset doesn't exist, then we return nothing
         return null

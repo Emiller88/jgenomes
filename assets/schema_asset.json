@@ -214,21 +214,9 @@
                         "properties": {
                             "vcf": {
                                 "meta": ["dbsnp"],
-                                "oneOf": [
-                                    {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "string",
-                                            "pattern": "^\\S+\\.vcf(\\.gz)?$",
-                                            "errorMessage": "VCF file (can be bgzipped), cannot contain spaces"
-                                        }
-                                    },
-                                    {
-                                        "type": "string",
-                                        "pattern": "^\\S+\\.vcf(\\.gz)?$",
-                                        "errorMessage": "VCF file (can be bgzipped), cannot contain spaces"
-                                    }
-                                ]
+                                "type": "string",
+                                "pattern": "^\\S+\\.vcf(\\.gz)?$",
+                                "errorMessage": "VCF file (can be bgzipped), cannot contain spaces"
                             },
                             "vcf_tbi": {
                                 "meta": ["dbsnp_tbi"],
