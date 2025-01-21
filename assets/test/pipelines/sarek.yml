@@ -3,9 +3,13 @@
   fasta: https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/genome.fasta
   source: nf-core/references
   species: Homo_sapiens
-  vcf_dbsnp: https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/dbsnp_146.hg38.vcf.gz
-  vcf_dbsnp_source: GATK_BUNDLE
-  vcf_germline_resource: https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/gnomAD.r2.1.1.vcf.gz
-  vcf_germline_resource_source: GATK_BUNDLE
-  vcf_known_indels: https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/mills_and_1000G.indels.vcf.gz
-  vcf_known_indels_source: GATK_BUNDLE
+  vcf:
+    dbsnp:
+      file: https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/dbsnp_146.hg38.vcf.gz
+      source: GATK_BUNDLE
+    germline_resource:
+      file: https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/gnomAD.r2.1.1.vcf.gz
+      source: GATK_BUNDLE
+    known_indels:
+      file: https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/mills_and_1000G.indels.vcf.gz
+      source: GATK_BUNDLE
