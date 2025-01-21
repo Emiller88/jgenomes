@@ -192,78 +192,66 @@ workflow ASSET_TO_CHANNEL {
     // HANDLING OF VCF
 
     dbsnp_branch = asset.branch { meta, _fasta ->
-        file: meta.vcf.dbsnp.file
+        file: meta.vcf.dbsnp.vcf
         // If we already have the vcf_tbi, then we don't need to index the vcf
-        def meta_extra = [run_tabix: meta.vcf_tbi.dbsnp.file || meta.vcf.dbsnp.file.endsWith('.vcf') ? false : true]
-        meta_extra += [compress_vcf: meta.vcf.dbsnp.file.endsWith('.vcf') ?: false]
-        meta_extra += [type: 'dbsnp', source_vcf: meta.vcf.dbsnp.source]
-        return [reduce(meta) + meta_extra, meta.vcf.dbsnp.file]
+        def meta_extra = [run_tabix: meta.vcf.dbsnp.vcf_tbi || meta.vcf.dbsnp.vcf.endsWith('.vcf') ? false : true]
+        meta_extra += [compress_vcf: meta.vcf.dbsnp.vcf.endsWith('.vcf') ?: false]
+        meta_extra += [type: 'dbsnp', source_vcf: meta.vcf.dbsnp.vcf_source]
+        return [reduce(meta) + meta_extra, meta.vcf.dbsnp.vcf]
         other: true
         // If the asset doesn't exist, then we return nothing
         return null
     }
-
-    dbsnp = dbsnp_branch.file
 
     germline_resource_branch = asset.branch { meta, _fasta ->
-        file: meta.vcf.germline_resource.file
+        file: meta.vcf.germline_resource.vcf
         // If we already have the vcf_tbi, then we don't need to index the vcf
-        def meta_extra = [run_tabix: meta.vcf_tbi.germline_resource.file || meta.vcf.germline_resource.file.endsWith('.vcf') ? false : true]
-        meta_extra += [compress_vcf: meta.vcf.germline_resource.file.endsWith('.vcf') ?: false]
-        meta_extra += [type: 'germline_resource', source_vcf: meta.vcf.germline_resource.source]
-        return [reduce(meta) + meta_extra, meta.vcf.germline_resource.file]
+        def meta_extra = [run_tabix: meta.vcf.germline_resource.vcf_tbi || meta.vcf.germline_resource.vcf.endsWith('.vcf') ? false : true]
+        meta_extra += [compress_vcf: meta.vcf.germline_resource.vcf.endsWith('.vcf') ?: false]
+        meta_extra += [type: 'germline_resource', source_vcf: meta.vcf.germline_resource.vcf_source]
+        return [reduce(meta) + meta_extra, meta.vcf.germline_resource.vcf]
         other: true
         // If the asset doesn't exist, then we return nothing
         return null
     }
-
-    germline_resource = germline_resource_branch.file
 
     known_indels_branch = asset.branch { meta, _fasta ->
-        file: meta.vcf.known_indels.file
+        file: meta.vcf.known_indels.vcf
         // If we already have the vcf_tbi, then we don't need to index the vcf
-        def meta_extra = [run_tabix: meta.vcf_tbi.known_indels.file || meta.vcf.known_indels.file.endsWith('.vcf') ? false : true]
-        meta_extra += [compress_vcf: meta.vcf.known_indels.file.endsWith('.vcf') ?: false]
-        meta_extra += [type: 'known_indels', source_vcf: meta.vcf.known_indels.source]
-        return [reduce(meta) + meta_extra, meta.vcf.known_indels.file]
+        def meta_extra = [run_tabix: meta.vcf.known_indels.vcf_tbi || meta.vcf.known_indels.vcf.endsWith('.vcf') ? false : true]
+        meta_extra += [compress_vcf: meta.vcf.known_indels.vcf.endsWith('.vcf') ?: false]
+        meta_extra += [type: 'known_indels', source_vcf: meta.vcf.known_indels.vcf_source]
+        return [reduce(meta) + meta_extra, meta.vcf.known_indels.vcf]
         other: true
         // If the asset doesn't exist, then we return nothing
         return null
     }
-
-    known_indels = known_indels_branch.file
 
     known_snps_branch = asset.branch { meta, _fasta ->
-        file: meta.vcf.known_snps.file
+        file: meta.vcf.known_snps.vcf
         // If we already have the vcf_tbi, then we don't need to index the vcf
-        def meta_extra = [run_tabix: meta.vcf_tbi.known_snps.file || meta.vcf.known_snps.file.endsWith('.vcf') ? false : true]
-        meta_extra += [compress_vcf: meta.vcf.known_snps.file.endsWith('.vcf') ?: false]
-        meta_extra += [type: 'known_snps', source_vcf: meta.vcf.known_snps.source]
-        return [reduce(meta) + meta_extra, meta.vcf.known_snps.file]
+        def meta_extra = [run_tabix: meta.vcf.known_snps.vcf_tbi || meta.vcf.known_snps.vcf.endsWith('.vcf') ? false : true]
+        meta_extra += [compress_vcf: meta.vcf.known_snps.vcf.endsWith('.vcf') ?: false]
+        meta_extra += [type: 'known_snps', source_vcf: meta.vcf.known_snps.vcf_source]
+        return [reduce(meta) + meta_extra, meta.vcf.known_snps.vcf]
         other: true
         // If the asset doesn't exist, then we return nothing
         return null
     }
-
-    known_snps = known_snps_branch.file
 
     pon_branch = asset.branch { meta, _fasta ->
-        file: meta.vcf.pon.file
+        file: meta.vcf.pon.vcf
         // If we already have the vcf_tbi, then we don't need to index the vcf
-        def meta_extra = [run_tabix: meta.vcf_tbi.pon.file || meta.vcf.pon.file.endsWith('.vcf') ? false : true]
-        meta_extra += [compress_vcf: meta.vcf.pon.file.endsWith('.vcf') ?: false]
-        meta_extra += [type: 'pon', source_vcf: meta.vcf.pon.source]
-        return [reduce(meta) + meta_extra, meta.vcf.pon.file]
+        def meta_extra = [run_tabix: meta.vcf.pon.vcf_tbi || meta.vcf.pon.vcf.endsWith('.vcf') ? false : true]
+        meta_extra += [compress_vcf: meta.vcf.pon.vcf.endsWith('.vcf') ?: false]
+        meta_extra += [type: 'pon', source_vcf: meta.vcf.pon.vcf_source]
+        return [reduce(meta) + meta_extra, meta.vcf.pon.vcf]
         other: true
         // If the asset doesn't exist, then we return nothing
         return null
     }
 
-    pon = pon_branch.file
-
-    vcf = Channel.empty().mix(dbsnp, germline_resource, known_indels, known_snps, pon)
-
-    vcf.view()
+    vcf = Channel.empty().mix(dbsnp_branch.file, germline_resource_branch.file, known_indels_branch.file, known_snps_branch.file, pon_branch.file)
 
     emit:
     ascat_alleles    // channel: [meta, *.ascat_alleles.txt]

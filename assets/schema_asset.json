@@ -212,14 +212,20 @@
                     "dbsnp": {
                         "type": "object",
                         "properties": {
-                            "file": {
+                            "vcf": {
                                 "meta": ["dbsnp"],
                                 "type": "string",
                                 "pattern": "^\\S+\\.vcf(\\.gz)?$",
                                 "errorMessage": "VCF file (can be bgzipped), cannot contain spaces"
                             },
-                            "source": {
-                                "meta": ["source_dbsnp"],
+                            "vcf_tbi": {
+                                "meta": ["dbsnp_tbi"],
+                                "type": "string",
+                                "pattern": "^\\S+\\.vcf\\.gz\\.tbi?$",
+                                "errorMessage": "VCF tabix index, cannot contain spaces"
+                            },
+                            "vcf_source": {
+                                "meta": ["dbsnp_source"],
                                 "type": "string",
                                 "pattern": "^\\S+$",
                                 "errorMessage": "Source of dbsnp, cannot contain spaces"
@@ -229,14 +235,20 @@
                     "germline_resource": {
                         "type": "object",
                         "properties": {
-                            "file": {
+                            "vcf": {
                                 "meta": ["germline_resource"],
                                 "type": "string",
                                 "pattern": "^\\S+\\.vcf(\\.gz)?$",
                                 "errorMessage": "VCF file (can be bgzipped), cannot contain spaces"
                             },
-                            "source": {
-                                "meta": ["source_germline_resource"],
+                            "vcf_tbi": {
+                                "meta": ["germline_resource_tbi"],
+                                "type": "string",
+                                "pattern": "^\\S+\\.vcf\\.gz\\.tbi?$",
+                                "errorMessage": "VCF tabix index, cannot contain spaces"
+                            },
+                            "vcf_source": {
+                                "meta": ["germline_resource_source"],
                                 "type": "string",
                                 "pattern": "^\\S+$",
                                 "errorMessage": "Source of germline_resource, cannot contain spaces"
@@ -246,14 +258,20 @@
                     "known_indels": {
                         "type": "object",
                         "properties": {
-                            "file": {
+                            "vcf": {
                                 "meta": ["known_indels"],
                                 "type": "string",
                                 "pattern": "^\\S+\\.vcf(\\.gz)?$",
                                 "errorMessage": "VCF file (can be bgzipped), cannot contain spaces"
                             },
-                            "source": {
-                                "meta": ["source_known_indels"],
+                            "vcf_tbi": {
+                                "meta": ["known_indels_tbi"],
+                                "type": "string",
+                                "pattern": "^\\S+\\.vcf\\.gz\\.tbi?$",
+                                "errorMessage": "VCF tabix index, cannot contain spaces"
+                            },
+                            "vcf_source": {
+                                "meta": ["known_indels_source"],
                                 "type": "string",
                                 "pattern": "^\\S+$",
                                 "errorMessage": "Source of known_indels, cannot contain spaces"
@@ -263,14 +281,20 @@
                     "known_snps": {
                         "type": "object",
                         "properties": {
-                            "file": {
+                            "vcf": {
                                 "meta": ["known_snps"],
                                 "type": "string",
                                 "pattern": "^\\S+\\.vcf(\\.gz)?$",
                                 "errorMessage": "VCF file (can be bgzipped), cannot contain spaces"
                             },
-                            "source": {
-                                "meta": ["source_known_snps"],
+                            "vcf_tbi": {
+                                "meta": ["known_snps_tbi"],
+                                "type": "string",
+                                "pattern": "^\\S+\\.vcf\\.gz\\.tbi?$",
+                                "errorMessage": "VCF tabix index, cannot contain spaces"
+                            },
+                            "vcf_source": {
+                                "meta": ["known_snps_source"],
                                 "type": "string",
                                 "pattern": "^\\S+$",
                                 "errorMessage": "Source of known_snps, cannot contain spaces"
@@ -280,105 +304,20 @@
                     "pon": {
                         "type": "object",
                         "properties": {
-                            "file": {
+                            "vcf": {
                                 "meta": ["pon"],
                                 "type": "string",
                                 "pattern": "^\\S+\\.vcf(\\.gz)?$",
                                 "errorMessage": "VCF file (can be bgzipped), cannot contain spaces"
                             },
-                            "source": {
-                                "meta": ["source_pon"],
+                            "vcf_tbi": {
+                                "meta": ["pon_tbi"],
                                 "type": "string",
-                                "pattern": "^\\S+$",
-                                "errorMessage": "Source of pon, cannot contain spaces"
-                            }
-                        }
-                    }
-                }
-            },
-            "vcf_tbi": {
-                "type": "object",
-                "meta": ["vcf_tbi"],
-                "properties": {
-                    "dbsnp": {
-                        "type": "object",
-                        "properties": {
-                            "file": {
-                                "meta": ["dbsnp"],
-                                "type": "string",
-                                "pattern": "^\\S+\\.vcf\\.gz\\.tbi$",
+                                "pattern": "^\\S+\\.vcf\\.gz\\.tbi?$",
                                 "errorMessage": "VCF tabix index, cannot contain spaces"
                             },
-                            "source": {
-                                "meta": ["source_dbsnp"],
-                                "type": "string",
-                                "pattern": "^\\S+$",
-                                "errorMessage": "Source of dbsnp, cannot contain spaces"
-                            }
-                        }
-                    },
-                    "germline_resource": {
-                        "type": "object",
-                        "properties": {
-                            "file": {
-                                "meta": ["germline_resource"],
-                                "type": "string",
-                                "pattern": "^\\S+\\.vcf\\.gz\\.tbi$",
-                                "errorMessage": "VCF tabix index, cannot contain spaces"
-                            },
-                            "source": {
-                                "meta": ["source_germline_resource"],
-                                "type": "string",
-                                "pattern": "^\\S+$",
-                                "errorMessage": "Source of germline_resource, cannot contain spaces"
-                            }
-                        }
-                    },
-                    "known_indels": {
-                        "type": "object",
-                        "properties": {
-                            "file": {
-                                "meta": ["known_indels"],
-                                "type": "string",
-                                "pattern": "^\\S+\\.vcf\\.gz\\.tbi$",
-                                "errorMessage": "VCF tabix index, cannot contain spaces"
-                            },
-                            "source": {
-                                "meta": ["source_known_indels"],
-                                "type": "string",
-                                "pattern": "^\\S+$",
-                                "errorMessage": "Source of known_indels, cannot contain spaces"
-                            }
-                        }
-                    },
-                    "known_snps": {
-                        "type": "object",
-                        "properties": {
-                            "file": {
-                                "meta": ["known_snps"],
-                                "type": "string",
-                                "pattern": "^\\S+\\.vcf\\.gz\\.tbi$",
-                                "errorMessage": "VCF tabix index, cannot contain spaces"
-                            },
-                            "source": {
-                                "meta": ["source_known_snps"],
-                                "type": "string",
-                                "pattern": "^\\S+$",
-                                "errorMessage": "Source of known_snps, cannot contain spaces"
-                            }
-                        }
-                    },
-                    "pon": {
-                        "type": "object",
-                        "properties": {
-                            "file": {
-                                "meta": ["pon"],
-                                "type": "string",
-                                "pattern": "^\\S+\\.vcf\\.gz\\.tbi$",
-                                "errorMessage": "VCF tabix index, cannot contain spaces"
-                            },
-                            "source": {
-                                "meta": ["source_pon"],
+                            "vcf_source": {
+                                "meta": ["pon_source"],
                                 "type": "string",
                                 "pattern": "^\\S+$",
                                 "errorMessage": "Source of pon, cannot contain spaces"
