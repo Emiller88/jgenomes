@@ -1,30 +1,28 @@
-- genome: "GRCh38_chr21"
-  fasta: "https://raw.githubusercontent.com/nf-core/test-datasets/references/references/GRCh38_chr21/GRCh38_chr21.fa"
-  fasta_dict: "https://raw.githubusercontent.com/nf-core/test-datasets/references/references/GRCh38_chr21/GRCh38_chr21.dict"
-  fasta_fai: "https://raw.githubusercontent.com/nf-core/test-datasets/references/references/GRCh38_chr21/GRCh38_chr21.fa.fai"
-  fasta_sizes: "https://raw.githubusercontent.com/nf-core/test-datasets/references/references/GRCh38_chr21/GRCh38_chr21.fa.sizes"
-  gff: "https://raw.githubusercontent.com/nf-core/test-datasets/references/references/GRCh38_chr21/genes_chr21.gff"
-  gtf: "https://raw.githubusercontent.com/nf-core/test-datasets/references/references/GRCh38_chr21/GRCh38_chr21.gtf"
-  intervals_bed: "https://raw.githubusercontent.com/nf-core/test-datasets/references/references/GRCh38_chr21/GRCh38_chr21.bed"
-  mito_name: "MT"
-  readme: "https://raw.githubusercontent.com/nf-core/test-datasets/references/references/GRCh38_chr21/README.md"
-  source: "nf-core/references"
-  source_vcf: "GATK_BUNDLE"
-  species: "Homo_sapiens"
-  splice_sites: "https://raw.githubusercontent.com/nf-core/test-datasets/references/references/GRCh38_chr21/genes_chr21.splice_sites.txt"
-  transcript_fasta: "https://raw.githubusercontent.com/nf-core/test-datasets/references/references/GRCh38_chr21/genome.transcripts.fa"
-  vcf: "https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/dbsnp_146.hg38.vcf.gz"
-  vcf_tbi: "https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/dbsnp_146.hg38.vcf.gz.tbi"
-  # macs_gsize:                "1.2e7"
-- genome: "GRCh38_chr21"
-  source: "nf-core/references"
-  source_vcf: "GATK_BUNDLE"
-  species: "Homo_sapiens"
-  vcf: "https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/gnomAD.r2.1.1.vcf.gz"
-  vcf_tbi: "https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/gnomAD.r2.1.1.vcf.gz.tbi"
-- genome: "GRCh38_chr21"
-  source: "nf-core/references"
-  source_vcf: "GATK_BUNDLE"
-  species: "Homo_sapiens"
-  vcf: "https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/mills_and_1000G.indels.vcf.gz"
-  vcf_tbi: "https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/mills_and_1000G.indels.vcf.gz.tbi"
+- genome: GRCh38_chr21
+  fasta: https://raw.githubusercontent.com/nf-core/test-datasets/references/references/GRCh38_chr21/GRCh38_chr21.fa
+  fasta_dict: https://raw.githubusercontent.com/nf-core/test-datasets/references/references/GRCh38_chr21/GRCh38_chr21.dict
+  fasta_fai: https://raw.githubusercontent.com/nf-core/test-datasets/references/references/GRCh38_chr21/GRCh38_chr21.fa.fai
+  fasta_sizes: https://raw.githubusercontent.com/nf-core/test-datasets/references/references/GRCh38_chr21/GRCh38_chr21.fa.sizes
+  gff: https://raw.githubusercontent.com/nf-core/test-datasets/references/references/GRCh38_chr21/genes_chr21.gff
+  gtf: https://raw.githubusercontent.com/nf-core/test-datasets/references/references/GRCh38_chr21/GRCh38_chr21.gtf
+  intervals_bed: https://raw.githubusercontent.com/nf-core/test-datasets/references/references/GRCh38_chr21/GRCh38_chr21.bed
+  mito_name: MT
+  readme: https://raw.githubusercontent.com/nf-core/test-datasets/references/references/GRCh38_chr21/README.md
+  source: nf-core/references
+  species: Homo_sapiens
+  splice_sites: https://raw.githubusercontent.com/nf-core/test-datasets/references/references/GRCh38_chr21/genes_chr21.splice_sites.txt
+  transcript_fasta: https://raw.githubusercontent.com/nf-core/test-datasets/references/references/GRCh38_chr21/genome.transcripts.fa
+  # macs_gsize:                1.2e7
+  vcf:
+    dbsnp:
+      vcf: https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/dbsnp_146.hg38.vcf.gz
+      vcf_tbi: https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/dbsnp_146.hg38.vcf.gz.tbi
+      vcf_source: GATK_BUNDLE
+    germline_resource:
+      vcf: https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/gnomAD.r2.1.1.vcf.gz
+      vcf_tbi: https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/gnomAD.r2.1.1.vcf.gz.tbi
+      vcf_source: GATK_BUNDLE
+    known_indels:
+      vcf: https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/mills_and_1000G.indels.vcf.gz
+      vcf_tbi: https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/mills_and_1000G.indels.vcf.gz.tbi
+      vcf_source: GATK_BUNDLE
