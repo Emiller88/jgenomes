@@ -14,7 +14,7 @@ workflow REFERENCES {
 
     // Create channels from the input file(s)
     // Channels are empty when no assets are corresponding
-    ASSET_TO_CHANNEL(asset)
+    ASSET_TO_CHANNEL(asset, tools)
 
     intervals_bed = ASSET_TO_CHANNEL.out.intervals_bed
     fasta_dict = ASSET_TO_CHANNEL.out.fasta_dict

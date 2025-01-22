@@ -1,5 +1,36 @@
 {
-    "Run with profile test for sarek | --input references/assets GRCh38_chr22.yml": {
+    "Run with profile test for sarek | --input references/assets GRCh38_chr22_published.yml": {
+        "content": [
+            1,
+            {
+                "Workflow": {
+                    "nf-core/references": "v1.0.0dev"
+                }
+            },
+            [
+                "index.json",
+                "multiqc",
+                "multiqc/multiqc_data",
+                "multiqc/multiqc_data/multiqc.log",
+                "multiqc/multiqc_data/multiqc_citations.txt",
+                "multiqc/multiqc_data/multiqc_data.json",
+                "multiqc/multiqc_data/multiqc_software_versions.txt",
+                "multiqc/multiqc_data/multiqc_sources.txt",
+                "multiqc/multiqc_report.html",
+                "pipeline_info",
+                "pipeline_info/nf_core_references_software_mqc_versions.yml"
+            ],
+            [
+                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.4"
+        },
+        "timestamp": "2025-01-22T18:54:40.668010691"
+    },
+    "Run with profile test for sarek | --input references/assets GRCh38_chr22_source.yml": {
         "content": [
             10,
             {
@@ -109,6 +140,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.4"
         },
-        "timestamp": "2025-01-22T17:18:50.967435284"
+        "timestamp": "2025-01-22T18:47:05.24652551"
     }
 }

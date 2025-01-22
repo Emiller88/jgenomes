@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - [77](https://github.com/nf-core/references/pull/77) - Fix createsequencedictionary usage
+- [81](https://github.com/nf-core/references/pull/81) - Fix fasta_fai unnecessary regeneration
 
 ### Dependencies
 
