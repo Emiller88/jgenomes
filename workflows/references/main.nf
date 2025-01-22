@@ -186,8 +186,8 @@ workflow REFERENCES {
             splice_sites.map { meta, reference_ -> [meta + [file: 'splice_sites'], reference_] },
             star_index.map { meta, reference_ -> [meta + [file: 'star_index'], reference_] },
             transcript_fasta.map { meta, reference_ -> [meta + [file: 'transcript_fasta'], reference_] },
-            vcf.map { meta, reference_ -> [meta + [file: 'vcf'], reference_] },
-            vcf_tbi.map { meta, reference_ -> [meta + [file: 'vcf_tbi'], reference_] },
+            vcf.map { meta, reference_ -> [meta + [file: "${meta.type}_vcf"], reference_] },
+            vcf_tbi.map { meta, reference_ -> [meta + [file: "${meta.type}_vcf_tbi"], reference_] },
         )
 
     emit:

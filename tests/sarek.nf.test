@@ -4,13 +4,13 @@ nextflow_pipeline {
     script "../main.nf"
     tag "pipeline"
 
-    test("Run with profile test for sarek | --input assets/test/pipelines/sarek.yml") {
+    test("Run with profile test for sarek | --input references/assets GRCh38_chr22.yml") {
 
         options "-output-dir $outputDir"
 
         when {
             params {
-                input  = "${projectDir}/assets/test/pipelines/sarek.yml"
+                input  = "https://raw.githubusercontent.com/nf-core/references-assets/refs/heads/main/assets/test/sarek/GRCh38_chr22.yml"
                 outdir = "$outputDir"
                 tools  = 'bwamem1,bwamem2,createsequencedictionary,dragmap,faidx,intervals,msisensorpro,tabix'
             }

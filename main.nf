@@ -176,10 +176,10 @@ output {
                 else if (meta.file == "transcript_fasta") {
                     "${meta.species}/${meta.source}/${meta.genome}/Sequence/TranscriptFasta/${file}"
                 }
-                else if (meta.file == "vcf") {
+                else if (meta.file == "${meta.type}_vcf") {
                     "${meta.species}/${meta.source}/${meta.genome}/Annotation/${meta.source_vcf}/${file}"
                 }
-                else if (meta.file == "vcf_tbi") {
+                else if (meta.file == "${meta.type}_vcf_tbi") {
                     "${meta.species}/${meta.source}/${meta.genome}/Annotation/${meta.source_vcf}/${file}"
                 }
                 else {
