@@ -1,6 +1,7 @@
 workflow ASSET_TO_CHANNEL {
     take:
     asset // channel: [meta, fasta]
+    tools // List: Can contain any combination of tools of the list of available tools, or just no_tools
 
     main:
     // All the files and meta data are contained in the meta map (except for fasta)
@@ -83,7 +84,7 @@ workflow ASSET_TO_CHANNEL {
         meta_extra += [run_bwamem2: meta.bwamem2_index ? false : true]
         meta_extra += [run_createsequencedictionary: meta.fasta_dict ? false : true]
         meta_extra += [run_dragmap: meta.dragmap_hashtable ? false : true]
-        meta_extra += [run_faidx: meta.fasta_fai && meta.fasta_sizes ? false : true]
+        meta_extra += [run_faidx: meta.fasta_fai && (meta.fasta_sizes || !tools.contains('sizes')) ? false : true]
         meta_extra += [run_hisat2: meta.hisat2_index ? false : true]
         meta_extra += [run_intervals: meta.intervals_bed ? false : true]
         meta_extra += [run_kallisto: meta.kallisto_index ? false : true]
@@ -99,7 +100,6 @@ workflow ASSET_TO_CHANNEL {
     }
     fasta = fasta_branch.file
 
-
     fasta_dict_branch = asset.branch { meta, _fasta ->
         file: meta.fasta_dict
         return [reduce(meta), meta.fasta_dict]
@@ -108,7 +108,6 @@ workflow ASSET_TO_CHANNEL {
         return null
     }
     fasta_dict = fasta_dict_branch.file
-
 
     // If we have intervals_bed, then we don't need to run faidx
     fasta_fai_branch = asset.branch { meta, _fasta ->
@@ -122,7 +121,6 @@ workflow ASSET_TO_CHANNEL {
     }
     fasta_fai = fasta_fai_branch.file
 
-
     fasta_sizes_branch = asset.branch { meta, _fasta ->
         file: meta.fasta_sizes
         return [reduce(meta), meta.fasta_sizes]
@@ -131,7 +129,6 @@ workflow ASSET_TO_CHANNEL {
         return null
     }
     fasta_sizes = fasta_sizes_branch.file
-
 
     gff_branch = asset.branch { meta, fasta_ ->
         file: meta.gff
@@ -148,7 +145,6 @@ workflow ASSET_TO_CHANNEL {
     }
     gff = gff_branch.file
 
-
     gtf_branch = asset.branch { meta, _fasta ->
         file: meta.gtf
         // If ends with .gz, decompress it
@@ -162,7 +158,6 @@ workflow ASSET_TO_CHANNEL {
         return null
     }
     gtf = gtf_branch.file
-
 
     splice_sites_branch = asset.branch { meta, _fasta ->
         file: meta.splice_sites

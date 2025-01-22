@@ -1,23 +1,13 @@
 {
     "Run with profile test for sarek | --input references/assets GRCh38_chr22_published.yml": {
         "content": [
-            2,
+            1,
             {
-                "SAMTOOLS_FAIDX": {
-                    "samtools": 1.21
-                },
                 "Workflow": {
                     "nf-core/references": "v1.0.0dev"
                 }
             },
             [
-                "Homo_sapiens",
-                "Homo_sapiens/nf-core",
-                "Homo_sapiens/nf-core/references",
-                "Homo_sapiens/nf-core/references/GRCh38_chr22",
-                "Homo_sapiens/nf-core/references/GRCh38_chr22/Sequence",
-                "Homo_sapiens/nf-core/references/GRCh38_chr22/Sequence/WholeGenomeFasta",
-                "Homo_sapiens/nf-core/references/GRCh38_chr22/Sequence/WholeGenomeFasta/genome.fasta.fai",
                 "index.json",
                 "multiqc",
                 "multiqc/multiqc_data",
@@ -31,7 +21,6 @@
                 "pipeline_info/nf_core_references_software_mqc_versions.yml"
             ],
             [
-                "genome.fasta.fai:md5,3520cd30e1b100e55f578db9c855f685",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
             ]
         ],
@@ -39,7 +28,7 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.4"
         },
-        "timestamp": "2025-01-22T18:47:27.582029757"
+        "timestamp": "2025-01-22T18:54:40.668010691"
     },
     "Run with profile test for sarek | --input references/assets GRCh38_chr22_source.yml": {
         "content": [
