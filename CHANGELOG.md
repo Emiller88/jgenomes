@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [75](https://github.com/nf-core/references/pull/75) - Template update for nf-core/tools v3.1.1
 - [78](https://github.com/nf-core/references/pull/78) - Rename input to asset
 - [79](https://github.com/nf-core/references/pull/79) - Improve VCF handling and refactor schema for VCFs
+- [80](https://github.com/nf-core/references/pull/80) - Improve VCF publishing in index
 
 ### Fixed
 
