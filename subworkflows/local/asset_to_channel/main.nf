@@ -76,7 +76,7 @@ workflow ASSET_TO_CHANNEL {
     fasta_branch = asset.branch { meta, _readme ->
         file: meta.fasta
         // If ends with .gz, decompress it
-        def meta_extra = [decompress_readme: meta.fasta.endsWith('.gz') ?: false]
+        def meta_extra = [decompress_fasta: meta.fasta.endsWith('.gz') ?: false]
         // If any of the asset exists, then adding run_tools to false and skip the asset creation from the fasta file
         meta_extra += [run_bowtie1: meta.bowtie1_index ? false : true]
         meta_extra += [run_bowtie2: meta.bowtie2_index ? false : true]
