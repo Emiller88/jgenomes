@@ -13,16 +13,12 @@
   splice_sites: https://raw.githubusercontent.com/nf-core/test-datasets/references/references/GRCh38_chr21/genes_chr21.splice_sites.txt
   transcript_fasta: https://raw.githubusercontent.com/nf-core/test-datasets/references/references/GRCh38_chr21/genome.transcripts.fa
   # macs_gsize:                1.2e7
-  vcf:
-    dbsnp:
-      vcf: https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/dbsnp_146.hg38.vcf.gz
-      vcf_tbi: https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/dbsnp_146.hg38.vcf.gz.tbi
-      vcf_source: GATK_BUNDLE
-    germline_resource:
-      vcf: https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/gnomAD.r2.1.1.vcf.gz
-      vcf_tbi: https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/gnomAD.r2.1.1.vcf.gz.tbi
-      vcf_source: GATK_BUNDLE
-    known_indels:
-      vcf: https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/mills_and_1000G.indels.vcf.gz
-      vcf_tbi: https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/mills_and_1000G.indels.vcf.gz.tbi
-      vcf_source: GATK_BUNDLE
+  vcf_dbsnp_vcf: https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/dbsnp_146.hg38.vcf.gz
+  vcf_dbsnp_vcf_tbi: https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/dbsnp_146.hg38.vcf.gz.tbi
+  vcf_dbsnp_vcf_source: GATK_BUNDLE
+  vcf_germline_resource_vcf: https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/gnomAD.r2.1.1.vcf.gz
+  vcf_germline_resource_vcf_tbi: https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/gnomAD.r2.1.1.vcf.gz.tbi
+  vcf_germline_resource_vcf_source: GATK_BUNDLE
+  vcf_known_indels_vcf: https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/mills_and_1000G.indels.vcf.gz
+  vcf_known_indels_vcf_tbi: https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/mills_and_1000G.indels.vcf.gz.tbi
+  vcf_known_indels_vcf_source: GATK_BUNDLE

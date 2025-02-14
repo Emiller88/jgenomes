@@ -10,7 +10,7 @@ nextflow_pipeline {
 
         when {
             params {
-                input  = 'https://raw.githubusercontent.com/nf-core/references-assets/refs/heads/main/assets/genomes/Caenorhabditis_elegans/NCBI/WBcel235.yml'
+                input  = 'https://raw.githubusercontent.com/nf-core/references-assets/main/genomes_source/Caenorhabditis_elegans/NCBI/WBcel235.yml'
                 outdir = "$outputDir"
                 tools  = 'bwamem1,createsequencedictionary,faidx,intervals,rsem,star'
             }

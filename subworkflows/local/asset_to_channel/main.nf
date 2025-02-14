@@ -14,7 +14,7 @@ workflow ASSET_TO_CHANNEL {
     // Add a field here if it is a relevant meta data
     def reduce = { meta -> meta.subMap(['genome', 'id', 'source', 'source_version', 'species']) }
 
-    ascat_alleles_branch = asset.branch { meta, _fasta ->
+    ascat_alleles_branch = asset.branch { meta, _readme ->
         file: meta.ascat_alleles
         def meta_extra = [decompress_ascat_alleles: meta.ascat_alleles.endsWith('.zip') ?: false]
         return [reduce(meta) + meta_extra, meta.ascat_alleles]
@@ -24,7 +24,7 @@ workflow ASSET_TO_CHANNEL {
     }
     ascat_alleles = ascat_alleles_branch.file
 
-    ascat_loci_branch = asset.branch { meta, _fasta ->
+    ascat_loci_branch = asset.branch { meta, _readme ->
         file: meta.ascat_loci
         def meta_extra = [decompress_ascat_loci: meta.ascat_loci.endsWith('.zip') ?: false]
         return [reduce(meta) + meta_extra, meta.ascat_loci]
@@ -34,7 +34,7 @@ workflow ASSET_TO_CHANNEL {
     }
     ascat_loci = ascat_loci_branch.file
 
-    ascat_loci_gc_branch = asset.branch { meta, _fasta ->
+    ascat_loci_gc_branch = asset.branch { meta, _readme ->
         file: meta.ascat_loci_gc
         def meta_extra = [decompress_ascat_loci_gc: meta.ascat_loci_gc.endsWith('.zip') ?: false]
         return [reduce(meta) + meta_extra, meta.ascat_loci_gc]
@@ -44,7 +44,7 @@ workflow ASSET_TO_CHANNEL {
     }
     ascat_loci_gc = ascat_loci_gc_branch.file
 
-    ascat_loci_rt_branch = asset.branch { meta, _fasta ->
+    ascat_loci_rt_branch = asset.branch { meta, _readme ->
         file: meta.ascat_loci_rt
         def meta_extra = [decompress_ascat_loci_rt: meta.ascat_loci_rt.endsWith('.zip') ?: false]
         return [reduce(meta) + meta_extra, meta.ascat_loci_rt]
@@ -54,7 +54,7 @@ workflow ASSET_TO_CHANNEL {
     }
     ascat_loci_rt = ascat_loci_rt_branch.file
 
-    chr_dir_branch = asset.branch { meta, _fasta ->
+    chr_dir_branch = asset.branch { meta, _readme ->
         file: meta.chr_dir
         def meta_extra = [decompress_chr_dir: meta.chr_dir.endsWith('.tar.gz') ?: false]
         return [reduce(meta) + meta_extra, meta.chr_dir]
@@ -64,7 +64,7 @@ workflow ASSET_TO_CHANNEL {
     }
     chr_dir = chr_dir_branch.file
 
-    intervals_bed_branch = asset.branch { meta, _fasta ->
+    intervals_bed_branch = asset.branch { meta, _readme ->
         file: meta.intervals_bed
         return [reduce(meta), meta.intervals_bed]
         other: true
@@ -73,10 +73,10 @@ workflow ASSET_TO_CHANNEL {
     }
     intervals_bed = intervals_bed_branch.file
 
-    fasta_branch = asset.branch { meta, fasta_ ->
-        file: fasta_
+    fasta_branch = asset.branch { meta, _readme ->
+        file: meta.fasta
         // If ends with .gz, decompress it
-        def meta_extra = [decompress_fasta: fasta_.endsWith('.gz') ?: false]
+        def meta_extra = [decompress_fasta: meta.fasta.endsWith('.gz') ?: false]
         // If any of the asset exists, then adding run_tools to false and skip the asset creation from the fasta file
         meta_extra += [run_bowtie1: meta.bowtie1_index ? false : true]
         meta_extra += [run_bowtie2: meta.bowtie2_index ? false : true]
@@ -93,14 +93,14 @@ workflow ASSET_TO_CHANNEL {
         meta_extra += [run_rsem_make_transcript_fasta: meta.transcript_fasta ? false : true]
         meta_extra += [run_salmon: meta.salmon_index ? false : true]
         meta_extra += [run_star: meta.star_index ? false : true]
-        return [reduce(meta) + meta_extra, fasta_]
+        return [reduce(meta) + meta_extra, meta.fasta]
         other: true
         // If the asset doesn't exist, then we return nothing
         return null
     }
     fasta = fasta_branch.file
 
-    fasta_dict_branch = asset.branch { meta, _fasta ->
+    fasta_dict_branch = asset.branch { meta, _readme ->
         file: meta.fasta_dict
         return [reduce(meta), meta.fasta_dict]
         other: true
@@ -110,7 +110,7 @@ workflow ASSET_TO_CHANNEL {
     fasta_dict = fasta_dict_branch.file
 
     // If we have intervals_bed, then we don't need to run faidx
-    fasta_fai_branch = asset.branch { meta, _fasta ->
+    fasta_fai_branch = asset.branch { meta, _readme ->
         file: meta.fasta_fai
         // If we have intervals_bed, then we don't need to run faidx
         def meta_extra = [run_intervals: meta.intervals_bed ? false : true]
@@ -121,7 +121,7 @@ workflow ASSET_TO_CHANNEL {
     }
     fasta_fai = fasta_fai_branch.file
 
-    fasta_sizes_branch = asset.branch { meta, _fasta ->
+    fasta_sizes_branch = asset.branch { meta, _readme ->
         file: meta.fasta_sizes
         return [reduce(meta), meta.fasta_sizes]
         other: true
@@ -130,13 +130,13 @@ workflow ASSET_TO_CHANNEL {
     }
     fasta_sizes = fasta_sizes_branch.file
 
-    gff_branch = asset.branch { meta, fasta_ ->
+    gff_branch = asset.branch { meta, _readme ->
         file: meta.gff
         // If ends with .gz, decompress it
         def meta_extra = [decompress_gff: meta.gff.endsWith('.gz') ?: false]
         // If any of the asset exists, then adding run_tools to false and skip the asset creation from the annotation derived file
         // (gff, gtf or transcript_fasta)
-        meta_extra += [run_gffread: fasta_ && !meta.gtf ?: false]
+        meta_extra += [run_gffread: meta.fasta && !meta.gtf ?: false]
         meta_extra += [run_hisat2: meta.splice_sites ? false : true]
         return [reduce(meta) + meta_extra, meta.gff]
         other: true
@@ -145,7 +145,7 @@ workflow ASSET_TO_CHANNEL {
     }
     gff = gff_branch.file
 
-    gtf_branch = asset.branch { meta, _fasta ->
+    gtf_branch = asset.branch { meta, _readme ->
         file: meta.gtf
         // If ends with .gz, decompress it
         def meta_extra = [decompress_gtf: meta.gtf.endsWith('.gz') ?: false]
@@ -159,7 +159,7 @@ workflow ASSET_TO_CHANNEL {
     }
     gtf = gtf_branch.file
 
-    splice_sites_branch = asset.branch { meta, _fasta ->
+    splice_sites_branch = asset.branch { meta, _readme ->
         file: meta.splice_sites
         return [reduce(meta), meta.splice_sites]
         other: true
@@ -168,7 +168,7 @@ workflow ASSET_TO_CHANNEL {
     }
     splice_sites = splice_sites_branch.file
 
-    transcript_fasta_branch = asset.branch { meta, _fasta ->
+    transcript_fasta_branch = asset.branch { meta, _readme ->
         file: meta.transcript_fasta
         // If any of the asset exists, then adding run_tools to false and skip the asset creation from the annotation derived file
         // (gff, gtf or transcript_fasta)
@@ -186,62 +186,62 @@ workflow ASSET_TO_CHANNEL {
 
     // HANDLING OF VCF
 
-    dbsnp_branch = asset.branch { meta, _fasta ->
-        file: meta.vcf.dbsnp.vcf
+    dbsnp_branch = asset.branch { meta, _readme ->
+        file: meta.vcf_dbsnp_vcf
 
         // If we already have the vcf_tbi, then we don't need to index the vcf
-        def meta_extra = [run_tabix: meta.vcf.dbsnp.vcf_tbi || meta.vcf.dbsnp.vcf.endsWith('.vcf') ? false : true]
-        meta_extra += [compress_vcf: meta.vcf.dbsnp.vcf.endsWith('.vcf') ?: false]
-        meta_extra += [type: 'dbsnp', source_vcf: meta.vcf.dbsnp.vcf_source]
-        return [reduce(meta) + meta_extra, meta.vcf.dbsnp.vcf.contains('{') ? file(meta.vcf.dbsnp.vcf) : meta.vcf.dbsnp.vcf]
+        def meta_extra = [run_tabix: meta.vcf_dbsnp_vcf_tbi || meta.vcf_dbsnp_vcf.endsWith('.vcf') ? false : true]
+        meta_extra += [compress_vcf: meta.vcf_dbsnp_vcf.endsWith('.vcf') ?: false]
+        meta_extra += [type: 'dbsnp', source_vcf: meta.vcf_dbsnp_vcf_source]
+        return [reduce(meta) + meta_extra, meta.vcf_dbsnp_vcf.contains('{') ? file(meta.vcf_dbsnp_vcf) : meta.vcf_dbsnp_vcf]
         other: true
         // If the asset doesn't exist, then we return nothing
         return null
     }
 
-    germline_resource_branch = asset.branch { meta, _fasta ->
-        file: meta.vcf.germline_resource.vcf
+    germline_resource_branch = asset.branch { meta, _readme ->
+        file: meta.vcf_germline_resource_vcf
         // If we already have the vcf_tbi, then we don't need to index the vcf
-        def meta_extra = [run_tabix: meta.vcf.germline_resource.vcf_tbi || meta.vcf.germline_resource.vcf.endsWith('.vcf') ? false : true]
-        meta_extra += [compress_vcf: meta.vcf.germline_resource.vcf.endsWith('.vcf') ?: false]
-        meta_extra += [type: 'germline_resource', source_vcf: meta.vcf.germline_resource.vcf_source]
-        return [reduce(meta) + meta_extra, meta.vcf.germline_resource.vcf]
+        def meta_extra = [run_tabix: meta.vcf_germline_resource_vcf_tbi || meta.vcf_germline_resource_vcf.endsWith('.vcf') ? false : true]
+        meta_extra += [compress_vcf: meta.vcf_germline_resource_vcf.endsWith('.vcf') ?: false]
+        meta_extra += [type: 'germline_resource', source_vcf: meta.vcf_germline_resource_vcf_source]
+        return [reduce(meta) + meta_extra, meta.vcf_germline_resource_vcf]
         other: true
         // If the asset doesn't exist, then we return nothing
         return null
     }
 
-    known_indels_branch = asset.branch { meta, _fasta ->
-        file: meta.vcf.known_indels.vcf
+    known_indels_branch = asset.branch { meta, _readme ->
+        file: meta.vcf_known_indels_vcf
         // If we already have the vcf_tbi, then we don't need to index the vcf
-        def meta_extra = [run_tabix: meta.vcf.known_indels.vcf_tbi || meta.vcf.known_indels.vcf.endsWith('.vcf') ? false : true]
-        meta_extra += [compress_vcf: meta.vcf.known_indels.vcf.endsWith('.vcf') ?: false]
-        meta_extra += [type: 'known_indels', source_vcf: meta.vcf.known_indels.vcf_source]
-        return [reduce(meta) + meta_extra, meta.vcf.known_indels.vcf]
+        def meta_extra = [run_tabix: meta.vcf_known_indels_vcf_tbi || meta.vcf_known_indels_vcf.endsWith('.vcf') ? false : true]
+        meta_extra += [compress_vcf: meta.vcf_known_indels_vcf.endsWith('.vcf') ?: false]
+        meta_extra += [type: 'known_indels', source_vcf: meta.vcf_known_indels_vcf_source]
+        return [reduce(meta) + meta_extra, meta.vcf_known_indels_vcf]
         other: true
         // If the asset doesn't exist, then we return nothing
         return null
     }
 
-    known_snps_branch = asset.branch { meta, _fasta ->
-        file: meta.vcf.known_snps.vcf
+    known_snps_branch = asset.branch { meta, _readme ->
+        file: meta.vcf_known_snps_vcf
         // If we already have the vcf_tbi, then we don't need to index the vcf
-        def meta_extra = [run_tabix: meta.vcf.known_snps.vcf_tbi || meta.vcf.known_snps.vcf.endsWith('.vcf') ? false : true]
-        meta_extra += [compress_vcf: meta.vcf.known_snps.vcf.endsWith('.vcf') ?: false]
-        meta_extra += [type: 'known_snps', source_vcf: meta.vcf.known_snps.vcf_source]
-        return [reduce(meta) + meta_extra, meta.vcf.known_snps.vcf]
+        def meta_extra = [run_tabix: meta.vcf_known_snps_vcf_tbi || meta.vcf_known_snps_vcf.endsWith('.vcf') ? false : true]
+        meta_extra += [compress_vcf: meta.vcf_known_snps_vcf.endsWith('.vcf') ?: false]
+        meta_extra += [type: 'known_snps', source_vcf: meta.vcf_known_snps_vcf_source]
+        return [reduce(meta) + meta_extra, meta.vcf_known_snps_vcf]
         other: true
         // If the asset doesn't exist, then we return nothing
         return null
     }
 
-    pon_branch = asset.branch { meta, _fasta ->
-        file: meta.vcf.pon.vcf
+    pon_branch = asset.branch { meta, _readme ->
+        file: meta.vcf_pon_vcf
         // If we already have the vcf_tbi, then we don't need to index the vcf
-        def meta_extra = [run_tabix: meta.vcf.pon.vcf_tbi || meta.vcf.pon.vcf.endsWith('.vcf') ? false : true]
-        meta_extra += [compress_vcf: meta.vcf.pon.vcf.endsWith('.vcf') ?: false]
-        meta_extra += [type: 'pon', source_vcf: meta.vcf.pon.vcf_source]
-        return [reduce(meta) + meta_extra, meta.vcf.pon.vcf]
+        def meta_extra = [run_tabix: meta.vcf_pon_vcf_tbi || meta.vcf_pon_vcf.endsWith('.vcf') ? false : true]
+        meta_extra += [compress_vcf: meta.vcf_pon_vcf.endsWith('.vcf') ?: false]
+        meta_extra += [type: 'pon', source_vcf: meta.vcf_pon_vcf_source]
+        return [reduce(meta) + meta_extra, meta.vcf_pon_vcf]
         other: true
         // If the asset doesn't exist, then we return nothing
         return null

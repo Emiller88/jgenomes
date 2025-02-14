@@ -52,7 +52,7 @@ workflow {
         log.warn("No tools specified")
     }
 
-    NFCORE_REFERENCES(PIPELINE_INITIALISATION.out.asset, params.tools ?: "no_tools")
+    NFCORE_REFERENCES(PIPELINE_INITIALISATION.out.references, params.tools ?: "no_tools")
 
     ch_multiqc_files = Channel.empty()
 

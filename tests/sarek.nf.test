@@ -10,7 +10,7 @@ nextflow_pipeline {
 
         when {
             params {
-                input  = "https://raw.githubusercontent.com/nf-core/references-assets/refs/heads/main/assets/test/Homo_sapiens/GRCh38_chr22_source.yml"
+                input  = "https://raw.githubusercontent.com/nf-core/references-assets/main/genomes_source/Homo_sapiens/test/GRCh38_chr22.yml"
                 outdir = "$outputDir"
                 tools  = 'bwamem1,bwamem2,createsequencedictionary,dragmap,faidx,intervals,msisensorpro,tabix'
             }
@@ -43,7 +43,7 @@ nextflow_pipeline {
 
         when {
             params {
-                input  = "https://raw.githubusercontent.com/nf-core/references-assets/refs/heads/main/assets/test/Homo_sapiens/GRCh38_chr22_published.yml"
+                input  = "https://raw.githubusercontent.com/nf-core/references-assets/main/genomes_no_base/Homo_sapiens/test/GRCh38_chr22.yml"
                 outdir = "$outputDir"
                 tools  = 'bwamem1,bwamem2,createsequencedictionary,dragmap,faidx,intervals,msisensorpro,tabix'
             }
