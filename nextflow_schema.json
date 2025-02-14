@@ -16,7 +16,7 @@
                     "type": "string",
                     "format": "file-path",
                     "exists": true,
-                    "schema": "assets/schema_asset.json",
+                    "schema": "subworkflows/nf-core/utils_references/schema_references.json",
                     "mimetype": "text/csv",
                     "pattern": "^\\S+\\.(yaml|yml)$",
                     "description": "Path to yaml file containing information about the genome(s) and files to use for building references.",

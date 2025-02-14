@@ -32,9 +32,6 @@ workflow PIPELINE_INITIALISATION {
     asset             //  string: Path to asset yaml file
 
     main:
-
-    ch_versions = Channel.empty()
-
     //
     // Print version and exit if required and dump pipeline parameters to JSON file
     //
@@ -64,11 +61,10 @@ workflow PIPELINE_INITIALISATION {
     //
     // Create channel from asset file provided through params.asset
     //
-    ch_asset = Channel.fromList(samplesheetToList(asset, "${projectDir}/subworkflows/nf-core/utils_references/schema_references.json"))
+    references = Channel.fromList(samplesheetToList(asset, "${projectDir}/subworkflows/nf-core/utils_references/schema_references.json"))
 
     emit:
-    asset    = ch_asset
-    versions = ch_versions
+    references
 }
 
 /*
