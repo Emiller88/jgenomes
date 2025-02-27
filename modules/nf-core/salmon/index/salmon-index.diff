@@ -1,4 +1,4 @@
-Changes in module 'nf-core/salmon/index'
+Changes in component 'nf-core/salmon/index'
 Changes in 'salmon/index/main.nf':
 --- modules/nf-core/salmon/index/main.nf
 +++ modules/nf-core/salmon/index/main.nf
