@@ -1,6 +1,7 @@
 lint:
   actions_awsfulltest: false
   files_exist:
+    - .github/workflows/ci.yml
     - conf/igenomes.config
     - conf/igenomes_ignored.config
   files_unchanged:
