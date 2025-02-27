@@ -1,4 +1,12 @@
-nf_core_version: 3.1.1
+lint:
+  actions_awsfulltest: false
+  files_exist:
+    - conf/igenomes.config
+    - conf/igenomes_ignored.config
+  files_unchanged:
+    - .github/workflows/branch.yml
+    - .github/workflows/linting.yml
+nf_core_version: 3.2.0
 repository_type: pipeline
 template:
   author: "@maxulysse"
