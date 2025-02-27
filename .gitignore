@@ -12,6 +12,3 @@ null/
 tmp/
 .nf-test
 .vscode
-.doomrc
-mochadoom.cfg
-tranmap.dat

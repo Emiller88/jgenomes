@@ -22,7 +22,7 @@ include { methodsDescriptionText  } from './subworkflows/local/utils_nfcore_refe
 include { paramsSummaryMultiqc    } from './subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML  } from './subworkflows/nf-core/utils_nfcore_pipeline'
 
-include { MULTIQC                 } from './modules/nf-core/multiqc/main'
+include { MULTIQC                 } from './modules/nf-core/multiqc'
 
 include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_references_pipeline'
 include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_references_pipeline'
@@ -37,7 +37,6 @@ include { REFERENCES              } from "./workflows/references"
 
 workflow {
     main:
-
     // SUBWORKFLOW: Run initialisation tasks
     PIPELINE_INITIALISATION(
         params.version,
