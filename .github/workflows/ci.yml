@@ -25,8 +25,7 @@ concurrency:
 
 jobs:
   test:
-    name: "Run pipeline with test data (${{ matrix.NXF_VER }} | ${{ matrix.filter
-      }} | ${{ matrix.profile }} | ${{ matrix.shard }}/2"
+    name: "Run pipeline with test data (${{ matrix.NXF_VER }} | ${{ matrix.filter }} | ${{ matrix.profile }} | ${{ matrix.shard }}/2)"
     # Only run on push if this is the nf-core dev branch (merged PRs)
     if: "${{ github.event_name != 'push' || (github.event_name == 'push' && github.repository
       == 'nf-core/references') }}"

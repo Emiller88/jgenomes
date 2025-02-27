@@ -22,7 +22,7 @@ include { methodsDescriptionText  } from './subworkflows/local/utils_nfcore_refe
 include { paramsSummaryMultiqc    } from './subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML  } from './subworkflows/nf-core/utils_nfcore_pipeline'
 
-include { MULTIQC                 } from './modules/nf-core/multiqc/main'
+include { MULTIQC                 } from './modules/nf-core/multiqc'
 
 include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_references_pipeline'
 include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_references_pipeline'
@@ -37,7 +37,6 @@ include { REFERENCES              } from "./workflows/references"
 
 workflow {
     main:
-
     // SUBWORKFLOW: Run initialisation tasks
     PIPELINE_INITIALISATION(
         params.version,
@@ -52,15 +51,13 @@ workflow {
         log.warn("No tools specified")
     }
 
-    NFCORE_REFERENCES(PIPELINE_INITIALISATION.out.references, params.tools ?: "no_tools")
 
     ch_multiqc_files = Channel.empty()
 
     //
-    // MODULE: MultiQC
-    //
-    ch_multiqc_config = Channel.fromPath("${projectDir}/assets/multiqc_config.yml", checkIfExists: true)
-    ch_multiqc_custom_config = params.multiqc_config ? Channel.fromPath(params.multiqc_config, checkIfExists: true) : Channel.empty()
+    NFCORE_REFERENCES(
+        PIPELINE_INITIALISATION.out.samplesheet
+    )
     ch_multiqc_logo = params.multiqc_logo ? Channel.fromPath(params.multiqc_logo, checkIfExists: true) : Channel.empty()
     ch_workflow_summary = Channel.value(paramsSummaryMultiqc(paramsSummaryMap(workflow, parameters_schema: "nextflow_schema.json")))
     ch_multiqc_custom_methods_description = params.multiqc_methods_description ? file(params.multiqc_methods_description, checkIfExists: true) : file("${projectDir}/assets/methods_description_template.yml", checkIfExists: true)
