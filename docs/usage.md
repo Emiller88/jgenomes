@@ -33,11 +33,7 @@ An [example asset](../assets/asset.yml) has been provided with the pipeline.
 The typical command for running the pipeline is as follows:
 
 ```bash
-<<<<<<< HEAD
 nextflow run nf-core/references --input ./asset.yml --outdir ./results  -profile docker
-=======
-nextflow run nf-core/references --input ./samplesheet.csv --outdir ./results  -profile docker
->>>>>>> TEMPLATE
 ```
 
 This will launch the pipeline with the `docker` configuration profile. See below for more information about profiles.
