@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [80](https://github.com/nf-core/references/pull/80) - Improve VCF publishing in index
 - [86](https://github.com/nf-core/references/pull/86) - Template update for nf-core/tools v3.2.0
 - [87](https://github.com/nf-core/references/pull/87) - Automatic nf-test sharding
+- [88](https://github.com/nf-core/references/pull/88) - Update all modules
 
 ### Fixed
 
@@ -31,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 | modules                           | old version | new version |
 | --------------------------------- | ----------- | ----------- |
+| bbmap                             | 39.10       | 39.17       |
 | gunzip                            | 1.1         | 1.13        |
 | samtools (in star/genomegenerate) | 1.20        | 1.21        |
 | untar                             |             | 1.34        |

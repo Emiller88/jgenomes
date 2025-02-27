@@ -1,4 +1,4 @@
-Changes in module 'nf-core/rsem/preparereference'
+Changes in component 'nf-core/rsem/preparereference'
 Changes in 'rsem/preparereference/main.nf':
 --- modules/nf-core/rsem/preparereference/main.nf
 +++ modules/nf-core/rsem/preparereference/main.nf

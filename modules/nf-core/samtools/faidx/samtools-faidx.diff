@@ -1,4 +1,4 @@
-Changes in module 'nf-core/samtools/faidx'
+Changes in component 'nf-core/samtools/faidx'
 Changes in 'samtools/faidx/main.nf':
 --- modules/nf-core/samtools/faidx/main.nf
 +++ modules/nf-core/samtools/faidx/main.nf

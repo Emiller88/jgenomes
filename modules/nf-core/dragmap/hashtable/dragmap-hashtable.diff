@@ -1,4 +1,4 @@
-Changes in module 'nf-core/dragmap/hashtable'
+Changes in component 'nf-core/dragmap/hashtable'
 Changes in 'dragmap/hashtable/main.nf':
 --- modules/nf-core/dragmap/hashtable/main.nf
 +++ modules/nf-core/dragmap/hashtable/main.nf
