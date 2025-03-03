@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [72](https://github.com/nf-core/references/pull/72) - Compress vcf files when they are not already compressed
 - [74](https://github.com/nf-core/references/pull/74) - Add DOI
 - [76](https://github.com/nf-core/references/pull/76) - Add untar and unzip
+- [90](https://github.com/nf-core/references/pull/90) - Added link to Bluesky
 
 ### Changed
 
@@ -27,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [77](https://github.com/nf-core/references/pull/77) - Fix createsequencedictionary usage
 - [81](https://github.com/nf-core/references/pull/81) - Fix fasta_fai unnecessary regeneration
+- [90](https://github.com/nf-core/references/pull/90) - Fixed link to GHA CI broken by [87](https://github.com/nf-core/references/pull/87)
 
 ### Dependencies
 
