@@ -27,56 +27,56 @@ workflow REFERENCES {
     // Assess if assets needs to be uncompress or not
     // (We do not uncompress VCFs)
 
-    ascat_alleles_input = ASSET_TO_CHANNEL.out.ascat_alleles.branch { meta, _ascat_alleles ->
-        decompress_ascat_alleles: meta.decompress_ascat_alleles
+    ascat_alleles_input = ASSET_TO_CHANNEL.out.ascat_alleles.branch { _meta, ascat_alleles_ ->
+        decompress: ascat_alleles_.endsWith('.zip')
         other: true
     }
 
-    ascat_loci_input = ASSET_TO_CHANNEL.out.ascat_loci.branch { meta, _ascat_loci ->
-        decompress_ascat_loci: meta.decompress_ascat_loci
+    ascat_loci_input = ASSET_TO_CHANNEL.out.ascat_loci.branch { _meta, ascat_loci_ ->
+        decompress: ascat_loci_.endsWith('.zip')
         other: true
     }
 
-    ascat_loci_gc_input = ASSET_TO_CHANNEL.out.ascat_loci_gc.branch { meta, _ascat_loci_gc ->
-        decompress_ascat_loci_gc: meta.decompress_ascat_loci_gc
+    ascat_loci_gc_input = ASSET_TO_CHANNEL.out.ascat_loci_gc.branch { _meta, ascat_loci_gc_ ->
+        decompress: ascat_loci_gc_.endsWith('.zip')
         other: true
     }
 
-    ascat_loci_rt_input = ASSET_TO_CHANNEL.out.ascat_loci_rt.branch { meta, _ascat_loci_rt ->
-        decompress_ascat_loci_rt: meta.decompress_ascat_loci_rt
+    ascat_loci_rt_input = ASSET_TO_CHANNEL.out.ascat_loci_rt.branch { _meta, ascat_loci_rt_ ->
+        decompress: ascat_loci_rt_.endsWith('.zip')
         other: true
     }
 
-    chr_dir_input = ASSET_TO_CHANNEL.out.chr_dir.branch { meta, _chr_dir ->
-        decompress_chr_dir: meta.decompress_chr_dir
+    chr_dir_input = ASSET_TO_CHANNEL.out.chr_dir.branch { _meta, chr_dir_ ->
+        decompress: chr_dir_.endsWith('.tar.gz')
         other: true
     }
 
-    fasta_input = ASSET_TO_CHANNEL.out.fasta.branch { meta, _fasta ->
-        decompress_fasta: meta.decompress_fasta
+    fasta_input = ASSET_TO_CHANNEL.out.fasta.branch { _meta, fasta_ ->
+        decompress: fasta_.endsWith('.gz')
         other: true
     }
 
-    gff_input = ASSET_TO_CHANNEL.out.gff.branch { meta, _gff ->
-        decompress_gff: meta.decompress_gff
+    gff_input = ASSET_TO_CHANNEL.out.gff.branch { _meta, gff_ ->
+        decompress: gff_.endsWith('.gz')
         other: true
     }
 
-    gtf_input = ASSET_TO_CHANNEL.out.gtf.branch { meta, _gtf ->
-        decompress_gtf: meta.decompress_gtf
+    gtf_input = ASSET_TO_CHANNEL.out.gtf.branch { _meta, gtf ->
+        decompress: gtf.endsWith('.gz')
         other: true
     }
 
     // Uncompress any assets that need to be
     UNCOMPRESS_ASSET(
-        ascat_alleles_input.decompress_ascat_alleles,
-        ascat_loci_input.decompress_ascat_loci,
-        ascat_loci_gc_input.decompress_ascat_loci_gc,
-        ascat_loci_rt_input.decompress_ascat_loci_rt,
-        chr_dir_input.decompress_chr_dir,
-        fasta_input.decompress_fasta,
-        gff_input.decompress_gff,
-        gtf_input.decompress_gtf,
+        ascat_alleles_input.decompress,
+        ascat_loci_input.decompress,
+        ascat_loci_gc_input.decompress,
+        ascat_loci_rt_input.decompress,
+        chr_dir_input.decompress,
+        fasta_input.decompress,
+        gff_input.decompress,
+        gtf_input.decompress,
     )
 
     // This covers a mixture of compressed and uncompressed assets
@@ -159,17 +159,10 @@ workflow REFERENCES {
     reference = Channel
         .empty()
         .mix(
-            // Cannot output properly yet
-            // ascat_alleles.map { meta, reference_ -> [meta + [file: 'ascat_alleles'], reference_] },
-            // ascat_loci.map { meta, reference_ -> [meta + [file: 'ascat_loci'], reference_] },
-            // ascat_loci_gc.map { meta, reference_ -> [meta + [file: 'ascat_loci_gc'], reference_] },
-            // ascat_loci_rt.map { meta, reference_ -> [meta + [file: 'ascat_loci_rt'], reference_] },
             bowtie1_index.map { meta, reference_ -> [meta + [file: 'bowtie1_index'], reference_] },
             bowtie2_index.map { meta, reference_ -> [meta + [file: 'bowtie2_index'], reference_] },
             bwamem1_index.map { meta, reference_ -> [meta + [file: 'bwamem1_index'], reference_] },
             bwamem2_index.map { meta, reference_ -> [meta + [file: 'bwamem2_index'], reference_] },
-            // Cannot output properly yet
-            // chr_dir.map { meta, reference_ -> [meta + [file: 'chr_dir'], reference_] },
             dragmap_hashmap.map { meta, reference_ -> [meta + [file: 'dragmap_hashmap'], reference_] },
             fasta.map { meta, reference_ -> [meta + [file: 'fasta'], reference_] },
             fasta_dict.map { meta, reference_ -> [meta + [file: 'fasta_dict'], reference_] },

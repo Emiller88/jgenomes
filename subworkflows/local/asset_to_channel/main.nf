@@ -16,8 +16,7 @@ workflow ASSET_TO_CHANNEL {
 
     ascat_alleles_branch = asset.branch { meta, _readme ->
         file: meta.ascat_alleles
-        def meta_extra = [decompress_ascat_alleles: meta.ascat_alleles.endsWith('.zip') ?: false]
-        return [reduce(meta) + meta_extra, meta.ascat_alleles]
+        return [reduce(meta), meta.ascat_alleles]
         other: true
         // If the asset doesn't exist, then we return nothing
         return null
@@ -26,8 +25,7 @@ workflow ASSET_TO_CHANNEL {
 
     ascat_loci_branch = asset.branch { meta, _readme ->
         file: meta.ascat_loci
-        def meta_extra = [decompress_ascat_loci: meta.ascat_loci.endsWith('.zip') ?: false]
-        return [reduce(meta) + meta_extra, meta.ascat_loci]
+        return [reduce(meta), meta.ascat_loci]
         other: true
         // If the asset doesn't exist, then we return nothing
         return null
@@ -36,8 +34,7 @@ workflow ASSET_TO_CHANNEL {
 
     ascat_loci_gc_branch = asset.branch { meta, _readme ->
         file: meta.ascat_loci_gc
-        def meta_extra = [decompress_ascat_loci_gc: meta.ascat_loci_gc.endsWith('.zip') ?: false]
-        return [reduce(meta) + meta_extra, meta.ascat_loci_gc]
+        return [reduce(meta), meta.ascat_loci_gc]
         other: true
         // If the asset doesn't exist, then we return nothing
         return null
@@ -46,8 +43,7 @@ workflow ASSET_TO_CHANNEL {
 
     ascat_loci_rt_branch = asset.branch { meta, _readme ->
         file: meta.ascat_loci_rt
-        def meta_extra = [decompress_ascat_loci_rt: meta.ascat_loci_rt.endsWith('.zip') ?: false]
-        return [reduce(meta) + meta_extra, meta.ascat_loci_rt]
+        return [reduce(meta), meta.ascat_loci_rt]
         other: true
         // If the asset doesn't exist, then we return nothing
         return null
@@ -56,8 +52,7 @@ workflow ASSET_TO_CHANNEL {
 
     chr_dir_branch = asset.branch { meta, _readme ->
         file: meta.chr_dir
-        def meta_extra = [decompress_chr_dir: meta.chr_dir.endsWith('.tar.gz') ?: false]
-        return [reduce(meta) + meta_extra, meta.chr_dir]
+        return [reduce(meta), meta.chr_dir]
         other: true
         // If the asset doesn't exist, then we return nothing
         return null
@@ -75,10 +70,8 @@ workflow ASSET_TO_CHANNEL {
 
     fasta_branch = asset.branch { meta, _readme ->
         file: meta.fasta
-        // If ends with .gz, decompress it
-        def meta_extra = [decompress_fasta: meta.fasta.endsWith('.gz') ?: false]
         // If any of the asset exists, then adding run_tools to false and skip the asset creation from the fasta file
-        meta_extra += [run_bowtie1: meta.bowtie1_index ? false : true]
+        def meta_extra = [run_bowtie1: meta.bowtie1_index ? false : true]
         meta_extra += [run_bowtie2: meta.bowtie2_index ? false : true]
         meta_extra += [run_bwamem1: meta.bwamem1_index ? false : true]
         meta_extra += [run_bwamem2: meta.bwamem2_index ? false : true]
@@ -132,11 +125,9 @@ workflow ASSET_TO_CHANNEL {
 
     gff_branch = asset.branch { meta, _readme ->
         file: meta.gff
-        // If ends with .gz, decompress it
-        def meta_extra = [decompress_gff: meta.gff.endsWith('.gz') ?: false]
         // If any of the asset exists, then adding run_tools to false and skip the asset creation from the annotation derived file
         // (gff, gtf or transcript_fasta)
-        meta_extra += [run_gffread: meta.fasta && !meta.gtf ?: false]
+        def meta_extra = [run_gffread: meta.fasta && !meta.gtf ?: false]
         meta_extra += [run_hisat2: meta.splice_sites ? false : true]
         return [reduce(meta) + meta_extra, meta.gff]
         other: true
@@ -147,11 +138,9 @@ workflow ASSET_TO_CHANNEL {
 
     gtf_branch = asset.branch { meta, _readme ->
         file: meta.gtf
-        // If ends with .gz, decompress it
-        def meta_extra = [decompress_gtf: meta.gtf.endsWith('.gz') ?: false]
         // If any of the asset exists, then adding run_tools to false and skip the asset creation from the annotation derived file
         // (gff, gtf or transcript_fasta)
-        meta_extra += [run_hisat2: meta.splice_sites ? false : true]
+        def meta_extra = [run_hisat2: meta.splice_sites ? false : true]
         return [reduce(meta) + meta_extra, meta.gtf]
         other: true
         // If the asset doesn't exist, then we return nothing
