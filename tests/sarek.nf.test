@@ -4,7 +4,7 @@ nextflow_pipeline {
     script "../main.nf"
     tag "pipeline"
 
-    test("-profile test sarek --input references/assets GRCh38_chr22_source.yml") {
+    test("-profile test [sarek] --input references/assets GRCh38_chr22_source.yml") {
 
         options "-output-dir $outputDir"
 
@@ -37,7 +37,7 @@ nextflow_pipeline {
         }
     }
 
-    test("-profile test sarek --input references/assets GRCh38_chr22_published.yml") {
+    test("-profile test [sarek] --input references/assets GRCh38_chr22_published.yml") {
 
         options "-output-dir $outputDir"
 

@@ -1,5 +1,5 @@
 {
-    "-profile test WBCEL235 --input Caenorhabditis_elegans/NCBI/WBcel235.yml": {
+    "-profile test  --input Caenorhabditis_elegans/NCBI/WBcel235.yml": {
         "content": [
             10,
             {

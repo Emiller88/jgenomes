@@ -1,5 +1,5 @@
 {
-    "-profile test rsem --input assets/test/default_extended.yml": {
+    "-profile test [rsem] --input assets/test/default_extended.yml": {
         "content": [
             2,
             {
@@ -89,7 +89,7 @@
         },
         "timestamp": "2024-12-06T11:54:36.556736231"
     },
-    "-profile test rsem --input GRCh38_chr21.yml": {
+    "-profile test [rsem] --input GRCh38_chr21.yml": {
         "content": [
             4,
             {

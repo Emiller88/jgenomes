@@ -4,7 +4,7 @@ nextflow_pipeline {
     script "../main.nf"
     tag "pipeline"
 
-    test("-profile test tabix --input assets/test/default_extended.yml") {
+    test("-profile test [tabix] --input assets/test/default_extended.yml") {
 
         options "-output-dir $outputDir"
 
@@ -37,7 +37,7 @@ nextflow_pipeline {
         }
     }
 
-    test("-profile test tabix --input assets/test/default_full.yml") {
+    test("-profile test [tabix] --input assets/test/default_full.yml") {
 
         options "-output-dir $outputDir"
 

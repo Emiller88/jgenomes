@@ -1,5 +1,5 @@
 {
-    "-profile test gatk4 --input GRCh38_chr21.yml": {
+    "-profile test [gatk]4 --input GRCh38_chr21.yml": {
         "content": [
             2,
             {

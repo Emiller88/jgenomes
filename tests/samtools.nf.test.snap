@@ -1,5 +1,5 @@
 {
-    "-profile test samtools --input assets/test/default_full.yml": {
+    "-profile test [samtools] --input assets/test/default_full.yml": {
         "content": [
             1,
             {
@@ -30,7 +30,7 @@
         },
         "timestamp": "2024-11-28T13:03:25.374670864"
     },
-    "-profile test samtools --input assets/test/default_extended.yml": {
+    "-profile test [samtools] --input assets/test/default_extended.yml": {
         "content": [
             2,
             {
@@ -72,7 +72,7 @@
         },
         "timestamp": "2024-11-28T14:47:38.70092941"
     },
-    "-profile test samtools --input GRCh38_chr21.yml": {
+    "-profile test [samtools] --input GRCh38_chr21.yml": {
         "content": [
             3,
             {
