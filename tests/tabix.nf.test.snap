@@ -1,5 +1,5 @@
 {
-    "Run with profile test with tabix | --input assets/test/default_full.yml": {
+    "-profile test tabix --input assets/test/default_full.yml": {
         "content": [
             1,
             {
@@ -30,7 +30,7 @@
         },
         "timestamp": "2025-01-07T15:37:06.912762838"
     },
-    "Run with profile test with tabix | --input assets/test/default_extended.yml": {
+    "-profile test tabix --input assets/test/default_extended.yml": {
         "content": [
             2,
             {

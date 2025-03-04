@@ -1,5 +1,5 @@
 {
-    "Run with profile test for sarek | --input references/assets GRCh38_chr22_published.yml": {
+    "-profile test sarek --input references/assets GRCh38_chr22_published.yml": {
         "content": [
             1,
             {
@@ -30,7 +30,7 @@
         },
         "timestamp": "2025-01-22T18:54:40.668010691"
     },
-    "Run with profile test for sarek | --input references/assets GRCh38_chr22_source.yml": {
+    "-profile test sarek --input references/assets GRCh38_chr22_source.yml": {
         "content": [
             10,
             {

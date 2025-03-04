@@ -1,5 +1,5 @@
 {
-    "Run with profile test for hisat2 | --input assets/test/default_extended.yml": {
+    "-profile test hisat2 --input assets/test/default_extended.yml": {
         "content": [
             2,
             {
@@ -57,7 +57,7 @@
         },
         "timestamp": "2024-12-06T11:47:41.58238436"
     },
-    "Run with profile test for hisat2 | --input GRCh38_chr21.yml": {
+    "-profile test hisat2 --input GRCh38_chr21.yml": {
         "content": [
             4,
             {

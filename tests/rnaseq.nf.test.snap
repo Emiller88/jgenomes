@@ -1,5 +1,5 @@
 {
-    "Run with profile test for rnaseq | --input GRCh38_chr21.yml": {
+    "-profile test rnaseq --input GRCh38_chr21.yml": {
         "content": [
             6,
             {

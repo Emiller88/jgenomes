@@ -1,5 +1,5 @@
 {
-    "Run with profile test for kallisto | --input GRCh38_chr21.yml": {
+    "-profile test kallisto --input GRCh38_chr21.yml": {
         "content": [
             4,
             {
@@ -55,7 +55,7 @@
         },
         "timestamp": "2024-12-06T11:34:03.486585563"
     },
-    "Run with profile test for kallisto | --input assets/test/default_extended.yml": {
+    "-profile test kallisto --input assets/test/default_extended.yml": {
         "content": [
             2,
             {

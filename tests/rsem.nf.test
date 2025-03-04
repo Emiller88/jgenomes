@@ -4,7 +4,7 @@ nextflow_pipeline {
     script "../main.nf"
     tag "pipeline"
 
-    test("Run with profile test for rsem | --input assets/test/default_extended.yml") {
+    test("-profile test rsem --input assets/test/default_extended.yml") {
 
         options "-output-dir $outputDir"
 
@@ -37,7 +37,7 @@ nextflow_pipeline {
         }
     }
 
-    test("Run with profile test for rsem | --input GRCh38_chr21.yml") {
+    test("-profile test rsem --input GRCh38_chr21.yml") {
 
         options "-output-dir $outputDir"
 
