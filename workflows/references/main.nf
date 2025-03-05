@@ -10,6 +10,17 @@ workflow REFERENCES {
     tools // List: Can contain any combination of tools of the list of available tools, or just no_tools
 
     main:
+    def need_extract = { channel, type ->
+        channel
+            .map { meta, reference_ -> [meta + [reference: type], reference_] }
+            .branch { _meta, reference_ ->
+                extract_tar: reference_.endsWith('.tar.gz')
+                extract_gz: reference_.endsWith('.gz')
+                extract_zip: reference_.endsWith('.zip')
+                other: true
+            }
+    }
+
     versions = Channel.empty()
 
     // Create channels from the input file(s)
@@ -27,77 +38,14 @@ workflow REFERENCES {
     // Assess if assets needs to be uncompress or not
     // (We do not uncompress VCFs)
 
-    ascat_alleles_input = YAML_TO_CHANNEL.out.ascat_alleles
-        .map { meta, ascat_alleles_ -> [meta + [file: 'ascat_alleles'], ascat_alleles_] }
-        .branch { _meta, archive_ ->
-            extract_tar: archive_.endsWith('.tar.gz')
-            extract_gz: archive_.endsWith('.gz')
-            extract_zip: archive_.endsWith('.zip')
-            other: true
-        }
-
-    ascat_loci_input = YAML_TO_CHANNEL.out.ascat_loci
-        .map { meta, ascat_loci_ -> [meta + [file: 'ascat_loci'], ascat_loci_] }
-        .branch { _meta, archive_ ->
-            extract_tar: archive_.endsWith('.tar.gz')
-            extract_gz: archive_.endsWith('.gz')
-            extract_zip: archive_.endsWith('.zip')
-            other: true
-        }
-
-    ascat_loci_gc_input = YAML_TO_CHANNEL.out.ascat_loci_gc
-        .map { meta, ascat_loci_gc_ -> [meta + [file: 'ascat_loci_gc'], ascat_loci_gc_] }
-        .branch { _meta, archive_ ->
-            extract_tar: archive_.endsWith('.tar.gz')
-            extract_gz: archive_.endsWith('.gz')
-            extract_zip: archive_.endsWith('.zip')
-            other: true
-        }
-
-    ascat_loci_rt_input = YAML_TO_CHANNEL.out.ascat_loci_rt
-        .map { meta, ascat_loci_rt_ -> [meta + [file: 'ascat_loci_rt'], ascat_loci_rt_] }
-        .branch { _meta, archive_ ->
-            extract_tar: archive_.endsWith('.tar.gz')
-            extract_gz: archive_.endsWith('.gz')
-            extract_zip: archive_.endsWith('.zip')
-            other: true
-        }
-
-    chr_dir_input = YAML_TO_CHANNEL.out.chr_dir
-        .map { meta, chr_dir_ -> [meta + [file: 'chr_dir'], chr_dir_] }
-        .branch { _meta, archive_ ->
-            extract_tar: archive_.endsWith('.tar.gz')
-            extract_gz: archive_.endsWith('.gz')
-            extract_zip: archive_.endsWith('.zip')
-            other: true
-        }
-
-    fasta_input = YAML_TO_CHANNEL.out.fasta
-        .map { meta, fasta_ -> [meta + [file: 'fasta'], fasta_] }
-        .branch { _meta, archive_ ->
-            extract_tar: archive_.endsWith('.tar.gz')
-            extract_gz: archive_.endsWith('.gz')
-            extract_zip: archive_.endsWith('.zip')
-            other: true
-        }
-
-    gff_input = YAML_TO_CHANNEL.out.gff
-        .map { meta, gff_ -> [meta + [file: 'gff'], gff_] }
-        .branch { _meta, archive_ ->
-            extract_tar: archive_.endsWith('.tar.gz')
-            extract_gz: archive_.endsWith('.gz')
-            extract_zip: archive_.endsWith('.zip')
-            other: true
-        }
-
-    gtf_input = YAML_TO_CHANNEL.out.gtf
-        .map { meta, gtf_ -> [meta + [file: 'gtf'], gtf_] }
-        .branch { _meta, archive_ ->
-            extract_tar: archive_.endsWith('.tar.gz')
-            extract_gz: archive_.endsWith('.gz')
-            extract_zip: archive_.endsWith('.zip')
-            other: true
-        }
+    ascat_alleles_input = need_extract(YAML_TO_CHANNEL.out.ascat_alleles, 'ascat_alleles')
+    ascat_loci_input = need_extract(YAML_TO_CHANNEL.out.ascat_loci, 'ascat_loci')
+    ascat_loci_gc_input = need_extract(YAML_TO_CHANNEL.out.ascat_loci_gc, 'ascat_loci_gc')
+    ascat_loci_rt_input = need_extract(YAML_TO_CHANNEL.out.ascat_loci_rt, 'ascat_loci_rt')
+    chr_dir_input = need_extract(YAML_TO_CHANNEL.out.chr_dir, 'chr_dir')
+    fasta_input = need_extract(YAML_TO_CHANNEL.out.fasta, 'fasta')
+    gff_input = need_extract(YAML_TO_CHANNEL.out.gff, 'gff')
+    gtf_input = need_extract(YAML_TO_CHANNEL.out.gtf, 'gtf')
 
     files_to_extract_gz = Channel
         .empty()
@@ -146,14 +94,14 @@ workflow REFERENCES {
     )
 
     extracted_asset = EXTRACT_REFERENCE.out.extracted.branch { meta_, _extracted_asset ->
-        ascat_alleles: meta_.file == 'ascat_alleles'
-        ascat_loci: meta_.file == 'ascat_loci'
-        ascat_loci_gc: meta_.file == 'ascat_loci_gc'
-        ascat_loci_rt: meta_.file == 'ascat_loci_rt'
-        chr_dir: meta_.file == 'chr_dir'
-        fasta: meta_.file == 'fasta'
-        gff: meta_.file == 'gff'
-        gtf: meta_.file == 'gtf'
+        ascat_alleles: meta_.reference == 'ascat_alleles'
+        ascat_loci: meta_.reference == 'ascat_loci'
+        ascat_loci_gc: meta_.reference == 'ascat_loci_gc'
+        ascat_loci_rt: meta_.reference == 'ascat_loci_rt'
+        chr_dir: meta_.reference == 'chr_dir'
+        fasta: meta_.reference == 'fasta'
+        gff: meta_.reference == 'gff'
+        gtf: meta_.reference == 'gtf'
         other: true
     }
 
