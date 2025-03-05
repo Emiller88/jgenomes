@@ -327,5 +327,5 @@ workflow NFCORE_REFERENCES {
 
     emit:
     reference = REFERENCES.out.reference
-    versions  = REFERENCES.out.versions
+    versions  = REFERENCES.out.versions.mix(EXTRACT_ARCHIVE.out.versions)
 }
