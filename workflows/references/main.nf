@@ -24,23 +24,6 @@ workflow REFERENCES {
 
     versions = Channel.empty()
 
-    // Create references for dnaseq based pipelines such as nf-core/sarek
-    PREPARE_GENOME_DNASEQ(
-        fasta,
-        fasta_fai,
-        vcf,
-        tools.split(',').contains('bwamem1'),
-        tools.split(',').contains('bwamem2'),
-        tools.split(',').contains('createsequencedictionary'),
-        tools.split(',').contains('dragmap'),
-        tools.split(',').contains('faidx') && !tools.split(',').contains('sizes'),
-        tools.split(',').contains('intervals'),
-        tools.split(',').contains('msisensorpro'),
-        tools.split(',').contains('tabix'),
-    )
-
-    fasta_fai = fasta_fai.mix(PREPARE_GENOME_DNASEQ.out.fasta_fai)
-
     // Create references for rnaseq based pipelines such as nf-core/riboseq, nf-core/rnaseq, nf-core/rnavar
     PREPARE_GENOME_RNASEQ(
         fasta,
@@ -51,7 +34,7 @@ workflow REFERENCES {
         transcript_fasta,
         tools.split(',').contains('bowtie1'),
         tools.split(',').contains('bowtie2'),
-        tools.split(',').contains('faidx') && tools.split(',').contains('sizes'),
+        tools.split(',').contains('faidx') && (tools.split(',').contains('intervals') || tools.split(',').contains('sizes')),
         tools.split(',').contains('hisat2'),
         tools.split(',').contains('hisat2_extractsplicesites'),
         tools.split(',').contains('kallisto'),
@@ -60,6 +43,21 @@ workflow REFERENCES {
         tools.split(',').contains('salmon'),
         tools.split(',').contains('sizes'),
         tools.split(',').contains('star'),
+    )
+
+    // Create references for dnaseq based pipelines such as nf-core/sarek
+    PREPARE_GENOME_DNASEQ(
+        fasta,
+        fasta_fai.mix(PREPARE_GENOME_RNASEQ.out.fasta_fai).unique(),
+        vcf,
+        tools.split(',').contains('bwamem1'),
+        tools.split(',').contains('bwamem2'),
+        tools.split(',').contains('createsequencedictionary'),
+        tools.split(',').contains('dragmap'),
+        tools.split(',').contains('faidx') && !(tools.split(',').contains('intervals') || tools.split(',').contains('sizes')),
+        tools.split(',').contains('intervals'),
+        tools.split(',').contains('msisensorpro'),
+        tools.split(',').contains('tabix'),
     )
 
     // This works with a mixture of input and computed references

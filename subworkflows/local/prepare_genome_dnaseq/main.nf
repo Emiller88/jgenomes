@@ -76,20 +76,24 @@ workflow PREPARE_GENOME_DNASEQ {
     }
 
     if (run_faidx || run_intervals) {
-        // Do not run SAMTOOLS_FAIDX if the condition is false
-        fasta_samtools = fasta.map { meta, fasta_ -> meta.run_faidx ? [meta, fasta_] : null }
 
-        // No need to generate sizes for DNAseq
-        generate_sizes = false
+        if (run_faidx) {
 
-        SAMTOOLS_FAIDX(
-            fasta_samtools,
-            [[id: 'no_fai'], []],
-            generate_sizes,
-        )
+            // Do not run SAMTOOLS_FAIDX if the condition is false
+            fasta_samtools = fasta.map { meta, fasta_ -> meta.run_faidx ? [meta, fasta_] : null }
 
-        fasta_fai = fasta_fai.mix(SAMTOOLS_FAIDX.out.fai)
-        versions = versions.mix(SAMTOOLS_FAIDX.out.versions)
+            // No need to generate sizes for DNAseq
+            generate_sizes = false
+
+            SAMTOOLS_FAIDX(
+                fasta_samtools,
+                [[id: 'no_fai'], []],
+                generate_sizes,
+            )
+
+            fasta_fai = fasta_fai.mix(SAMTOOLS_FAIDX.out.fai)
+            versions = versions.mix(SAMTOOLS_FAIDX.out.versions)
+        }
 
         if (run_intervals) {
             // Do not run BUILD_INTERVALS if the condition is false
