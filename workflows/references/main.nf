@@ -27,67 +27,148 @@ workflow REFERENCES {
     // Assess if assets needs to be uncompress or not
     // (We do not uncompress VCFs)
 
-    ascat_alleles_input = ASSET_TO_CHANNEL.out.ascat_alleles.branch { _meta, ascat_alleles_ ->
-        decompress: ascat_alleles_.endsWith('.zip')
-        other: true
-    }
+    ascat_alleles_input = ASSET_TO_CHANNEL.out.ascat_alleles
+        .map { meta, ascat_alleles_ -> [meta + [file: 'ascat_alleles'], ascat_alleles_] }
+        .branch { _meta, archive_ ->
+            extract_tar: archive_.endsWith('.tar.gz')
+            extract_gz: archive_.endsWith('.gz')
+            extract_zip: archive_.endsWith('.zip')
+            other: true
+        }
 
-    ascat_loci_input = ASSET_TO_CHANNEL.out.ascat_loci.branch { _meta, ascat_loci_ ->
-        decompress: ascat_loci_.endsWith('.zip')
-        other: true
-    }
+    ascat_loci_input = ASSET_TO_CHANNEL.out.ascat_loci
+        .map { meta, ascat_loci_ -> [meta + [file: 'ascat_loci'], ascat_loci_] }
+        .branch { _meta, archive_ ->
+            extract_tar: archive_.endsWith('.tar.gz')
+            extract_gz: archive_.endsWith('.gz')
+            extract_zip: archive_.endsWith('.zip')
+            other: true
+        }
 
-    ascat_loci_gc_input = ASSET_TO_CHANNEL.out.ascat_loci_gc.branch { _meta, ascat_loci_gc_ ->
-        decompress: ascat_loci_gc_.endsWith('.zip')
-        other: true
-    }
+    ascat_loci_gc_input = ASSET_TO_CHANNEL.out.ascat_loci_gc
+        .map { meta, ascat_loci_gc_ -> [meta + [file: 'ascat_loci_gc'], ascat_loci_gc_] }
+        .branch { _meta, archive_ ->
+            extract_tar: archive_.endsWith('.tar.gz')
+            extract_gz: archive_.endsWith('.gz')
+            extract_zip: archive_.endsWith('.zip')
+            other: true
+        }
 
-    ascat_loci_rt_input = ASSET_TO_CHANNEL.out.ascat_loci_rt.branch { _meta, ascat_loci_rt_ ->
-        decompress: ascat_loci_rt_.endsWith('.zip')
-        other: true
-    }
+    ascat_loci_rt_input = ASSET_TO_CHANNEL.out.ascat_loci_rt
+        .map { meta, ascat_loci_rt_ -> [meta + [file: 'ascat_loci_rt'], ascat_loci_rt_] }
+        .branch { _meta, archive_ ->
+            extract_tar: archive_.endsWith('.tar.gz')
+            extract_gz: archive_.endsWith('.gz')
+            extract_zip: archive_.endsWith('.zip')
+            other: true
+        }
 
-    chr_dir_input = ASSET_TO_CHANNEL.out.chr_dir.branch { _meta, chr_dir_ ->
-        decompress: chr_dir_.endsWith('.tar.gz')
-        other: true
-    }
+    chr_dir_input = ASSET_TO_CHANNEL.out.chr_dir
+        .map { meta, chr_dir_ -> [meta + [file: 'chr_dir'], chr_dir_] }
+        .branch { _meta, archive_ ->
+            extract_tar: archive_.endsWith('.tar.gz')
+            extract_gz: archive_.endsWith('.gz')
+            extract_zip: archive_.endsWith('.zip')
+            other: true
+        }
 
-    fasta_input = ASSET_TO_CHANNEL.out.fasta.branch { _meta, fasta_ ->
-        decompress: fasta_.endsWith('.gz')
-        other: true
-    }
+    fasta_input = ASSET_TO_CHANNEL.out.fasta
+        .map { meta, fasta_ -> [meta + [file: 'fasta'], fasta_] }
+        .branch { _meta, archive_ ->
+            extract_tar: archive_.endsWith('.tar.gz')
+            extract_gz: archive_.endsWith('.gz')
+            extract_zip: archive_.endsWith('.zip')
+            other: true
+        }
 
-    gff_input = ASSET_TO_CHANNEL.out.gff.branch { _meta, gff_ ->
-        decompress: gff_.endsWith('.gz')
-        other: true
-    }
+    gff_input = ASSET_TO_CHANNEL.out.gff
+        .map { meta, gff_ -> [meta + [file: 'gff'], gff_] }
+        .branch { _meta, archive_ ->
+            extract_tar: archive_.endsWith('.tar.gz')
+            extract_gz: archive_.endsWith('.gz')
+            extract_zip: archive_.endsWith('.zip')
+            other: true
+        }
 
-    gtf_input = ASSET_TO_CHANNEL.out.gtf.branch { _meta, gtf ->
-        decompress: gtf.endsWith('.gz')
-        other: true
-    }
+    gtf_input = ASSET_TO_CHANNEL.out.gtf
+        .map { meta, gtf_ -> [meta + [file: 'gtf'], gtf_] }
+        .branch { _meta, archive_ ->
+            extract_tar: archive_.endsWith('.tar.gz')
+            extract_gz: archive_.endsWith('.gz')
+            extract_zip: archive_.endsWith('.zip')
+            other: true
+        }
+
+    files_to_extract_gz = Channel
+        .empty()
+        .mix(
+            ascat_alleles_input.extract_gz,
+            ascat_loci_input.extract_gz,
+            ascat_loci_gc_input.extract_gz,
+            ascat_loci_rt_input.extract_gz,
+            chr_dir_input.extract_gz,
+            fasta_input.extract_gz,
+            gff_input.extract_gz,
+            gtf_input.extract_gz,
+        )
+
+    files_to_extract_tar = Channel
+        .empty()
+        .mix(
+            ascat_alleles_input.extract_tar,
+            ascat_loci_input.extract_tar,
+            ascat_loci_gc_input.extract_tar,
+            ascat_loci_rt_input.extract_tar,
+            chr_dir_input.extract_tar,
+            fasta_input.extract_tar,
+            gff_input.extract_tar,
+            gtf_input.extract_tar,
+        )
+
+    files_to_extract_zip = Channel
+        .empty()
+        .mix(
+            ascat_alleles_input.extract_zip,
+            ascat_loci_input.extract_zip,
+            ascat_loci_gc_input.extract_zip,
+            ascat_loci_rt_input.extract_zip,
+            chr_dir_input.extract_zip,
+            fasta_input.extract_zip,
+            gff_input.extract_zip,
+            gtf_input.extract_zip,
+        )
 
     // Uncompress any assets that need to be
     UNCOMPRESS_ASSET(
-        ascat_alleles_input.decompress,
-        ascat_loci_input.decompress,
-        ascat_loci_gc_input.decompress,
-        ascat_loci_rt_input.decompress,
-        chr_dir_input.decompress,
-        fasta_input.decompress,
-        gff_input.decompress,
-        gtf_input.decompress,
+        files_to_extract_gz,
+        files_to_extract_tar,
+        files_to_extract_zip,
     )
 
+    extracted_asset = UNCOMPRESS_ASSET.out.extracted.branch { meta_, _extracted_asset ->
+        ascat_alleles: meta_.file == 'ascat_alleles'
+        ascat_loci: meta_.file == 'ascat_loci'
+        ascat_loci_gc: meta_.file == 'ascat_loci_gc'
+        ascat_loci_rt: meta_.file == 'ascat_loci_rt'
+        chr_dir: meta_.file == 'chr_dir'
+        fasta: meta_.file == 'fasta'
+        gff: meta_.file == 'gff'
+        gtf: meta_.file == 'gtf'
+        other: true
+    }
+
+    extracted_asset.other.view { "Non assigned extracted asset: " + it }
+
+
     // This covers a mixture of compressed and uncompressed assets
-    ascat_alleles = ascat_alleles_input.other.mix(UNCOMPRESS_ASSET.out.ascat_alleles)
-    ascat_loci = ascat_loci_input.other.mix(UNCOMPRESS_ASSET.out.ascat_loci)
-    ascat_loci_gc = ascat_loci_gc_input.other.mix(UNCOMPRESS_ASSET.out.ascat_loci_gc)
-    ascat_loci_rt = ascat_loci_rt_input.other.mix(UNCOMPRESS_ASSET.out.ascat_loci_rt)
-    chr_dir = chr_dir_input.other.mix(UNCOMPRESS_ASSET.out.chr_dir)
-    fasta = fasta_input.other.mix(UNCOMPRESS_ASSET.out.fasta)
-    gff = gff_input.other.mix(UNCOMPRESS_ASSET.out.gff)
-    gtf = gtf_input.other.mix(UNCOMPRESS_ASSET.out.gtf)
+    ascat_alleles = ascat_alleles_input.other.mix(extracted_asset.ascat_alleles)
+    ascat_loci = ascat_loci_input.other.mix(extracted_asset.ascat_loci)
+    ascat_loci_gc = ascat_loci_gc_input.other.mix(extracted_asset.ascat_loci_gc)
+    ascat_loci_rt = ascat_loci_rt_input.other.mix(extracted_asset.ascat_loci_rt)
+    chr_dir = chr_dir_input.other.mix(extracted_asset.chr_dir)
+    fasta = fasta_input.other.mix(extracted_asset.fasta)
+    gff = gff_input.other.mix(extracted_asset.gff)
+    gtf = gtf_input.other.mix(extracted_asset.gtf)
 
     // Create reference assets from fasta only
     CREATE_FROM_FASTA_ONLY(
