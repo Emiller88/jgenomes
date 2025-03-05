@@ -1,8 +1,8 @@
-include { YAML_TO_CHANNEL                  } from '../../subworkflows/local/yaml_to_channel'
 include { CREATE_FROM_FASTA_AND_ANNOTATION } from '../../subworkflows/local/create_from_fasta_and_annotation'
 include { CREATE_FROM_FASTA_ONLY           } from '../../subworkflows/local/create_from_fasta_only'
-include { INDEX_VCF                        } from '../../subworkflows/local/index_vcf'
 include { EXTRACT_REFERENCE                } from '../../subworkflows/local/extract_reference'
+include { INDEX_VCF                        } from '../../subworkflows/local/index_vcf'
+include { YAML_TO_CHANNEL                  } from '../../subworkflows/local/yaml_to_channel'
 
 workflow REFERENCES {
     take:
@@ -14,9 +14,9 @@ workflow REFERENCES {
         channel
             .map { meta, reference_ -> [meta + [reference: type], reference_] }
             .branch { _meta, reference_ ->
-                extract_tar: reference_.endsWith('.tar.gz')
-                extract_gz: reference_.endsWith('.gz')
-                extract_zip: reference_.endsWith('.zip')
+                tar: reference_.endsWith('.tar.gz')
+                gz: reference_.endsWith('.gz')
+                zip: reference_.endsWith('.zip')
                 other: true
             }
     }
@@ -24,7 +24,7 @@ workflow REFERENCES {
     versions = Channel.empty()
 
     // Create channels from the input file(s)
-    // Channels are empty when no assets are corresponding
+    // Channels are empty when no reference corresponds
     YAML_TO_CHANNEL(asset, tools)
 
     intervals_bed = YAML_TO_CHANNEL.out.intervals_bed
@@ -35,9 +35,9 @@ workflow REFERENCES {
     transcript_fasta = YAML_TO_CHANNEL.out.transcript_fasta
     vcf = YAML_TO_CHANNEL.out.vcf
 
-    // Assess if assets needs to be uncompress or not
+    // Check if reference needs to be extracted
+    // Copy the reference type to the meta
     // (We do not uncompress VCFs)
-
     ascat_alleles_input = need_extract(YAML_TO_CHANNEL.out.ascat_alleles, 'ascat_alleles')
     ascat_loci_input = need_extract(YAML_TO_CHANNEL.out.ascat_loci, 'ascat_loci')
     ascat_loci_gc_input = need_extract(YAML_TO_CHANNEL.out.ascat_loci_gc, 'ascat_loci_gc')
@@ -47,50 +47,51 @@ workflow REFERENCES {
     gff_input = need_extract(YAML_TO_CHANNEL.out.gff, 'gff')
     gtf_input = need_extract(YAML_TO_CHANNEL.out.gtf, 'gtf')
 
-    files_to_extract_gz = Channel
+    extract_gz = Channel
         .empty()
         .mix(
-            ascat_alleles_input.extract_gz,
-            ascat_loci_input.extract_gz,
-            ascat_loci_gc_input.extract_gz,
-            ascat_loci_rt_input.extract_gz,
-            chr_dir_input.extract_gz,
-            fasta_input.extract_gz,
-            gff_input.extract_gz,
-            gtf_input.extract_gz,
+            ascat_alleles_input.gz,
+            ascat_loci_input.gz,
+            ascat_loci_gc_input.gz,
+            ascat_loci_rt_input.gz,
+            chr_dir_input.gz,
+            fasta_input.gz,
+            gff_input.gz,
+            gtf_input.gz,
         )
 
-    files_to_extract_tar = Channel
+    extract_tar = Channel
         .empty()
         .mix(
-            ascat_alleles_input.extract_tar,
-            ascat_loci_input.extract_tar,
-            ascat_loci_gc_input.extract_tar,
-            ascat_loci_rt_input.extract_tar,
-            chr_dir_input.extract_tar,
-            fasta_input.extract_tar,
-            gff_input.extract_tar,
-            gtf_input.extract_tar,
+            ascat_alleles_input.tar,
+            ascat_loci_input.tar,
+            ascat_loci_gc_input.tar,
+            ascat_loci_rt_input.tar,
+            chr_dir_input.tar,
+            fasta_input.tar,
+            gff_input.tar,
+            gtf_input.tar,
         )
 
-    files_to_extract_zip = Channel
+    extract_zip = Channel
         .empty()
         .mix(
-            ascat_alleles_input.extract_zip,
-            ascat_loci_input.extract_zip,
-            ascat_loci_gc_input.extract_zip,
-            ascat_loci_rt_input.extract_zip,
-            chr_dir_input.extract_zip,
-            fasta_input.extract_zip,
-            gff_input.extract_zip,
-            gtf_input.extract_zip,
+            ascat_alleles_input.zip,
+            ascat_loci_input.zip,
+            ascat_loci_gc_input.zip,
+            ascat_loci_rt_input.zip,
+            chr_dir_input.zip,
+            fasta_input.zip,
+            gff_input.zip,
+            gtf_input.zip,
         )
 
     // Uncompress any assets that need to be
+    // From any archive format
     EXTRACT_REFERENCE(
-        files_to_extract_gz,
-        files_to_extract_tar,
-        files_to_extract_zip,
+        extract_gz,
+        extract_tar,
+        extract_zip,
     )
 
     extracted_asset = EXTRACT_REFERENCE.out.extracted.branch { meta_, _extracted_asset ->
@@ -105,6 +106,7 @@ workflow REFERENCES {
         other: true
     }
 
+    // This is a sanity check
     extracted_asset.other.view { "Non assigned extracted asset: " + it }
 
     // This covers a mixture of compressed and uncompressed assets
@@ -155,7 +157,7 @@ workflow REFERENCES {
         tools.split(',').contains('tabix'),
     )
 
-    // This works with a mixture of input and computed assets
+    // This works with a mixture of input and computed references
     fasta_dict = fasta_dict.mix(CREATE_FROM_FASTA_ONLY.out.fasta_dict)
     fasta_fai = fasta_fai.mix(CREATE_FROM_FASTA_ONLY.out.fasta_fai)
     fasta_sizes = fasta_sizes.mix(CREATE_FROM_FASTA_ONLY.out.fasta_sizes)
@@ -164,7 +166,7 @@ workflow REFERENCES {
     splice_sites = splice_sites.mix(CREATE_FROM_FASTA_AND_ANNOTATION.out.splice_sites)
     transcript_fasta = transcript_fasta.mix(CREATE_FROM_FASTA_AND_ANNOTATION.out.transcript_fasta)
 
-    // TODO: This does not work YET with a mixture of input and computed assets
+    // TODO: This does not work YET with a mixture of input and computed references
     bowtie1_index = CREATE_FROM_FASTA_ONLY.out.bowtie1_index
     bowtie2_index = CREATE_FROM_FASTA_ONLY.out.bowtie2_index
     bwamem1_index = CREATE_FROM_FASTA_ONLY.out.bwamem1_index
@@ -179,10 +181,10 @@ workflow REFERENCES {
     vcf_tbi = INDEX_VCF.out.vcf_tbi
 
     // TODO: Refactor this with topics
-    versions = versions.mix(CREATE_FROM_FASTA_ONLY.out.versions)
     versions = versions.mix(CREATE_FROM_FASTA_AND_ANNOTATION.out.versions)
-    versions = versions.mix(INDEX_VCF.out.versions)
+    versions = versions.mix(CREATE_FROM_FASTA_ONLY.out.versions)
     versions = versions.mix(EXTRACT_REFERENCE.out.versions)
+    versions = versions.mix(INDEX_VCF.out.versions)
 
     reference = Channel
         .empty()
