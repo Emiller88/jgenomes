@@ -33,7 +33,7 @@ workflow REFERENCES {
         tools.split(',').contains('bwamem2'),
         tools.split(',').contains('createsequencedictionary'),
         tools.split(',').contains('dragmap'),
-        tools.split(',').contains('faidx') || !tools.split(',').contains('sizes'),
+        tools.split(',').contains('faidx') && !tools.split(',').contains('sizes'),
         tools.split(',').contains('intervals'),
         tools.split(',').contains('msisensorpro'),
         tools.split(',').contains('tabix'),
@@ -51,19 +51,20 @@ workflow REFERENCES {
         transcript_fasta,
         tools.split(',').contains('bowtie1'),
         tools.split(',').contains('bowtie2'),
-        tools.split(',').contains('faidx'),
+        tools.split(',').contains('faidx') && tools.split(',').contains('sizes'),
         tools.split(',').contains('hisat2'),
         tools.split(',').contains('hisat2_extractsplicesites'),
         tools.split(',').contains('kallisto'),
         tools.split(',').contains('rsem'),
         tools.split(',').contains('rsem_make_transcript_fasta'),
         tools.split(',').contains('salmon'),
-        tools.split(',').contains('faidx') || tools.split(',').contains('sizes'),
+        tools.split(',').contains('sizes'),
         tools.split(',').contains('star'),
     )
 
     // This works with a mixture of input and computed references
     fasta_dict = fasta_dict.mix(PREPARE_GENOME_DNASEQ.out.fasta_dict)
+    fasta_fai = fasta_fai.mix(PREPARE_GENOME_DNASEQ.out.fasta_fai, PREPARE_GENOME_RNASEQ.out.fasta_fai)
     fasta_sizes = fasta_sizes.mix(PREPARE_GENOME_RNASEQ.out.fasta_sizes)
     gtf = gtf.mix(PREPARE_GENOME_RNASEQ.out.gtf)
     intervals_bed = intervals_bed.mix(PREPARE_GENOME_DNASEQ.out.intervals_bed)
