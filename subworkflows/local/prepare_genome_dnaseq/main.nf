@@ -27,7 +27,7 @@ workflow PREPARE_GENOME_DNASEQ {
     bwamem2_index = Channel.empty()
     dragmap_hashmap = Channel.empty()
     fasta_dict = Channel.empty()
-    fasta_sizes = Channel.empty()
+    fasta_fai = Channel.empty()
     intervals_bed = Channel.empty()
     msisensorpro_list = Channel.empty()
     vcf_gz = Channel.empty()
