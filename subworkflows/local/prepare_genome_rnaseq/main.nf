@@ -27,8 +27,8 @@ workflow PREPARE_GENOME_RNASEQ {
     run_rsem                       // boolean: true/false
     run_rsem_make_transcript_fasta // boolean: true/false
     run_salmon                     // boolean: true/false
-    run_star                       // boolean: true/false
     run_sizes                      // boolean: true/false
+    run_star                       // boolean: true/false
 
     main:
     bowtie1_index = Channel.empty()
