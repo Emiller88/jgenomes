@@ -24,8 +24,10 @@ include { softwareVersionsToYAML  } from './subworkflows/nf-core/utils_nfcore_pi
 
 include { MULTIQC                 } from './modules/nf-core/multiqc'
 
+include { EXTRACT_REFERENCE       } from './subworkflows/local/extract_reference'
 include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_references_pipeline'
 include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_references_pipeline'
+include { YAML_TO_CHANNEL         } from './subworkflows/local/yaml_to_channel'
 
 include { REFERENCES              } from "./workflows/references"
 
@@ -204,12 +206,124 @@ output {
 //
 workflow NFCORE_REFERENCES {
     take:
-    asset // channel: asset reference yml file read in from --asset
-    tools // list of tools to use to build references
+    references
+    tools      // list of tools to use to build references
 
     main:
+    // Helper closure to check if a reference needs to be extracted
+    // Add the reference type to the meta
+    // Depending on the extension, return the appropriate channel
+    def need_extract = { channel, type ->
+        channel
+            .map { meta, reference_ -> [meta + [reference: type], reference_] }
+            .branch { _meta, reference_ ->
+                tar: reference_.endsWith('.tar.gz')
+                gz: reference_.endsWith('.gz')
+                zip: reference_.endsWith('.zip')
+                not_extracted: true
+            }
+    }
+
+    YAML_TO_CHANNEL(references, params.tools ?: "no_tools")
+
+    // References that need to be extracted
+    // (VCFs are not extracted)
+    ascat_alleles_input = need_extract(YAML_TO_CHANNEL.out.ascat_alleles, 'ascat_alleles')
+    ascat_loci_input = need_extract(YAML_TO_CHANNEL.out.ascat_loci, 'ascat_loci')
+    ascat_loci_gc_input = need_extract(YAML_TO_CHANNEL.out.ascat_loci_gc, 'ascat_loci_gc')
+    ascat_loci_rt_input = need_extract(YAML_TO_CHANNEL.out.ascat_loci_rt, 'ascat_loci_rt')
+    chr_dir_input = need_extract(YAML_TO_CHANNEL.out.chr_dir, 'chr_dir')
+    fasta_input = need_extract(YAML_TO_CHANNEL.out.fasta, 'fasta')
+    gff_input = need_extract(YAML_TO_CHANNEL.out.gff, 'gff')
+    gtf_input = need_extract(YAML_TO_CHANNEL.out.gtf, 'gtf')
+
+    // gather all gzipped references
+    extract_gz = Channel
+        .empty()
+        .mix(
+            ascat_alleles_input.gz,
+            ascat_loci_input.gz,
+            ascat_loci_gc_input.gz,
+            ascat_loci_rt_input.gz,
+            chr_dir_input.gz,
+            fasta_input.gz,
+            gff_input.gz,
+            gtf_input.gz,
+        )
+
+    // gather all tarred references
+    extract_tar = Channel
+        .empty()
+        .mix(
+            ascat_alleles_input.tar,
+            ascat_loci_input.tar,
+            ascat_loci_gc_input.tar,
+            ascat_loci_rt_input.tar,
+            chr_dir_input.tar,
+            fasta_input.tar,
+            gff_input.tar,
+            gtf_input.tar,
+        )
+
+    // gather all zipped references
+    extract_zip = Channel
+        .empty()
+        .mix(
+            ascat_alleles_input.zip,
+            ascat_loci_input.zip,
+            ascat_loci_gc_input.zip,
+            ascat_loci_rt_input.zip,
+            chr_dir_input.zip,
+            fasta_input.zip,
+            gff_input.zip,
+            gtf_input.zip,
+        )
+
+    // Extract references from any archive format
+    EXTRACT_REFERENCE(
+        extract_gz,
+        extract_tar,
+        extract_zip,
+    )
+
+    // return to the appropriate channels
+    extracted_asset = EXTRACT_REFERENCE.out.extracted.branch { meta_, _extracted_asset ->
+        ascat_alleles: meta_.reference == 'ascat_alleles'
+        ascat_loci: meta_.reference == 'ascat_loci'
+        ascat_loci_gc: meta_.reference == 'ascat_loci_gc'
+        ascat_loci_rt: meta_.reference == 'ascat_loci_rt'
+        chr_dir: meta_.reference == 'chr_dir'
+        fasta: meta_.reference == 'fasta'
+        gff: meta_.reference == 'gff'
+        gtf: meta_.reference == 'gtf'
+        non_assigned: true
+    }
+
+    // This is a sanity check
+    extracted_asset.non_assigned.view { "Non assigned extracted asset: " + it }
+
     // WORKFLOW: Run pipeline
-    REFERENCES(asset, tools)
+    // Mix the references that were extracted with the references that did not need to be extracted
+    // Some references are not extracted because they are usually not stored in an archived format
+    // TODO: check if more references need to be extracted
+    REFERENCES(
+        ascat_alleles_input.not_extracted.mix(extracted_asset.ascat_alleles),
+        ascat_loci_input.not_extracted.mix(extracted_asset.ascat_loci),
+        ascat_loci_gc_input.not_extracted.mix(extracted_asset.ascat_loci_gc),
+        ascat_loci_rt_input.not_extracted.mix(extracted_asset.ascat_loci_rt),
+        chr_dir_input.not_extracted.mix(extracted_asset.chr_dir),
+        fasta_input.not_extracted.mix(extracted_asset.fasta),
+        YAML_TO_CHANNEL.out.fasta_dict,
+        YAML_TO_CHANNEL.out.fasta_fai,
+        YAML_TO_CHANNEL.out.fasta_sizes,
+        gff_input.not_extracted.mix(extracted_asset.gff),
+        gtf_input.not_extracted.mix(extracted_asset.gtf),
+        YAML_TO_CHANNEL.out.intervals_bed,
+        YAML_TO_CHANNEL.out.splice_sites,
+        YAML_TO_CHANNEL.out.transcript_fasta,
+        YAML_TO_CHANNEL.out.vcf,
+        tools,
+    )
 
     emit:
     reference = REFERENCES.out.reference
