@@ -1,8 +1,5 @@
-include { CREATE_FROM_FASTA_AND_ANNOTATION } from '../../subworkflows/local/create_from_fasta_and_annotation'
-include { CREATE_FROM_FASTA_ONLY           } from '../../subworkflows/local/create_from_fasta_only'
-include { INDEX_VCF                        } from '../../subworkflows/local/index_vcf'
-include { EXTRACT_REFERENCE                } from '../../subworkflows/local/extract_reference'
-include { YAML_TO_CHANNEL                  } from '../../subworkflows/local/yaml_to_channel'
+include { PREPARE_GENOME_DNASEQ } from '../../subworkflows/local/prepare_genome_dnaseq'
+include { PREPARE_GENOME_RNASEQ } from '../../subworkflows/local/prepare_genome_rnaseq'
 
 workflow REFERENCES {
     take:
@@ -27,12 +24,11 @@ workflow REFERENCES {
 
     versions = Channel.empty()
 
-    // Create reference assets from fasta only
-    CREATE_FROM_FASTA_ONLY(
+    // Create references for dnaseq based pipelines such as nf-core/sarek
+    PREPARE_GENOME_DNASEQ(
         fasta,
         fasta_fai,
-        tools.split(',').contains('bowtie1'),
-        tools.split(',').contains('bowtie2'),
+        vcf,
         tools.split(',').contains('bwamem1'),
         tools.split(',').contains('bwamem2'),
         tools.split(',').contains('createsequencedictionary'),
@@ -40,58 +36,57 @@ workflow REFERENCES {
         tools.split(',').contains('faidx'),
         tools.split(',').contains('intervals'),
         tools.split(',').contains('msisensorpro'),
-        tools.split(',').contains('sizes'),
+        tools.split(',').contains('tabix'),
     )
 
-    // Create reference assets from fasta and gene annotation (so gff, gtf and transcript_fasta)
-    CREATE_FROM_FASTA_AND_ANNOTATION(
+    fasta_fai = fasta_fai.mix(PREPARE_GENOME_DNASEQ.out.fasta_fai)
+
+    // Create references for rnaseq based pipelines such as nf-core/riboseq, nf-core/rnaseq, nf-core/rnavar
+    PREPARE_GENOME_RNASEQ(
         fasta,
+        fasta_fai,
         gff,
         gtf,
         splice_sites,
         transcript_fasta,
+        tools.split(',').contains('bowtie1'),
+        tools.split(',').contains('bowtie2'),
+        tools.split(',').contains('faidx'),
         tools.split(',').contains('hisat2'),
         tools.split(',').contains('hisat2_extractsplicesites'),
         tools.split(',').contains('kallisto'),
         tools.split(',').contains('rsem'),
         tools.split(',').contains('rsem_make_transcript_fasta'),
         tools.split(',').contains('salmon'),
+        tools.split(',').contains('sizes'),
         tools.split(',').contains('star'),
     )
 
-    // Index VCF
-    INDEX_VCF(
-        vcf,
-        tools.split(',').contains('tabix'),
-    )
-
     // This works with a mixture of input and computed references
-    fasta_dict = fasta_dict.mix(CREATE_FROM_FASTA_ONLY.out.fasta_dict)
-    fasta_fai = fasta_fai.mix(CREATE_FROM_FASTA_ONLY.out.fasta_fai)
-    fasta_sizes = fasta_sizes.mix(CREATE_FROM_FASTA_ONLY.out.fasta_sizes)
-    gtf = gtf.mix(CREATE_FROM_FASTA_AND_ANNOTATION.out.gtf)
-    intervals_bed = intervals_bed.mix(CREATE_FROM_FASTA_ONLY.out.intervals_bed)
-    splice_sites = splice_sites.mix(CREATE_FROM_FASTA_AND_ANNOTATION.out.splice_sites)
-    transcript_fasta = transcript_fasta.mix(CREATE_FROM_FASTA_AND_ANNOTATION.out.transcript_fasta)
+    fasta_dict = fasta_dict.mix(PREPARE_GENOME_DNASEQ.out.fasta_dict)
+    fasta_sizes = fasta_sizes.mix(PREPARE_GENOME_RNASEQ.out.fasta_sizes)
+    gtf = gtf.mix(PREPARE_GENOME_RNASEQ.out.gtf)
+    intervals_bed = intervals_bed.mix(PREPARE_GENOME_DNASEQ.out.intervals_bed)
+    splice_sites = splice_sites.mix(PREPARE_GENOME_RNASEQ.out.splice_sites)
+    transcript_fasta = transcript_fasta.mix(PREPARE_GENOME_RNASEQ.out.transcript_fasta)
 
     // TODO: This does not work YET with a mixture of input and computed references
-    bowtie1_index = CREATE_FROM_FASTA_ONLY.out.bowtie1_index
-    bowtie2_index = CREATE_FROM_FASTA_ONLY.out.bowtie2_index
-    bwamem1_index = CREATE_FROM_FASTA_ONLY.out.bwamem1_index
-    bwamem2_index = CREATE_FROM_FASTA_ONLY.out.bwamem2_index
-    dragmap_hashmap = CREATE_FROM_FASTA_ONLY.out.dragmap_hashmap
-    hisat2_index = CREATE_FROM_FASTA_AND_ANNOTATION.out.hisat2_index
-    kallisto_index = CREATE_FROM_FASTA_AND_ANNOTATION.out.kallisto_index
-    msisensorpro_list = CREATE_FROM_FASTA_ONLY.out.msisensorpro_list
-    rsem_index = CREATE_FROM_FASTA_AND_ANNOTATION.out.rsem_index
-    salmon_index = CREATE_FROM_FASTA_AND_ANNOTATION.out.salmon_index
-    star_index = CREATE_FROM_FASTA_AND_ANNOTATION.out.star_index
-    vcf_tbi = INDEX_VCF.out.vcf_tbi
+    bowtie1_index = PREPARE_GENOME_RNASEQ.out.bowtie1_index
+    bowtie2_index = PREPARE_GENOME_RNASEQ.out.bowtie2_index
+    bwamem1_index = PREPARE_GENOME_DNASEQ.out.bwamem1_index
+    bwamem2_index = PREPARE_GENOME_DNASEQ.out.bwamem2_index
+    dragmap_hashmap = PREPARE_GENOME_DNASEQ.out.dragmap_hashmap
+    hisat2_index = PREPARE_GENOME_RNASEQ.out.hisat2_index
+    kallisto_index = PREPARE_GENOME_RNASEQ.out.kallisto_index
+    msisensorpro_list = PREPARE_GENOME_DNASEQ.out.msisensorpro_list
+    rsem_index = PREPARE_GENOME_RNASEQ.out.rsem_index
+    salmon_index = PREPARE_GENOME_RNASEQ.out.salmon_index
+    star_index = PREPARE_GENOME_RNASEQ.out.star_index
+    vcf_tbi = PREPARE_GENOME_DNASEQ.out.vcf_tbi
 
     // TODO: Refactor this with topics
-    versions = versions.mix(CREATE_FROM_FASTA_AND_ANNOTATION.out.versions)
-    versions = versions.mix(CREATE_FROM_FASTA_ONLY.out.versions)
-    versions = versions.mix(INDEX_VCF.out.versions)
+    versions = versions.mix(PREPARE_GENOME_DNASEQ.out.versions)
+    versions = versions.mix(PREPARE_GENOME_RNASEQ.out.versions)
 
     reference = Channel
         .empty()

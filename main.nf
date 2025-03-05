@@ -24,7 +24,7 @@ include { softwareVersionsToYAML  } from './subworkflows/nf-core/utils_nfcore_pi
 
 include { MULTIQC                 } from './modules/nf-core/multiqc'
 
-include { EXTRACT_REFERENCE       } from './subworkflows/local/extract_reference'
+include { EXTRACT_ARCHIVE         } from './subworkflows/local/extract_archive'
 include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_references_pipeline'
 include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_references_pipeline'
 include { YAML_TO_CHANNEL         } from './subworkflows/local/yaml_to_channel'
@@ -280,14 +280,14 @@ workflow NFCORE_REFERENCES {
         )
 
     // Extract references from any archive format
-    EXTRACT_REFERENCE(
+    EXTRACT_ARCHIVE(
         extract_gz,
         extract_tar,
         extract_zip,
     )
 
     // return to the appropriate channels
-    extracted_asset = EXTRACT_REFERENCE.out.extracted.branch { meta_, _extracted_asset ->
+    extracted_asset = EXTRACT_ARCHIVE.out.extracted.branch { meta_, _extracted_asset ->
         ascat_alleles: meta_.reference == 'ascat_alleles'
         ascat_loci: meta_.reference == 'ascat_loci'
         ascat_loci_gc: meta_.reference == 'ascat_loci_gc'

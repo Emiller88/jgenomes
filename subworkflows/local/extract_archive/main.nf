@@ -6,7 +6,7 @@ include { GUNZIP } from '../../../modules/nf-core/gunzip'
 include { UNTAR  } from '../../../modules/nf-core/untar'
 include { UNZIP  } from '../../../modules/nf-core/unzip'
 
-workflow EXTRACT_REFERENCE {
+workflow EXTRACT_ARCHIVE {
     take:
     extract_gz
     extract_tar
