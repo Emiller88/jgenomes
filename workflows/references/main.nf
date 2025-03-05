@@ -92,17 +92,15 @@ workflow REFERENCES {
     reference = Channel
         .empty()
         .mix(
-            // Cannot output properly yet
-            // ascat_alleles.map { meta, reference_ -> [meta + [file: 'ascat_alleles'], reference_] },
-            // ascat_loci.map { meta, reference_ -> [meta + [file: 'ascat_loci'], reference_] },
-            // ascat_loci_gc.map { meta, reference_ -> [meta + [file: 'ascat_loci_gc'], reference_] },
-            // ascat_loci_rt.map { meta, reference_ -> [meta + [file: 'ascat_loci_rt'], reference_] },
+            ascat_alleles.map { meta, reference_ -> [meta + [file: 'ascat_alleles'], reference_] },
+            ascat_loci.map { meta, reference_ -> [meta + [file: 'ascat_loci'], reference_] },
+            ascat_loci_gc.map { meta, reference_ -> [meta + [file: 'ascat_loci_gc'], reference_] },
+            ascat_loci_rt.map { meta, reference_ -> [meta + [file: 'ascat_loci_rt'], reference_] },
             bowtie1_index.map { meta, reference_ -> [meta + [file: 'bowtie1_index'], reference_] },
             bowtie2_index.map { meta, reference_ -> [meta + [file: 'bowtie2_index'], reference_] },
             bwamem1_index.map { meta, reference_ -> [meta + [file: 'bwamem1_index'], reference_] },
             bwamem2_index.map { meta, reference_ -> [meta + [file: 'bwamem2_index'], reference_] },
-            // Cannot output properly yet
-            // chr_dir.map { meta, reference_ -> [meta + [file: 'chr_dir'], reference_] },
+            chr_dir.map { meta, reference_ -> [meta + [file: 'chr_dir'], reference_] },
             dragmap_hashmap.map { meta, reference_ -> [meta + [file: 'dragmap_hashmap'], reference_] },
             fasta.map { meta, reference_ -> [meta + [file: 'fasta'], reference_] },
             fasta_dict.map { meta, reference_ -> [meta + [file: 'fasta_dict'], reference_] },
