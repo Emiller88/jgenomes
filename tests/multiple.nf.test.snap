@@ -1,5 +1,5 @@
 {
-    "-profile test  with globs on s3 --input assets/test/pipelines/sarek_s3_muliple_glob.yml": {
+    "-profile test --tools tabix --input assets/test/pipelines/sarek_s3_muliple_glob.yml": {
         "content": [
             5,
             {
@@ -45,11 +45,11 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.4"
+            "nextflow": "25.01.0"
         },
-        "timestamp": "2025-02-14T18:32:07.138946542"
+        "timestamp": "2025-03-05T08:55:52.226157667"
     },
-    "-profile test  --input assets/test/default_multiple.yml": {
+    "-profile test --tools bwamem1,createsequencedictionary,faidx,intervals--input assets/test/default_multiple.yml": {
         "content": [
             9,
             {
@@ -137,8 +137,8 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.3"
+            "nextflow": "25.01.0"
         },
-        "timestamp": "2025-01-09T16:59:54.759898863"
+        "timestamp": "2025-03-05T08:55:15.458217871"
     }
 }

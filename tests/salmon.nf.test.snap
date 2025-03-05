@@ -1,5 +1,5 @@
 {
-    "-profile test [salmon] --input GRCh38_chr21.yml": {
+    "-profile test --tools salmon,rsem_make_transcript_fasta --input GRCh38_chr21.yml": {
         "content": [
             4,
             {
@@ -75,11 +75,11 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.2"
+            "nextflow": "25.01.0"
         },
-        "timestamp": "2024-12-06T11:43:27.413672277"
+        "timestamp": "2025-03-05T09:05:17.523832824"
     },
-    "-profile test [salmon] --input assets/test/default_extended.yml": {
+    "-profile test --tools salmon,rsem_make_transcript_fasta --input assets/test/default_extended.yml": {
         "content": [
             2,
             {
@@ -142,8 +142,8 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.2"
+            "nextflow": "25.01.0"
         },
-        "timestamp": "2024-12-06T11:57:24.351180092"
+        "timestamp": "2025-03-05T09:04:18.411751006"
     }
 }

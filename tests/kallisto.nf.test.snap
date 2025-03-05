@@ -1,5 +1,5 @@
 {
-    "-profile test [kallisto] --input GRCh38_chr21.yml": {
+    "-profile test --tools kallisto,rsem_make_transcript_fasta --input GRCh38_chr21.yml": {
         "content": [
             4,
             {
@@ -51,11 +51,11 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.2"
+            "nextflow": "25.01.0"
         },
-        "timestamp": "2024-12-06T11:34:03.486585563"
+        "timestamp": "2025-03-05T08:54:13.565709002"
     },
-    "-profile test [kallisto] --input assets/test/default_extended.yml": {
+    "-profile test --tools kallisto,rsem_make_transcript_fasta --input assets/test/default_extended.yml": {
         "content": [
             2,
             {
@@ -94,8 +94,8 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.2"
+            "nextflow": "25.01.0"
         },
-        "timestamp": "2024-12-06T11:50:22.597389596"
+        "timestamp": "2025-03-05T08:52:53.613029106"
     }
 }

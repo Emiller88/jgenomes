@@ -4,7 +4,7 @@ nextflow_pipeline {
     script "../main.nf"
     tag "pipeline"
 
-    test("-profile test  --input assets/test/default_multiple.yml") {
+    test("-profile test --tools bwamem1,createsequencedictionary,faidx,intervals--input assets/test/default_multiple.yml") {
 
         options "-output-dir $outputDir"
 
@@ -37,7 +37,7 @@ nextflow_pipeline {
         }
     }
 
-    test("-profile test  with globs on s3 --input assets/test/pipelines/sarek_s3_muliple_glob.yml") {
+    test("-profile test --tools tabix --input assets/test/pipelines/sarek_s3_muliple_glob.yml") {
 
         options "-output-dir $outputDir"
 
