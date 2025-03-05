@@ -33,7 +33,7 @@ workflow REFERENCES {
         tools.split(',').contains('bwamem2'),
         tools.split(',').contains('createsequencedictionary'),
         tools.split(',').contains('dragmap'),
-        tools.split(',').contains('faidx'),
+        tools.split(',').contains('faidx') || !tools.split(',').contains('sizes'),
         tools.split(',').contains('intervals'),
         tools.split(',').contains('msisensorpro'),
         tools.split(',').contains('tabix'),
@@ -58,7 +58,7 @@ workflow REFERENCES {
         tools.split(',').contains('rsem'),
         tools.split(',').contains('rsem_make_transcript_fasta'),
         tools.split(',').contains('salmon'),
-        tools.split(',').contains('sizes'),
+        tools.split(',').contains('faidx') || tools.split(',').contains('sizes'),
         tools.split(',').contains('star'),
     )
 
