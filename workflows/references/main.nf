@@ -1,8 +1,8 @@
-include { ASSET_TO_CHANNEL                 } from '../../subworkflows/local/asset_to_channel'
+include { YAML_TO_CHANNEL                  } from '../../subworkflows/local/yaml_to_channel'
 include { CREATE_FROM_FASTA_AND_ANNOTATION } from '../../subworkflows/local/create_from_fasta_and_annotation'
 include { CREATE_FROM_FASTA_ONLY           } from '../../subworkflows/local/create_from_fasta_only'
 include { INDEX_VCF                        } from '../../subworkflows/local/index_vcf'
-include { UNCOMPRESS_ASSET                 } from '../../subworkflows/local/uncompress_asset'
+include { EXTRACT_REFERENCE                } from '../../subworkflows/local/extract_reference'
 
 workflow REFERENCES {
     take:
@@ -14,20 +14,20 @@ workflow REFERENCES {
 
     // Create channels from the input file(s)
     // Channels are empty when no assets are corresponding
-    ASSET_TO_CHANNEL(asset, tools)
+    YAML_TO_CHANNEL(asset, tools)
 
-    intervals_bed = ASSET_TO_CHANNEL.out.intervals_bed
-    fasta_dict = ASSET_TO_CHANNEL.out.fasta_dict
-    fasta_fai = ASSET_TO_CHANNEL.out.fasta_fai
-    fasta_sizes = ASSET_TO_CHANNEL.out.fasta_sizes
-    splice_sites = ASSET_TO_CHANNEL.out.splice_sites
-    transcript_fasta = ASSET_TO_CHANNEL.out.transcript_fasta
-    vcf = ASSET_TO_CHANNEL.out.vcf
+    intervals_bed = YAML_TO_CHANNEL.out.intervals_bed
+    fasta_dict = YAML_TO_CHANNEL.out.fasta_dict
+    fasta_fai = YAML_TO_CHANNEL.out.fasta_fai
+    fasta_sizes = YAML_TO_CHANNEL.out.fasta_sizes
+    splice_sites = YAML_TO_CHANNEL.out.splice_sites
+    transcript_fasta = YAML_TO_CHANNEL.out.transcript_fasta
+    vcf = YAML_TO_CHANNEL.out.vcf
 
     // Assess if assets needs to be uncompress or not
     // (We do not uncompress VCFs)
 
-    ascat_alleles_input = ASSET_TO_CHANNEL.out.ascat_alleles
+    ascat_alleles_input = YAML_TO_CHANNEL.out.ascat_alleles
         .map { meta, ascat_alleles_ -> [meta + [file: 'ascat_alleles'], ascat_alleles_] }
         .branch { _meta, archive_ ->
             extract_tar: archive_.endsWith('.tar.gz')
@@ -36,7 +36,7 @@ workflow REFERENCES {
             other: true
         }
 
-    ascat_loci_input = ASSET_TO_CHANNEL.out.ascat_loci
+    ascat_loci_input = YAML_TO_CHANNEL.out.ascat_loci
         .map { meta, ascat_loci_ -> [meta + [file: 'ascat_loci'], ascat_loci_] }
         .branch { _meta, archive_ ->
             extract_tar: archive_.endsWith('.tar.gz')
@@ -45,7 +45,7 @@ workflow REFERENCES {
             other: true
         }
 
-    ascat_loci_gc_input = ASSET_TO_CHANNEL.out.ascat_loci_gc
+    ascat_loci_gc_input = YAML_TO_CHANNEL.out.ascat_loci_gc
         .map { meta, ascat_loci_gc_ -> [meta + [file: 'ascat_loci_gc'], ascat_loci_gc_] }
         .branch { _meta, archive_ ->
             extract_tar: archive_.endsWith('.tar.gz')
@@ -54,7 +54,7 @@ workflow REFERENCES {
             other: true
         }
 
-    ascat_loci_rt_input = ASSET_TO_CHANNEL.out.ascat_loci_rt
+    ascat_loci_rt_input = YAML_TO_CHANNEL.out.ascat_loci_rt
         .map { meta, ascat_loci_rt_ -> [meta + [file: 'ascat_loci_rt'], ascat_loci_rt_] }
         .branch { _meta, archive_ ->
             extract_tar: archive_.endsWith('.tar.gz')
@@ -63,7 +63,7 @@ workflow REFERENCES {
             other: true
         }
 
-    chr_dir_input = ASSET_TO_CHANNEL.out.chr_dir
+    chr_dir_input = YAML_TO_CHANNEL.out.chr_dir
         .map { meta, chr_dir_ -> [meta + [file: 'chr_dir'], chr_dir_] }
         .branch { _meta, archive_ ->
             extract_tar: archive_.endsWith('.tar.gz')
@@ -72,7 +72,7 @@ workflow REFERENCES {
             other: true
         }
 
-    fasta_input = ASSET_TO_CHANNEL.out.fasta
+    fasta_input = YAML_TO_CHANNEL.out.fasta
         .map { meta, fasta_ -> [meta + [file: 'fasta'], fasta_] }
         .branch { _meta, archive_ ->
             extract_tar: archive_.endsWith('.tar.gz')
@@ -81,7 +81,7 @@ workflow REFERENCES {
             other: true
         }
 
-    gff_input = ASSET_TO_CHANNEL.out.gff
+    gff_input = YAML_TO_CHANNEL.out.gff
         .map { meta, gff_ -> [meta + [file: 'gff'], gff_] }
         .branch { _meta, archive_ ->
             extract_tar: archive_.endsWith('.tar.gz')
@@ -90,7 +90,7 @@ workflow REFERENCES {
             other: true
         }
 
-    gtf_input = ASSET_TO_CHANNEL.out.gtf
+    gtf_input = YAML_TO_CHANNEL.out.gtf
         .map { meta, gtf_ -> [meta + [file: 'gtf'], gtf_] }
         .branch { _meta, archive_ ->
             extract_tar: archive_.endsWith('.tar.gz')
@@ -139,13 +139,13 @@ workflow REFERENCES {
         )
 
     // Uncompress any assets that need to be
-    UNCOMPRESS_ASSET(
+    EXTRACT_REFERENCE(
         files_to_extract_gz,
         files_to_extract_tar,
         files_to_extract_zip,
     )
 
-    extracted_asset = UNCOMPRESS_ASSET.out.extracted.branch { meta_, _extracted_asset ->
+    extracted_asset = EXTRACT_REFERENCE.out.extracted.branch { meta_, _extracted_asset ->
         ascat_alleles: meta_.file == 'ascat_alleles'
         ascat_loci: meta_.file == 'ascat_loci'
         ascat_loci_gc: meta_.file == 'ascat_loci_gc'
@@ -158,7 +158,6 @@ workflow REFERENCES {
     }
 
     extracted_asset.other.view { "Non assigned extracted asset: " + it }
-
 
     // This covers a mixture of compressed and uncompressed assets
     ascat_alleles = ascat_alleles_input.other.mix(extracted_asset.ascat_alleles)
@@ -235,7 +234,7 @@ workflow REFERENCES {
     versions = versions.mix(CREATE_FROM_FASTA_ONLY.out.versions)
     versions = versions.mix(CREATE_FROM_FASTA_AND_ANNOTATION.out.versions)
     versions = versions.mix(INDEX_VCF.out.versions)
-    versions = versions.mix(UNCOMPRESS_ASSET.out.versions)
+    versions = versions.mix(EXTRACT_REFERENCE.out.versions)
 
     reference = Channel
         .empty()

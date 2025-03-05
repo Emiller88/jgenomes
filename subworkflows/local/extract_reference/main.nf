@@ -1,12 +1,12 @@
 //
-// Uncompress reference genome files
+// extract reference genome files
 //
 
 include { GUNZIP } from '../../../modules/nf-core/gunzip'
 include { UNTAR  } from '../../../modules/nf-core/untar'
 include { UNZIP  } from '../../../modules/nf-core/unzip'
 
-workflow UNCOMPRESS_ASSET {
+workflow EXTRACT_REFERENCE {
     take:
     extract_gz
     extract_tar
@@ -15,12 +15,7 @@ workflow UNCOMPRESS_ASSET {
     main:
     versions = Channel.empty()
 
-    // Do not run GUNZIP, UNTAR, UNZIP if the condition is false
-    // extract_gz = extract_gz.map { meta, extract_gz_ -> meta.decompress_gz ? [meta, extract_gz_] : null }
-    // extract_tar = extract_tar.map { meta, extract_tar_ -> meta.decompress_tar ? [meta, extract_tar_] : null }
-    // extract_zip = extract_zip.map { meta, extract_zip_ -> meta.decompress_zip ? [meta, extract_zip_] : null }
-
-    // Uncompress the assets
+    // extract reference
     GUNZIP(extract_gz)
     UNTAR(extract_tar)
     UNZIP(extract_zip)

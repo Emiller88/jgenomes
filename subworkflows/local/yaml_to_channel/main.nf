@@ -1,4 +1,4 @@
-workflow ASSET_TO_CHANNEL {
+workflow YAML_TO_CHANNEL {
     take:
     asset // channel: [meta, fasta]
     tools // List: Can contain any combination of tools of the list of available tools, or just no_tools
