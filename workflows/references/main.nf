@@ -17,7 +17,7 @@ workflow REFERENCES {
                 tar: reference_.endsWith('.tar.gz')
                 gz: reference_.endsWith('.gz')
                 zip: reference_.endsWith('.zip')
-                other: true
+                no_extract: true
             }
     }
 
@@ -103,21 +103,21 @@ workflow REFERENCES {
         fasta: meta_.reference == 'fasta'
         gff: meta_.reference == 'gff'
         gtf: meta_.reference == 'gtf'
-        other: true
+        not_assigned: true
     }
 
     // This is a sanity check
-    extracted_asset.other.view { "Non assigned extracted asset: " + it }
+    extracted_asset.not_assigned.view { "Non assigned extracted asset: " + it }
 
     // This covers a mixture of compressed and uncompressed assets
-    ascat_alleles = ascat_alleles_input.other.mix(extracted_asset.ascat_alleles)
-    ascat_loci = ascat_loci_input.other.mix(extracted_asset.ascat_loci)
-    ascat_loci_gc = ascat_loci_gc_input.other.mix(extracted_asset.ascat_loci_gc)
-    ascat_loci_rt = ascat_loci_rt_input.other.mix(extracted_asset.ascat_loci_rt)
-    chr_dir = chr_dir_input.other.mix(extracted_asset.chr_dir)
-    fasta = fasta_input.other.mix(extracted_asset.fasta)
-    gff = gff_input.other.mix(extracted_asset.gff)
-    gtf = gtf_input.other.mix(extracted_asset.gtf)
+    ascat_alleles = ascat_alleles_input.no_extract.mix(extracted_asset.ascat_alleles)
+    ascat_loci = ascat_loci_input.no_extract.mix(extracted_asset.ascat_loci)
+    ascat_loci_gc = ascat_loci_gc_input.no_extract.mix(extracted_asset.ascat_loci_gc)
+    ascat_loci_rt = ascat_loci_rt_input.no_extract.mix(extracted_asset.ascat_loci_rt)
+    chr_dir = chr_dir_input.no_extract.mix(extracted_asset.chr_dir)
+    fasta = fasta_input.no_extract.mix(extracted_asset.fasta)
+    gff = gff_input.no_extract.mix(extracted_asset.gff)
+    gtf = gtf_input.no_extract.mix(extracted_asset.gtf)
 
     // Create reference assets from fasta only
     CREATE_FROM_FASTA_ONLY(
