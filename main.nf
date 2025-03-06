@@ -217,7 +217,7 @@ workflow NFCORE_REFERENCES {
         channel
             .map { meta, reference_ -> [meta + [reference: type], reference_] }
             .branch { _meta, reference_ ->
-                to_extract: reference_.endsWith('.gz') || reference_.endsWith('.zip')
+                to_extract: reference_.toString().endsWith('.gz') || reference_.toString().endsWith('.zip')
                 not_extracted: true
             }
     }
