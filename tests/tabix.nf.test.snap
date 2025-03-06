@@ -1,5 +1,5 @@
 {
-    "Run with profile test with tabix | --input assets/test/default_full.yml": {
+    "-profile test --tools tabix --input assets/test/default_full.yml": {
         "content": [
             1,
             {
@@ -26,11 +26,11 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.3"
+            "nextflow": "25.01.0"
         },
-        "timestamp": "2025-01-07T15:37:06.912762838"
+        "timestamp": "2025-03-05T09:07:51.089246407"
     },
-    "Run with profile test with tabix | --input assets/test/default_extended.yml": {
+    "-profile test --tools tabix --input assets/test/default_extended.yml": {
         "content": [
             2,
             {
@@ -68,8 +68,8 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.4"
+            "nextflow": "25.01.0"
         },
-        "timestamp": "2025-01-21T13:25:24.187520607"
+        "timestamp": "2025-03-05T09:07:31.931507315"
     }
 }

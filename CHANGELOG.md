@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [72](https://github.com/nf-core/references/pull/72) - Compress vcf files when they are not already compressed
 - [74](https://github.com/nf-core/references/pull/74) - Add DOI
 - [76](https://github.com/nf-core/references/pull/76) - Add untar and unzip
+- [89](https://github.com/nf-core/references/pull/89) - Added EDAM for bwa/index and bwamem2/index
 - [90](https://github.com/nf-core/references/pull/90) - Added link to Bluesky
 
 ### Changed
@@ -23,6 +24,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [86](https://github.com/nf-core/references/pull/86) - Template update for nf-core/tools v3.2.0
 - [87](https://github.com/nf-core/references/pull/87) - Automatic nf-test sharding
 - [88](https://github.com/nf-core/references/pull/88) - Update all modules
+- [91](https://github.com/nf-core/references/pull/91) - Refactor and simplify GUNZIP, UNTAR and UNZIP usage
+- [91](https://github.com/nf-core/references/pull/91) - Split up references generation into separate subworkflows based on dnaseq or rnaseq
 
 ### Fixed
 

@@ -4,7 +4,7 @@ nextflow_pipeline {
     script "../main.nf"
     tag "pipeline"
 
-    test("Run with profile test for rnaseq | --input GRCh38_chr21.yml") {
+    test("-profile test --tools bowtie1,bowtie2,faidx,gffread,sizes,star --input GRCh38_chr21.yml") {
 
     options "-output-dir $outputDir"
 

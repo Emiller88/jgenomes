@@ -1,5 +1,5 @@
 {
-    "Run with profile test for WBCEL235 | --input Caenorhabditis_elegans/NCBI/WBcel235.yml": {
+    "-profile test --tools bwamem1,createsequencedictionary,faidx,intervals,rsem,star --input Caenorhabditis_elegans/NCBI/WBcel235.yml": {
         "content": [
             10,
             {
@@ -12,13 +12,7 @@
                 "GATK4_CREATESEQUENCEDICTIONARY": {
                     "gatk4": "4.6.1.0"
                 },
-                "GUNZIP_FASTA": {
-                    "gunzip": 1.13
-                },
-                "GUNZIP_GFF": {
-                    "gunzip": 1.13
-                },
-                "GUNZIP_GTF": {
+                "GUNZIP": {
                     "gunzip": 1.13
                 },
                 "RSEM_PREPAREREFERENCE_GENOME": {
@@ -172,8 +166,8 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.3"
+            "nextflow": "25.01.0"
         },
-        "timestamp": "2025-01-09T17:08:15.313945179"
+        "timestamp": "2025-03-05T11:11:35.333527484"
     }
 }

@@ -1,5 +1,5 @@
 {
-    "Run with profile test for rnaseq | --input GRCh38_chr21.yml": {
+    "-profile test --tools bowtie1,bowtie2,faidx,gffread,sizes,star --input GRCh38_chr21.yml": {
         "content": [
             6,
             {
@@ -118,8 +118,8 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.3"
+            "nextflow": "25.01.0"
         },
-        "timestamp": "2025-01-08T12:22:22.93802882"
+        "timestamp": "2025-03-05T08:58:17.536967398"
     }
 }

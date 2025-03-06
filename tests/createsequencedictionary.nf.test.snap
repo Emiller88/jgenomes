@@ -1,5 +1,5 @@
 {
-    "Run with profile test for gatk4 | --input GRCh38_chr21.yml": {
+    "-profile test --tools createsequencedictionary --input GRCh38_chr21.yml": {
         "content": [
             2,
             {
@@ -37,8 +37,8 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.3"
+            "nextflow": "25.01.0"
         },
-        "timestamp": "2025-01-09T16:58:42.061296288"
+        "timestamp": "2025-03-05T08:49:24.528883642"
     }
 }
