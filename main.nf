@@ -217,9 +217,7 @@ workflow NFCORE_REFERENCES {
         channel
             .map { meta, reference_ -> [meta + [reference: type], reference_] }
             .branch { _meta, reference_ ->
-                tar: reference_.endsWith('.tar.gz')
-                gz: reference_.endsWith('.gz')
-                zip: reference_.endsWith('.zip')
+                to_extract: reference_.endsWith('.gz') || reference_.endsWith('.zip')
                 not_extracted: true
             }
     }
@@ -237,53 +235,23 @@ workflow NFCORE_REFERENCES {
     gff_input = need_extract(YAML_TO_CHANNEL.out.gff, 'gff')
     gtf_input = need_extract(YAML_TO_CHANNEL.out.gtf, 'gtf')
 
-    // gather all gzipped references
-    extract_gz = Channel
+    // gather all archived references
+    archive_to_extract = Channel
         .empty()
         .mix(
-            ascat_alleles_input.gz,
-            ascat_loci_input.gz,
-            ascat_loci_gc_input.gz,
-            ascat_loci_rt_input.gz,
-            chr_dir_input.gz,
-            fasta_input.gz,
-            gff_input.gz,
-            gtf_input.gz,
-        )
-
-    // gather all tarred references
-    extract_tar = Channel
-        .empty()
-        .mix(
-            ascat_alleles_input.tar,
-            ascat_loci_input.tar,
-            ascat_loci_gc_input.tar,
-            ascat_loci_rt_input.tar,
-            chr_dir_input.tar,
-            fasta_input.tar,
-            gff_input.tar,
-            gtf_input.tar,
-        )
-
-    // gather all zipped references
-    extract_zip = Channel
-        .empty()
-        .mix(
-            ascat_alleles_input.zip,
-            ascat_loci_input.zip,
-            ascat_loci_gc_input.zip,
-            ascat_loci_rt_input.zip,
-            chr_dir_input.zip,
-            fasta_input.zip,
-            gff_input.zip,
-            gtf_input.zip,
+            ascat_alleles_input.to_extract,
+            ascat_loci_input.to_extract,
+            ascat_loci_gc_input.to_extract,
+            ascat_loci_rt_input.to_extract,
+            chr_dir_input.to_extract,
+            fasta_input.to_extract,
+            gff_input.to_extract,
+            gtf_input.to_extract,
         )
 
     // Extract references from any archive format
     EXTRACT_ARCHIVE(
-        extract_gz,
-        extract_tar,
-        extract_zip,
+        archive_to_extract
     )
 
     // return to the appropriate channels
@@ -299,8 +267,8 @@ workflow NFCORE_REFERENCES {
         non_assigned: true
     }
 
-    // This is a sanity check
-    extracted_asset.non_assigned.view { "Non assigned extracted asset: " + it }
+    // This is a confidence check
+    extracted_asset.non_assigned.view { log.warn("Non assigned extracted asset: " + it) }
 
     // WORKFLOW: Run pipeline
     // Mix the references that were extracted with the references that did not need to be extracted
