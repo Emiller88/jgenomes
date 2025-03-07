@@ -117,7 +117,28 @@
                 ]
             ],
             [
-                
+                [
+                    {
+                        "id": "test"
+                    },
+                    [
+                        "complete_ref_lens.bin:md5,89462fa6d28fc9345dab5cb2d0c0fa13",
+                        "ctable.bin:md5,c90c99297f83d6631091573556cf5ba7",
+                        "ctg_offsets.bin:md5,19defb4c94bdfbe86a5cc830a1bcbbf3",
+                        "duplicate_clusters.tsv:md5,c96ca031de4888558eec24fd13bd1c9b",
+                        "info.json:md5,4918c48bf6fea4f5ec0e67f40d0e2205",
+                        "mphf.bin:md5,623a268a373b5d5ea9a2bd85e77531a9",
+                        "pos.bin:md5,2fe8bbfebffec007625385138fc150c3",
+                        "pre_indexing.log:md5,273c637183ae3b234e55864e087b0200",
+                        "rank.bin:md5,1cb782b403385e65201d71f138ea48ca",
+                        "refAccumLengths.bin:md5,6d079853ead7e61c9f2a99cade1ac457",
+                        "ref_indexing.log:md5,4ad82ea946bb4de3797700afa918c945",
+                        "reflengths.bin:md5,89462fa6d28fc9345dab5cb2d0c0fa13",
+                        "refseq.bin:md5,ba1790c39279fc7f10627de57433642a",
+                        "seq.bin:md5,87b209bff98eb61afef17ae9b505baf1",
+                        "versionInfo.json:md5,d2c799050e81aa6e282ac8a73e773941"
+                    ]
+                ]
             ],
             [
                 [
@@ -171,6 +192,7 @@
                 "versions.yml:md5,bdd0980428bddd82b00efe49c7e33203",
                 "versions.yml:md5,c082767988a5e7ee97408d28358389aa",
                 "versions.yml:md5,c4c0ac84f821dee47cbb5d876778e301",
+                "versions.yml:md5,d5b1d7db2c40a4abc8435947fdad1d47",
                 "versions.yml:md5,e8962da49ea2a0280fa1ff74caa494c5"
             ]
         ],
@@ -178,6 +200,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.01.0"
         },
-        "timestamp": "2025-03-07T13:15:07.25779884"
+        "timestamp": "2025-03-07T14:06:10.161108796"
     }
 }

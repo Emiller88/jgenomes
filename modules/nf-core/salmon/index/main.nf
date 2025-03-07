@@ -1,19 +1,18 @@
 process SALMON_INDEX {
-    tag "$transcript_fasta"
+    tag "${genome_fasta} - ${transcript_fasta}"
     label "process_medium"
 
     conda "${moduleDir}/environment.yml"
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/salmon:1.10.3--h6dccd9a_2' :
-        'biocontainers/salmon:1.10.3--h6dccd9a_2' }"
+    container "${workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container
+        ? 'https://depot.galaxyproject.org/singularity/salmon:1.10.3--h6dccd9a_2'
+        : 'biocontainers/salmon:1.10.3--h6dccd9a_2'}"
 
     input:
-    tuple val(meta), path(genome_fasta)
-    tuple val(meta2), path(transcript_fasta)
+    tuple val(meta), path(genome_fasta), path(transcript_fasta)
 
     output:
     tuple val(meta), path("salmon"), emit: index
-    path "versions.yml",             emit: versions
+    path "versions.yml", emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -22,28 +21,28 @@ process SALMON_INDEX {
     def args = task.ext.args ?: ''
     def decoys = ''
     def fasta = transcript_fasta
-    if (genome_fasta){
+    if (genome_fasta) {
         if (genome_fasta.endsWith('.gz')) {
-            genome_fasta = "<(gunzip -c $genome_fasta)"
+            genome_fasta = "<(gunzip -c ${genome_fasta})"
         }
-        decoys='-d decoys.txt'
-        fasta='gentrome.fa'
+        decoys = '-d decoys.txt'
+        fasta = 'gentrome.fa'
     }
     if (transcript_fasta.endsWith('.gz')) {
-        transcript_fasta = "<(gunzip -c $transcript_fasta)"
+        transcript_fasta = "<(gunzip -c ${transcript_fasta})"
     }
     """
-    if [ -n '$genome_fasta' ]; then
-        grep '^>' $genome_fasta | cut -d ' ' -f 1 | cut -d \$'\\t' -f 1 | sed 's/>//g' > decoys.txt
-        cat $transcript_fasta $genome_fasta > $fasta
+    if [ -n '${genome_fasta}' ]; then
+        grep '^>' ${genome_fasta} | cut -d ' ' -f 1 | cut -d \$'\\t' -f 1 | sed 's/>//g' > decoys.txt
+        cat ${transcript_fasta} ${genome_fasta} > ${fasta}
     fi
 
     salmon \\
         index \\
-        --threads $task.cpus \\
-        -t $fasta \\
-        $decoys \\
-        $args \\
+        --threads ${task.cpus} \\
+        -t ${fasta} \\
+        ${decoys} \\
+        ${args} \\
         -i salmon
 
     cat <<-END_VERSIONS > versions.yml

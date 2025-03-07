@@ -57,11 +57,7 @@ workflow PREPARE_GENOME_RNASEQ {
     }
 
     if (run_faidx || run_sizes) {
-        SAMTOOLS_FAIDX(
-            fasta,
-            [[id: 'no_fai'], []],
-            run_sizes,
-        )
+        SAMTOOLS_FAIDX(fasta.map { meta, fasta_ -> [meta, fasta_, []] }, run_sizes)
 
         fasta_fai = fasta_fai.mix(SAMTOOLS_FAIDX.out.fai)
         fasta_sizes = SAMTOOLS_FAIDX.out.sizes
@@ -69,10 +65,7 @@ workflow PREPARE_GENOME_RNASEQ {
     }
 
     if (run_hisat2 || run_kallisto || run_rsem || run_rsem_make_transcript_fasta || run_salmon || run_star) {
-        GFFREAD(
-            gff,
-            [],
-        )
+        GFFREAD(gff.map { meta, gff_ -> [meta, gff_, []] })
 
         versions = versions.mix(GFFREAD.out.versions)
 
@@ -88,11 +81,7 @@ workflow PREPARE_GENOME_RNASEQ {
             splice_sites = splice_sites.mix(HISAT2_EXTRACTSPLICESITES.out.txt)
 
             if (run_hisat2) {
-                HISAT2_BUILD(
-                    fasta,
-                    gtf,
-                    splice_sites,
-                )
+                HISAT2_BUILD(fasta.join(gtf).join(splice_sites))
 
                 hisat2_index = HISAT2_BUILD.out.index
 
@@ -101,10 +90,8 @@ workflow PREPARE_GENOME_RNASEQ {
         }
 
         if (run_kallisto || run_rsem_make_transcript_fasta || run_salmon) {
-            MAKE_TRANSCRIPTS_FASTA(
-                fasta,
-                gtf,
-            )
+            MAKE_TRANSCRIPTS_FASTA(fasta.join(gtf))
+
             versions = versions.mix(MAKE_TRANSCRIPTS_FASTA.out.versions)
 
             transcript_fasta = transcript_fasta.mix(MAKE_TRANSCRIPTS_FASTA.out.transcript_fasta)
@@ -117,10 +104,7 @@ workflow PREPARE_GENOME_RNASEQ {
             }
 
             if (run_salmon) {
-                SALMON_INDEX(
-                    fasta,
-                    transcript_fasta,
-                )
+                SALMON_INDEX(fasta.join(transcript_fasta))
 
                 salmon_index = SALMON_INDEX.out.index
                 versions = versions.mix(SALMON_INDEX.out.versions)
@@ -128,14 +112,14 @@ workflow PREPARE_GENOME_RNASEQ {
         }
 
         if (run_rsem) {
-            RSEM_PREPAREREFERENCE_GENOME(fasta, gtf)
+            RSEM_PREPAREREFERENCE_GENOME(fasta.join(gtf))
 
             rsem_index = RSEM_PREPAREREFERENCE_GENOME.out.index
             versions = versions.mix(RSEM_PREPAREREFERENCE_GENOME.out.versions)
         }
 
         if (run_star) {
-            STAR_GENOMEGENERATE(fasta, gtf)
+            STAR_GENOMEGENERATE(fasta.join(gtf))
 
             star_index = STAR_GENOMEGENERATE.out.index
             versions = versions.mix(STAR_GENOMEGENERATE.out.versions)
