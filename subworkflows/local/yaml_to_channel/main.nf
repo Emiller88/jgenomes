@@ -180,7 +180,7 @@ workflow YAML_TO_CHANNEL {
 
         // If we already have the vcf_tbi, then we don't need to index the vcf
         def meta_extra = [run_tabix: meta.vcf_dbsnp_vcf_tbi || meta.vcf_dbsnp_vcf.endsWith('.vcf') ? false : true]
-        meta_extra += [compress_vcf: meta.vcf_dbsnp_vcf.endsWith('.vcf') ?: false]
+        meta_extra += [run_bgziptabix: meta.vcf_dbsnp_vcf.endsWith('.vcf') ?: false]
         meta_extra += [type: 'dbsnp', source_vcf: meta.vcf_dbsnp_vcf_source]
         return [reduce(meta) + meta_extra, meta.vcf_dbsnp_vcf.contains('{') ? file(meta.vcf_dbsnp_vcf) : meta.vcf_dbsnp_vcf]
         other: true
@@ -192,7 +192,7 @@ workflow YAML_TO_CHANNEL {
         file: meta.vcf_germline_resource_vcf
         // If we already have the vcf_tbi, then we don't need to index the vcf
         def meta_extra = [run_tabix: meta.vcf_germline_resource_vcf_tbi || meta.vcf_germline_resource_vcf.endsWith('.vcf') ? false : true]
-        meta_extra += [compress_vcf: meta.vcf_germline_resource_vcf.endsWith('.vcf') ?: false]
+        meta_extra += [run_bgziptabix: meta.vcf_germline_resource_vcf.endsWith('.vcf') ?: false]
         meta_extra += [type: 'germline_resource', source_vcf: meta.vcf_germline_resource_vcf_source]
         return [reduce(meta) + meta_extra, meta.vcf_germline_resource_vcf]
         other: true
@@ -204,7 +204,7 @@ workflow YAML_TO_CHANNEL {
         file: meta.vcf_known_indels_vcf
         // If we already have the vcf_tbi, then we don't need to index the vcf
         def meta_extra = [run_tabix: meta.vcf_known_indels_vcf_tbi || meta.vcf_known_indels_vcf.endsWith('.vcf') ? false : true]
-        meta_extra += [compress_vcf: meta.vcf_known_indels_vcf.endsWith('.vcf') ?: false]
+        meta_extra += [run_bgziptabix: meta.vcf_known_indels_vcf.endsWith('.vcf') ?: false]
         meta_extra += [type: 'known_indels', source_vcf: meta.vcf_known_indels_vcf_source]
         return [reduce(meta) + meta_extra, meta.vcf_known_indels_vcf]
         other: true
@@ -216,7 +216,7 @@ workflow YAML_TO_CHANNEL {
         file: meta.vcf_known_snps_vcf
         // If we already have the vcf_tbi, then we don't need to index the vcf
         def meta_extra = [run_tabix: meta.vcf_known_snps_vcf_tbi || meta.vcf_known_snps_vcf.endsWith('.vcf') ? false : true]
-        meta_extra += [compress_vcf: meta.vcf_known_snps_vcf.endsWith('.vcf') ?: false]
+        meta_extra += [run_bgziptabix: meta.vcf_known_snps_vcf.endsWith('.vcf') ?: false]
         meta_extra += [type: 'known_snps', source_vcf: meta.vcf_known_snps_vcf_source]
         return [reduce(meta) + meta_extra, meta.vcf_known_snps_vcf]
         other: true
@@ -228,7 +228,7 @@ workflow YAML_TO_CHANNEL {
         file: meta.vcf_pon_vcf
         // If we already have the vcf_tbi, then we don't need to index the vcf
         def meta_extra = [run_tabix: meta.vcf_pon_vcf_tbi || meta.vcf_pon_vcf.endsWith('.vcf') ? false : true]
-        meta_extra += [compress_vcf: meta.vcf_pon_vcf.endsWith('.vcf') ?: false]
+        meta_extra += [run_bgziptabix: meta.vcf_pon_vcf.endsWith('.vcf') ?: false]
         meta_extra += [type: 'pon', source_vcf: meta.vcf_pon_vcf_source]
         return [reduce(meta) + meta_extra, meta.vcf_pon_vcf]
         other: true
