@@ -4,7 +4,7 @@ nextflow_workflow {
     script "../main.nf"
     workflow "PREPARE_GENOME_DNASEQ"
 
-    test("Should run without failures") {
+    test(".fasta/.vcf/.vcf.gz - all tools") {
 
         when {
             params {

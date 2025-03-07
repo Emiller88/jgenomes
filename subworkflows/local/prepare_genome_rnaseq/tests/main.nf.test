@@ -1,0 +1,75 @@
+nextflow_workflow {
+
+    name "Test PREPARE_GENOME_RNASEQ"
+    script "../main.nf"
+    workflow "PREPARE_GENOME_RNASEQ"
+
+    test(".fasta/.gff - all tools") {
+
+        when {
+            params {
+            }
+            workflow {
+                """
+                run_bowtie1 = true
+                run_bowtie2 = true
+                run_faidx = true
+                run_hisat2 = true
+                run_hisat2_extractsplicesites = true
+                run_kallisto = true
+                run_rsem = true
+                run_rsem_make_transcript_fasta = true
+                run_salmon = true
+                run_sizes = true
+                run_star = true
+
+                input[0] = Channel.of([
+                    [id:'test'],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/genome.fasta', checkIfExists: true)
+                ])
+                input[1] = Channel.empty()
+                input[2] = Channel.of([
+                    [id:'test'],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/genome.gtf', checkIfExists: true)
+                ])
+                input[3] = Channel.empty()
+                input[4] = Channel.empty()
+                input[5] = Channel.empty()
+                input[6] = run_bowtie1
+                input[7] = run_bowtie2
+                input[8] = run_faidx
+                input[9] = run_hisat2
+                input[10] = run_hisat2_extractsplicesites
+                input[11] = run_kallisto
+                input[12] = run_rsem
+                input[13] = run_rsem_make_transcript_fasta
+                input[14] = run_salmon
+                input[15] = run_sizes
+                input[16] = run_star
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out.bowtie1_index,
+                    workflow.out.bowtie2_index,
+                    workflow.out.fasta_fai,
+                    workflow.out.fasta_sizes,
+                    workflow.out.gtf,
+                    workflow.out.hisat2_index,
+                    workflow.out.kallisto_index,
+                    workflow.out.rsem_index,
+                    workflow.out.salmon_index,
+                    workflow.out.splice_sites,
+                    workflow.out.star_index,
+                    workflow.out.transcript_fasta,
+                    workflow.out.versions
+                ).match()
+                }
+            )
+        }
+    }
+}
