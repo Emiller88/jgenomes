@@ -52,7 +52,7 @@ nextflow_workflow {
                 { assert snapshot(
                     workflow.out.bwamem1_index,
                     workflow.out.bwamem2_index,
-                    dragmap_hashmap,
+                    workflow.out.dragmap_hashmap.collect { [it[0], file(it[1]).name + "/", dragmap_hashmap] },
                     workflow.out.fasta_dict,
                     workflow.out.fasta_fai,
                     workflow.out.intervals_bed,

@@ -51,6 +51,10 @@ nextflow_workflow {
         }
 
         then {
+            def all_files_temp = file(workflow.out.rsem_index.get(0).get(1)).listFiles().sort()
+            def rsem_index = all_files_temp.collect { file -> file.name }
+            all_files_temp = file(workflow.out.star_index.get(0).get(1)).listFiles().sort()
+            def star_index = all_files_temp.collect { file -> file.name }
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
@@ -60,11 +64,11 @@ nextflow_workflow {
                     workflow.out.fasta_sizes,
                     workflow.out.gtf,
                     workflow.out.hisat2_index,
-                    workflow.out.kallisto_index,
-                    workflow.out.rsem_index,
+                    workflow.out.kallisto_index.collect { [it[0], file(it[1]).name] },
+                    workflow.out.rsem_index.collect { [it[0], file(it[1]).name + "/", rsem_index] },
                     workflow.out.salmon_index,
                     workflow.out.splice_sites,
-                    workflow.out.star_index,
+                    workflow.out.star_index.collect { [it[0], file(it[1]).name + "/", star_index] },
                     workflow.out.transcript_fasta,
                     workflow.out.versions
                 ).match()

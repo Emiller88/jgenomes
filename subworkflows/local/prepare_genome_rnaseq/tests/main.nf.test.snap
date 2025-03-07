@@ -79,7 +79,7 @@
                     {
                         "id": "test"
                     },
-                    "kallisto:md5,89b07a5fbea444b814c1a42064dbb8c5"
+                    "kallisto"
                 ]
             ],
             [
@@ -87,31 +87,32 @@
                     {
                         "id": "test"
                     },
+                    "rsem/",
                     [
-                        "Genome:md5,a654229fbca6071dcb6b01ce7df704da",
-                        "Log.out:md5,31a3a433773f31fc9e44a7d722861826",
-                        "SA:md5,8c3edc46697b72c9e92440d4cf43506c",
-                        "SAindex:md5,fd05c149960e72642a8d7c860528ae81",
-                        "chrLength.txt:md5,c81f40f27e72606d7d07097c1d56a5b5",
-                        "chrName.txt:md5,5ae68a67b70976ee95342a7451cb5af1",
-                        "chrNameLength.txt:md5,b190587cae0531f3cf25552d8aa674db",
-                        "chrStart.txt:md5,8d3291e6bcdbe9902fbd7c887494173f",
-                        "exonGeTrInfo.tab:md5,72d4dd88d25e3c5b0bb72b12b4ac99a8",
-                        "exonInfo.tab:md5,0d560290fab688b7268d88d5494bf9fe",
-                        "geneInfo.tab:md5,8b608537307443ffaee4927d2b428805",
-                        "genome.chrlist:md5,b190587cae0531f3cf25552d8aa674db",
-                        "genome.fasta:md5,f315020d899597c1b57e5fe9f60f4c3e",
-                        "genome.grp:md5,c2848a8b6d495956c11ec53efc1de67e",
-                        "genome.idx.fa:md5,050c521a2719c2ae48267c1e65218f29",
-                        "genome.n2g.idx.fa:md5,050c521a2719c2ae48267c1e65218f29",
-                        "genome.seq:md5,94da0c6b88c33e63c9a052a11f4f57c1",
-                        "genome.ti:md5,b0815127b7a48f82f705fd35e1bdf528",
-                        "genome.transcripts.fa:md5,050c521a2719c2ae48267c1e65218f29",
-                        "genomeParameters.txt:md5,6f7d4d17e53630a7f805605174b5ea4d",
-                        "sjdbInfo.txt:md5,5690ea9d9f09f7ff85b7fd47bd234903",
-                        "sjdbList.fromGTF.out.tab:md5,8760c33e966dad0b39f440301ebbdee4",
-                        "sjdbList.out.tab:md5,9e4f991abbbfeb3935a2bb21b9e258f1",
-                        "transcriptInfo.tab:md5,0c3a5adb49d15e5feff81db8e29f2e36"
+                        "Genome",
+                        "Log.out",
+                        "SA",
+                        "SAindex",
+                        "chrLength.txt",
+                        "chrName.txt",
+                        "chrNameLength.txt",
+                        "chrStart.txt",
+                        "exonGeTrInfo.tab",
+                        "exonInfo.tab",
+                        "geneInfo.tab",
+                        "genome.chrlist",
+                        "genome.fasta",
+                        "genome.grp",
+                        "genome.idx.fa",
+                        "genome.n2g.idx.fa",
+                        "genome.seq",
+                        "genome.ti",
+                        "genome.transcripts.fa",
+                        "genomeParameters.txt",
+                        "sjdbInfo.txt",
+                        "sjdbList.fromGTF.out.tab",
+                        "sjdbList.out.tab",
+                        "transcriptInfo.tab"
                     ]
                 ]
             ],
@@ -131,23 +132,24 @@
                     {
                         "id": "test"
                     },
+                    "star/",
                     [
-                        "Genome:md5,a654229fbca6071dcb6b01ce7df704da",
-                        "Log.out:md5,1414afc9e7d5140cb1d4666e597919d0",
-                        "SA:md5,8c3edc46697b72c9e92440d4cf43506c",
-                        "SAindex:md5,d0fbf2789ee1e9f60c352ba3655d9de4",
-                        "chrLength.txt:md5,c81f40f27e72606d7d07097c1d56a5b5",
-                        "chrName.txt:md5,5ae68a67b70976ee95342a7451cb5af1",
-                        "chrNameLength.txt:md5,b190587cae0531f3cf25552d8aa674db",
-                        "chrStart.txt:md5,8d3291e6bcdbe9902fbd7c887494173f",
-                        "exonGeTrInfo.tab:md5,72d4dd88d25e3c5b0bb72b12b4ac99a8",
-                        "exonInfo.tab:md5,0d560290fab688b7268d88d5494bf9fe",
-                        "geneInfo.tab:md5,8b608537307443ffaee4927d2b428805",
-                        "genomeParameters.txt:md5,88b05e908bf56cfc04cf85abec045be9",
-                        "sjdbInfo.txt:md5,5690ea9d9f09f7ff85b7fd47bd234903",
-                        "sjdbList.fromGTF.out.tab:md5,8760c33e966dad0b39f440301ebbdee4",
-                        "sjdbList.out.tab:md5,9e4f991abbbfeb3935a2bb21b9e258f1",
-                        "transcriptInfo.tab:md5,0c3a5adb49d15e5feff81db8e29f2e36"
+                        "Genome",
+                        "Log.out",
+                        "SA",
+                        "SAindex",
+                        "chrLength.txt",
+                        "chrName.txt",
+                        "chrNameLength.txt",
+                        "chrStart.txt",
+                        "exonGeTrInfo.tab",
+                        "exonInfo.tab",
+                        "geneInfo.tab",
+                        "genomeParameters.txt",
+                        "sjdbInfo.txt",
+                        "sjdbList.fromGTF.out.tab",
+                        "sjdbList.out.tab",
+                        "transcriptInfo.tab"
                     ]
                 ]
             ],
@@ -176,6 +178,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.01.0"
         },
-        "timestamp": "2025-03-07T12:48:28.175203873"
+        "timestamp": "2025-03-07T13:15:07.25779884"
     }
 }
