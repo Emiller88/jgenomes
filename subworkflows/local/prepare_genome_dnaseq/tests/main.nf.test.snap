@@ -1,0 +1,122 @@
+{
+    ".fasta/.vcf/.vcf.gz - all tools": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    [
+                        "genome.amb:md5,1891c1de381b3a96d4e72f590fde20c1",
+                        "genome.ann:md5,2df4aa2d7580639fa0fcdbcad5e2e969",
+                        "genome.bwt:md5,815eded87e4cb6b0f1daab5c4d6e30af",
+                        "genome.pac:md5,8569fbdb2c98c6fb16dfa73d8eacb070",
+                        "genome.sa:md5,e7cff62b919448a3a3d0fe4aaf427594"
+                    ]
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    [
+                        "genome.fasta.0123:md5,d73300d44f733bcdb7c988fc3ff3e3e9",
+                        "genome.fasta.amb:md5,1891c1de381b3a96d4e72f590fde20c1",
+                        "genome.fasta.ann:md5,2df4aa2d7580639fa0fcdbcad5e2e969",
+                        "genome.fasta.bwt.2bit.64:md5,cd4bdf496eab05228a50c45ee43c1ed0",
+                        "genome.fasta.pac:md5,8569fbdb2c98c6fb16dfa73d8eacb070"
+                    ]
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "dragmap/",
+                    [
+                        "hash_table.cfg",
+                        "hash_table.cfg.bin",
+                        "hash_table.cmp",
+                        "hash_table_stats.txt",
+                        "ref_index.bin",
+                        "reference.bin",
+                        "repeat_mask.bin",
+                        "str_table.bin"
+                    ]
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "genome.dict:md5,2433fe2ba31257337bf4c4bd4cb8da15"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "genome.fasta.fai:md5,3520cd30e1b100e55f578db9c855f685"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test.msisensor_scan.list:md5,a7886e7a56a1d7e3be6b4496753fd743"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test.vcf.gz,variantsMD5:4af4335dc9afaa1d0981cb037da97b59"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "dbsnp_146.hg38.vcf.gz.tbi"
+                ],
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test.vcf.gz.tbi"
+                ]
+            ],
+            [
+                "versions.yml:md5,1a261512dbad505711e60f42b540b715",
+                "versions.yml:md5,2fd70a9efdd32615abdd8f7782dc96ff",
+                "versions.yml:md5,559faafdcd1e8cfbe4508196bff7117b",
+                "versions.yml:md5,757894083e1c8c3e6facc452a706be35",
+                "versions.yml:md5,9921c6dc6cad5895445bd3813814685a",
+                "versions.yml:md5,9b316374534f9598679f3c714477e1b2",
+                "versions.yml:md5,b5f8d54c5dcdf08109279ea5ba00c243",
+                "versions.yml:md5,c4dafb726ca57f4b5deda9010c825380",
+                "versions.yml:md5,cc25e0d0b6f8914bcfa47ad9c5dfde0b"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.01.0"
+        },
+        "timestamp": "2025-03-07T13:14:25.14497332"
+    }
+}

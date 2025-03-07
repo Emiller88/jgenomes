@@ -1,0 +1,59 @@
+{
+    ".gz && .tar.gz": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "hello.txt:md5,e59ff97941044f85df5297e1c302d260"
+                        ]
+                    ],
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_1.fastq:md5,4161df271f9bfcd25d5845a1e220dbec"
+                    ]
+                ],
+                "1": [
+                    
+                ],
+                "2": [
+                    "versions.yml:md5,078c618a24b59237a3e2257741bee7dd",
+                    "versions.yml:md5,7fffc1e63ca7fcde5e4cf4e41a1c8837"
+                ],
+                "extracted": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "hello.txt:md5,e59ff97941044f85df5297e1c302d260"
+                        ]
+                    ],
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_1.fastq:md5,4161df271f9bfcd25d5845a1e220dbec"
+                    ]
+                ],
+                "not_extracted": [
+                    
+                ],
+                "versions": [
+                    "versions.yml:md5,078c618a24b59237a3e2257741bee7dd",
+                    "versions.yml:md5,7fffc1e63ca7fcde5e4cf4e41a1c8837"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.01.0"
+        },
+        "timestamp": "2025-03-06T13:25:51.789340756"
+    }
+}

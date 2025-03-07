@@ -14,9 +14,9 @@ workflow EXTRACT_ARCHIVE {
     versions = Channel.empty()
 
     archive_to_extract = archive.branch { _meta, archive_ ->
-        tar: archive_.endsWith('.tar.gz')
-        gz: archive_.endsWith('.gz')
-        zip: archive_.endsWith('.zip')
+        tar: archive_.toString().endsWith('.tar.gz')
+        gz: archive_.toString().endsWith('.gz')
+        zip: archive_.toString().endsWith('.zip')
         non_assigned: true
     }
 

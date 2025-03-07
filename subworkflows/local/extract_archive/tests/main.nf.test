@@ -1,0 +1,29 @@
+nextflow_workflow {
+
+    name "Test EXTRACT_ARCHIVE"
+    script "../main.nf"
+    workflow "EXTRACT_ARCHIVE"
+
+    test(".gz && .tar.gz") {
+
+        when {
+            params {
+            }
+            workflow {
+                """
+                input[0] = Channel.of([[id:'test'],
+                    file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fastq/test_1.fastq.gz', checkIfExists: true)
+                ],
+                    [[id:'test'],
+                    file(params.modules_testdata_base_path + 'generic/tar/hello.tar.gz', checkIfExists: true)
+                ])
+                """
+            }
+        }
+
+        then {
+            assert workflow.success
+            assert snapshot(workflow.out).match()
+        }
+    }
+}

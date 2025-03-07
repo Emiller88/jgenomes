@@ -1,13 +1,23 @@
 {
     "-profile test --tools bwamem1,bwamem2,createsequencedictionary,dragmap,faidx,intervals,msisensorpro,tabix --input references/assets GRCh38_chr22_published.yml": {
         "content": [
-            1,
+            2,
             {
+                "MSISENSORPRO_SCAN": {
+                    "msisensor-pro": "1.2.0"
+                },
                 "Workflow": {
                     "nf-core/references": "v1.0.0dev"
                 }
             },
             [
+                "Homo_sapiens",
+                "Homo_sapiens/nf-core",
+                "Homo_sapiens/nf-core/references",
+                "Homo_sapiens/nf-core/references/GRCh38_chr22",
+                "Homo_sapiens/nf-core/references/GRCh38_chr22/Annotation",
+                "Homo_sapiens/nf-core/references/GRCh38_chr22/Annotation/msisensorpro",
+                "Homo_sapiens/nf-core/references/GRCh38_chr22/Annotation/msisensorpro/GRCh38_chr22.msisensor_scan.list",
                 "index.json",
                 "multiqc",
                 "multiqc/multiqc_data",
@@ -21,6 +31,7 @@
                 "pipeline_info/nf_core_references_software_mqc_versions.yml"
             ],
             [
+                "GRCh38_chr22.msisensor_scan.list:md5,a7886e7a56a1d7e3be6b4496753fd743",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
             ]
         ],
@@ -28,11 +39,11 @@
             "nf-test": "0.9.2",
             "nextflow": "25.01.0"
         },
-        "timestamp": "2025-03-05T09:07:12.35378421"
+        "timestamp": "2025-03-07T12:36:50.359451536"
     },
     "-profile test --tools bwamem1,bwamem2,createsequencedictionary,dragmap,faidx,intervals,msisensorpro,tabix --input references/assets GRCh38_chr22_source.yml": {
         "content": [
-            10,
+            11,
             {
                 "BUILD_INTERVALS": {
                     "gawk": "5.3.0"
@@ -48,6 +59,9 @@
                 },
                 "GATK4_CREATESEQUENCEDICTIONARY": {
                     "gatk4": "4.6.1.0"
+                },
+                "MSISENSORPRO_SCAN": {
+                    "msisensor-pro": "1.2.0"
                 },
                 "SAMTOOLS_FAIDX": {
                     "samtools": 1.21
@@ -71,6 +85,8 @@
                 "Homo_sapiens/nf-core/references/testdata.GRCh38_chr22/Annotation/GATK_BUNDLE/mills_and_1000G.indels.vcf.gz.tbi",
                 "Homo_sapiens/nf-core/references/testdata.GRCh38_chr22/Annotation/intervals",
                 "Homo_sapiens/nf-core/references/testdata.GRCh38_chr22/Annotation/intervals/testdata.GRCh38_chr22.bed",
+                "Homo_sapiens/nf-core/references/testdata.GRCh38_chr22/Annotation/msisensorpro",
+                "Homo_sapiens/nf-core/references/testdata.GRCh38_chr22/Annotation/msisensorpro/testdata.GRCh38_chr22.msisensor_scan.list",
                 "Homo_sapiens/nf-core/references/testdata.GRCh38_chr22/Sequence",
                 "Homo_sapiens/nf-core/references/testdata.GRCh38_chr22/Sequence/BWAIndex",
                 "Homo_sapiens/nf-core/references/testdata.GRCh38_chr22/Sequence/BWAIndex/version0.7.18",
@@ -116,6 +132,7 @@
                 "gnomAD.r2.1.1.vcf.gz.tbi:md5,d95bc4bd1eee441d13ed99f0f3d501f8",
                 "mills_and_1000G.indels.vcf.gz.tbi:md5,1bb7ab8f22eb798efd796439d3b29b7a",
                 "testdata.GRCh38_chr22.bed:md5,87a15eb9c2ff20ccd5cd8735a28708f7",
+                "testdata.GRCh38_chr22.msisensor_scan.list:md5,a7886e7a56a1d7e3be6b4496753fd743",
                 "genome.amb:md5,1891c1de381b3a96d4e72f590fde20c1",
                 "genome.ann:md5,2df4aa2d7580639fa0fcdbcad5e2e969",
                 "genome.bwt:md5,815eded87e4cb6b0f1daab5c4d6e30af",
@@ -140,6 +157,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.01.0"
         },
-        "timestamp": "2025-03-05T09:06:53.445774453"
+        "timestamp": "2025-03-07T12:36:26.179922075"
     }
 }

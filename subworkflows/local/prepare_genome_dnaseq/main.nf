@@ -35,40 +35,28 @@ workflow PREPARE_GENOME_DNASEQ {
     versions = Channel.empty()
 
     if (run_bwamem1) {
-        // Do not run BWAMEM1_INDEX if the condition is false
-        fasta_bwamem1 = fasta.map { meta, fasta_ -> meta.run_bwamem1 ? [meta, fasta_] : null }
-
-        BWAMEM1_INDEX(fasta_bwamem1)
+        BWAMEM1_INDEX(fasta)
 
         bwamem1_index = BWAMEM1_INDEX.out.index
         versions = versions.mix(BWAMEM1_INDEX.out.versions)
     }
 
     if (run_bwamem2) {
-        // Do not run BWAMEM2_INDEX if the condition is false
-        fasta_bwamem2 = fasta.map { meta, fasta_ -> meta.run_bwamem2 ? [meta, fasta_] : null }
-
-        BWAMEM2_INDEX(fasta_bwamem2)
+        BWAMEM2_INDEX(fasta)
 
         bwamem2_index = BWAMEM2_INDEX.out.index
         versions = versions.mix(BWAMEM2_INDEX.out.versions)
     }
 
     if (run_dragmap) {
-        // Do not run DRAGMAP_HASHTABLE if the condition is false
-        fasta_dragmap = fasta.map { meta, fasta_ -> meta.run_dragmap ? [meta, fasta_] : null }
-
-        DRAGMAP_HASHTABLE(fasta_dragmap)
+        DRAGMAP_HASHTABLE(fasta)
 
         dragmap_hashmap = DRAGMAP_HASHTABLE.out.hashmap
         versions = versions.mix(DRAGMAP_HASHTABLE.out.versions)
     }
 
     if (run_createsequencedictionary) {
-        // Do not run GATK4_CREATESEQUENCEDICTIONARY if the condition is false
-        fasta_gat4kdict = fasta.map { meta, fasta_ -> meta.run_createsequencedictionary ? [meta, fasta_] : null }
-
-        GATK4_CREATESEQUENCEDICTIONARY(fasta_gat4kdict)
+        GATK4_CREATESEQUENCEDICTIONARY(fasta)
 
         fasta_dict = GATK4_CREATESEQUENCEDICTIONARY.out.dict
         versions = versions.mix(GATK4_CREATESEQUENCEDICTIONARY.out.versions)
@@ -77,15 +65,11 @@ workflow PREPARE_GENOME_DNASEQ {
     if (run_faidx || run_intervals) {
 
         if (run_faidx) {
-
-            // Do not run SAMTOOLS_FAIDX if the condition is false
-            fasta_samtools = fasta.map { meta, fasta_ -> meta.run_faidx ? [meta, fasta_] : null }
-
             // No need to generate sizes for DNAseq
             generate_sizes = false
 
             SAMTOOLS_FAIDX(
-                fasta_samtools,
+                fasta,
                 [[id: 'no_fai'], []],
                 generate_sizes,
             )
@@ -95,34 +79,27 @@ workflow PREPARE_GENOME_DNASEQ {
         }
 
         if (run_intervals) {
-            // Do not run BUILD_INTERVALS if the condition is false
-            fasta_fai_intervals = fasta_fai.map { meta, fasta_fai_ -> meta.run_intervals ? [meta, fasta_fai_] : null }
-
-            BUILD_INTERVALS(fasta_fai_intervals, [])
+            BUILD_INTERVALS(fasta_fai, [])
             intervals_bed = BUILD_INTERVALS.out.output
             versions = versions.mix(BUILD_INTERVALS.out.versions)
         }
     }
 
     if (run_msisensorpro) {
-        // Do not run MSISENSORPRO_SCAN if the condition is false
-        fasta_msisensorpro = fasta.map { meta, fasta_ -> meta.run_msisensorpro ? [meta, fasta_] : null }
-
-        MSISENSORPRO_SCAN(fasta_msisensorpro)
+        MSISENSORPRO_SCAN(fasta)
 
         msisensorpro_list = MSISENSORPRO_SCAN.out.list
         versions = versions.mix(MSISENSORPRO_SCAN.out.versions)
     }
 
     if (run_tabix) {
-        // Do not run TABIX_TABIX if the condition is false
-        vcf_tabix = vcf.map { meta, vcf_ -> meta.run_tabix ? [meta, vcf_] : null }
+        vcf_to_index = vcf.branch { _meta, vcf_ ->
+            vcf_gz: vcf_.toString().endsWith('.gz')
+            vcf: true
+        }
 
-        // Do not run TABIX_BGZIPTABIX if the condition is false
-        vcf_bgziptabix = vcf.map { meta, vcf_ -> meta.compress_vcf ? [meta, vcf_] : null }
-
-        TABIX_BGZIPTABIX(vcf_bgziptabix)
-        TABIX_TABIX(vcf_tabix)
+        TABIX_BGZIPTABIX(vcf_to_index.vcf)
+        TABIX_TABIX(vcf_to_index.vcf_gz)
 
         vcf_gz = TABIX_BGZIPTABIX.out.gz_tbi.map { meta, vcf_gz_, _vcf_tbi -> [meta, vcf_gz_] }
         vcf_tbi = TABIX_TABIX.out.tbi.mix(TABIX_BGZIPTABIX.out.gz_tbi.map { meta, _vcf_gz, vcf_tbi_ -> [meta, vcf_tbi_] })

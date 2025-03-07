@@ -1,0 +1,68 @@
+nextflow_workflow {
+
+    name "Test PREPARE_GENOME_DNASEQ"
+    script "../main.nf"
+    workflow "PREPARE_GENOME_DNASEQ"
+
+    test(".fasta/.vcf/.vcf.gz - all tools") {
+
+        when {
+            params {
+            }
+            workflow {
+                """
+                run_bwamem1 = true
+                run_bwamem2 = true
+                run_createsequencedictionary = true
+                run_dragmap = true
+                run_faidx = true
+                run_intervals = true
+                run_msisensorpro = true
+                run_tabix = true
+
+                input[0] = Channel.of([
+                    [id:'test'],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/genome.fasta', checkIfExists: true)
+                ])
+                input[1] = Channel.empty()
+                input[2] = Channel.of([
+                    [id:'test'],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/vcf/dbsnp_146.hg38.vcf.gz', checkIfExists: true)
+                ],[
+                    [id:'test'],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/vcf/genmod_compound.vcf', checkIfExists: true)
+                ])
+                input[3] = run_bwamem1
+                input[4] = run_bwamem2
+                input[5] = run_createsequencedictionary
+                input[6] = run_dragmap
+                input[7] = run_faidx
+                input[8] = run_intervals
+                input[9] = run_msisensorpro
+                input[10] = run_tabix
+                """
+            }
+        }
+
+        then {
+            def all_files_temp = file(workflow.out.dragmap_hashmap.get(0).get(1)).listFiles().sort()
+            def dragmap_hashmap = all_files_temp.collect { file -> file.name }
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out.bwamem1_index,
+                    workflow.out.bwamem2_index,
+                    workflow.out.dragmap_hashmap.collect { [it[0], file(it[1]).name + "/", dragmap_hashmap] },
+                    workflow.out.fasta_dict,
+                    workflow.out.fasta_fai,
+                    workflow.out.intervals_bed,
+                    workflow.out.msisensorpro_list,
+                    workflow.out.vcf_gz.collect { [it[0], "${file(it[1]).name},variantsMD5:${path(it[1]).vcf.variantsMD5}"] },
+                    workflow.out.vcf_tbi.collect { [it[0], file(it[1]).name] },
+                    workflow.out.versions
+                ).match()
+                }
+            )
+        }
+    }
+}
