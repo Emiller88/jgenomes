@@ -55,6 +55,8 @@ nextflow_workflow {
             def rsem_index = all_files_temp.collect { file -> file.name }
             all_files_temp = file(workflow.out.star_index.get(0).get(1)).listFiles().sort()
             def star_index = all_files_temp.collect { file -> file.name }
+            all_files_temp = file(workflow.out.salmon_index.get(0).get(1)).listFiles().sort()
+            def salmon_index = all_files_temp.collect { file -> file.name }
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
@@ -66,7 +68,7 @@ nextflow_workflow {
                     workflow.out.hisat2_index,
                     workflow.out.kallisto_index.collect { [it[0], file(it[1]).name] },
                     workflow.out.rsem_index.collect { [it[0], file(it[1]).name + "/", rsem_index] },
-                    workflow.out.salmon_index,
+                    workflow.out.salmon_index.collect { [it[0], file(it[1]).name + "/", salmon_index] },
                     workflow.out.splice_sites,
                     workflow.out.star_index.collect { [it[0], file(it[1]).name + "/", star_index] },
                     workflow.out.transcript_fasta,

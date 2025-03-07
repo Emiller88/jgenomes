@@ -31,6 +31,22 @@ workflow PREPARE_GENOME_RNASEQ {
     run_star                       // boolean: true/false
 
     main:
+    def join_by_meta_id = { channel1, channel2, channel3 = null ->
+        if (channel3) {
+            channel1
+                .map { meta, content1_ -> [meta.id, content1_, meta] }
+                .join(channel2.map { meta, content2_ -> [meta.id, content2_, meta] })
+                .join(channel3.map { meta, content3_ -> [meta.id, content3_, meta] })
+                .map { _id, content1_, meta1, content2_, meta2, content3_, meta3 -> [meta3 + meta2 + meta1, content1_, content2_, content3_] }
+        }
+        else {
+            channel1
+                .map { meta, content1_ -> [meta.id, content1_, meta] }
+                .join(channel2.map { meta, content2_ -> [meta.id, content2_, meta] })
+                .map { _id, content1_, meta1, content2_, meta2 -> [meta2 + meta1, content1_, content2_] }
+        }
+    }
+
     bowtie1_index = Channel.empty()
     bowtie2_index = Channel.empty()
     hisat2_index = Channel.empty()
@@ -57,11 +73,7 @@ workflow PREPARE_GENOME_RNASEQ {
     }
 
     if (run_faidx || run_sizes) {
-        SAMTOOLS_FAIDX(
-            fasta,
-            [[id: 'no_fai'], []],
-            run_sizes,
-        )
+        SAMTOOLS_FAIDX(fasta.map { meta, fasta_ -> [meta, fasta_, []] }, run_sizes)
 
         fasta_fai = fasta_fai.mix(SAMTOOLS_FAIDX.out.fai)
         fasta_sizes = SAMTOOLS_FAIDX.out.sizes
@@ -69,17 +81,14 @@ workflow PREPARE_GENOME_RNASEQ {
     }
 
     if (run_hisat2 || run_kallisto || run_rsem || run_rsem_make_transcript_fasta || run_salmon || run_star) {
-        GFFREAD(
-            gff,
-            [],
-        )
+        GFFREAD(gff.map { meta, gff_ -> [meta, gff_, []] })
 
         versions = versions.mix(GFFREAD.out.versions)
 
         gtf = gtf
             .mix(GFFREAD.out.gtf)
             .groupTuple()
-            .map { meta, gtf_ -> gtf_[1] ? [meta, gtf_[1]] : [meta, gtf_] }
+            .map { meta, gtf_ -> gtf_[1] ? [meta, gtf_[1]] : [meta, gtf_[0]] }
 
         if (run_hisat2 || run_hisat2_extractsplicesites) {
             HISAT2_EXTRACTSPLICESITES(gtf)
@@ -88,11 +97,7 @@ workflow PREPARE_GENOME_RNASEQ {
             splice_sites = splice_sites.mix(HISAT2_EXTRACTSPLICESITES.out.txt)
 
             if (run_hisat2) {
-                HISAT2_BUILD(
-                    fasta,
-                    gtf,
-                    splice_sites,
-                )
+                HISAT2_BUILD(join_by_meta_id(fasta, gtf, splice_sites))
 
                 hisat2_index = HISAT2_BUILD.out.index
 
@@ -101,10 +106,8 @@ workflow PREPARE_GENOME_RNASEQ {
         }
 
         if (run_kallisto || run_rsem_make_transcript_fasta || run_salmon) {
-            MAKE_TRANSCRIPTS_FASTA(
-                fasta,
-                gtf,
-            )
+            MAKE_TRANSCRIPTS_FASTA(join_by_meta_id(fasta, gtf))
+
             versions = versions.mix(MAKE_TRANSCRIPTS_FASTA.out.versions)
 
             transcript_fasta = transcript_fasta.mix(MAKE_TRANSCRIPTS_FASTA.out.transcript_fasta)
@@ -117,10 +120,7 @@ workflow PREPARE_GENOME_RNASEQ {
             }
 
             if (run_salmon) {
-                SALMON_INDEX(
-                    fasta,
-                    transcript_fasta,
-                )
+                SALMON_INDEX(join_by_meta_id(fasta, transcript_fasta))
 
                 salmon_index = SALMON_INDEX.out.index
                 versions = versions.mix(SALMON_INDEX.out.versions)
@@ -128,14 +128,14 @@ workflow PREPARE_GENOME_RNASEQ {
         }
 
         if (run_rsem) {
-            RSEM_PREPAREREFERENCE_GENOME(fasta, gtf)
+            RSEM_PREPAREREFERENCE_GENOME(join_by_meta_id(fasta, gtf))
 
             rsem_index = RSEM_PREPAREREFERENCE_GENOME.out.index
             versions = versions.mix(RSEM_PREPAREREFERENCE_GENOME.out.versions)
         }
 
         if (run_star) {
-            STAR_GENOMEGENERATE(fasta, gtf)
+            STAR_GENOMEGENERATE(join_by_meta_id(fasta, gtf))
 
             star_index = STAR_GENOMEGENERATE.out.index
             versions = versions.mix(STAR_GENOMEGENERATE.out.versions)

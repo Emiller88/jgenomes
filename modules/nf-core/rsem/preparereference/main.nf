@@ -1,20 +1,19 @@
 process RSEM_PREPAREREFERENCE {
-    tag "$fasta"
+    tag "${fasta}"
     label 'process_high'
 
     conda "${moduleDir}/environment.yml"
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/mulled-v2-cf0123ef83b3c38c13e3b0696a3f285d3f20f15b:64aad4a4e144878400649e71f42105311be7ed87-0' :
-        'biocontainers/mulled-v2-cf0123ef83b3c38c13e3b0696a3f285d3f20f15b:64aad4a4e144878400649e71f42105311be7ed87-0' }"
+    container "${workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container
+        ? 'https://depot.galaxyproject.org/singularity/mulled-v2-cf0123ef83b3c38c13e3b0696a3f285d3f20f15b:64aad4a4e144878400649e71f42105311be7ed87-0'
+        : 'biocontainers/mulled-v2-cf0123ef83b3c38c13e3b0696a3f285d3f20f15b:64aad4a4e144878400649e71f42105311be7ed87-0'}"
 
     input:
-    tuple val(meta), path(fasta, stageAs: "rsem/*")
-    tuple val(meta2), path(gtf)
+    tuple val(meta), path(fasta, stageAs: "rsem/*"), path(gtf)
 
     output:
-    tuple val(meta), path("rsem")           , emit: index
+    tuple val(meta), path("rsem"), emit: index
     tuple val(meta), path("*transcripts.fa"), emit: transcript_fasta
-    path "versions.yml"   , emit: versions
+    path "versions.yml", emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -30,17 +29,17 @@ process RSEM_PREPAREREFERENCE {
         STAR \\
             --runMode genomeGenerate \\
             --genomeDir rsem/ \\
-            --genomeFastaFiles $fasta \\
-            --sjdbGTFfile $gtf \\
-            --runThreadN $task.cpus \\
-            $memory \\
-            $args2
+            --genomeFastaFiles ${fasta} \\
+            --sjdbGTFfile ${gtf} \\
+            --runThreadN ${task.cpus} \\
+            ${memory} \\
+            ${args2}
 
         rsem-prepare-reference \\
-            --gtf $gtf \\
-            --num-threads $task.cpus \\
+            --gtf ${gtf} \\
+            --num-threads ${task.cpus} \\
             ${args_list.join(' ')} \\
-            $fasta \\
+            ${fasta} \\
             rsem/genome
 
         cp rsem/genome.transcripts.fa .
@@ -51,13 +50,14 @@ process RSEM_PREPAREREFERENCE {
             star: \$(STAR --version | sed -e "s/STAR_//g")
         END_VERSIONS
         """
-    } else {
+    }
+    else {
         """
         rsem-prepare-reference \\
-            --gtf $gtf \\
-            --num-threads $task.cpus \\
-            $args \\
-            $fasta \\
+            --gtf ${gtf} \\
+            --num-threads ${task.cpus} \\
+            ${args} \\
+            ${fasta} \\
             rsem/genome
 
         cp rsem/genome.transcripts.fa .
