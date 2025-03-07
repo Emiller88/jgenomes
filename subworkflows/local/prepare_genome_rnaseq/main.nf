@@ -43,31 +43,22 @@ workflow PREPARE_GENOME_RNASEQ {
     versions = Channel.empty()
 
     if (run_bowtie1) {
-        // Do not run BOWTIE1_BUILD if the condition is false
-        fasta_bowtie1 = fasta.map { meta, fasta_ -> meta.run_bowtie1 ? [meta, fasta_] : null }
-
-        BOWTIE1_BUILD(fasta_bowtie1)
+        BOWTIE1_BUILD(fasta)
 
         bowtie1_index = BOWTIE1_BUILD.out.index
         versions = versions.mix(BOWTIE1_BUILD.out.versions)
     }
 
     if (run_bowtie2) {
-        // Do not run BOWTIE2_BUILD if the condition is false
-        fasta_bowtie2 = fasta.map { meta, fasta_ -> meta.run_bowtie2 ? [meta, fasta_] : null }
-
-        BOWTIE2_BUILD(fasta_bowtie2)
+        BOWTIE2_BUILD(fasta)
 
         bowtie2_index = BOWTIE2_BUILD.out.index
         versions = versions.mix(BOWTIE2_BUILD.out.versions)
     }
 
     if (run_faidx || run_sizes) {
-        // Do not run SAMTOOLS_FAIDX if the condition is false
-        fasta_samtools = fasta.map { meta, fasta_ -> meta.run_faidx ? [meta, fasta_] : null }
-
         SAMTOOLS_FAIDX(
-            fasta_samtools,
+            fasta,
             [[id: 'no_fai'], []],
             run_sizes,
         )
@@ -78,11 +69,8 @@ workflow PREPARE_GENOME_RNASEQ {
     }
 
     if (run_hisat2 || run_kallisto || run_rsem || run_rsem_make_transcript_fasta || run_salmon || run_star) {
-        // Do not run GFFREAD if the condition is false
-        gff_gffread = gff.map { meta, gff_ -> meta.run_gffread ? [meta, gff_] : null }
-
         GFFREAD(
-            gff_gffread,
+            gff,
             [],
         )
 
@@ -94,20 +82,14 @@ workflow PREPARE_GENOME_RNASEQ {
             .map { meta, gtf_ -> gtf_[1] ? [meta, gtf_[1]] : [meta, gtf_] }
 
         if (run_hisat2 || run_hisat2_extractsplicesites) {
-            // Do not run HISAT2_EXTRACTSPLICESITES if the condition is false
-            gtf_hisat2 = gtf.map { meta, gtf_ -> meta.run_hisat2 ? [meta, gtf_] : null }
-
-            HISAT2_EXTRACTSPLICESITES(gtf_hisat2)
+            HISAT2_EXTRACTSPLICESITES(gtf)
 
             versions = versions.mix(HISAT2_EXTRACTSPLICESITES.out.versions)
             splice_sites = splice_sites.mix(HISAT2_EXTRACTSPLICESITES.out.txt)
 
             if (run_hisat2) {
-                // Do not run HISAT2_BUILD if the condition is false
-                fasta_hisat2 = fasta.map { meta, fasta_ -> meta.run_hisat2 ? [meta, fasta_] : null }
-
                 HISAT2_BUILD(
-                    fasta_hisat2,
+                    fasta,
                     gtf,
                     splice_sites,
                 )
@@ -119,11 +101,8 @@ workflow PREPARE_GENOME_RNASEQ {
         }
 
         if (run_kallisto || run_rsem_make_transcript_fasta || run_salmon) {
-            // Do not run MAKE_TRANSCRIPTS_FASTA if the condition is false
-            fasta_make_transcripts_fasta = fasta.map { meta, fasta_ -> meta.run_rsem_make_transcript_fasta ? [meta, fasta_] : null }
-
             MAKE_TRANSCRIPTS_FASTA(
-                fasta_make_transcripts_fasta,
+                fasta,
                 gtf,
             )
             versions = versions.mix(MAKE_TRANSCRIPTS_FASTA.out.versions)
@@ -131,25 +110,16 @@ workflow PREPARE_GENOME_RNASEQ {
             transcript_fasta = transcript_fasta.mix(MAKE_TRANSCRIPTS_FASTA.out.transcript_fasta)
 
             if (run_kallisto) {
-                // Do not run KALLISTO_INDEX if the condition is false
-                transcript_fasta_kallisto = transcript_fasta.map { meta, transcript_fasta_ -> meta.run_kallisto ? [meta, transcript_fasta_] : null }
-
-                KALLISTO_INDEX(transcript_fasta_kallisto)
+                KALLISTO_INDEX(transcript_fasta)
 
                 kallisto_index = KALLISTO_INDEX.out.index
                 versions = versions.mix(KALLISTO_INDEX.out.versions)
             }
 
             if (run_salmon) {
-                // Do not run SALMON_INDEX if the condition is false
-                fasta_salmon = fasta.map { meta, fasta_ -> meta.run_salmon ? [meta, fasta_] : null }
-
-                // Do not run SALMON_INDEX if the condition is false
-                transcript_fasta_salmon = transcript_fasta.map { meta, transcript_fasta_ -> meta.run_salmon ? [meta, transcript_fasta_] : null }
-
                 SALMON_INDEX(
-                    fasta_salmon,
-                    transcript_fasta_salmon,
+                    fasta,
+                    transcript_fasta,
                 )
 
                 salmon_index = SALMON_INDEX.out.index
@@ -158,20 +128,14 @@ workflow PREPARE_GENOME_RNASEQ {
         }
 
         if (run_rsem) {
-            // Do not run RSEM_PREPAREREFERENCE_GENOME if the condition is false
-            fasta_rsem = fasta.map { meta, fasta_ -> meta.run_rsem ? [meta, fasta_] : null }
-
-            RSEM_PREPAREREFERENCE_GENOME(fasta_rsem, gtf)
+            RSEM_PREPAREREFERENCE_GENOME(fasta, gtf)
 
             rsem_index = RSEM_PREPAREREFERENCE_GENOME.out.index
             versions = versions.mix(RSEM_PREPAREREFERENCE_GENOME.out.versions)
         }
 
         if (run_star) {
-            // Do not run STAR_GENOMEGENERATE if the condition is false
-            fasta_star = fasta.map { meta, fasta_ -> meta.run_star ? [meta, fasta_] : null }
-
-            STAR_GENOMEGENERATE(fasta_star, gtf)
+            STAR_GENOMEGENERATE(fasta, gtf)
 
             star_index = STAR_GENOMEGENERATE.out.index
             versions = versions.mix(STAR_GENOMEGENERATE.out.versions)
