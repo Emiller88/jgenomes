@@ -31,6 +31,22 @@ workflow PREPARE_GENOME_RNASEQ {
     run_star                       // boolean: true/false
 
     main:
+    def join_by_id = { channel1, channel2, channel3 = null ->
+        if (channel3) {
+            channel1
+                .map { meta, content1_ -> [meta.id, content1_, meta] }
+                .join(channel2.map { meta, content2_ -> [meta.id, content2_, meta] })
+                .join(channel3.map { meta, content3_ -> [meta.id, content3_, meta] })
+                .map { _id, content1_, meta1, content2_, meta2, content3_, meta3 -> [meta3 + meta2 + meta1, content1_, content2_, content3_] }
+        }
+        else {
+            channel1
+                .map { meta, content1_ -> [meta.id, content1_, meta] }
+                .join(channel2.map { meta, content2_ -> [meta.id, content2_, meta] })
+                .map { _id, content1_, meta1, content2_, meta2 -> [meta2 + meta1, content1_, content2_] }
+        }
+    }
+
     bowtie1_index = Channel.empty()
     bowtie2_index = Channel.empty()
     hisat2_index = Channel.empty()
@@ -81,13 +97,7 @@ workflow PREPARE_GENOME_RNASEQ {
             splice_sites = splice_sites.mix(HISAT2_EXTRACTSPLICESITES.out.txt)
 
             if (run_hisat2) {
-                fasta_join_gtf_join_splice_sites = fasta
-                    .map { meta, fasta_ -> [meta.id, fasta_, meta] }
-                    .join(gtf.map { meta, gtf_ -> [meta.id, gtf_, meta] })
-                    .join(splice_sites.map { meta, splice_sites_ -> [meta.id, splice_sites_, meta] })
-                    .map { _id, fasta_, meta_fasta, gtf_, meta_gtf, splice_sites_, meta_splice_sites -> [meta_splice_sites + meta_gtf + meta_fasta, fasta_, gtf_, splice_sites_] }
-
-                HISAT2_BUILD(fasta_join_gtf_join_splice_sites)
+                HISAT2_BUILD(join_by_id(fasta, gtf, splice_sites))
 
                 hisat2_index = HISAT2_BUILD.out.index
 
@@ -96,12 +106,7 @@ workflow PREPARE_GENOME_RNASEQ {
         }
 
         if (run_kallisto || run_rsem_make_transcript_fasta || run_salmon) {
-            fasta_join_gtf = fasta
-                .map { meta, fasta_ -> [meta.id, fasta_, meta] }
-                .join(gtf.map { meta, gtf_ -> [meta.id, gtf_, meta] })
-                .map { _id, fasta_, meta_fasta, gtf_, meta_gtf -> [meta_gtf + meta_fasta, fasta_, gtf_] }
-
-            MAKE_TRANSCRIPTS_FASTA(fasta_join_gtf)
+            MAKE_TRANSCRIPTS_FASTA(join_by_id(fasta, gtf))
 
             versions = versions.mix(MAKE_TRANSCRIPTS_FASTA.out.versions)
 
@@ -115,12 +120,7 @@ workflow PREPARE_GENOME_RNASEQ {
             }
 
             if (run_salmon) {
-                fasta_join_transcript_fasta = fasta
-                    .map { meta, fasta_ -> [meta.id, fasta_, meta] }
-                    .join(transcript_fasta.map { meta, transcript_fasta_ -> [meta.id, transcript_fasta_, meta] })
-                    .map { _id, fasta_, meta_fasta, transcript_fasta_, meta_transcript_fasta -> [meta_transcript_fasta + meta_fasta, fasta_, transcript_fasta_] }
-
-                SALMON_INDEX(fasta_join_transcript_fasta)
+                SALMON_INDEX(join_by_id(fasta, transcript_fasta))
 
                 salmon_index = SALMON_INDEX.out.index
                 versions = versions.mix(SALMON_INDEX.out.versions)
@@ -128,24 +128,14 @@ workflow PREPARE_GENOME_RNASEQ {
         }
 
         if (run_rsem) {
-            fasta_join_gtf = fasta
-                .map { meta, fasta_ -> [meta.id, fasta_, meta] }
-                .join(gtf.map { meta, gtf_ -> [meta.id, gtf_, meta] })
-                .map { _id, fasta_, meta_fasta, gtf_, meta_gtf -> [meta_gtf + meta_fasta, fasta_, gtf_] }
-
-            RSEM_PREPAREREFERENCE_GENOME(fasta_join_gtf)
+            RSEM_PREPAREREFERENCE_GENOME(join_by_id(fasta, gtf))
 
             rsem_index = RSEM_PREPAREREFERENCE_GENOME.out.index
             versions = versions.mix(RSEM_PREPAREREFERENCE_GENOME.out.versions)
         }
 
         if (run_star) {
-            fasta_join_gtf = fasta
-                .map { meta, fasta_ -> [meta.id, fasta_, meta] }
-                .join(gtf.map { meta, gtf_ -> [meta.id, gtf_, meta] })
-                .map { _id, fasta_, meta_fasta, gtf_, meta_gtf -> [meta_gtf + meta_fasta, fasta_, gtf_] }
-
-            STAR_GENOMEGENERATE(fasta_join_gtf)
+            STAR_GENOMEGENERATE(join_by_id(fasta, gtf))
 
             star_index = STAR_GENOMEGENERATE.out.index
             versions = versions.mix(STAR_GENOMEGENERATE.out.versions)

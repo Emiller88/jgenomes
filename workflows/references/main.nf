@@ -21,7 +21,6 @@ workflow REFERENCES {
     tools            // List: Can contain any combination of tools of the list of available tools, or just no_tools
 
     main:
-
     versions = Channel.empty()
 
     // Create references for rnaseq based pipelines such as nf-core/riboseq, nf-core/rnaseq, nf-core/rnavar
