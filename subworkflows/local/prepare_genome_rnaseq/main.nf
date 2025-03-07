@@ -72,7 +72,7 @@ workflow PREPARE_GENOME_RNASEQ {
         gtf = gtf
             .mix(GFFREAD.out.gtf)
             .groupTuple()
-            .map { meta, gtf_ -> gtf_[1] ? [meta, gtf_[1]] : [meta, gtf_] }
+            .map { meta, gtf_ -> gtf_[1] ? [meta, gtf_[1]] : [meta, gtf_[0]] }
 
         if (run_hisat2 || run_hisat2_extractsplicesites) {
             HISAT2_EXTRACTSPLICESITES(gtf)
@@ -81,7 +81,13 @@ workflow PREPARE_GENOME_RNASEQ {
             splice_sites = splice_sites.mix(HISAT2_EXTRACTSPLICESITES.out.txt)
 
             if (run_hisat2) {
-                HISAT2_BUILD(fasta.join(gtf).join(splice_sites))
+                fasta_join_gtf_join_splice_sites = fasta
+                    .map { meta, fasta_ -> [meta.id, fasta_, meta] }
+                    .join(gtf.map { meta, gtf_ -> [meta.id, gtf_, meta] })
+                    .join(splice_sites.map { meta, splice_sites_ -> [meta.id, splice_sites_, meta] })
+                    .map { _id, fasta_, meta_fasta, gtf_, meta_gtf, splice_sites_, meta_splice_sites -> [meta_splice_sites + meta_gtf + meta_fasta, fasta_, gtf_, splice_sites_] }
+
+                HISAT2_BUILD(fasta_join_gtf_join_splice_sites)
 
                 hisat2_index = HISAT2_BUILD.out.index
 
@@ -90,7 +96,12 @@ workflow PREPARE_GENOME_RNASEQ {
         }
 
         if (run_kallisto || run_rsem_make_transcript_fasta || run_salmon) {
-            MAKE_TRANSCRIPTS_FASTA(fasta.join(gtf))
+            fasta_join_gtf = fasta
+                .map { meta, fasta_ -> [meta.id, fasta_, meta] }
+                .join(gtf.map { meta, gtf_ -> [meta.id, gtf_, meta] })
+                .map { _id, fasta_, meta_fasta, gtf_, meta_gtf -> [meta_gtf + meta_fasta, fasta_, gtf_] }
+
+            MAKE_TRANSCRIPTS_FASTA(fasta_join_gtf)
 
             versions = versions.mix(MAKE_TRANSCRIPTS_FASTA.out.versions)
 
@@ -104,7 +115,12 @@ workflow PREPARE_GENOME_RNASEQ {
             }
 
             if (run_salmon) {
-                SALMON_INDEX(fasta.join(transcript_fasta))
+                fasta_join_transcript_fasta = fasta
+                    .map { meta, fasta_ -> [meta.id, fasta_, meta] }
+                    .join(transcript_fasta.map { meta, transcript_fasta_ -> [meta.id, transcript_fasta_, meta] })
+                    .map { _id, fasta_, meta_fasta, transcript_fasta_, meta_transcript_fasta -> [meta_transcript_fasta + meta_fasta, fasta_, transcript_fasta_] }
+
+                SALMON_INDEX(fasta_join_transcript_fasta)
 
                 salmon_index = SALMON_INDEX.out.index
                 versions = versions.mix(SALMON_INDEX.out.versions)
@@ -112,14 +128,24 @@ workflow PREPARE_GENOME_RNASEQ {
         }
 
         if (run_rsem) {
-            RSEM_PREPAREREFERENCE_GENOME(fasta.join(gtf))
+            fasta_join_gtf = fasta
+                .map { meta, fasta_ -> [meta.id, fasta_, meta] }
+                .join(gtf.map { meta, gtf_ -> [meta.id, gtf_, meta] })
+                .map { _id, fasta_, meta_fasta, gtf_, meta_gtf -> [meta_gtf + meta_fasta, fasta_, gtf_] }
+
+            RSEM_PREPAREREFERENCE_GENOME(fasta_join_gtf)
 
             rsem_index = RSEM_PREPAREREFERENCE_GENOME.out.index
             versions = versions.mix(RSEM_PREPAREREFERENCE_GENOME.out.versions)
         }
 
         if (run_star) {
-            STAR_GENOMEGENERATE(fasta.join(gtf))
+            fasta_join_gtf = fasta
+                .map { meta, fasta_ -> [meta.id, fasta_, meta] }
+                .join(gtf.map { meta, gtf_ -> [meta.id, gtf_, meta] })
+                .map { _id, fasta_, meta_fasta, gtf_, meta_gtf -> [meta_gtf + meta_fasta, fasta_, gtf_] }
+
+            STAR_GENOMEGENERATE(fasta_join_gtf)
 
             star_index = STAR_GENOMEGENERATE.out.index
             versions = versions.mix(STAR_GENOMEGENERATE.out.versions)

@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [76](https://github.com/nf-core/references/pull/76) - Add untar and unzip
 - [89](https://github.com/nf-core/references/pull/89) - Added EDAM for bwa/index and bwamem2/index
 - [90](https://github.com/nf-core/references/pull/90) - Added link to Bluesky
+- [92](https://github.com/nf-core/references/pull/92) - Added tests for prepare_genome_dnaseq and prepare_genome_rnaseq
 
 ### Changed
 
@@ -26,6 +27,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [88](https://github.com/nf-core/references/pull/88) - Update all modules
 - [91](https://github.com/nf-core/references/pull/91) - Refactor and simplify GUNZIP, UNTAR and UNZIP usage
 - [91](https://github.com/nf-core/references/pull/91) - Split up references generation into separate subworkflows based on dnaseq or rnaseq
+- [92](https://github.com/nf-core/references/pull/92) - Improve prepare_genome_dnaseq and prepare_genome_rnaseq usage
+- [93](https://github.com/nf-core/references/pull/93) - Only one meta for all references that belongs to the same genome
 
 ### Fixed
 
