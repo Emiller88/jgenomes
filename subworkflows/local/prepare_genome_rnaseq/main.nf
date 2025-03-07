@@ -31,7 +31,7 @@ workflow PREPARE_GENOME_RNASEQ {
     run_star                       // boolean: true/false
 
     main:
-    def join_by_id = { channel1, channel2, channel3 = null ->
+    def join_by_meta_id = { channel1, channel2, channel3 = null ->
         if (channel3) {
             channel1
                 .map { meta, content1_ -> [meta.id, content1_, meta] }
@@ -97,7 +97,7 @@ workflow PREPARE_GENOME_RNASEQ {
             splice_sites = splice_sites.mix(HISAT2_EXTRACTSPLICESITES.out.txt)
 
             if (run_hisat2) {
-                HISAT2_BUILD(join_by_id(fasta, gtf, splice_sites))
+                HISAT2_BUILD(join_by_meta_id(fasta, gtf, splice_sites))
 
                 hisat2_index = HISAT2_BUILD.out.index
 
@@ -106,7 +106,7 @@ workflow PREPARE_GENOME_RNASEQ {
         }
 
         if (run_kallisto || run_rsem_make_transcript_fasta || run_salmon) {
-            MAKE_TRANSCRIPTS_FASTA(join_by_id(fasta, gtf))
+            MAKE_TRANSCRIPTS_FASTA(join_by_meta_id(fasta, gtf))
 
             versions = versions.mix(MAKE_TRANSCRIPTS_FASTA.out.versions)
 
@@ -120,7 +120,7 @@ workflow PREPARE_GENOME_RNASEQ {
             }
 
             if (run_salmon) {
-                SALMON_INDEX(join_by_id(fasta, transcript_fasta))
+                SALMON_INDEX(join_by_meta_id(fasta, transcript_fasta))
 
                 salmon_index = SALMON_INDEX.out.index
                 versions = versions.mix(SALMON_INDEX.out.versions)
@@ -128,14 +128,14 @@ workflow PREPARE_GENOME_RNASEQ {
         }
 
         if (run_rsem) {
-            RSEM_PREPAREREFERENCE_GENOME(join_by_id(fasta, gtf))
+            RSEM_PREPAREREFERENCE_GENOME(join_by_meta_id(fasta, gtf))
 
             rsem_index = RSEM_PREPAREREFERENCE_GENOME.out.index
             versions = versions.mix(RSEM_PREPAREREFERENCE_GENOME.out.versions)
         }
 
         if (run_star) {
-            STAR_GENOMEGENERATE(join_by_id(fasta, gtf))
+            STAR_GENOMEGENERATE(join_by_meta_id(fasta, gtf))
 
             star_index = STAR_GENOMEGENERATE.out.index
             versions = versions.mix(STAR_GENOMEGENERATE.out.versions)
