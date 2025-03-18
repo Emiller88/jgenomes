@@ -8,13 +8,14 @@ on:
       - "**/*.png"
       - "**/*.svg"
   pull_request:
-    branches: [dev]
     paths-ignore:
       - "docs/**"
       - "**/meta.yml"
       - "**/*.md"
       - "**/*.png"
       - "**/*.svg"
+  release:
+    types: [published]
   workflow_dispatch:
     inputs:
       runners:
@@ -81,13 +82,13 @@ jobs:
       matrix:
         shard: ${{ fromJson(needs.nf-test-changes.outputs.shard) }}
         profile: [conda, docker, singularity]
-        isMaster:
-          - ${{ github.base_ref == 'master' }}
+        isMain:
+          - ${{ github.base_ref == 'master' || github.base_ref == 'main' }}
         # Exclude conda and singularity on dev
         exclude:
-          - isMaster: false
+          - isMain: false
             profile: "conda"
-          - isMaster: false
+          - isMain: false
             profile: "singularity"
         NXF_VER:
           - "24.10.2"
