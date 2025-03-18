@@ -38,6 +38,7 @@ include { REFERENCES              } from "./workflows/references"
 */
 
 workflow {
+
     main:
     // SUBWORKFLOW: Run initialisation tasks
     PIPELINE_INITIALISATION(
@@ -57,9 +58,7 @@ workflow {
 
     ch_multiqc_files = Channel.empty()
 
-    //
     // MODULE: MultiQC
-    //
     ch_multiqc_config = Channel.fromPath("${projectDir}/assets/multiqc_config.yml", checkIfExists: true)
     ch_multiqc_custom_config = params.multiqc_config ? Channel.fromPath(params.multiqc_config, checkIfExists: true) : Channel.empty()
     ch_multiqc_logo = params.multiqc_logo ? Channel.fromPath(params.multiqc_logo, checkIfExists: true) : Channel.empty()
@@ -201,9 +200,7 @@ output {
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-//
 // WORKFLOW: Build references depending on type of asset and the tools specified
-//
 workflow NFCORE_REFERENCES {
     take:
     references
