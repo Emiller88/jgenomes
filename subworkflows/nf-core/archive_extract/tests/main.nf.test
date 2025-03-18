@@ -1,21 +1,33 @@
 nextflow_workflow {
 
-    name "Test EXTRACT_ARCHIVE"
+    name "Test ARCHIVE_EXTRACT"
     script "../main.nf"
-    workflow "EXTRACT_ARCHIVE"
+    workflow "ARCHIVE_EXTRACT"
 
-    test(".gz && .tar.gz") {
+    tag "subworkflows"
+    tag "subworkflows_nfcore"
+    tag "subworkflows/archive_extract"
+
+    tag "gunzip"
+    tag "untar"
+    tag "unzip"
+
+    test(".gz && .tar.gz && .zip") {
 
         when {
             params {
             }
             workflow {
                 """
-                input[0] = Channel.of([[id:'test'],
+                input[0] = Channel.of(
+                    [[id:'test_gz'],
                     file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fastq/test_1.fastq.gz', checkIfExists: true)
                 ],
-                    [[id:'test'],
+                    [[id:'test_tar'],
                     file(params.modules_testdata_base_path + 'generic/tar/hello.tar.gz', checkIfExists: true)
+                ],
+                    [[id:'test_zip'],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/chr21/sequence/genome_strtablefile.zip', checkIfExists: true)
                 ])
                 """
             }

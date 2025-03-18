@@ -13,22 +13,6 @@ Changes in 'dragmap/hashtable/main.nf':
  
      input:
      tuple val(meta), path(fasta)
-@@ -33,15 +33,4 @@
-         dragmap: \$(echo \$(dragen-os --version 2>&1))
-     END_VERSIONS
-     """
--
--    stub:
--    """
--    mkdir dragmap
--
--    cat <<-END_VERSIONS > versions.yml
--    "${task.process}":
--        dragmap: \$(echo \$(dragen-os --version 2>&1))
--    END_VERSIONS
--    """
--
- }
 
 'modules/nf-core/dragmap/hashtable/meta.yml' is unchanged
 'modules/nf-core/dragmap/hashtable/environment.yml' is unchanged

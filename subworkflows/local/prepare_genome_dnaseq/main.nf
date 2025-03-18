@@ -75,7 +75,7 @@ workflow PREPARE_GENOME_DNASEQ {
         }
 
         if (run_intervals) {
-            BUILD_INTERVALS(fasta_fai, [])
+            BUILD_INTERVALS(fasta_fai, [], false)
             intervals_bed = BUILD_INTERVALS.out.output
             versions = versions.mix(BUILD_INTERVALS.out.versions)
         }
