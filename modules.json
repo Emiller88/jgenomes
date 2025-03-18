@@ -60,7 +60,7 @@
                     "gunzip": {
                         "branch": "master",
                         "git_sha": "81880787133db07d9b4c1febd152c090eb8325dc",
-                        "installed_by": ["archive_extract", "modules"]
+                        "installed_by": ["archive_extract"]
                     },
                     "hisat2/build": {
                         "branch": "master",
@@ -130,12 +130,12 @@
                     "untar": {
                         "branch": "master",
                         "git_sha": "81880787133db07d9b4c1febd152c090eb8325dc",
-                        "installed_by": ["archive_extract", "modules"]
+                        "installed_by": ["archive_extract"]
                     },
                     "unzip": {
                         "branch": "master",
                         "git_sha": "81880787133db07d9b4c1febd152c090eb8325dc",
-                        "installed_by": ["archive_extract", "modules"]
+                        "installed_by": ["archive_extract"]
                     }
                 }
             },
