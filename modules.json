@@ -60,7 +60,7 @@
                     "gunzip": {
                         "branch": "master",
                         "git_sha": "81880787133db07d9b4c1febd152c090eb8325dc",
-                        "installed_by": ["modules"]
+                        "installed_by": ["archive_extract", "modules"]
                     },
                     "hisat2/build": {
                         "branch": "master",
@@ -130,17 +130,22 @@
                     "untar": {
                         "branch": "master",
                         "git_sha": "81880787133db07d9b4c1febd152c090eb8325dc",
-                        "installed_by": ["modules"]
+                        "installed_by": ["archive_extract", "modules"]
                     },
                     "unzip": {
                         "branch": "master",
                         "git_sha": "81880787133db07d9b4c1febd152c090eb8325dc",
-                        "installed_by": ["modules"]
+                        "installed_by": ["archive_extract", "modules"]
                     }
                 }
             },
             "subworkflows": {
                 "nf-core": {
+                    "archive_extract": {
+                        "branch": "master",
+                        "git_sha": "875cffac4d196e4811d8a8d6b6fa55da513b885e",
+                        "installed_by": ["subworkflows"]
+                    },
                     "utils_nextflow_pipeline": {
                         "branch": "master",
                         "git_sha": "c2b22d85f30a706a3073387f30380704fcae013b",

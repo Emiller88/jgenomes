@@ -24,7 +24,7 @@ include { softwareVersionsToYAML  } from './subworkflows/nf-core/utils_nfcore_pi
 
 include { MULTIQC                 } from './modules/nf-core/multiqc'
 
-include { ARCHIVE_EXTRACT         } from './subworkflows/local/archive_extract'
+include { ARCHIVE_EXTRACT         } from './subworkflows/nf-core/archive_extract'
 include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_references_pipeline'
 include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_references_pipeline'
 include { YAML_TO_CHANNEL         } from './subworkflows/local/yaml_to_channel'
