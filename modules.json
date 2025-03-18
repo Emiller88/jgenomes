@@ -7,7 +7,7 @@
                 "nf-core": {
                     "bbmap/bbsplit": {
                         "branch": "master",
-                        "git_sha": "dd32ce5a1e5e16d56510768d027c36f0660ee2b8",
+                        "git_sha": "f06465ff69516528b0178b2a2a5f6b1d4287faa9",
                         "installed_by": ["modules"]
                     },
                     "bowtie/build": {
@@ -22,12 +22,12 @@
                     },
                     "bwa/index": {
                         "branch": "master",
-                        "git_sha": "15a93581f7f81d05c04b828954004a089360ea9b",
+                        "git_sha": "b519b07af4ed954827e8cbbed1de3b6751ad2427",
                         "installed_by": ["modules"]
                     },
                     "bwamem2/index": {
                         "branch": "master",
-                        "git_sha": "15a93581f7f81d05c04b828954004a089360ea9b",
+                        "git_sha": "b519b07af4ed954827e8cbbed1de3b6751ad2427",
                         "installed_by": ["modules"]
                     },
                     "custom/catadditionalfasta": {
@@ -48,7 +48,7 @@
                     },
                     "gawk": {
                         "branch": "master",
-                        "git_sha": "81880787133db07d9b4c1febd152c090eb8325dc",
+                        "git_sha": "102e86c93832f5239990b2fa0f59db3b85c83ed3",
                         "installed_by": ["modules"]
                     },
                     "gffread": {
@@ -102,7 +102,7 @@
                     },
                     "samtools/faidx": {
                         "branch": "master",
-                        "git_sha": "b13f07be4c508d6ff6312d354d09f2493243e208",
+                        "git_sha": "b75d04926473d07bb85c08df19531f37bcf5fd4a",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/samtools/faidx/samtools-faidx.diff"
                     },
