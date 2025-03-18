@@ -29,6 +29,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [91](https://github.com/nf-core/references/pull/91) - Split up references generation into separate subworkflows based on dnaseq or rnaseq
 - [92](https://github.com/nf-core/references/pull/92) - Improve prepare_genome_dnaseq and prepare_genome_rnaseq usage
 - [93](https://github.com/nf-core/references/pull/93) - Only one meta for all references that belongs to the same genome
+- [96](https://github.com/nf-core/references/pull/96) - Update all modules
+- [96](https://github.com/nf-core/references/pull/96) - Use nf-core version of `ARCHIVE_EXTRACT`
 
 ### Fixed
 
@@ -40,8 +42,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 | modules                           | old version | new version |
 | --------------------------------- | ----------- | ----------- |
-| bbmap                             | 39.10       | 39.17       |
+| bbmap                             | 39.10       | 39.18       |
 | gunzip                            | 1.1         | 1.13        |
+| pigz (in bbmap/bbsplit)           |             | 2.8         |
 | samtools (in star/genomegenerate) | 1.20        | 1.21        |
 | untar                             |             | 1.34        |
 | unzip                             |             | 16.02       |
