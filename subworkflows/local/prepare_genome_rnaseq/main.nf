@@ -81,7 +81,7 @@ workflow PREPARE_GENOME_RNASEQ {
     }
 
     if (run_hisat2 || run_kallisto || run_rsem || run_rsem_make_transcript_fasta || run_salmon || run_star) {
-        GFFREAD(gff.map { meta, gff_ -> [meta, gff_, []] })
+        GFFREAD(gff.map { meta, gff_ -> [meta, [], gff_] })
 
         versions = versions.mix(GFFREAD.out.versions)
 
